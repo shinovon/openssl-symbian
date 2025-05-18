@@ -116,7 +116,21 @@
 #include <openssl/rand.h>
 #include "rand_lcl.h"
 
-#if !(defined(OPENSSL_SYS_WINDOWS) || defined(OPENSSL_SYS_WIN32) || defined(OPENSSL_SYS_VMS) || defined(OPENSSL_SYS_OS2) || defined(OPENSSL_SYS_VXWORKS) || defined(OPENSSL_SYS_NETWARE))
+#ifdef OPENSSL_SYS_SYMBIAN
+int RAND_poll(void)
+{
+    uint32_t rnd = 0, i;
+    for (i = 0; i < sizeof(int); ++i) {
+        if (i % 4 == 0) {
+            rnd = rand();
+            rnd >>= 8;
+        }
+    }
+    return rnd;
+}
+#endif
+
+#if !(defined(OPENSSL_SYS_SYMBIAN) || defined(OPENSSL_SYS_WINDOWS) || defined(OPENSSL_SYS_WIN32) || defined(OPENSSL_SYS_VMS) || defined(OPENSSL_SYS_OS2) || defined(OPENSSL_SYS_VXWORKS) || defined(OPENSSL_SYS_NETWARE))
 
 # include <sys/types.h>
 # include <sys/time.h>
