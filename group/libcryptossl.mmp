@@ -7,6 +7,8 @@ CAPABILITY   All -Tcb
 VENDORID 	0x101FB657
 VERSION 	0.10
 
+DEFFILE			libsslu.def
+
 //#ifdef EKA2
 //DEFFILE			libssl.def
 //#else
