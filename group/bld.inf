@@ -14,5 +14,6 @@ DEFAULT
 PRJ_EXPORTS
 
 PRJ_MMPFILES
-libcrypto.mmp
-libssl.mmp
+//libcrypto.mmp
+//libssl.mmp
+libcryptossl.mmp
