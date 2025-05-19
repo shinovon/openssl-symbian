@@ -421,7 +421,7 @@ static int dladdr(void *address, Dl_info *dl)
 
 static int dlfcn_pathbyaddr(void *addr, char *path, int sz)
 {
-# ifdef HAVE_DLINFO
+# if defined(HAVE_DLINFO) && !defined(OPENSSL_SYS_SYMBIAN)
     Dl_info dli;
     int len;
 

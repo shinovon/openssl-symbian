@@ -67,7 +67,11 @@
  */
 typedef void *(*memset_t)(void *,int,size_t);
 
-static volatile memset_t memset_func = memset;
+void* memset_fwd(void* ptr, int ch, size_t size) {
+    return memset(ptr, ch, size);
+}
+
+static volatile memset_t memset_func = memset_fwd;
 
 void OPENSSL_cleanse(void *ptr, size_t len)
 {

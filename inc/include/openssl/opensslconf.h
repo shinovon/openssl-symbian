@@ -7,13 +7,18 @@ extern "C" {
 /* OpenSSL was configured with the following options: */
 #ifndef OPENSSL_DOING_MAKEDEPEND
 
-
+#ifndef OPENSSL_NO_ERR
+# define OPENSSL_NO_ERR
+#endif
 #ifndef OPENSSL_NO_EC_NISTP_64_GCC_128
 # define OPENSSL_NO_EC_NISTP_64_GCC_128
 #endif
-//#ifndef OPENSSL_NO_GMP
-//# define OPENSSL_NO_GMP
-//#endif
+#ifndef OPENSSL_NO_GMP
+# define OPENSSL_NO_GMP
+#endif
+#ifndef OPENSSL_NO_STATIC_ENGINE
+# define OPENSSL_NO_STATIC_ENGINE
+#endif
 //#ifndef OPENSSL_NO_JPAKE
 //# define OPENSSL_NO_JPAKE
 //#endif

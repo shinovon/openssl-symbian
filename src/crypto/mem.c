@@ -73,7 +73,20 @@ static int allow_customize_debug = 1; /* exchanging memory-related functions
  * the following pointers may be changed as long as 'allow_customize' is set
  */
 
-static void *(*malloc_func) (size_t) = malloc;
+
+void* malloc_fwd(size_t size) {
+    return malloc(size);
+}
+
+void* realloc_fwd(void* ptr, size_t size) {
+    return realloc(ptr, size);
+}
+
+void free_fwd(void* ptr) {
+    free(ptr);
+}
+
+static void *(*malloc_func) (size_t) = malloc_fwd;
 static void *default_malloc_ex(size_t num, const char *file, int line)
 {
     return malloc_func(num);
@@ -90,7 +103,7 @@ static void *(*malloc_ex_func) (size_t, const char *file, int line)
 # endif
 #endif
 
-static void *(*realloc_func) (void *, size_t) = realloc;
+static void *(*realloc_func) (void *, size_t) = realloc_fwd;
 static void *default_realloc_ex(void *str, size_t num,
                                 const char *file, int line)
 {
@@ -103,10 +116,10 @@ static void *(*realloc_ex_func) (void *, size_t, const char *file, int line)
 #ifdef OPENSSL_SYS_VMS
    static void (*free_func) (__void_ptr64) = free;
 #else
-   static void (*free_func) (void *) = free;
+   static void (*free_func) (void *) = free_fwd;
 #endif
 
-static void *(*malloc_locked_func) (size_t) = malloc;
+static void *(*malloc_locked_func) (size_t) = malloc_fwd;
 static void *default_malloc_locked_ex(size_t num, const char *file, int line)
 {
     return malloc_locked_func(num);
@@ -118,7 +131,7 @@ static void *(*malloc_locked_ex_func) (size_t, const char *file, int line)
 #ifdef OPENSSL_SYS_VMS
    static void (*free_locked_func) (__void_ptr64) = free;
 #else
-   static void (*free_locked_func) (void *) = free;
+   static void (*free_locked_func) (void *) = free_fwd;
 #endif
 
 /* may be changed as long as 'allow_customize_debug' is set */

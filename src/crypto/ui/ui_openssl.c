@@ -148,7 +148,7 @@
  * If unistd.h defines _POSIX_VERSION, we conclude that we are on a POSIX
  * system and have sigaction and termios.
  */
-# if defined(_POSIX_VERSION)
+# if defined(_POSIX_VERSION) && !defined(OPENSSL_SYS_SYMBIAN)
 
 #  define SIGACTION
 #  if !defined(TERMIOS) && !defined(TERMIO) && !defined(SGTTY)
@@ -210,7 +210,8 @@
 	&& !defined(OPENSSL_SYS_MACINTOSH_CLASSIC) \
 	&& !defined(MAC_OS_GUSI_SOURCE)	\
 	&& !defined(OPENSSL_SYS_VXWORKS) \
-	&& !defined(OPENSSL_SYS_NETWARE)
+    && !defined(OPENSSL_SYS_NETWARE) \ 
+    && !defined(OPENSSL_SYS_SYMBIAN)
 #  define TERMIOS
 #  undef  TERMIO
 #  undef  SGTTY
@@ -295,7 +296,7 @@ static long tty_orig[3], tty_new[3]; /* XXX Is there any guarantee that this
 static long status;
 static unsigned short channel = 0;
 #else
-# if !defined(OPENSSL_SYS_MSDOS) || defined(__DJGPP__)
+# if (!defined(OPENSSL_SYS_MSDOS) || defined(__DJGPP__)) && !defined(OPENSSL_SYS_SYMBIAN)
 static TTY_STRUCT tty_orig, tty_new;
 # endif
 #endif
@@ -393,7 +394,7 @@ static int read_string(UI *ui, UI_STRING *uis)
     return 1;
 }
 
-#if !defined(OPENSSL_SYS_WIN16) && !defined(OPENSSL_SYS_WINCE)
+#if !defined(OPENSSL_SYS_WIN16) && !defined(OPENSSL_SYS_WINCE) && !defined(OPENSSL_SYS_SYMBIAN)
 /* Internal functions to read a string without echoing */
 static int read_till_nl(FILE *in)
 {
@@ -416,7 +417,7 @@ static int read_string_inner(UI *ui, UI_STRING *uis, int echo, int strip_nl)
     int ok;
     char result[BUFSIZ];
     int maxsize = BUFSIZ - 1;
-#if !defined(OPENSSL_SYS_WIN16) && !defined(OPENSSL_SYS_WINCE)
+#if !defined(OPENSSL_SYS_WIN16) && !defined(OPENSSL_SYS_WINCE) && !defined(OPENSSL_SYS_SYMBIAN)
     char *p;
 
     intr_signal = 0;
@@ -618,7 +619,7 @@ static int close_console(UI *ui)
     return 1;
 }
 
-#if !defined(OPENSSL_SYS_WIN16) && !defined(OPENSSL_SYS_WINCE)
+#if !defined(OPENSSL_SYS_WIN16) && !defined(OPENSSL_SYS_WINCE) && !defined(OPENSSL_SYS_SYMBIAN)
 /* Internal functions to handle signals and act on them */
 static void pushsig(void)
 {
