@@ -2,12 +2,14 @@
 
 TARGET		  libssl.dll
 TARGETTYPE	  dll
-UID			 0x1000008d 0xE9371A59
+UID           0x1000008d 0x10281F34
 CAPABILITY   All -Tcb
 VENDORID 	0x101FB657
 VERSION 	0.10
 
-DEFFILE			libsslu.def
+DEFFILE			libssl.def
+
+//OPTION GCCE -fvisibility-inlines-hidden -std=c99
 
 //#ifdef EKA2
 //DEFFILE			libssl.def
