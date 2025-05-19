@@ -134,7 +134,7 @@
 #include <openssl/bn.h>
 #include "ssl_locl.h"
 
-int SSL_get_ex_data_X509_STORE_CTX_idx(void)
+EXPORT_C int SSL_get_ex_data_X509_STORE_CTX_idx(void)
 {
     static volatile int ssl_x509_store_ctx_idx = -1;
     int got_write_lock = 0;
@@ -780,7 +780,7 @@ static void set_client_CA_list(STACK_OF(X509_NAME) **ca_list,
     *ca_list = name_list;
 }
 
-STACK_OF(X509_NAME) *SSL_dup_CA_list(STACK_OF(X509_NAME) *sk)
+EXPORT_C STACK_OF(X509_NAME) *SSL_dup_CA_list(STACK_OF(X509_NAME) *sk)
 {
     int i;
     STACK_OF(X509_NAME) *ret;
@@ -797,22 +797,22 @@ STACK_OF(X509_NAME) *SSL_dup_CA_list(STACK_OF(X509_NAME) *sk)
     return (ret);
 }
 
-void SSL_set_client_CA_list(SSL *s, STACK_OF(X509_NAME) *name_list)
+EXPORT_C void SSL_set_client_CA_list(SSL *s, STACK_OF(X509_NAME) *name_list)
 {
     set_client_CA_list(&(s->client_CA), name_list);
 }
 
-void SSL_CTX_set_client_CA_list(SSL_CTX *ctx, STACK_OF(X509_NAME) *name_list)
+EXPORT_C void SSL_CTX_set_client_CA_list(SSL_CTX *ctx, STACK_OF(X509_NAME) *name_list)
 {
     set_client_CA_list(&(ctx->client_CA), name_list);
 }
 
-STACK_OF(X509_NAME) *SSL_CTX_get_client_CA_list(const SSL_CTX *ctx)
+EXPORT_C STACK_OF(X509_NAME) *SSL_CTX_get_client_CA_list(const SSL_CTX *ctx)
 {
     return (ctx->client_CA);
 }
 
-STACK_OF(X509_NAME) *SSL_get_client_CA_list(const SSL *s)
+EXPORT_C STACK_OF(X509_NAME) *SSL_get_client_CA_list(const SSL *s)
 {
     if (s->type == SSL_ST_CONNECT) { /* we are in the client */
         if (((s->version >> 8) == SSL3_VERSION_MAJOR) && (s->s3 != NULL))
@@ -846,12 +846,12 @@ static int add_client_CA(STACK_OF(X509_NAME) **sk, X509 *x)
     return (1);
 }
 
-int SSL_add_client_CA(SSL *ssl, X509 *x)
+EXPORT_C int SSL_add_client_CA(SSL *ssl, X509 *x)
 {
     return (add_client_CA(&(ssl->client_CA), x));
 }
 
-int SSL_CTX_add_client_CA(SSL_CTX *ctx, X509 *x)
+EXPORT_C int SSL_CTX_add_client_CA(SSL_CTX *ctx, X509 *x)
 {
     return (add_client_CA(&(ctx->client_CA), x));
 }
@@ -870,7 +870,7 @@ static int xname_cmp(const X509_NAME *const *a, const X509_NAME *const *b)
  * \param file the file containing one or more certs.
  * \return a ::STACK containing the certs.
  */
-STACK_OF(X509_NAME) *SSL_load_client_CA_file(const char *file)
+EXPORT_C STACK_OF(X509_NAME) *SSL_load_client_CA_file(const char *file)
 {
     BIO *in;
     X509 *x = NULL;
@@ -940,7 +940,7 @@ STACK_OF(X509_NAME) *SSL_load_client_CA_file(const char *file)
  * certs may have been added to \c stack.
  */
 
-int SSL_add_file_cert_subjects_to_stack(STACK_OF(X509_NAME) *stack,
+EXPORT_C int SSL_add_file_cert_subjects_to_stack(STACK_OF(X509_NAME) *stack,
                                         const char *file)
 {
     BIO *in;
@@ -1003,7 +1003,7 @@ int SSL_add_file_cert_subjects_to_stack(STACK_OF(X509_NAME) *stack,
  * certs may have been added to \c stack.
  */
 
-int SSL_add_dir_cert_subjects_to_stack(STACK_OF(X509_NAME) *stack,
+EXPORT_C int SSL_add_dir_cert_subjects_to_stack(STACK_OF(X509_NAME) *stack,
                                        const char *dir)
 {
     OPENSSL_DIR_CTX *d = NULL;

@@ -147,13 +147,13 @@ static void SSL_SESSION_list_remove(SSL_CTX *ctx, SSL_SESSION *s);
 static void SSL_SESSION_list_add(SSL_CTX *ctx, SSL_SESSION *s);
 static int remove_session_lock(SSL_CTX *ctx, SSL_SESSION *c, int lck);
 
-SSL_SESSION *SSL_get_session(const SSL *ssl)
+EXPORT_C SSL_SESSION *SSL_get_session(const SSL *ssl)
 /* aka SSL_get0_session; gets 0 objects, just returns a copy of the pointer */
 {
     return (ssl->session);
 }
 
-SSL_SESSION *SSL_get1_session(SSL *ssl)
+EXPORT_C SSL_SESSION *SSL_get1_session(SSL *ssl)
 /* variant of SSL_get_session: caller really gets something */
 {
     SSL_SESSION *sess;
@@ -170,7 +170,7 @@ SSL_SESSION *SSL_get1_session(SSL *ssl)
     return (sess);
 }
 
-int SSL_SESSION_get_ex_new_index(long argl, void *argp,
+EXPORT_C int SSL_SESSION_get_ex_new_index(long argl, void *argp,
                                  CRYPTO_EX_new *new_func,
                                  CRYPTO_EX_dup *dup_func,
                                  CRYPTO_EX_free *free_func)
@@ -179,17 +179,17 @@ int SSL_SESSION_get_ex_new_index(long argl, void *argp,
                                    new_func, dup_func, free_func);
 }
 
-int SSL_SESSION_set_ex_data(SSL_SESSION *s, int idx, void *arg)
+EXPORT_C int SSL_SESSION_set_ex_data(SSL_SESSION *s, int idx, void *arg)
 {
     return (CRYPTO_set_ex_data(&s->ex_data, idx, arg));
 }
 
-void *SSL_SESSION_get_ex_data(const SSL_SESSION *s, int idx)
+EXPORT_C void *SSL_SESSION_get_ex_data(const SSL_SESSION *s, int idx)
 {
     return (CRYPTO_get_ex_data(&s->ex_data, idx));
 }
 
-SSL_SESSION *SSL_SESSION_new(void)
+EXPORT_C SSL_SESSION *SSL_SESSION_new(void)
 {
     SSL_SESSION *ss;
 
@@ -353,7 +353,7 @@ err:
     return NULL;
 }
 
-const unsigned char *SSL_SESSION_get_id(const SSL_SESSION *s,
+EXPORT_C const unsigned char *SSL_SESSION_get_id(const SSL_SESSION *s,
                                         unsigned int *len)
 {
     if (len)
@@ -737,7 +737,7 @@ int ssl_get_prev_session(SSL *s, unsigned char *session_id, int len,
         return 0;
 }
 
-int SSL_CTX_add_session(SSL_CTX *ctx, SSL_SESSION *c)
+EXPORT_C int SSL_CTX_add_session(SSL_CTX *ctx, SSL_SESSION *c)
 {
     int ret = 0;
     SSL_SESSION *s;
@@ -815,7 +815,7 @@ int SSL_CTX_add_session(SSL_CTX *ctx, SSL_SESSION *c)
     return (ret);
 }
 
-int SSL_CTX_remove_session(SSL_CTX *ctx, SSL_SESSION *c)
+EXPORT_C int SSL_CTX_remove_session(SSL_CTX *ctx, SSL_SESSION *c)
 {
     return remove_session_lock(ctx, c, 1);
 }
@@ -848,7 +848,7 @@ static int remove_session_lock(SSL_CTX *ctx, SSL_SESSION *c, int lck)
     return (ret);
 }
 
-void SSL_SESSION_free(SSL_SESSION *ss)
+EXPORT_C void SSL_SESSION_free(SSL_SESSION *ss)
 {
     int i;
 
@@ -907,7 +907,7 @@ void SSL_SESSION_free(SSL_SESSION *ss)
     OPENSSL_free(ss);
 }
 
-int SSL_set_session(SSL *s, SSL_SESSION *session)
+EXPORT_C int SSL_set_session(SSL *s, SSL_SESSION *session)
 {
     int ret = 0;
     const SSL_METHOD *meth;
@@ -964,7 +964,7 @@ int SSL_set_session(SSL *s, SSL_SESSION *session)
     return (ret);
 }
 
-long SSL_SESSION_set_timeout(SSL_SESSION *s, long t)
+EXPORT_C long SSL_SESSION_set_timeout(SSL_SESSION *s, long t)
 {
     if (s == NULL)
         return (0);
@@ -972,21 +972,21 @@ long SSL_SESSION_set_timeout(SSL_SESSION *s, long t)
     return (1);
 }
 
-long SSL_SESSION_get_timeout(const SSL_SESSION *s)
+EXPORT_C long SSL_SESSION_get_timeout(const SSL_SESSION *s)
 {
     if (s == NULL)
         return (0);
     return (s->timeout);
 }
 
-long SSL_SESSION_get_time(const SSL_SESSION *s)
+EXPORT_C long SSL_SESSION_get_time(const SSL_SESSION *s)
 {
     if (s == NULL)
         return (0);
     return (s->time);
 }
 
-long SSL_SESSION_set_time(SSL_SESSION *s, long t)
+EXPORT_C long SSL_SESSION_set_time(SSL_SESSION *s, long t)
 {
     if (s == NULL)
         return (0);
@@ -1014,7 +1014,7 @@ int SSL_SESSION_set1_id_context(SSL_SESSION *s, const unsigned char *sid_ctx,
     return 1;
 }
 
-long SSL_CTX_set_timeout(SSL_CTX *s, long t)
+EXPORT_C long SSL_CTX_set_timeout(SSL_CTX *s, long t)
 {
     long l;
     if (s == NULL)
@@ -1024,7 +1024,7 @@ long SSL_CTX_set_timeout(SSL_CTX *s, long t)
     return (l);
 }
 
-long SSL_CTX_get_timeout(const SSL_CTX *s)
+EXPORT_C long SSL_CTX_get_timeout(const SSL_CTX *s)
 {
     if (s == NULL)
         return (0);
@@ -1115,7 +1115,7 @@ static void timeout_doall_arg(SSL_SESSION *s, TIMEOUT_PARAM *p)
 
 static IMPLEMENT_LHASH_DOALL_ARG_FN(timeout, SSL_SESSION, TIMEOUT_PARAM)
 
-void SSL_CTX_flush_sessions(SSL_CTX *s, long t)
+EXPORT_C void SSL_CTX_flush_sessions(SSL_CTX *s, long t)
 {
     unsigned long i;
     TIMEOUT_PARAM tp;
@@ -1193,29 +1193,29 @@ static void SSL_SESSION_list_add(SSL_CTX *ctx, SSL_SESSION *s)
     }
 }
 
-void SSL_CTX_sess_set_new_cb(SSL_CTX *ctx,
+EXPORT_C void SSL_CTX_sess_set_new_cb(SSL_CTX *ctx,
                              int (*cb) (struct ssl_st *ssl,
                                         SSL_SESSION *sess))
 {
     ctx->new_session_cb = cb;
 }
 
-int (*SSL_CTX_sess_get_new_cb(SSL_CTX *ctx)) (SSL *ssl, SSL_SESSION *sess) {
+EXPORT_C int (*SSL_CTX_sess_get_new_cb(SSL_CTX *ctx)) (SSL *ssl, SSL_SESSION *sess) {
     return ctx->new_session_cb;
 }
 
-void SSL_CTX_sess_set_remove_cb(SSL_CTX *ctx,
+EXPORT_C void SSL_CTX_sess_set_remove_cb(SSL_CTX *ctx,
                                 void (*cb) (SSL_CTX *ctx, SSL_SESSION *sess))
 {
     ctx->remove_session_cb = cb;
 }
 
-void (*SSL_CTX_sess_get_remove_cb(SSL_CTX *ctx)) (SSL_CTX *ctx,
+EXPORT_C void (*SSL_CTX_sess_get_remove_cb(SSL_CTX *ctx)) (SSL_CTX *ctx,
                                                   SSL_SESSION *sess) {
     return ctx->remove_session_cb;
 }
 
-void SSL_CTX_sess_set_get_cb(SSL_CTX *ctx,
+EXPORT_C void SSL_CTX_sess_set_get_cb(SSL_CTX *ctx,
                              SSL_SESSION *(*cb) (struct ssl_st *ssl,
                                                  unsigned char *data, int len,
                                                  int *copy))
@@ -1223,31 +1223,31 @@ void SSL_CTX_sess_set_get_cb(SSL_CTX *ctx,
     ctx->get_session_cb = cb;
 }
 
-SSL_SESSION *(*SSL_CTX_sess_get_get_cb(SSL_CTX *ctx)) (SSL *ssl,
+EXPORT_C SSL_SESSION *(*SSL_CTX_sess_get_get_cb(SSL_CTX *ctx)) (SSL *ssl,
                                                        unsigned char *data,
                                                        int len, int *copy) {
     return ctx->get_session_cb;
 }
 
-void SSL_CTX_set_info_callback(SSL_CTX *ctx,
+EXPORT_C void SSL_CTX_set_info_callback(SSL_CTX *ctx,
                                void (*cb) (const SSL *ssl, int type, int val))
 {
     ctx->info_callback = cb;
 }
 
-void (*SSL_CTX_get_info_callback(SSL_CTX *ctx)) (const SSL *ssl, int type,
+EXPORT_C void (*SSL_CTX_get_info_callback(SSL_CTX *ctx)) (const SSL *ssl, int type,
                                                  int val) {
     return ctx->info_callback;
 }
 
-void SSL_CTX_set_client_cert_cb(SSL_CTX *ctx,
+EXPORT_C void SSL_CTX_set_client_cert_cb(SSL_CTX *ctx,
                                 int (*cb) (SSL *ssl, X509 **x509,
                                            EVP_PKEY **pkey))
 {
     ctx->client_cert_cb = cb;
 }
 
-int (*SSL_CTX_get_client_cert_cb(SSL_CTX *ctx)) (SSL *ssl, X509 **x509,
+EXPORT_C int (*SSL_CTX_get_client_cert_cb(SSL_CTX *ctx)) (SSL *ssl, X509 **x509,
                                                  EVP_PKEY **pkey) {
     return ctx->client_cert_cb;
 }
@@ -1270,7 +1270,7 @@ int SSL_CTX_set_client_cert_engine(SSL_CTX *ctx, ENGINE *e)
 }
 #endif
 
-void SSL_CTX_set_cookie_generate_cb(SSL_CTX *ctx,
+EXPORT_C void SSL_CTX_set_cookie_generate_cb(SSL_CTX *ctx,
                                     int (*cb) (SSL *ssl,
                                                unsigned char *cookie,
                                                unsigned int *cookie_len))
@@ -1278,7 +1278,7 @@ void SSL_CTX_set_cookie_generate_cb(SSL_CTX *ctx,
     ctx->app_gen_cookie_cb = cb;
 }
 
-void SSL_CTX_set_cookie_verify_cb(SSL_CTX *ctx,
+EXPORT_C void SSL_CTX_set_cookie_verify_cb(SSL_CTX *ctx,
                                   int (*cb) (SSL *ssl, unsigned char *cookie,
                                              unsigned int cookie_len))
 {

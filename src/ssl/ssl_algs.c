@@ -61,7 +61,7 @@
 #include <openssl/lhash.h>
 #include "ssl_locl.h"
 
-int SSL_library_init(void)
+EXPORT_C int SSL_library_init(void)
 {
 
 #ifndef OPENSSL_NO_DES

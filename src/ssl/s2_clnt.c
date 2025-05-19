@@ -137,7 +137,7 @@ static const SSL_METHOD *ssl2_get_client_method(int ver)
         return (NULL);
 }
 
-IMPLEMENT_ssl2_meth_func(SSLv2_client_method,
+EXPORT_C IMPLEMENT_ssl2_meth_func(SSLv2_client_method,
                          ssl_undefined_function,
                          ssl2_connect, ssl2_get_client_method)
 

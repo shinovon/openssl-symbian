@@ -85,6 +85,6 @@ IMPLEMENT_tls_meth_func(TLS1_2_VERSION, TLSv1_2_client_method,
                         ssl3_connect,
                         tls1_get_client_method, TLSv1_1_enc_data)
 
-    IMPLEMENT_tls_meth_func(TLS1_VERSION, TLSv1_client_method,
+    EXPORT_C IMPLEMENT_tls_meth_func(TLS1_VERSION, TLSv1_client_method,
                         ssl_undefined_function,
                         ssl3_connect, tls1_get_client_method, TLSv1_enc_data)

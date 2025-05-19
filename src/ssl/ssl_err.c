@@ -828,7 +828,7 @@ static ERR_STRING_DATA SSL_str_reasons[] = {
 
 #endif
 
-void ERR_load_SSL_strings(void)
+EXPORT_C void ERR_load_SSL_strings(void)
 {
 #ifndef OPENSSL_NO_ERR
 

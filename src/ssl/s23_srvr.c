@@ -141,7 +141,7 @@ static const SSL_METHOD *ssl23_get_server_method(int ver)
         return (NULL);
 }
 
-IMPLEMENT_ssl23_meth_func(SSLv23_server_method,
+EXPORT_C IMPLEMENT_ssl23_meth_func(SSLv23_server_method,
                           ssl23_accept,
                           ssl_undefined_function, ssl23_get_server_method)
 

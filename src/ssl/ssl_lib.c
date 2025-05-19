@@ -187,7 +187,7 @@ SSL3_ENC_METHOD ssl3_undef_enc_method = {
              int use_context))ssl_undefined_function,
 };
 
-int SSL_clear(SSL *s)
+EXPORT_C int SSL_clear(SSL *s)
 {
 
     if (s->method == NULL) {
@@ -272,7 +272,7 @@ int SSL_clear(SSL *s)
 }
 
 /** Used to change an SSL_CTXs default SSL method type */
-int SSL_CTX_set_ssl_version(SSL_CTX *ctx, const SSL_METHOD *meth)
+EXPORT_C int SSL_CTX_set_ssl_version(SSL_CTX *ctx, const SSL_METHOD *meth)
 {
     STACK_OF(SSL_CIPHER) *sk;
 
@@ -291,7 +291,7 @@ int SSL_CTX_set_ssl_version(SSL_CTX *ctx, const SSL_METHOD *meth)
     return (1);
 }
 
-SSL *SSL_new(SSL_CTX *ctx)
+EXPORT_C SSL *SSL_new(SSL_CTX *ctx)
 {
     SSL *s;
 
@@ -434,7 +434,7 @@ SSL *SSL_new(SSL_CTX *ctx)
     return (NULL);
 }
 
-int SSL_CTX_set_session_id_context(SSL_CTX *ctx, const unsigned char *sid_ctx,
+EXPORT_C int SSL_CTX_set_session_id_context(SSL_CTX *ctx, const unsigned char *sid_ctx,
                                    unsigned int sid_ctx_len)
 {
     if (sid_ctx_len > sizeof(ctx->sid_ctx)) {
@@ -448,7 +448,7 @@ int SSL_CTX_set_session_id_context(SSL_CTX *ctx, const unsigned char *sid_ctx,
     return 1;
 }
 
-int SSL_set_session_id_context(SSL *ssl, const unsigned char *sid_ctx,
+EXPORT_C int SSL_set_session_id_context(SSL *ssl, const unsigned char *sid_ctx,
                                unsigned int sid_ctx_len)
 {
     if (sid_ctx_len > SSL_MAX_SID_CTX_LENGTH) {
@@ -462,7 +462,7 @@ int SSL_set_session_id_context(SSL *ssl, const unsigned char *sid_ctx,
     return 1;
 }
 
-int SSL_CTX_set_generate_session_id(SSL_CTX *ctx, GEN_SESSION_CB cb)
+EXPORT_C int SSL_CTX_set_generate_session_id(SSL_CTX *ctx, GEN_SESSION_CB cb)
 {
     CRYPTO_w_lock(CRYPTO_LOCK_SSL_CTX);
     ctx->generate_session_id = cb;
@@ -470,7 +470,7 @@ int SSL_CTX_set_generate_session_id(SSL_CTX *ctx, GEN_SESSION_CB cb)
     return 1;
 }
 
-int SSL_set_generate_session_id(SSL *ssl, GEN_SESSION_CB cb)
+EXPORT_C int SSL_set_generate_session_id(SSL *ssl, GEN_SESSION_CB cb)
 {
     CRYPTO_w_lock(CRYPTO_LOCK_SSL);
     ssl->generate_session_id = cb;
@@ -478,7 +478,7 @@ int SSL_set_generate_session_id(SSL *ssl, GEN_SESSION_CB cb)
     return 1;
 }
 
-int SSL_has_matching_session_id(const SSL *ssl, const unsigned char *id,
+EXPORT_C int SSL_has_matching_session_id(const SSL *ssl, const unsigned char *id,
                                 unsigned int id_len)
 {
     /*
@@ -514,22 +514,22 @@ int SSL_has_matching_session_id(const SSL *ssl, const unsigned char *id,
     return (p != NULL);
 }
 
-int SSL_CTX_set_purpose(SSL_CTX *s, int purpose)
+EXPORT_C int SSL_CTX_set_purpose(SSL_CTX *s, int purpose)
 {
     return X509_VERIFY_PARAM_set_purpose(s->param, purpose);
 }
 
-int SSL_set_purpose(SSL *s, int purpose)
+EXPORT_C int SSL_set_purpose(SSL *s, int purpose)
 {
     return X509_VERIFY_PARAM_set_purpose(s->param, purpose);
 }
 
-int SSL_CTX_set_trust(SSL_CTX *s, int trust)
+EXPORT_C int SSL_CTX_set_trust(SSL_CTX *s, int trust)
 {
     return X509_VERIFY_PARAM_set_trust(s->param, trust);
 }
 
-int SSL_set_trust(SSL *s, int trust)
+EXPORT_C int SSL_set_trust(SSL *s, int trust)
 {
     return X509_VERIFY_PARAM_set_trust(s->param, trust);
 }
@@ -559,7 +559,7 @@ void SSL_certs_clear(SSL *s)
     ssl_cert_clear_certs(s->cert);
 }
 
-void SSL_free(SSL *s)
+EXPORT_C void SSL_free(SSL *s)
 {
     int i;
 
@@ -670,7 +670,7 @@ void SSL_free(SSL *s)
     OPENSSL_free(s);
 }
 
-void SSL_set_bio(SSL *s, BIO *rbio, BIO *wbio)
+EXPORT_C void SSL_set_bio(SSL *s, BIO *rbio, BIO *wbio)
 {
     /*
      * If the output buffering BIO is still in place, remove it
@@ -689,22 +689,22 @@ void SSL_set_bio(SSL *s, BIO *rbio, BIO *wbio)
     s->wbio = wbio;
 }
 
-BIO *SSL_get_rbio(const SSL *s)
+EXPORT_C BIO *SSL_get_rbio(const SSL *s)
 {
     return (s->rbio);
 }
 
-BIO *SSL_get_wbio(const SSL *s)
+EXPORT_C BIO *SSL_get_wbio(const SSL *s)
 {
     return (s->wbio);
 }
 
-int SSL_get_fd(const SSL *s)
+EXPORT_C int SSL_get_fd(const SSL *s)
 {
     return (SSL_get_rfd(s));
 }
 
-int SSL_get_rfd(const SSL *s)
+EXPORT_C int SSL_get_rfd(const SSL *s)
 {
     int ret = -1;
     BIO *b, *r;
@@ -716,7 +716,7 @@ int SSL_get_rfd(const SSL *s)
     return (ret);
 }
 
-int SSL_get_wfd(const SSL *s)
+EXPORT_C int SSL_get_wfd(const SSL *s)
 {
     int ret = -1;
     BIO *b, *r;
@@ -729,7 +729,7 @@ int SSL_get_wfd(const SSL *s)
 }
 
 #ifndef OPENSSL_NO_SOCK
-int SSL_set_fd(SSL *s, int fd)
+EXPORT_C int SSL_set_fd(SSL *s, int fd)
 {
     int ret = 0;
     BIO *bio = NULL;
@@ -747,7 +747,7 @@ int SSL_set_fd(SSL *s, int fd)
     return (ret);
 }
 
-int SSL_set_wfd(SSL *s, int fd)
+EXPORT_C int SSL_set_wfd(SSL *s, int fd)
 {
     int ret = 0;
     BIO *bio = NULL;
@@ -769,7 +769,7 @@ int SSL_set_wfd(SSL *s, int fd)
     return (ret);
 }
 
-int SSL_set_rfd(SSL *s, int fd)
+EXPORT_C int SSL_set_rfd(SSL *s, int fd)
 {
     int ret = 0;
     BIO *bio = NULL;
@@ -793,7 +793,7 @@ int SSL_set_rfd(SSL *s, int fd)
 #endif
 
 /* return length of latest Finished message we sent, copy to 'buf' */
-size_t SSL_get_finished(const SSL *s, void *buf, size_t count)
+EXPORT_C size_t SSL_get_finished(const SSL *s, void *buf, size_t count)
 {
     size_t ret = 0;
 
@@ -807,7 +807,7 @@ size_t SSL_get_finished(const SSL *s, void *buf, size_t count)
 }
 
 /* return length of latest Finished message we expected, copy to 'buf' */
-size_t SSL_get_peer_finished(const SSL *s, void *buf, size_t count)
+EXPORT_C size_t SSL_get_peer_finished(const SSL *s, void *buf, size_t count)
 {
     size_t ret = 0;
 
@@ -820,35 +820,35 @@ size_t SSL_get_peer_finished(const SSL *s, void *buf, size_t count)
     return ret;
 }
 
-int SSL_get_verify_mode(const SSL *s)
+EXPORT_C int SSL_get_verify_mode(const SSL *s)
 {
     return (s->verify_mode);
 }
 
-int SSL_get_verify_depth(const SSL *s)
+EXPORT_C int SSL_get_verify_depth(const SSL *s)
 {
     return X509_VERIFY_PARAM_get_depth(s->param);
 }
 
-int (*SSL_get_verify_callback(const SSL *s)) (int, X509_STORE_CTX *) {
+EXPORT_C int (*SSL_get_verify_callback(const SSL *s)) (int, X509_STORE_CTX *) {
     return (s->verify_callback);
 }
 
-int SSL_CTX_get_verify_mode(const SSL_CTX *ctx)
+EXPORT_C int SSL_CTX_get_verify_mode(const SSL_CTX *ctx)
 {
     return (ctx->verify_mode);
 }
 
-int SSL_CTX_get_verify_depth(const SSL_CTX *ctx)
+EXPORT_C int SSL_CTX_get_verify_depth(const SSL_CTX *ctx)
 {
     return X509_VERIFY_PARAM_get_depth(ctx->param);
 }
 
-int (*SSL_CTX_get_verify_callback(const SSL_CTX *ctx)) (int, X509_STORE_CTX *) {
+EXPORT_C int (*SSL_CTX_get_verify_callback(const SSL_CTX *ctx)) (int, X509_STORE_CTX *) {
     return (ctx->default_verify_callback);
 }
 
-void SSL_set_verify(SSL *s, int mode,
+EXPORT_C void SSL_set_verify(SSL *s, int mode,
                     int (*callback) (int ok, X509_STORE_CTX *ctx))
 {
     s->verify_mode = mode;
@@ -856,22 +856,22 @@ void SSL_set_verify(SSL *s, int mode,
         s->verify_callback = callback;
 }
 
-void SSL_set_verify_depth(SSL *s, int depth)
+EXPORT_C void SSL_set_verify_depth(SSL *s, int depth)
 {
     X509_VERIFY_PARAM_set_depth(s->param, depth);
 }
 
-void SSL_set_read_ahead(SSL *s, int yes)
+EXPORT_C void SSL_set_read_ahead(SSL *s, int yes)
 {
     s->read_ahead = yes;
 }
 
-int SSL_get_read_ahead(const SSL *s)
+EXPORT_C int SSL_get_read_ahead(const SSL *s)
 {
     return (s->read_ahead);
 }
 
-int SSL_pending(const SSL *s)
+EXPORT_C int SSL_pending(const SSL *s)
 {
     /*
      * SSL_pending cannot work properly if read-ahead is enabled
@@ -883,7 +883,7 @@ int SSL_pending(const SSL *s)
     return (s->method->ssl_pending(s));
 }
 
-X509 *SSL_get_peer_certificate(const SSL *s)
+EXPORT_C X509 *SSL_get_peer_certificate(const SSL *s)
 {
     X509 *r;
 
@@ -900,7 +900,7 @@ X509 *SSL_get_peer_certificate(const SSL *s)
     return (r);
 }
 
-STACK_OF(X509) *SSL_get_peer_cert_chain(const SSL *s)
+EXPORT_C STACK_OF(X509) *SSL_get_peer_cert_chain(const SSL *s)
 {
     STACK_OF(X509) *r;
 
@@ -922,7 +922,7 @@ STACK_OF(X509) *SSL_get_peer_cert_chain(const SSL *s)
  * Now in theory, since the calling process own 't' it should be safe to
  * modify.  We need to be able to read f without being hassled
  */
-void SSL_copy_session_id(SSL *t, const SSL *f)
+EXPORT_C void SSL_copy_session_id(SSL *t, const SSL *f)
 {
     CERT *tmp;
 
@@ -950,7 +950,7 @@ void SSL_copy_session_id(SSL *t, const SSL *f)
 }
 
 /* Fix this so it checks all the valid key/cert options */
-int SSL_CTX_check_private_key(const SSL_CTX *ctx)
+EXPORT_C int SSL_CTX_check_private_key(const SSL_CTX *ctx)
 {
     if ((ctx == NULL) ||
         (ctx->cert == NULL) || (ctx->cert->key->x509 == NULL)) {
@@ -968,7 +968,7 @@ int SSL_CTX_check_private_key(const SSL_CTX *ctx)
 }
 
 /* Fix this function so that it takes an optional type parameter */
-int SSL_check_private_key(const SSL *ssl)
+EXPORT_C int SSL_check_private_key(const SSL *ssl)
 {
     if (ssl == NULL) {
         SSLerr(SSL_F_SSL_CHECK_PRIVATE_KEY, ERR_R_PASSED_NULL_PARAMETER);
@@ -990,7 +990,7 @@ int SSL_check_private_key(const SSL *ssl)
                                    ssl->cert->key->privatekey));
 }
 
-int SSL_accept(SSL *s)
+EXPORT_C int SSL_accept(SSL *s)
 {
     if (s->handshake_func == 0)
         /* Not properly initialized yet */
@@ -999,7 +999,7 @@ int SSL_accept(SSL *s)
     return (s->method->ssl_accept(s));
 }
 
-int SSL_connect(SSL *s)
+EXPORT_C int SSL_connect(SSL *s)
 {
     if (s->handshake_func == 0)
         /* Not properly initialized yet */
@@ -1008,12 +1008,12 @@ int SSL_connect(SSL *s)
     return (s->method->ssl_connect(s));
 }
 
-long SSL_get_default_timeout(const SSL *s)
+EXPORT_C long SSL_get_default_timeout(const SSL *s)
 {
     return (s->method->get_timeout());
 }
 
-int SSL_read(SSL *s, void *buf, int num)
+EXPORT_C int SSL_read(SSL *s, void *buf, int num)
 {
     if (s->handshake_func == 0) {
         SSLerr(SSL_F_SSL_READ, SSL_R_UNINITIALIZED);
@@ -1027,7 +1027,7 @@ int SSL_read(SSL *s, void *buf, int num)
     return (s->method->ssl_read(s, buf, num));
 }
 
-int SSL_peek(SSL *s, void *buf, int num)
+EXPORT_C int SSL_peek(SSL *s, void *buf, int num)
 {
     if (s->handshake_func == 0) {
         SSLerr(SSL_F_SSL_PEEK, SSL_R_UNINITIALIZED);
@@ -1040,7 +1040,7 @@ int SSL_peek(SSL *s, void *buf, int num)
     return (s->method->ssl_peek(s, buf, num));
 }
 
-int SSL_write(SSL *s, const void *buf, int num)
+EXPORT_C int SSL_write(SSL *s, const void *buf, int num)
 {
     if (s->handshake_func == 0) {
         SSLerr(SSL_F_SSL_WRITE, SSL_R_UNINITIALIZED);
@@ -1055,7 +1055,7 @@ int SSL_write(SSL *s, const void *buf, int num)
     return (s->method->ssl_write(s, buf, num));
 }
 
-int SSL_shutdown(SSL *s)
+EXPORT_C int SSL_shutdown(SSL *s)
 {
     /*
      * Note that this function behaves differently from what one might
@@ -1077,7 +1077,7 @@ int SSL_shutdown(SSL *s)
     }
 }
 
-int SSL_renegotiate(SSL *s)
+EXPORT_C int SSL_renegotiate(SSL *s)
 {
     if (s->renegotiate == 0)
         s->renegotiate = 1;
@@ -1097,7 +1097,7 @@ int SSL_renegotiate_abbreviated(SSL *s)
     return (s->method->ssl_renegotiate(s));
 }
 
-int SSL_renegotiate_pending(SSL *s)
+EXPORT_C int SSL_renegotiate_pending(SSL *s)
 {
     /*
      * becomes true when negotiation is requested; false again once a
@@ -1106,7 +1106,7 @@ int SSL_renegotiate_pending(SSL *s)
     return (s->renegotiate != 0);
 }
 
-long SSL_ctrl(SSL *s, int cmd, long larg, void *parg)
+EXPORT_C long SSL_ctrl(SSL *s, int cmd, long larg, void *parg)
 {
     long l;
 
@@ -1164,7 +1164,7 @@ long SSL_ctrl(SSL *s, int cmd, long larg, void *parg)
     }
 }
 
-long SSL_callback_ctrl(SSL *s, int cmd, void (*fp) (void))
+EXPORT_C long SSL_callback_ctrl(SSL *s, int cmd, void (*fp) (void))
 {
     switch (cmd) {
     case SSL_CTRL_SET_MSG_CALLBACK:
@@ -1179,12 +1179,12 @@ long SSL_callback_ctrl(SSL *s, int cmd, void (*fp) (void))
     }
 }
 
-LHASH_OF(SSL_SESSION) *SSL_CTX_sessions(SSL_CTX *ctx)
+EXPORT_C LHASH_OF(SSL_SESSION) *SSL_CTX_sessions(SSL_CTX *ctx)
 {
     return ctx->sessions;
 }
 
-long SSL_CTX_ctrl(SSL_CTX *ctx, int cmd, long larg, void *parg)
+EXPORT_C long SSL_CTX_ctrl(SSL_CTX *ctx, int cmd, long larg, void *parg)
 {
     long l;
     /* For some cases with ctx == NULL perform syntax checks */
@@ -1280,7 +1280,7 @@ long SSL_CTX_ctrl(SSL_CTX *ctx, int cmd, long larg, void *parg)
     }
 }
 
-long SSL_CTX_callback_ctrl(SSL_CTX *ctx, int cmd, void (*fp) (void))
+EXPORT_C long SSL_CTX_callback_ctrl(SSL_CTX *ctx, int cmd, void (*fp) (void))
 {
     switch (cmd) {
     case SSL_CTRL_SET_MSG_CALLBACK:
@@ -1320,7 +1320,7 @@ int ssl_cipher_ptr_id_cmp(const SSL_CIPHER *const *ap,
 
 /** return a STACK of the ciphers available for the SSL and in order of
  * preference */
-STACK_OF(SSL_CIPHER) *SSL_get_ciphers(const SSL *s)
+EXPORT_C STACK_OF(SSL_CIPHER) *SSL_get_ciphers(const SSL *s)
 {
     if (s != NULL) {
         if (s->cipher_list != NULL) {
@@ -1347,7 +1347,7 @@ STACK_OF(SSL_CIPHER) *ssl_get_ciphers_by_id(SSL *s)
 }
 
 /** The old interface to get the same thing as SSL_get_ciphers() */
-const char *SSL_get_cipher_list(const SSL *s, int n)
+EXPORT_C const char *SSL_get_cipher_list(const SSL *s, int n)
 {
     SSL_CIPHER *c;
     STACK_OF(SSL_CIPHER) *sk;
@@ -1364,7 +1364,7 @@ const char *SSL_get_cipher_list(const SSL *s, int n)
 }
 
 /** specify the ciphers to be used by default by the SSL_CTX */
-int SSL_CTX_set_cipher_list(SSL_CTX *ctx, const char *str)
+EXPORT_C int SSL_CTX_set_cipher_list(SSL_CTX *ctx, const char *str)
 {
     STACK_OF(SSL_CIPHER) *sk;
 
@@ -1387,7 +1387,7 @@ int SSL_CTX_set_cipher_list(SSL_CTX *ctx, const char *str)
 }
 
 /** specify the ciphers to be used by the SSL */
-int SSL_set_cipher_list(SSL *s, const char *str)
+EXPORT_C int SSL_set_cipher_list(SSL *s, const char *str)
 {
     STACK_OF(SSL_CIPHER) *sk;
 
@@ -1404,7 +1404,7 @@ int SSL_set_cipher_list(SSL *s, const char *str)
 }
 
 /* works well for SSLv2, not so good for SSLv3 */
-char *SSL_get_shared_ciphers(const SSL *s, char *buf, int size)
+EXPORT_C char *SSL_get_shared_ciphers(const SSL *s, char *buf, int size)
 {
     char *p;
     STACK_OF(SSL_CIPHER) *clntsk, *srvrsk;
@@ -1865,6 +1865,12 @@ static unsigned long ssl_session_hash(const SSL_SESSION *a)
     return (l);
 }
 
+// TODO consider changing name in def file
+EXPORT_C unsigned long SSL_SESSION_hash(const SSL_SESSION *a)
+{
+    return ssl_session_hash(a);
+}
+
 /*
  * NB: If this function (or indeed the hash function which uses a sort of
  * coarser function than this one) is changed, ensure
@@ -1881,6 +1887,12 @@ static int ssl_session_cmp(const SSL_SESSION *a, const SSL_SESSION *b)
     return (memcmp(a->session_id, b->session_id, a->session_id_length));
 }
 
+// TODO consider changing name in def file
+EXPORT_C int SSL_SESSION_cmp(const SSL_SESSION *a, const SSL_SESSION *b)
+{
+    return ssl_session_cmp(a, b);
+}
+
 /*
  * These wrapper functions should remain rather than redeclaring
  * SSL_SESSION_hash and SSL_SESSION_cmp for void* types and casting each
@@ -1890,7 +1902,7 @@ static int ssl_session_cmp(const SSL_SESSION *a, const SSL_SESSION *b)
 static IMPLEMENT_LHASH_HASH_FN(ssl_session, SSL_SESSION)
 static IMPLEMENT_LHASH_COMP_FN(ssl_session, SSL_SESSION)
 
-SSL_CTX *SSL_CTX_new(const SSL_METHOD *meth)
+EXPORT_C SSL_CTX *SSL_CTX_new(const SSL_METHOD *meth)
 {
     SSL_CTX *ret = NULL;
 
@@ -2113,7 +2125,7 @@ static void ssl_buf_freelist_free(SSL3_BUF_FREELIST *list)
 }
 #endif
 
-void SSL_CTX_free(SSL_CTX *a)
+EXPORT_C void SSL_CTX_free(SSL_CTX *a)
 {
     int i;
 
@@ -2210,17 +2222,17 @@ void SSL_CTX_free(SSL_CTX *a)
     OPENSSL_free(a);
 }
 
-void SSL_CTX_set_default_passwd_cb(SSL_CTX *ctx, pem_password_cb *cb)
+EXPORT_C void SSL_CTX_set_default_passwd_cb(SSL_CTX *ctx, pem_password_cb *cb)
 {
     ctx->default_passwd_callback = cb;
 }
 
-void SSL_CTX_set_default_passwd_cb_userdata(SSL_CTX *ctx, void *u)
+EXPORT_C void SSL_CTX_set_default_passwd_cb_userdata(SSL_CTX *ctx, void *u)
 {
     ctx->default_passwd_callback_userdata = u;
 }
 
-void SSL_CTX_set_cert_verify_callback(SSL_CTX *ctx,
+EXPORT_C void SSL_CTX_set_cert_verify_callback(SSL_CTX *ctx,
                                       int (*cb) (X509_STORE_CTX *, void *),
                                       void *arg)
 {
@@ -2228,14 +2240,14 @@ void SSL_CTX_set_cert_verify_callback(SSL_CTX *ctx,
     ctx->app_verify_arg = arg;
 }
 
-void SSL_CTX_set_verify(SSL_CTX *ctx, int mode,
+EXPORT_C void SSL_CTX_set_verify(SSL_CTX *ctx, int mode,
                         int (*cb) (int, X509_STORE_CTX *))
 {
     ctx->verify_mode = mode;
     ctx->default_verify_callback = cb;
 }
 
-void SSL_CTX_set_verify_depth(SSL_CTX *ctx, int depth)
+EXPORT_C void SSL_CTX_set_verify_depth(SSL_CTX *ctx, int depth)
 {
     X509_VERIFY_PARAM_set_depth(ctx->param, depth);
 }
@@ -2676,12 +2688,12 @@ const SSL_METHOD *SSL_CTX_get_ssl_method(SSL_CTX *ctx)
     return ctx->method;
 }
 
-const SSL_METHOD *SSL_get_ssl_method(SSL *s)
+EXPORT_C const SSL_METHOD *SSL_get_ssl_method(SSL *s)
 {
     return (s->method);
 }
 
-int SSL_set_ssl_method(SSL *s, const SSL_METHOD *meth)
+EXPORT_C int SSL_set_ssl_method(SSL *s, const SSL_METHOD *meth)
 {
     int conn = -1;
     int ret = 1;
@@ -2706,7 +2718,7 @@ int SSL_set_ssl_method(SSL *s, const SSL_METHOD *meth)
     return (ret);
 }
 
-int SSL_get_error(const SSL *s, int i)
+EXPORT_C int SSL_get_error(const SSL *s, int i)
 {
     int reason;
     unsigned long l;
@@ -2788,7 +2800,7 @@ int SSL_get_error(const SSL *s, int i)
     return (SSL_ERROR_SYSCALL);
 }
 
-int SSL_do_handshake(SSL *s)
+EXPORT_C int SSL_do_handshake(SSL *s)
 {
     int ret = 1;
 
@@ -2809,7 +2821,7 @@ int SSL_do_handshake(SSL *s)
  * For the next 2 functions, SSL_clear() sets shutdown and so one of these
  * calls will reset it
  */
-void SSL_set_accept_state(SSL *s)
+EXPORT_C void SSL_set_accept_state(SSL *s)
 {
     s->server = 1;
     s->shutdown = 0;
@@ -2821,7 +2833,7 @@ void SSL_set_accept_state(SSL *s)
     ssl_clear_hash_ctx(&s->write_hash);
 }
 
-void SSL_set_connect_state(SSL *s)
+EXPORT_C void SSL_set_connect_state(SSL *s)
 {
     s->server = 0;
     s->shutdown = 0;
@@ -2859,7 +2871,7 @@ SSL_METHOD *ssl_bad_method(int ver)
     return (NULL);
 }
 
-const char *SSL_get_version(const SSL *s)
+EXPORT_C const char *SSL_get_version(const SSL *s)
 {
     if (s->version == TLS1_2_VERSION)
         return ("TLSv1.2");
@@ -2881,7 +2893,7 @@ const char *SSL_get_version(const SSL *s)
         return ("unknown");
 }
 
-SSL *SSL_dup(SSL *s)
+EXPORT_C SSL *SSL_dup(SSL *s)
 {
     STACK_OF(X509_NAME) *sk;
     X509_NAME *xn;
@@ -3027,7 +3039,7 @@ void ssl_clear_cipher_ctx(SSL *s)
 #endif
 }
 
-X509 *SSL_get_certificate(const SSL *s)
+EXPORT_C X509 *SSL_get_certificate(const SSL *s)
 {
     if (s->cert != NULL)
         return (s->cert->key->x509);
@@ -3035,7 +3047,7 @@ X509 *SSL_get_certificate(const SSL *s)
         return (NULL);
 }
 
-EVP_PKEY *SSL_get_privatekey(const SSL *s)
+EXPORT_C EVP_PKEY *SSL_get_privatekey(const SSL *s)
 {
     if (s->cert != NULL)
         return (s->cert->key->privatekey);
@@ -3059,7 +3071,7 @@ EVP_PKEY *SSL_CTX_get0_privatekey(const SSL_CTX *ctx)
         return NULL;
 }
 
-const SSL_CIPHER *SSL_get_current_cipher(const SSL *s)
+EXPORT_C const SSL_CIPHER *SSL_get_current_cipher(const SSL *s)
 {
     if ((s->session != NULL) && (s->session->cipher != NULL))
         return (s->session->cipher);
@@ -3067,25 +3079,25 @@ const SSL_CIPHER *SSL_get_current_cipher(const SSL *s)
 }
 
 #ifdef OPENSSL_NO_COMP
-const COMP_METHOD *SSL_get_current_compression(SSL *s)
+EXPORT_C const COMP_METHOD *SSL_get_current_compression(SSL *s)
 {
     return NULL;
 }
 
-const COMP_METHOD *SSL_get_current_expansion(SSL *s)
+EXPORT_C const COMP_METHOD *SSL_get_current_expansion(SSL *s)
 {
     return NULL;
 }
 #else
 
-const COMP_METHOD *SSL_get_current_compression(SSL *s)
+EXPORT_C const COMP_METHOD *SSL_get_current_compression(SSL *s)
 {
     if (s->compress != NULL)
         return (s->compress->meth);
     return (NULL);
 }
 
-const COMP_METHOD *SSL_get_current_expansion(SSL *s)
+EXPORT_C const COMP_METHOD *SSL_get_current_expansion(SSL *s)
 {
     if (s->expand != NULL)
         return (s->expand->meth);
@@ -3140,47 +3152,47 @@ void ssl_free_wbio_buffer(SSL *s)
     s->bbio = NULL;
 }
 
-void SSL_CTX_set_quiet_shutdown(SSL_CTX *ctx, int mode)
+EXPORT_C void SSL_CTX_set_quiet_shutdown(SSL_CTX *ctx, int mode)
 {
     ctx->quiet_shutdown = mode;
 }
 
-int SSL_CTX_get_quiet_shutdown(const SSL_CTX *ctx)
+EXPORT_C int SSL_CTX_get_quiet_shutdown(const SSL_CTX *ctx)
 {
     return (ctx->quiet_shutdown);
 }
 
-void SSL_set_quiet_shutdown(SSL *s, int mode)
+EXPORT_C void SSL_set_quiet_shutdown(SSL *s, int mode)
 {
     s->quiet_shutdown = mode;
 }
 
-int SSL_get_quiet_shutdown(const SSL *s)
+EXPORT_C int SSL_get_quiet_shutdown(const SSL *s)
 {
     return (s->quiet_shutdown);
 }
 
-void SSL_set_shutdown(SSL *s, int mode)
+EXPORT_C void SSL_set_shutdown(SSL *s, int mode)
 {
     s->shutdown = mode;
 }
 
-int SSL_get_shutdown(const SSL *s)
+EXPORT_C int SSL_get_shutdown(const SSL *s)
 {
     return (s->shutdown);
 }
 
-int SSL_version(const SSL *s)
+EXPORT_C int SSL_version(const SSL *s)
 {
     return (s->version);
 }
 
-SSL_CTX *SSL_get_SSL_CTX(const SSL *ssl)
+EXPORT_C SSL_CTX *SSL_get_SSL_CTX(const SSL *ssl)
 {
     return (ssl->ctx);
 }
 
-SSL_CTX *SSL_set_SSL_CTX(SSL *ssl, SSL_CTX *ctx)
+EXPORT_C SSL_CTX *SSL_set_SSL_CTX(SSL *ssl, SSL_CTX *ctx)
 {
     CERT *ocert = ssl->cert;
     if (ssl->ctx == ctx)
@@ -3244,19 +3256,19 @@ SSL_CTX *SSL_set_SSL_CTX(SSL *ssl, SSL_CTX *ctx)
 }
 
 #ifndef OPENSSL_NO_STDIO
-int SSL_CTX_set_default_verify_paths(SSL_CTX *ctx)
+EXPORT_C int SSL_CTX_set_default_verify_paths(SSL_CTX *ctx)
 {
     return (X509_STORE_set_default_paths(ctx->cert_store));
 }
 
-int SSL_CTX_load_verify_locations(SSL_CTX *ctx, const char *CAfile,
+EXPORT_C int SSL_CTX_load_verify_locations(SSL_CTX *ctx, const char *CAfile,
                                   const char *CApath)
 {
     return (X509_STORE_load_locations(ctx->cert_store, CAfile, CApath));
 }
 #endif
 
-void SSL_set_info_callback(SSL *ssl,
+EXPORT_C void SSL_set_info_callback(SSL *ssl,
                            void (*cb) (const SSL *ssl, int type, int val))
 {
     ssl->info_callback = cb;
@@ -3266,13 +3278,13 @@ void SSL_set_info_callback(SSL *ssl,
  * One compiler (Diab DCC) doesn't like argument names in returned function
  * pointer.
  */
-void (*SSL_get_info_callback(const SSL *ssl)) (const SSL * /* ssl */ ,
+EXPORT_C void (*SSL_get_info_callback(const SSL *ssl)) (const SSL * /* ssl */ ,
                                                int /* type */ ,
                                                int /* val */ ) {
     return ssl->info_callback;
 }
 
-int SSL_state(const SSL *ssl)
+EXPORT_C int SSL_state(const SSL *ssl)
 {
     return (ssl->state);
 }
@@ -3282,34 +3294,34 @@ void SSL_set_state(SSL *ssl, int state)
     ssl->state = state;
 }
 
-void SSL_set_verify_result(SSL *ssl, long arg)
+EXPORT_C void SSL_set_verify_result(SSL *ssl, long arg)
 {
     ssl->verify_result = arg;
 }
 
-long SSL_get_verify_result(const SSL *ssl)
+EXPORT_C long SSL_get_verify_result(const SSL *ssl)
 {
     return (ssl->verify_result);
 }
 
-int SSL_get_ex_new_index(long argl, void *argp, CRYPTO_EX_new *new_func,
+EXPORT_C int SSL_get_ex_new_index(long argl, void *argp, CRYPTO_EX_new *new_func,
                          CRYPTO_EX_dup *dup_func, CRYPTO_EX_free *free_func)
 {
     return CRYPTO_get_ex_new_index(CRYPTO_EX_INDEX_SSL, argl, argp,
                                    new_func, dup_func, free_func);
 }
 
-int SSL_set_ex_data(SSL *s, int idx, void *arg)
+EXPORT_C int SSL_set_ex_data(SSL *s, int idx, void *arg)
 {
     return (CRYPTO_set_ex_data(&s->ex_data, idx, arg));
 }
 
-void *SSL_get_ex_data(const SSL *s, int idx)
+EXPORT_C void *SSL_get_ex_data(const SSL *s, int idx)
 {
     return (CRYPTO_get_ex_data(&s->ex_data, idx));
 }
 
-int SSL_CTX_get_ex_new_index(long argl, void *argp, CRYPTO_EX_new *new_func,
+EXPORT_C int SSL_CTX_get_ex_new_index(long argl, void *argp, CRYPTO_EX_new *new_func,
                              CRYPTO_EX_dup *dup_func,
                              CRYPTO_EX_free *free_func)
 {
@@ -3317,12 +3329,12 @@ int SSL_CTX_get_ex_new_index(long argl, void *argp, CRYPTO_EX_new *new_func,
                                    new_func, dup_func, free_func);
 }
 
-int SSL_CTX_set_ex_data(SSL_CTX *s, int idx, void *arg)
+EXPORT_C int SSL_CTX_set_ex_data(SSL_CTX *s, int idx, void *arg)
 {
     return (CRYPTO_set_ex_data(&s->ex_data, idx, arg));
 }
 
-void *SSL_CTX_get_ex_data(const SSL_CTX *s, int idx)
+EXPORT_C void *SSL_CTX_get_ex_data(const SSL_CTX *s, int idx)
 {
     return (CRYPTO_get_ex_data(&s->ex_data, idx));
 }
@@ -3332,19 +3344,19 @@ int ssl_ok(SSL *s)
     return (1);
 }
 
-X509_STORE *SSL_CTX_get_cert_store(const SSL_CTX *ctx)
+EXPORT_C X509_STORE *SSL_CTX_get_cert_store(const SSL_CTX *ctx)
 {
     return (ctx->cert_store);
 }
 
-void SSL_CTX_set_cert_store(SSL_CTX *ctx, X509_STORE *store)
+EXPORT_C void SSL_CTX_set_cert_store(SSL_CTX *ctx, X509_STORE *store)
 {
     if (ctx->cert_store != NULL)
         X509_STORE_free(ctx->cert_store);
     ctx->cert_store = store;
 }
 
-int SSL_want(const SSL *s)
+EXPORT_C int SSL_want(const SSL *s)
 {
     return (s->rwstate);
 }
@@ -3356,14 +3368,14 @@ int SSL_want(const SSL *s)
  */
 
 #ifndef OPENSSL_NO_RSA
-void SSL_CTX_set_tmp_rsa_callback(SSL_CTX *ctx, RSA *(*cb) (SSL *ssl,
+EXPORT_C void SSL_CTX_set_tmp_rsa_callback(SSL_CTX *ctx, RSA *(*cb) (SSL *ssl,
                                                             int is_export,
                                                             int keylength))
 {
     SSL_CTX_callback_ctrl(ctx, SSL_CTRL_SET_TMP_RSA_CB, (void (*)(void))cb);
 }
 
-void SSL_set_tmp_rsa_callback(SSL *ssl, RSA *(*cb) (SSL *ssl,
+EXPORT_C void SSL_set_tmp_rsa_callback(SSL *ssl, RSA *(*cb) (SSL *ssl,
                                                     int is_export,
                                                     int keylength))
 {
@@ -3394,14 +3406,14 @@ RSA *cb(SSL *ssl, int is_export, int keylength)
  */
 
 #ifndef OPENSSL_NO_DH
-void SSL_CTX_set_tmp_dh_callback(SSL_CTX *ctx,
+EXPORT_C void SSL_CTX_set_tmp_dh_callback(SSL_CTX *ctx,
                                  DH *(*dh) (SSL *ssl, int is_export,
                                             int keylength))
 {
     SSL_CTX_callback_ctrl(ctx, SSL_CTRL_SET_TMP_DH_CB, (void (*)(void))dh);
 }
 
-void SSL_set_tmp_dh_callback(SSL *ssl, DH *(*dh) (SSL *ssl, int is_export,
+EXPORT_C void SSL_set_tmp_dh_callback(SSL *ssl, DH *(*dh) (SSL *ssl, int is_export,
                                                   int keylength))
 {
     SSL_callback_ctrl(ssl, SSL_CTRL_SET_TMP_DH_CB, (void (*)(void))dh);
@@ -3528,7 +3540,7 @@ void SSL_CTX_set_psk_server_callback(SSL_CTX *ctx,
 }
 #endif
 
-void SSL_CTX_set_msg_callback(SSL_CTX *ctx,
+EXPORT_C void SSL_CTX_set_msg_callback(SSL_CTX *ctx,
                               void (*cb) (int write_p, int version,
                                           int content_type, const void *buf,
                                           size_t len, SSL *ssl, void *arg))
@@ -3536,7 +3548,7 @@ void SSL_CTX_set_msg_callback(SSL_CTX *ctx,
     SSL_CTX_callback_ctrl(ctx, SSL_CTRL_SET_MSG_CALLBACK, (void (*)(void))cb);
 }
 
-void SSL_set_msg_callback(SSL *ssl,
+EXPORT_C void SSL_set_msg_callback(SSL *ssl,
                           void (*cb) (int write_p, int version,
                                       int content_type, const void *buf,
                                       size_t len, SSL *ssl, void *arg))

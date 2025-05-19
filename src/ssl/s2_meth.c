@@ -71,7 +71,7 @@ static const SSL_METHOD *ssl2_get_method(int ver)
         return (NULL);
 }
 
-IMPLEMENT_ssl2_meth_func(SSLv2_method,
+EXPORT_C IMPLEMENT_ssl2_meth_func(SSLv2_method,
                          ssl2_accept, ssl2_connect, ssl2_get_method)
 
 # else /* !OPENSSL_NO_SSL2 */
