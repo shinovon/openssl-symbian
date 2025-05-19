@@ -17,9 +17,9 @@ extern "C" {
 //#ifndef OPENSSL_NO_JPAKE
 //# define OPENSSL_NO_JPAKE
 //#endif
-//#ifndef OPENSSL_NO_KRB5
-//# define OPENSSL_NO_KRB5
-//#endif
+#ifndef OPENSSL_NO_KRB5
+# define OPENSSL_NO_KRB5
+#endif
 //#ifndef OPENSSL_NO_LIBUNBOUND
 //# define OPENSSL_NO_LIBUNBOUND
 //#endif
