@@ -1,0 +1,71 @@
+#include <platform_paths.hrh>
+
+TARGET		  libssl.dll
+TARGETTYPE	  dll
+UID			 0x1000008d 0xE9371A59
+CAPABILITY   All -Tcb
+VENDORID 	0x101FB657
+VERSION 	0.10
+
+//#ifdef EKA2
+//DEFFILE			libssl.def
+//#else
+//DEFFILE			libssl.def
+//#endif
+
+// TODO search for macro
+MACRO SYMBIAN
+//MACRO OPENSSL_THREADS
+// TODO pthreads
+//MACRO PTHREADS
+MACRO _REENTRANT
+MACRO DSO_DLFCN
+MACRO HAVE_DLFCN_H
+MACRO NO_SYSLOG
+MACRO ZLIB_SHARED
+MACRO ZLIB
+MACRO LIBDL_ONLY_ORDINALS
+MACRO NO_WINDOWS_BRAINDEATH
+MACRO OPENSSL_SYS_SYMBIAN
+MACRO OPENSSL_NO_DGRAM
+
+OS_LAYER_SYSTEMINCLUDE
+OS_LAYER_LIBC_SYSTEMINCLUDE
+
+USERINCLUDE   ..
+USERINCLUDE   ../inc/include
+USERINCLUDE   ../inc/include/openssl
+//USERINCLUDE   ../src/ssl
+
+// TODO do a cleanup
+USERINCLUDE   ../src/ssl
+
+SYSTEMINCLUDE  ..
+SYSTEMINCLUDE  ../inc/include
+SYSTEMINCLUDE  ../inc/include/openssl
+//SYSTEMINCLUDE  ../src/ssl
+
+// Why?
+//STDCPP
+
+//nostrictdef
+
+//START MARM
+//END
+
+//SMPSAFE
+//PAGED
+
+EPOCALLOWDLLDATA
+
+//#ifdef ENABLE_ABIV2_MODE
+//DEBUGGABLE_UDEBONLY
+//#endif
+
+LIBRARY			libc.lib libdl.lib euser.lib efsrv.lib certstore.lib ctframework.lib x509.lib crypto.lib x500.lib asn1.lib libcrypto.lib
+
+//.cpp files are just tests
+
+
+SOURCEPATH ../src/ssl
+SOURCE bio_ssl.c d1_both.c d1_clnt.c d1_lib.c d1_meth.c d1_pkt.c d1_srtp.c d1_srvr.c kssl.c s23_clnt.c s23_lib.c s23_meth.c s23_pkt.c s23_srvr.c s2_clnt.c s2_enc.c s2_lib.c s2_meth.c s2_pkt.c s2_srvr.c s3_both.c s3_cbc.c s3_clnt.c s3_enc.c s3_lib.c s3_meth.c s3_pkt.c s3_srvr.c ssl_algs.c ssl_asn1.c ssl_cert.c ssl_ciph.c ssl_conf.c ssl_err.c ssl_err2.c ssl_lib.c ssl_rsa.c ssl_sess.c ssl_stat.c ssl_txt.c ssl_utst.c t1_clnt.c t1_enc.c t1_ext.c t1_lib.c t1_meth.c t1_reneg.c t1_srvr.c t1_trce.c tls_srp.c
