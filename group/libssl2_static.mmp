@@ -85,7 +85,7 @@ SYSTEMINCLUDE  ../inc/include/openssl
 
 EPOCALLOWDLLDATA
 
-LIBRARY			libc.lib libdl.lib euser.lib efsrv.lib certstore.lib ctframework.lib x509.lib crypto.lib x500.lib asn1.lib libpthread.lib
+LIBRARY euser.lib libc.lib libdl.lib libpthread.lib
 
 SOURCEPATH ../src/crypto/aes
 SOURCE aes_cbc.c aes_cfb.c aes_core.c aes_ctr.c aes_ecb.c aes_ige.c aes_misc.c aes_ofb.c aes_wrap.c
