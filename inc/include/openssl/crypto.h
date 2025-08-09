@@ -366,8 +366,8 @@ DECLARE_STACK_OF(CRYPTO_EX_DATA_FUNCS)
                 CRYPTO_dbg_get_options);\
         } while(0)
 
-int CRYPTO_mem_ctrl(int mode);
-int CRYPTO_is_mem_check_on(void);
+IMPORT_C int CRYPTO_mem_ctrl(int mode);
+IMPORT_C int CRYPTO_is_mem_check_on(void);
 
 /* for applications */
 # define MemCheck_start() CRYPTO_mem_ctrl(CRYPTO_MEM_CHECK_ON)
@@ -393,55 +393,55 @@ int CRYPTO_is_mem_check_on(void);
         CRYPTO_malloc_locked((int)num,__FILE__,__LINE__)
 # define OPENSSL_free_locked(addr) CRYPTO_free_locked(addr)
 
-const char *SSLeay_version(int type);
-unsigned long SSLeay(void);
+IMPORT_C const char *SSLeay_version(int type);
+IMPORT_C unsigned long SSLeay(void);
 
-int OPENSSL_issetugid(void);
+IMPORT_C int OPENSSL_issetugid(void);
 
 /* An opaque type representing an implementation of "ex_data" support */
 typedef struct st_CRYPTO_EX_DATA_IMPL CRYPTO_EX_DATA_IMPL;
 /* Return an opaque pointer to the current "ex_data" implementation */
-const CRYPTO_EX_DATA_IMPL *CRYPTO_get_ex_data_implementation(void);
+IMPORT_C const CRYPTO_EX_DATA_IMPL *CRYPTO_get_ex_data_implementation(void);
 /* Sets the "ex_data" implementation to be used (if it's not too late) */
-int CRYPTO_set_ex_data_implementation(const CRYPTO_EX_DATA_IMPL *i);
+IMPORT_C int CRYPTO_set_ex_data_implementation(const CRYPTO_EX_DATA_IMPL *i);
 /* Get a new "ex_data" class, and return the corresponding "class_index" */
-int CRYPTO_ex_data_new_class(void);
+IMPORT_C int CRYPTO_ex_data_new_class(void);
 /* Within a given class, get/register a new index */
-int CRYPTO_get_ex_new_index(int class_index, long argl, void *argp,
+IMPORT_C int CRYPTO_get_ex_new_index(int class_index, long argl, void *argp,
                             CRYPTO_EX_new *new_func, CRYPTO_EX_dup *dup_func,
                             CRYPTO_EX_free *free_func);
 /*
  * Initialise/duplicate/free CRYPTO_EX_DATA variables corresponding to a
  * given class (invokes whatever per-class callbacks are applicable)
  */
-int CRYPTO_new_ex_data(int class_index, void *obj, CRYPTO_EX_DATA *ad);
-int CRYPTO_dup_ex_data(int class_index, CRYPTO_EX_DATA *to,
+IMPORT_C int CRYPTO_new_ex_data(int class_index, void *obj, CRYPTO_EX_DATA *ad);
+IMPORT_C int CRYPTO_dup_ex_data(int class_index, CRYPTO_EX_DATA *to,
                        CRYPTO_EX_DATA *from);
-void CRYPTO_free_ex_data(int class_index, void *obj, CRYPTO_EX_DATA *ad);
+IMPORT_C void CRYPTO_free_ex_data(int class_index, void *obj, CRYPTO_EX_DATA *ad);
 /*
  * Get/set data in a CRYPTO_EX_DATA variable corresponding to a particular
  * index (relative to the class type involved)
  */
-int CRYPTO_set_ex_data(CRYPTO_EX_DATA *ad, int idx, void *val);
-void *CRYPTO_get_ex_data(const CRYPTO_EX_DATA *ad, int idx);
+IMPORT_C int CRYPTO_set_ex_data(CRYPTO_EX_DATA *ad, int idx, void *val);
+IMPORT_C void *CRYPTO_get_ex_data(const CRYPTO_EX_DATA *ad, int idx);
 /*
  * This function cleans up all "ex_data" state. It mustn't be called under
  * potential race-conditions.
  */
-void CRYPTO_cleanup_all_ex_data(void);
+IMPORT_C void CRYPTO_cleanup_all_ex_data(void);
 
-int CRYPTO_get_new_lockid(char *name);
+IMPORT_C int CRYPTO_get_new_lockid(char *name);
 
-int CRYPTO_num_locks(void);     /* return CRYPTO_NUM_LOCKS (shared libs!) */
-void CRYPTO_lock(int mode, int type, const char *file, int line);
-void CRYPTO_set_locking_callback(void (*func) (int mode, int type,
+IMPORT_C int CRYPTO_num_locks(void);     /* return CRYPTO_NUM_LOCKS (shared libs!) */
+IMPORT_C void CRYPTO_lock(int mode, int type, const char *file, int line);
+IMPORT_C void CRYPTO_set_locking_callback(void (*func) (int mode, int type,
                                                const char *file, int line));
-void (*CRYPTO_get_locking_callback(void)) (int mode, int type,
+IMPORT_C void (*CRYPTO_get_locking_callback(void)) (int mode, int type,
                                            const char *file, int line);
-void CRYPTO_set_add_lock_callback(int (*func)
+IMPORT_C void CRYPTO_set_add_lock_callback(int (*func)
                                    (int *num, int mount, int type,
                                     const char *file, int line));
-int (*CRYPTO_get_add_lock_callback(void)) (int *num, int mount, int type,
+IMPORT_C int (*CRYPTO_get_add_lock_callback(void)) (int *num, int mount, int type,
                                            const char *file, int line);
 
 /* Don't use this structure directly. */
@@ -450,45 +450,45 @@ typedef struct crypto_threadid_st {
     unsigned long val;
 } CRYPTO_THREADID;
 /* Only use CRYPTO_THREADID_set_[numeric|pointer]() within callbacks */
-void CRYPTO_THREADID_set_numeric(CRYPTO_THREADID *id, unsigned long val);
-void CRYPTO_THREADID_set_pointer(CRYPTO_THREADID *id, void *ptr);
-int CRYPTO_THREADID_set_callback(void (*threadid_func) (CRYPTO_THREADID *));
-void (*CRYPTO_THREADID_get_callback(void)) (CRYPTO_THREADID *);
-void CRYPTO_THREADID_current(CRYPTO_THREADID *id);
-int CRYPTO_THREADID_cmp(const CRYPTO_THREADID *a, const CRYPTO_THREADID *b);
-void CRYPTO_THREADID_cpy(CRYPTO_THREADID *dest, const CRYPTO_THREADID *src);
-unsigned long CRYPTO_THREADID_hash(const CRYPTO_THREADID *id);
+IMPORT_C void CRYPTO_THREADID_set_numeric(CRYPTO_THREADID *id, unsigned long val);
+IMPORT_C void CRYPTO_THREADID_set_pointer(CRYPTO_THREADID *id, void *ptr);
+IMPORT_C int CRYPTO_THREADID_set_callback(void (*threadid_func) (CRYPTO_THREADID *));
+IMPORT_C void (*CRYPTO_THREADID_get_callback(void)) (CRYPTO_THREADID *);
+IMPORT_C void CRYPTO_THREADID_current(CRYPTO_THREADID *id);
+IMPORT_C int CRYPTO_THREADID_cmp(const CRYPTO_THREADID *a, const CRYPTO_THREADID *b);
+IMPORT_C void CRYPTO_THREADID_cpy(CRYPTO_THREADID *dest, const CRYPTO_THREADID *src);
+IMPORT_C unsigned long CRYPTO_THREADID_hash(const CRYPTO_THREADID *id);
 # ifndef OPENSSL_NO_DEPRECATED
-void CRYPTO_set_id_callback(unsigned long (*func) (void));
-unsigned long (*CRYPTO_get_id_callback(void)) (void);
-unsigned long CRYPTO_thread_id(void);
+IMPORT_C void CRYPTO_set_id_callback(unsigned long (*func) (void));
+IMPORT_C unsigned long (*CRYPTO_get_id_callback(void)) (void);
+IMPORT_C unsigned long CRYPTO_thread_id(void);
 # endif
 
-const char *CRYPTO_get_lock_name(int type);
-int CRYPTO_add_lock(int *pointer, int amount, int type, const char *file,
+IMPORT_C const char *CRYPTO_get_lock_name(int type);
+IMPORT_C int CRYPTO_add_lock(int *pointer, int amount, int type, const char *file,
                     int line);
 
-int CRYPTO_get_new_dynlockid(void);
-void CRYPTO_destroy_dynlockid(int i);
-struct CRYPTO_dynlock_value *CRYPTO_get_dynlock_value(int i);
-void CRYPTO_set_dynlock_create_callback(struct CRYPTO_dynlock_value
+IMPORT_C int CRYPTO_get_new_dynlockid(void);
+IMPORT_C void CRYPTO_destroy_dynlockid(int i);
+IMPORT_C struct CRYPTO_dynlock_value *CRYPTO_get_dynlock_value(int i);
+IMPORT_C void CRYPTO_set_dynlock_create_callback(struct CRYPTO_dynlock_value
                                         *(*dyn_create_function) (const char
                                                                  *file,
                                                                  int line));
-void CRYPTO_set_dynlock_lock_callback(void (*dyn_lock_function)
+IMPORT_C void CRYPTO_set_dynlock_lock_callback(void (*dyn_lock_function)
                                        (int mode,
                                         struct CRYPTO_dynlock_value *l,
                                         const char *file, int line));
-void CRYPTO_set_dynlock_destroy_callback(void (*dyn_destroy_function)
+IMPORT_C void CRYPTO_set_dynlock_destroy_callback(void (*dyn_destroy_function)
                                           (struct CRYPTO_dynlock_value *l,
                                            const char *file, int line));
-struct CRYPTO_dynlock_value
+IMPORT_C struct CRYPTO_dynlock_value
 *(*CRYPTO_get_dynlock_create_callback(void)) (const char *file, int line);
-void (*CRYPTO_get_dynlock_lock_callback(void)) (int mode,
+IMPORT_C void (*CRYPTO_get_dynlock_lock_callback(void)) (int mode,
                                                 struct CRYPTO_dynlock_value
                                                 *l, const char *file,
                                                 int line);
-void (*CRYPTO_get_dynlock_destroy_callback(void)) (struct CRYPTO_dynlock_value
+IMPORT_C void (*CRYPTO_get_dynlock_destroy_callback(void)) (struct CRYPTO_dynlock_value
                                                    *l, const char *file,
                                                    int line);
 
@@ -496,59 +496,59 @@ void (*CRYPTO_get_dynlock_destroy_callback(void)) (struct CRYPTO_dynlock_value
  * CRYPTO_set_mem_functions includes CRYPTO_set_locked_mem_functions -- call
  * the latter last if you need different functions
  */
-int CRYPTO_set_mem_functions(void *(*m) (size_t), void *(*r) (void *, size_t),
+IMPORT_C int CRYPTO_set_mem_functions(void *(*m) (size_t), void *(*r) (void *, size_t),
                              void (*f) (void *));
-int CRYPTO_set_locked_mem_functions(void *(*m) (size_t),
+IMPORT_C int CRYPTO_set_locked_mem_functions(void *(*m) (size_t),
                                     void (*free_func) (void *));
-int CRYPTO_set_mem_ex_functions(void *(*m) (size_t, const char *, int),
+IMPORT_C int CRYPTO_set_mem_ex_functions(void *(*m) (size_t, const char *, int),
                                 void *(*r) (void *, size_t, const char *,
                                             int), void (*f) (void *));
-int CRYPTO_set_locked_mem_ex_functions(void *(*m) (size_t, const char *, int),
+IMPORT_C int CRYPTO_set_locked_mem_ex_functions(void *(*m) (size_t, const char *, int),
                                        void (*free_func) (void *));
-int CRYPTO_set_mem_debug_functions(void (*m)
+IMPORT_C int CRYPTO_set_mem_debug_functions(void (*m)
                                     (void *, int, const char *, int, int),
                                    void (*r) (void *, void *, int,
                                               const char *, int, int),
                                    void (*f) (void *, int), void (*so) (long),
                                    long (*go) (void));
-void CRYPTO_get_mem_functions(void *(**m) (size_t),
+IMPORT_C void CRYPTO_get_mem_functions(void *(**m) (size_t),
                               void *(**r) (void *, size_t),
                               void (**f) (void *));
-void CRYPTO_get_locked_mem_functions(void *(**m) (size_t),
+IMPORT_C void CRYPTO_get_locked_mem_functions(void *(**m) (size_t),
                                      void (**f) (void *));
-void CRYPTO_get_mem_ex_functions(void *(**m) (size_t, const char *, int),
+IMPORT_C void CRYPTO_get_mem_ex_functions(void *(**m) (size_t, const char *, int),
                                  void *(**r) (void *, size_t, const char *,
                                               int), void (**f) (void *));
-void CRYPTO_get_locked_mem_ex_functions(void
+IMPORT_C void CRYPTO_get_locked_mem_ex_functions(void
                                         *(**m) (size_t, const char *, int),
                                         void (**f) (void *));
-void CRYPTO_get_mem_debug_functions(void (**m)
+IMPORT_C void CRYPTO_get_mem_debug_functions(void (**m)
                                      (void *, int, const char *, int, int),
                                     void (**r) (void *, void *, int,
                                                 const char *, int, int),
                                     void (**f) (void *, int),
                                     void (**so) (long), long (**go) (void));
 
-void *CRYPTO_malloc_locked(int num, const char *file, int line);
-void CRYPTO_free_locked(void *ptr);
-void *CRYPTO_malloc(int num, const char *file, int line);
-char *CRYPTO_strdup(const char *str, const char *file, int line);
-void CRYPTO_free(void *ptr);
-void *CRYPTO_realloc(void *addr, int num, const char *file, int line);
-void *CRYPTO_realloc_clean(void *addr, int old_num, int num, const char *file,
+IMPORT_C void *CRYPTO_malloc_locked(int num, const char *file, int line);
+IMPORT_C void CRYPTO_free_locked(void *ptr);
+IMPORT_C void *CRYPTO_malloc(int num, const char *file, int line);
+IMPORT_C char *CRYPTO_strdup(const char *str, const char *file, int line);
+IMPORT_C void CRYPTO_free(void *ptr);
+IMPORT_C void *CRYPTO_realloc(void *addr, int num, const char *file, int line);
+IMPORT_C void *CRYPTO_realloc_clean(void *addr, int old_num, int num, const char *file,
                            int line);
-void *CRYPTO_remalloc(void *addr, int num, const char *file, int line);
+IMPORT_C void *CRYPTO_remalloc(void *addr, int num, const char *file, int line);
 
-void OPENSSL_cleanse(void *ptr, size_t len);
+IMPORT_C void OPENSSL_cleanse(void *ptr, size_t len);
 
-void CRYPTO_set_mem_debug_options(long bits);
-long CRYPTO_get_mem_debug_options(void);
+IMPORT_C void CRYPTO_set_mem_debug_options(long bits);
+IMPORT_C long CRYPTO_get_mem_debug_options(void);
 
 # define CRYPTO_push_info(info) \
         CRYPTO_push_info_(info, __FILE__, __LINE__);
-int CRYPTO_push_info_(const char *info, const char *file, int line);
-int CRYPTO_pop_info(void);
-int CRYPTO_remove_all_info(void);
+IMPORT_C int CRYPTO_push_info_(const char *info, const char *file, int line);
+IMPORT_C int CRYPTO_pop_info(void);
+IMPORT_C int CRYPTO_remove_all_info(void);
 
 /*
  * Default debugging functions (enabled by CRYPTO_malloc_debug_init() macro;
@@ -560,11 +560,11 @@ int CRYPTO_remove_all_info(void);
  * 0:   called before the actual memory allocation has taken place
  * 1:   called after the actual memory allocation has taken place
  */
-void CRYPTO_dbg_malloc(void *addr, int num, const char *file, int line,
+IMPORT_C void CRYPTO_dbg_malloc(void *addr, int num, const char *file, int line,
                        int before_p);
-void CRYPTO_dbg_realloc(void *addr1, void *addr2, int num, const char *file,
+IMPORT_C void CRYPTO_dbg_realloc(void *addr1, void *addr2, int num, const char *file,
                         int line, int before_p);
-void CRYPTO_dbg_free(void *addr, int before_p);
+IMPORT_C void CRYPTO_dbg_free(void *addr, int before_p);
 /*-
  * Tell the debugging code about options.  By default, the following values
  * apply:
@@ -574,30 +574,30 @@ void CRYPTO_dbg_free(void *addr, int before_p);
  * V_CRYPTO_MDEBUG_THREAD (2):  Set the "Show Thread Number" option.
  * V_CRYPTO_MDEBUG_ALL (3):     1 + 2
  */
-void CRYPTO_dbg_set_options(long bits);
-long CRYPTO_dbg_get_options(void);
+IMPORT_C void CRYPTO_dbg_set_options(long bits);
+IMPORT_C long CRYPTO_dbg_get_options(void);
 
 # ifndef OPENSSL_NO_FP_API
-void CRYPTO_mem_leaks_fp(FILE *);
+IMPORT_C void CRYPTO_mem_leaks_fp(FILE *);
 # endif
-void CRYPTO_mem_leaks(struct bio_st *bio);
+IMPORT_C void CRYPTO_mem_leaks(struct bio_st *bio);
 /* unsigned long order, char *file, int line, int num_bytes, char *addr */
 typedef void *CRYPTO_MEM_LEAK_CB (unsigned long, const char *, int, int,
                                   void *);
-void CRYPTO_mem_leaks_cb(CRYPTO_MEM_LEAK_CB *cb);
+IMPORT_C void CRYPTO_mem_leaks_cb(CRYPTO_MEM_LEAK_CB *cb);
 
 /* die if we have to */
-void OpenSSLDie(const char *file, int line, const char *assertion);
+IMPORT_C void OpenSSLDie(const char *file, int line, const char *assertion);
 # define OPENSSL_assert(e)       (void)((e) ? 0 : (OpenSSLDie(__FILE__, __LINE__, #e),1))
 
-unsigned long *OPENSSL_ia32cap_loc(void);
+IMPORT_C unsigned long *OPENSSL_ia32cap_loc(void);
 # define OPENSSL_ia32cap (*(OPENSSL_ia32cap_loc()))
-int OPENSSL_isservice(void);
+IMPORT_C int OPENSSL_isservice(void);
 
-int FIPS_mode(void);
-int FIPS_mode_set(int r);
+IMPORT_C int FIPS_mode(void);
+IMPORT_C int FIPS_mode_set(int r);
 
-void OPENSSL_init(void);
+IMPORT_C void OPENSSL_init(void);
 
 # define fips_md_init(alg) fips_md_init_ctx(alg, alg)
 
@@ -628,14 +628,14 @@ void OPENSSL_init(void);
  * into a defined order as the return value when a != b is undefined, other
  * than to be non-zero.
  */
-int CRYPTO_memcmp(const volatile void *a, const volatile void *b, size_t len);
+IMPORT_C int CRYPTO_memcmp(const volatile void *a, const volatile void *b, size_t len);
 
 /* BEGIN ERROR CODES */
 /*
  * The following lines are auto generated by the script mkerr.pl. Any changes
  * made after this point may be overwritten when the script is next run.
  */
-void ERR_load_CRYPTO_strings(void);
+IMPORT_C void ERR_load_CRYPTO_strings(void);
 
 /* Error codes for the CRYPTO functions. */
 

@@ -210,7 +210,7 @@
 	&& !defined(OPENSSL_SYS_MACINTOSH_CLASSIC) \
 	&& !defined(MAC_OS_GUSI_SOURCE)	\
 	&& !defined(OPENSSL_SYS_VXWORKS) \
-    && !defined(OPENSSL_SYS_NETWARE) \ 
+    && !defined(OPENSSL_SYS_NETWARE) \
     && !defined(OPENSSL_SYS_SYMBIAN)
 #  define TERMIOS
 #  undef  TERMIO

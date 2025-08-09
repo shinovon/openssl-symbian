@@ -317,47 +317,47 @@ struct rsa_st {
 # define RSA_set_app_data(s,arg)         RSA_set_ex_data(s,0,arg)
 # define RSA_get_app_data(s)             RSA_get_ex_data(s,0)
 
-RSA *RSA_new(void);
-RSA *RSA_new_method(ENGINE *engine);
-int RSA_size(const RSA *rsa);
+IMPORT_C RSA *RSA_new(void);
+IMPORT_C RSA *RSA_new_method(ENGINE *engine);
+IMPORT_C int RSA_size(const RSA *rsa);
 
 /* Deprecated version */
 # ifndef OPENSSL_NO_DEPRECATED
-RSA *RSA_generate_key(int bits, unsigned long e, void
+IMPORT_C RSA *RSA_generate_key(int bits, unsigned long e, void
                        (*callback) (int, int, void *), void *cb_arg);
 # endif                         /* !defined(OPENSSL_NO_DEPRECATED) */
 
 /* New version */
-int RSA_generate_key_ex(RSA *rsa, int bits, BIGNUM *e, BN_GENCB *cb);
+IMPORT_C int RSA_generate_key_ex(RSA *rsa, int bits, BIGNUM *e, BN_GENCB *cb);
 
-int RSA_check_key(const RSA *);
+IMPORT_C int RSA_check_key(const RSA *);
         /* next 4 return -1 on error */
-int RSA_public_encrypt(int flen, const unsigned char *from,
+IMPORT_C int RSA_public_encrypt(int flen, const unsigned char *from,
                        unsigned char *to, RSA *rsa, int padding);
-int RSA_private_encrypt(int flen, const unsigned char *from,
+IMPORT_C int RSA_private_encrypt(int flen, const unsigned char *from,
                         unsigned char *to, RSA *rsa, int padding);
-int RSA_public_decrypt(int flen, const unsigned char *from,
+IMPORT_C int RSA_public_decrypt(int flen, const unsigned char *from,
                        unsigned char *to, RSA *rsa, int padding);
-int RSA_private_decrypt(int flen, const unsigned char *from,
+IMPORT_C int RSA_private_decrypt(int flen, const unsigned char *from,
                         unsigned char *to, RSA *rsa, int padding);
-void RSA_free(RSA *r);
+IMPORT_C void RSA_free(RSA *r);
 /* "up" the RSA object's reference count */
-int RSA_up_ref(RSA *r);
+IMPORT_C int RSA_up_ref(RSA *r);
 
-int RSA_flags(const RSA *r);
+IMPORT_C int RSA_flags(const RSA *r);
 
-void RSA_set_default_method(const RSA_METHOD *meth);
-const RSA_METHOD *RSA_get_default_method(void);
-const RSA_METHOD *RSA_get_method(const RSA *rsa);
-int RSA_set_method(RSA *rsa, const RSA_METHOD *meth);
+IMPORT_C void RSA_set_default_method(const RSA_METHOD *meth);
+IMPORT_C const RSA_METHOD *RSA_get_default_method(void);
+IMPORT_C const RSA_METHOD *RSA_get_method(const RSA *rsa);
+IMPORT_C int RSA_set_method(RSA *rsa, const RSA_METHOD *meth);
 
 /* This function needs the memory locking malloc callbacks to be installed */
-int RSA_memory_lock(RSA *r);
+IMPORT_C int RSA_memory_lock(RSA *r);
 
 /* these are the actual SSLeay RSA functions */
-const RSA_METHOD *RSA_PKCS1_SSLeay(void);
+IMPORT_C const RSA_METHOD *RSA_PKCS1_SSLeay(void);
 
-const RSA_METHOD *RSA_null_method(void);
+IMPORT_C const RSA_METHOD *RSA_null_method(void);
 
 DECLARE_ASN1_ENCODE_FUNCTIONS_const(RSA, RSAPublicKey)
 DECLARE_ASN1_ENCODE_FUNCTIONS_const(RSA, RSAPrivateKey)

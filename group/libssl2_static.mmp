@@ -1,33 +1,19 @@
 #include <platform_paths.hrh>
 
-TARGET		  libcrypto.dll
-TARGETTYPE	  dll
-UID			 0x1000008d 0xE9371A59
-CAPABILITY   All -Tcb
-VENDORID 	0x101FB657
-VERSION 	0.10
+TARGET		  libssl2.lib
+TARGETTYPE	  lib
 
-//#ifdef EKA2
-//DEFFILE			libcrypto.def
-//#else
-//DEFFILE			libcrypto.def
-//#endif
-
-// TODO search for macro
 MACRO SYMBIAN
-//MACRO OPENSSL_THREADS
-// TODO pthreads
-//MACRO PTHREADS
+MACRO OPENSSL_THREADS
+MACRO PTHREADS
 MACRO _REENTRANT
 MACRO DSO_DLFCN
 MACRO HAVE_DLFCN_H
 MACRO NO_SYSLOG
-MACRO ZLIB_SHARED
-MACRO ZLIB
 MACRO LIBDL_ONLY_ORDINALS
 MACRO NO_WINDOWS_BRAINDEATH
 MACRO OPENSSL_SYS_SYMBIAN
-MACRO OPENSSL_NO_DGRAM
+MACRO OPENSSL_NO_SCTP
 
 OS_LAYER_SYSTEMINCLUDE
 OS_LAYER_LIBC_SYSTEMINCLUDE
@@ -35,9 +21,7 @@ OS_LAYER_LIBC_SYSTEMINCLUDE
 USERINCLUDE   ..
 USERINCLUDE   ../inc/include
 USERINCLUDE   ../inc/include/openssl
-//USERINCLUDE   ../src/crypto
-
-// TODO do a cleanup
+USERINCLUDE   ../src/ssl
 USERINCLUDE   ../src/crypto/aes
 USERINCLUDE   ../src/crypto/asn1
 USERINCLUDE   ../src/crypto/bf
@@ -98,28 +82,10 @@ USERINCLUDE   ../src/crypto/x509v3
 SYSTEMINCLUDE  ..
 SYSTEMINCLUDE  ../inc/include
 SYSTEMINCLUDE  ../inc/include/openssl
-//SYSTEMINCLUDE  ../src/crypto
-
-// Why?
-//STDCPP
-
-//nostrictdef
-
-//START MARM
-//END
-
-//SMPSAFE
-//PAGED
 
 EPOCALLOWDLLDATA
 
-//#ifdef ENABLE_ABIV2_MODE
-//DEBUGGABLE_UDEBONLY
-//#endif
-
-LIBRARY			libc.lib libdl.lib euser.lib efsrv.lib certstore.lib ctframework.lib x509.lib crypto.lib x500.lib asn1.lib
-
-//.cpp files are just tests
+LIBRARY			libc.lib libdl.lib euser.lib efsrv.lib certstore.lib ctframework.lib x509.lib crypto.lib x500.lib asn1.lib libpthread.lib
 
 SOURCEPATH ../src/crypto/aes
 SOURCE aes_cbc.c aes_cfb.c aes_core.c aes_ctr.c aes_ecb.c aes_ige.c aes_misc.c aes_ofb.c aes_wrap.c
@@ -247,3 +213,14 @@ SOURCEPATH ../src/crypto/x509v3
 SOURCE pcy_cache.c pcy_data.c pcy_lib.c pcy_map.c pcy_node.c pcy_tree.c v3_addr.c v3_akey.c v3_akeya.c v3_alt.c v3_asid.c v3_bcons.c v3_bitst.c v3_conf.c v3_cpols.c v3_crld.c v3_enum.c v3_extku.c v3_genn.c v3_ia5.c v3_info.c v3_int.c v3_lib.c v3_ncons.c v3_ocsp.c v3_pci.c v3_pcia.c v3_pcons.c v3_pku.c v3_pmaps.c v3_prn.c v3_purp.c v3_scts.c v3_skey.c v3_sxnet.c v3_utl.c v3err.c
 SOURCEPATH ../src/crypto/ui
 SOURCE ui_compat.c ui_err.c ui_lib.c ui_openssl.c ui_util.c
+
+SOURCEPATH ../src/ssl
+SOURCE bio_ssl.c d1_both.c d1_clnt.c d1_lib.c d1_meth.c d1_pkt.c d1_srtp.c d1_srvr.c kssl.c s23_clnt.c s23_lib.c s23_meth.c s23_pkt.c s23_srvr.c s2_clnt.c s2_enc.c s2_lib.c s2_meth.c s2_pkt.c s2_srvr.c s3_both.c s3_cbc.c s3_clnt.c s3_enc.c s3_lib.c s3_meth.c s3_pkt.c s3_srvr.c ssl_algs.c ssl_asn1.c ssl_cert.c ssl_ciph.c ssl_conf.c ssl_err.c ssl_err2.c ssl_lib.c ssl_rsa.c ssl_sess.c ssl_stat.c ssl_txt.c ssl_utst.c t1_clnt.c t1_enc.c t1_ext.c t1_lib.c t1_meth.c t1_reneg.c t1_srvr.c t1_trce.c tls_srp.c
+
+OPTION ARMCC -Otime --diag_suppress 1296 --diag_suppress 1293 --diag_suppress 69 --diag_suppress 66 --diag_suppress 63 --diag_suppress 1559
+
+#ifdef ARMCC_4_0
+OPTION_REPLACE ARMCC --import_all_vtbl
+OPTION ARMCC --visibility_inlines_hidden
+#endif
+

@@ -72,6 +72,9 @@ BIO *BIO_new(BIO_METHOD *method)
         BIOerr(BIO_F_BIO_NEW, ERR_R_MALLOC_FAILURE);
         return (NULL);
     }
+#ifdef SYMBIAN
+   memset(ret,0,sizeof(BIO));
+#endif		
     if (!BIO_set(ret, method)) {
         OPENSSL_free(ret);
         ret = NULL;

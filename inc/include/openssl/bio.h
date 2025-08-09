@@ -641,66 +641,66 @@ unsigned long BIO_number_read(BIO *bio);
 unsigned long BIO_number_written(BIO *bio);
 
 /* For BIO_f_asn1() */
-int BIO_asn1_set_prefix(BIO *b, asn1_ps_func *prefix,
+IMPORT_C int BIO_asn1_set_prefix(BIO *b, asn1_ps_func *prefix,
                         asn1_ps_func *prefix_free);
-int BIO_asn1_get_prefix(BIO *b, asn1_ps_func **pprefix,
+IMPORT_C int BIO_asn1_get_prefix(BIO *b, asn1_ps_func **pprefix,
                         asn1_ps_func **pprefix_free);
-int BIO_asn1_set_suffix(BIO *b, asn1_ps_func *suffix,
+IMPORT_C int BIO_asn1_set_suffix(BIO *b, asn1_ps_func *suffix,
                         asn1_ps_func *suffix_free);
-int BIO_asn1_get_suffix(BIO *b, asn1_ps_func **psuffix,
+IMPORT_C int BIO_asn1_get_suffix(BIO *b, asn1_ps_func **psuffix,
                         asn1_ps_func **psuffix_free);
 
 # ifndef OPENSSL_NO_FP_API
-BIO_METHOD *BIO_s_file(void);
-BIO *BIO_new_file(const char *filename, const char *mode);
-BIO *BIO_new_fp(FILE *stream, int close_flag);
+IMPORT_C BIO_METHOD *BIO_s_file(void);
+IMPORT_C BIO *BIO_new_file(const char *filename, const char *mode);
+IMPORT_C BIO *BIO_new_fp(FILE *stream, int close_flag);
 #  define BIO_s_file_internal    BIO_s_file
 # endif
-BIO *BIO_new(BIO_METHOD *type);
-int BIO_set(BIO *a, BIO_METHOD *type);
-int BIO_free(BIO *a);
-void BIO_vfree(BIO *a);
-int BIO_read(BIO *b, void *data, int len);
-int BIO_gets(BIO *bp, char *buf, int size);
-int BIO_write(BIO *b, const void *data, int len);
-int BIO_puts(BIO *bp, const char *buf);
-int BIO_indent(BIO *b, int indent, int max);
-long BIO_ctrl(BIO *bp, int cmd, long larg, void *parg);
-long BIO_callback_ctrl(BIO *b, int cmd,
+IMPORT_C BIO *BIO_new(BIO_METHOD *type);
+IMPORT_C int BIO_set(BIO *a, BIO_METHOD *type);
+IMPORT_C int BIO_free(BIO *a);
+IMPORT_C void BIO_vfree(BIO *a);
+IMPORT_C int BIO_read(BIO *b, void *data, int len);
+IMPORT_C int BIO_gets(BIO *bp, char *buf, int size);
+IMPORT_C int BIO_write(BIO *b, const void *data, int len);
+IMPORT_C int BIO_puts(BIO *bp, const char *buf);
+IMPORT_C int BIO_indent(BIO *b, int indent, int max);
+IMPORT_C long BIO_ctrl(BIO *bp, int cmd, long larg, void *parg);
+IMPORT_C long BIO_callback_ctrl(BIO *b, int cmd,
                        void (*fp) (struct bio_st *, int, const char *, int,
                                    long, long));
-char *BIO_ptr_ctrl(BIO *bp, int cmd, long larg);
-long BIO_int_ctrl(BIO *bp, int cmd, long larg, int iarg);
-BIO *BIO_push(BIO *b, BIO *append);
-BIO *BIO_pop(BIO *b);
-void BIO_free_all(BIO *a);
-BIO *BIO_find_type(BIO *b, int bio_type);
-BIO *BIO_next(BIO *b);
-BIO *BIO_get_retry_BIO(BIO *bio, int *reason);
-int BIO_get_retry_reason(BIO *bio);
-BIO *BIO_dup_chain(BIO *in);
+IMPORT_C char *BIO_ptr_ctrl(BIO *bp, int cmd, long larg);
+IMPORT_C long BIO_int_ctrl(BIO *bp, int cmd, long larg, int iarg);
+IMPORT_C BIO *BIO_push(BIO *b, BIO *append);
+IMPORT_C BIO *BIO_pop(BIO *b);
+IMPORT_C void BIO_free_all(BIO *a);
+IMPORT_C BIO *BIO_find_type(BIO *b, int bio_type);
+IMPORT_C BIO *BIO_next(BIO *b);
+IMPORT_C BIO *BIO_get_retry_BIO(BIO *bio, int *reason);
+IMPORT_C int BIO_get_retry_reason(BIO *bio);
+IMPORT_C BIO *BIO_dup_chain(BIO *in);
 
-int BIO_nread0(BIO *bio, char **buf);
-int BIO_nread(BIO *bio, char **buf, int num);
-int BIO_nwrite0(BIO *bio, char **buf);
-int BIO_nwrite(BIO *bio, char **buf, int num);
+IMPORT_C int BIO_nread0(BIO *bio, char **buf);
+IMPORT_C int BIO_nread(BIO *bio, char **buf, int num);
+IMPORT_C int BIO_nwrite0(BIO *bio, char **buf);
+IMPORT_C int BIO_nwrite(BIO *bio, char **buf, int num);
 
 long BIO_debug_callback(BIO *bio, int cmd, const char *argp, int argi,
                         long argl, long ret);
 
-BIO_METHOD *BIO_s_mem(void);
-BIO *BIO_new_mem_buf(const void *buf, int len);
-BIO_METHOD *BIO_s_socket(void);
-BIO_METHOD *BIO_s_connect(void);
-BIO_METHOD *BIO_s_accept(void);
-BIO_METHOD *BIO_s_fd(void);
+IMPORT_C BIO_METHOD *BIO_s_mem(void);
+IMPORT_C BIO *BIO_new_mem_buf(const void *buf, int len);
+IMPORT_C BIO_METHOD *BIO_s_socket(void);
+IMPORT_C BIO_METHOD *BIO_s_connect(void);
+IMPORT_C BIO_METHOD *BIO_s_accept(void);
+IMPORT_C BIO_METHOD *BIO_s_fd(void);
 # ifndef OPENSSL_SYS_OS2
-BIO_METHOD *BIO_s_log(void);
+IMPORT_C BIO_METHOD *BIO_s_log(void);
 # endif
-BIO_METHOD *BIO_s_bio(void);
-BIO_METHOD *BIO_s_null(void);
-BIO_METHOD *BIO_f_null(void);
-BIO_METHOD *BIO_f_buffer(void);
+IMPORT_C BIO_METHOD *BIO_s_bio(void);
+IMPORT_C BIO_METHOD *BIO_s_null(void);
+IMPORT_C BIO_METHOD *BIO_f_null(void);
+IMPORT_C BIO_METHOD *BIO_f_buffer(void);
 # ifdef OPENSSL_SYS_VMS
 BIO_METHOD *BIO_f_linebuffer(void);
 # endif

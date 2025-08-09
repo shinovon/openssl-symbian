@@ -232,7 +232,12 @@ int i2t_ASN1_OBJECT(char *buf, int buf_len, ASN1_OBJECT *a)
 
 int i2a_ASN1_OBJECT(BIO *bp, ASN1_OBJECT *a)
 {
-    char buf[80], *p = buf;
+#ifndef SYMBIAN			
+	char buf[80];
+#else
+  char buf[40];
+#endif	
+    char *p = buf;
     int i;
 
     if ((a == NULL) || (a->data == NULL))

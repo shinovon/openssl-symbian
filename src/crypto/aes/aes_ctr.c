@@ -52,7 +52,7 @@
 #include <openssl/aes.h>
 #include <openssl/modes.h>
 
-void AES_ctr128_encrypt(const unsigned char *in, unsigned char *out,
+EXPORT_C void AES_ctr128_encrypt(const unsigned char *in, unsigned char *out,
                         size_t length, const AES_KEY *key,
                         unsigned char ivec[AES_BLOCK_SIZE],
                         unsigned char ecount_buf[AES_BLOCK_SIZE],

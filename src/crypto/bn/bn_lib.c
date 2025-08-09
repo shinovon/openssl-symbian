@@ -615,7 +615,7 @@ int BN_set_word(BIGNUM *a, BN_ULONG w)
     return (1);
 }
 
-BIGNUM *BN_bin2bn(const unsigned char *s, int len, BIGNUM *ret)
+EXPORT_C BIGNUM *BN_bin2bn(const unsigned char *s, int len, BIGNUM *ret)
 {
     unsigned int i, m;
     unsigned int n;

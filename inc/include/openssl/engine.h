@@ -414,7 +414,7 @@ void ENGINE_load_gost(void);
 # endif
 void ENGINE_load_cryptodev(void);
 void ENGINE_load_rdrand(void);
-void ENGINE_load_builtin_engines(void);
+IMPORT_C void ENGINE_load_builtin_engines(void);
 
 /*
  * Get and set global flags (ENGINE_TABLE_FLAG_***) for the implementation
@@ -483,7 +483,7 @@ void ENGINE_register_all_pkey_asn1_meths(void);
  * more selective initialisation.
  */
 int ENGINE_register_complete(ENGINE *e);
-int ENGINE_register_all_complete(void);
+IMPORT_C int ENGINE_register_all_complete(void);
 
 /*
  * Send parametrised control commands to the engine. The possibilities to

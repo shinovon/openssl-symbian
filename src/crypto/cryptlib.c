@@ -1040,3 +1040,17 @@ int CRYPTO_memcmp(const volatile void *in_a, const volatile void *in_b, size_t l
 
     return x;
 }
+
+#ifndef __ARMCC_4_0__
+extern int __aeabi_uidivmod(unsigned int a, unsigned int b);
+extern int __aeabi_idivmod(int a, int b);
+int __aeabi_idiv(int a, int b)
+{
+	return __aeabi_idivmod(a, b);
+}
+
+int __aeabi_uidiv(unsigned int a, unsigned int b)
+{
+	return __aeabi_uidivmod(a, b);
+}
+#endif

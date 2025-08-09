@@ -136,17 +136,17 @@ typedef struct ec_point_st EC_POINT;
  *  optimized methods.
  *  \return  EC_METHOD object
  */
-const EC_METHOD *EC_GFp_simple_method(void);
+IMPORT_C const EC_METHOD *EC_GFp_simple_method(void);
 
 /** Returns GFp methods using montgomery multiplication.
  *  \return  EC_METHOD object
  */
-const EC_METHOD *EC_GFp_mont_method(void);
+IMPORT_C const EC_METHOD *EC_GFp_mont_method(void);
 
 /** Returns GFp methods using optimized methods for NIST recommended curves
  *  \return  EC_METHOD object
  */
-const EC_METHOD *EC_GFp_nist_method(void);
+IMPORT_C const EC_METHOD *EC_GFp_nist_method(void);
 
 # ifndef OPENSSL_NO_EC_NISTP_64_GCC_128
 /** Returns 64-bit optimized methods for nistp224
@@ -185,12 +185,12 @@ const EC_METHOD *EC_GF2m_simple_method(void);
  *  \param   meth  EC_METHOD to use
  *  \return  newly created EC_GROUP object or NULL in case of an error.
  */
-EC_GROUP *EC_GROUP_new(const EC_METHOD *meth);
+IMPORT_C EC_GROUP *EC_GROUP_new(const EC_METHOD *meth);
 
 /** Frees a EC_GROUP object
  *  \param  group  EC_GROUP object to be freed.
  */
-void EC_GROUP_free(EC_GROUP *group);
+IMPORT_C void EC_GROUP_free(EC_GROUP *group);
 
 /** Clears and frees a EC_GROUP object
  *  \param  group  EC_GROUP object to be cleared and freed.
@@ -391,7 +391,7 @@ EC_GROUP *EC_GROUP_new_curve_GF2m(const BIGNUM *p, const BIGNUM *a,
  *  \return newly created EC_GROUP object with specified curve or NULL
  *          if an error occurred
  */
-EC_GROUP *EC_GROUP_new_by_curve_name(int nid);
+IMPORT_C EC_GROUP *EC_GROUP_new_by_curve_name(int nid);
 
 /********************************************************************/
 /*               handling of internal curves                        */

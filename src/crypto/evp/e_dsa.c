@@ -101,8 +101,10 @@ struct evp_pkey_method_st {
     int (*ctrl_str) (EVP_PKEY_CTX *ctx, const char *type, const char *value);
 } /* EVP_PKEY_METHOD */ ;
 
+#if 0
 static EVP_PKEY_METHOD dss_method = {
     DSA_sign,
     DSA_verify,
     {EVP_PKEY_DSA, EVP_PKEY_DSA2, EVP_PKEY_DSA3, NULL},
 };
+#endif

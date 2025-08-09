@@ -206,7 +206,7 @@ extern "C" {
  * on R4000 and above should use this mode, along with the relevant assembler
  * code :-).  Do NOT define BN_LLONG.
  */
-# ifdef SIXTY_FOUR_BIT
+# if 1
 #  undef BN_LLONG
 #  undef BN_ULLONG
 #  define BN_ULONG        unsigned long long
@@ -469,37 +469,37 @@ int BN_GENCB_call(BN_GENCB *cb, int a, int b);
 #  define BN_zero(a)      (BN_set_word((a),0))
 # endif
 
-const BIGNUM *BN_value_one(void);
-char *BN_options(void);
-BN_CTX *BN_CTX_new(void);
+IMPORT_C const BIGNUM *BN_value_one(void);
+IMPORT_C char *BN_options(void);
+IMPORT_C BN_CTX *BN_CTX_new(void);
 # ifndef OPENSSL_NO_DEPRECATED
-void BN_CTX_init(BN_CTX *c);
+IMPORT_C void BN_CTX_init(BN_CTX *c);
 # endif
-void BN_CTX_free(BN_CTX *c);
-void BN_CTX_start(BN_CTX *ctx);
-BIGNUM *BN_CTX_get(BN_CTX *ctx);
-void BN_CTX_end(BN_CTX *ctx);
-int BN_rand(BIGNUM *rnd, int bits, int top, int bottom);
-int BN_pseudo_rand(BIGNUM *rnd, int bits, int top, int bottom);
-int BN_rand_range(BIGNUM *rnd, const BIGNUM *range);
-int BN_pseudo_rand_range(BIGNUM *rnd, const BIGNUM *range);
-int BN_num_bits(const BIGNUM *a);
-int BN_num_bits_word(BN_ULONG);
-BIGNUM *BN_new(void);
-void BN_init(BIGNUM *);
-void BN_clear_free(BIGNUM *a);
-BIGNUM *BN_copy(BIGNUM *a, const BIGNUM *b);
-void BN_swap(BIGNUM *a, BIGNUM *b);
-BIGNUM *BN_bin2bn(const unsigned char *s, int len, BIGNUM *ret);
-int BN_bn2bin(const BIGNUM *a, unsigned char *to);
-BIGNUM *BN_mpi2bn(const unsigned char *s, int len, BIGNUM *ret);
-int BN_bn2mpi(const BIGNUM *a, unsigned char *to);
-int BN_sub(BIGNUM *r, const BIGNUM *a, const BIGNUM *b);
-int BN_usub(BIGNUM *r, const BIGNUM *a, const BIGNUM *b);
-int BN_uadd(BIGNUM *r, const BIGNUM *a, const BIGNUM *b);
-int BN_add(BIGNUM *r, const BIGNUM *a, const BIGNUM *b);
-int BN_mul(BIGNUM *r, const BIGNUM *a, const BIGNUM *b, BN_CTX *ctx);
-int BN_sqr(BIGNUM *r, const BIGNUM *a, BN_CTX *ctx);
+IMPORT_C void BN_CTX_free(BN_CTX *c);
+IMPORT_C void BN_CTX_start(BN_CTX *ctx);
+IMPORT_C BIGNUM *BN_CTX_get(BN_CTX *ctx);
+IMPORT_C void BN_CTX_end(BN_CTX *ctx);
+IMPORT_C int BN_rand(BIGNUM *rnd, int bits, int top, int bottom);
+IMPORT_C int BN_pseudo_rand(BIGNUM *rnd, int bits, int top, int bottom);
+IMPORT_C int BN_rand_range(BIGNUM *rnd, const BIGNUM *range);
+IMPORT_C int BN_pseudo_rand_range(BIGNUM *rnd, const BIGNUM *range);
+IMPORT_C int BN_num_bits(const BIGNUM *a);
+IMPORT_C int BN_num_bits_word(BN_ULONG);
+IMPORT_C BIGNUM *BN_new(void);
+IMPORT_C void BN_init(BIGNUM *);
+IMPORT_C void BN_clear_free(BIGNUM *a);
+IMPORT_C BIGNUM *BN_copy(BIGNUM *a, const BIGNUM *b);
+IMPORT_C void BN_swap(BIGNUM *a, BIGNUM *b);
+IMPORT_C BIGNUM *BN_bin2bn(const unsigned char *s, int len, BIGNUM *ret);
+IMPORT_C int BN_bn2bin(const BIGNUM *a, unsigned char *to);
+IMPORT_C BIGNUM *BN_mpi2bn(const unsigned char *s, int len, BIGNUM *ret);
+IMPORT_C int BN_bn2mpi(const BIGNUM *a, unsigned char *to);
+IMPORT_C int BN_sub(BIGNUM *r, const BIGNUM *a, const BIGNUM *b);
+IMPORT_C int BN_usub(BIGNUM *r, const BIGNUM *a, const BIGNUM *b);
+IMPORT_C int BN_uadd(BIGNUM *r, const BIGNUM *a, const BIGNUM *b);
+IMPORT_C int BN_add(BIGNUM *r, const BIGNUM *a, const BIGNUM *b);
+IMPORT_C int BN_mul(BIGNUM *r, const BIGNUM *a, const BIGNUM *b, BN_CTX *ctx);
+IMPORT_C int BN_sqr(BIGNUM *r, const BIGNUM *a, BN_CTX *ctx);
 /** BN_set_negative sets sign of a BIGNUM
  * \param  b  pointer to the BIGNUM object
  * \param  n  0 if the BIGNUM b should be positive and a value != 0 otherwise

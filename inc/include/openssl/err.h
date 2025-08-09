@@ -317,48 +317,48 @@ typedef struct ERR_string_data_st {
     const char *string;
 } ERR_STRING_DATA;
 
-void ERR_put_error(int lib, int func, int reason, const char *file, int line);
-void ERR_set_error_data(char *data, int flags);
+IMPORT_C void ERR_put_error(int lib, int func, int reason, const char *file, int line);
+IMPORT_C void ERR_set_error_data(char *data, int flags);
 
-unsigned long ERR_get_error(void);
-unsigned long ERR_get_error_line(const char **file, int *line);
-unsigned long ERR_get_error_line_data(const char **file, int *line,
+IMPORT_C unsigned long ERR_get_error(void);
+IMPORT_C unsigned long ERR_get_error_line(const char **file, int *line);
+IMPORT_C unsigned long ERR_get_error_line_data(const char **file, int *line,
                                       const char **data, int *flags);
-unsigned long ERR_peek_error(void);
-unsigned long ERR_peek_error_line(const char **file, int *line);
-unsigned long ERR_peek_error_line_data(const char **file, int *line,
+IMPORT_C unsigned long ERR_peek_error(void);
+IMPORT_C unsigned long ERR_peek_error_line(const char **file, int *line);
+IMPORT_C unsigned long ERR_peek_error_line_data(const char **file, int *line,
                                        const char **data, int *flags);
-unsigned long ERR_peek_last_error(void);
-unsigned long ERR_peek_last_error_line(const char **file, int *line);
-unsigned long ERR_peek_last_error_line_data(const char **file, int *line,
+IMPORT_C unsigned long ERR_peek_last_error(void);
+IMPORT_C unsigned long ERR_peek_last_error_line(const char **file, int *line);
+IMPORT_C unsigned long ERR_peek_last_error_line_data(const char **file, int *line,
                                             const char **data, int *flags);
-void ERR_clear_error(void);
-char *ERR_error_string(unsigned long e, char *buf);
-void ERR_error_string_n(unsigned long e, char *buf, size_t len);
-const char *ERR_lib_error_string(unsigned long e);
-const char *ERR_func_error_string(unsigned long e);
-const char *ERR_reason_error_string(unsigned long e);
-void ERR_print_errors_cb(int (*cb) (const char *str, size_t len, void *u),
+IMPORT_C void ERR_clear_error(void);
+IMPORT_C char *ERR_error_string(unsigned long e, char *buf);
+IMPORT_C void ERR_error_string_n(unsigned long e, char *buf, size_t len);
+IMPORT_C const char *ERR_lib_error_string(unsigned long e);
+IMPORT_C const char *ERR_func_error_string(unsigned long e);
+IMPORT_C const char *ERR_reason_error_string(unsigned long e);
+IMPORT_C void ERR_print_errors_cb(int (*cb) (const char *str, size_t len, void *u),
                          void *u);
 # ifndef OPENSSL_NO_FP_API
-void ERR_print_errors_fp(FILE *fp);
+IMPORT_C void ERR_print_errors_fp(FILE *fp);
 # endif
 # ifndef OPENSSL_NO_BIO
-void ERR_print_errors(BIO *bp);
+IMPORT_C void ERR_print_errors(BIO *bp);
 # endif
-void ERR_add_error_data(int num, ...);
-void ERR_add_error_vdata(int num, va_list args);
-void ERR_load_strings(int lib, ERR_STRING_DATA str[]);
-void ERR_unload_strings(int lib, ERR_STRING_DATA str[]);
-void ERR_load_ERR_strings(void);
-void ERR_load_crypto_strings(void);
-void ERR_free_strings(void);
+IMPORT_C void ERR_add_error_data(int num, ...);
+IMPORT_C void ERR_add_error_vdata(int num, va_list args);
+IMPORT_C void ERR_load_strings(int lib, ERR_STRING_DATA str[]);
+IMPORT_C void ERR_unload_strings(int lib, ERR_STRING_DATA str[]);
+IMPORT_C void ERR_load_ERR_strings(void);
+IMPORT_C void ERR_load_crypto_strings(void);
+IMPORT_C void ERR_free_strings(void);
 
-void ERR_remove_thread_state(const CRYPTO_THREADID *tid);
+IMPORT_C void ERR_remove_thread_state(const CRYPTO_THREADID *tid);
 # ifndef OPENSSL_NO_DEPRECATED
-void ERR_remove_state(unsigned long pid); /* if zero we look it up */
+IMPORT_C void ERR_remove_state(unsigned long pid); /* if zero we look it up */
 # endif
-ERR_STATE *ERR_get_state(void);
+IMPORT_C ERR_STATE *ERR_get_state(void);
 
 # ifndef OPENSSL_NO_LHASH
 LHASH_OF(ERR_STRING_DATA) *ERR_get_string_table(void);

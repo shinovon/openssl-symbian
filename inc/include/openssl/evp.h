@@ -716,58 +716,58 @@ const EVP_MD *EVP_md4(void);
 const EVP_MD *EVP_md5(void);
 # endif
 # ifndef OPENSSL_NO_SHA
-const EVP_MD *EVP_sha(void);
-const EVP_MD *EVP_sha1(void);
-const EVP_MD *EVP_dss(void);
-const EVP_MD *EVP_dss1(void);
-const EVP_MD *EVP_ecdsa(void);
+IMPORT_C const EVP_MD *EVP_sha(void);
+IMPORT_C const EVP_MD *EVP_sha1(void);
+IMPORT_C const EVP_MD *EVP_dss(void);
+IMPORT_C const EVP_MD *EVP_dss1(void);
+IMPORT_C const EVP_MD *EVP_ecdsa(void);
 # endif
 # ifndef OPENSSL_NO_SHA256
-const EVP_MD *EVP_sha224(void);
-const EVP_MD *EVP_sha256(void);
+IMPORT_C const EVP_MD *EVP_sha224(void);
+IMPORT_C const EVP_MD *EVP_sha256(void);
 # endif
 # ifndef OPENSSL_NO_SHA512
-const EVP_MD *EVP_sha384(void);
-const EVP_MD *EVP_sha512(void);
+IMPORT_C const EVP_MD *EVP_sha384(void);
+IMPORT_C const EVP_MD *EVP_sha512(void);
 # endif
 # ifndef OPENSSL_NO_MDC2
-const EVP_MD *EVP_mdc2(void);
+IMPORT_C const EVP_MD *EVP_mdc2(void);
 # endif
 # ifndef OPENSSL_NO_RIPEMD
-const EVP_MD *EVP_ripemd160(void);
+IMPORT_C const EVP_MD *EVP_ripemd160(void);
 # endif
 # ifndef OPENSSL_NO_WHIRLPOOL
-const EVP_MD *EVP_whirlpool(void);
+IMPORT_C const EVP_MD *EVP_whirlpool(void);
 # endif
-const EVP_CIPHER *EVP_enc_null(void); /* does nothing :-) */
+IMPORT_C const EVP_CIPHER *EVP_enc_null(void); /* does nothing :-) */
 # ifndef OPENSSL_NO_DES
-const EVP_CIPHER *EVP_des_ecb(void);
-const EVP_CIPHER *EVP_des_ede(void);
-const EVP_CIPHER *EVP_des_ede3(void);
-const EVP_CIPHER *EVP_des_ede_ecb(void);
-const EVP_CIPHER *EVP_des_ede3_ecb(void);
-const EVP_CIPHER *EVP_des_cfb64(void);
+IMPORT_C const EVP_CIPHER *EVP_des_ecb(void);
+IMPORT_C const EVP_CIPHER *EVP_des_ede(void);
+IMPORT_C const EVP_CIPHER *EVP_des_ede3(void);
+IMPORT_C const EVP_CIPHER *EVP_des_ede_ecb(void);
+IMPORT_C const EVP_CIPHER *EVP_des_ede3_ecb(void);
+IMPORT_C const EVP_CIPHER *EVP_des_cfb64(void);
 #  define EVP_des_cfb EVP_des_cfb64
-const EVP_CIPHER *EVP_des_cfb1(void);
-const EVP_CIPHER *EVP_des_cfb8(void);
-const EVP_CIPHER *EVP_des_ede_cfb64(void);
+IMPORT_C const EVP_CIPHER *EVP_des_cfb1(void);
+IMPORT_C const EVP_CIPHER *EVP_des_cfb8(void);
+IMPORT_C const EVP_CIPHER *EVP_des_ede_cfb64(void);
 #  define EVP_des_ede_cfb EVP_des_ede_cfb64
 #  if 0
 const EVP_CIPHER *EVP_des_ede_cfb1(void);
 const EVP_CIPHER *EVP_des_ede_cfb8(void);
 #  endif
-const EVP_CIPHER *EVP_des_ede3_cfb64(void);
+IMPORT_C const EVP_CIPHER *EVP_des_ede3_cfb64(void);
 #  define EVP_des_ede3_cfb EVP_des_ede3_cfb64
-const EVP_CIPHER *EVP_des_ede3_cfb1(void);
-const EVP_CIPHER *EVP_des_ede3_cfb8(void);
-const EVP_CIPHER *EVP_des_ofb(void);
-const EVP_CIPHER *EVP_des_ede_ofb(void);
-const EVP_CIPHER *EVP_des_ede3_ofb(void);
-const EVP_CIPHER *EVP_des_cbc(void);
-const EVP_CIPHER *EVP_des_ede_cbc(void);
-const EVP_CIPHER *EVP_des_ede3_cbc(void);
-const EVP_CIPHER *EVP_desx_cbc(void);
-const EVP_CIPHER *EVP_des_ede3_wrap(void);
+IMPORT_C const EVP_CIPHER *EVP_des_ede3_cfb1(void);
+IMPORT_C const EVP_CIPHER *EVP_des_ede3_cfb8(void);
+IMPORT_C const EVP_CIPHER *EVP_des_ofb(void);
+IMPORT_C const EVP_CIPHER *EVP_des_ede_ofb(void);
+IMPORT_C const EVP_CIPHER *EVP_des_ede3_ofb(void);
+IMPORT_C const EVP_CIPHER *EVP_des_cbc(void);
+IMPORT_C const EVP_CIPHER *EVP_des_ede_cbc(void);
+IMPORT_C const EVP_CIPHER *EVP_des_ede3_cbc(void);
+IMPORT_C const EVP_CIPHER *EVP_desx_cbc(void);
+IMPORT_C const EVP_CIPHER *EVP_des_ede3_wrap(void);
 /*
  * This should now be supported through the dev_crypto ENGINE. But also, why
  * are rc4 and md5 declarations made here inside a "NO_DES" precompiler
@@ -782,88 +782,88 @@ const EVP_MD *EVP_dev_crypto_md5(void);
 #  endif
 # endif
 # ifndef OPENSSL_NO_RC4
-const EVP_CIPHER *EVP_rc4(void);
-const EVP_CIPHER *EVP_rc4_40(void);
+IMPORT_C const EVP_CIPHER *EVP_rc4(void);
+IMPORT_C const EVP_CIPHER *EVP_rc4_40(void);
 #  ifndef OPENSSL_NO_MD5
-const EVP_CIPHER *EVP_rc4_hmac_md5(void);
+IMPORT_C const EVP_CIPHER *EVP_rc4_hmac_md5(void);
 #  endif
 # endif
 # ifndef OPENSSL_NO_IDEA
-const EVP_CIPHER *EVP_idea_ecb(void);
-const EVP_CIPHER *EVP_idea_cfb64(void);
+IMPORT_C const EVP_CIPHER *EVP_idea_ecb(void);
+IMPORT_C const EVP_CIPHER *EVP_idea_cfb64(void);
 #  define EVP_idea_cfb EVP_idea_cfb64
-const EVP_CIPHER *EVP_idea_ofb(void);
-const EVP_CIPHER *EVP_idea_cbc(void);
+IMPORT_C const EVP_CIPHER *EVP_idea_ofb(void);
+IMPORT_C const EVP_CIPHER *EVP_idea_cbc(void);
 # endif
 # ifndef OPENSSL_NO_RC2
-const EVP_CIPHER *EVP_rc2_ecb(void);
-const EVP_CIPHER *EVP_rc2_cbc(void);
-const EVP_CIPHER *EVP_rc2_40_cbc(void);
-const EVP_CIPHER *EVP_rc2_64_cbc(void);
-const EVP_CIPHER *EVP_rc2_cfb64(void);
+IMPORT_C const EVP_CIPHER *EVP_rc2_ecb(void);
+IMPORT_C IMPORT_C const EVP_CIPHER *EVP_rc2_cbc(void);
+IMPORT_C IMPORT_C const EVP_CIPHER *EVP_rc2_40_cbc(void);
+IMPORT_C const EVP_CIPHER *EVP_rc2_64_cbc(void);
+IMPORT_C const EVP_CIPHER *EVP_rc2_cfb64(void);
 #  define EVP_rc2_cfb EVP_rc2_cfb64
-const EVP_CIPHER *EVP_rc2_ofb(void);
+IMPORT_C const EVP_CIPHER *EVP_rc2_ofb(void);
 # endif
 # ifndef OPENSSL_NO_BF
-const EVP_CIPHER *EVP_bf_ecb(void);
-const EVP_CIPHER *EVP_bf_cbc(void);
-const EVP_CIPHER *EVP_bf_cfb64(void);
+IMPORT_C const EVP_CIPHER *EVP_bf_ecb(void);
+IMPORT_C const EVP_CIPHER *EVP_bf_cbc(void);
+IMPORT_C const EVP_CIPHER *EVP_bf_cfb64(void);
 #  define EVP_bf_cfb EVP_bf_cfb64
-const EVP_CIPHER *EVP_bf_ofb(void);
+IMPORT_C const EVP_CIPHER *EVP_bf_ofb(void);
 # endif
 # ifndef OPENSSL_NO_CAST
-const EVP_CIPHER *EVP_cast5_ecb(void);
-const EVP_CIPHER *EVP_cast5_cbc(void);
-const EVP_CIPHER *EVP_cast5_cfb64(void);
+IMPORT_C const EVP_CIPHER *EVP_cast5_ecb(void);
+IMPORT_C const EVP_CIPHER *EVP_cast5_cbc(void);
+IMPORT_C const EVP_CIPHER *EVP_cast5_cfb64(void);
 #  define EVP_cast5_cfb EVP_cast5_cfb64
-const EVP_CIPHER *EVP_cast5_ofb(void);
+IMPORT_C const EVP_CIPHER *EVP_cast5_ofb(void);
 # endif
 # ifndef OPENSSL_NO_RC5
-const EVP_CIPHER *EVP_rc5_32_12_16_cbc(void);
-const EVP_CIPHER *EVP_rc5_32_12_16_ecb(void);
-const EVP_CIPHER *EVP_rc5_32_12_16_cfb64(void);
+IMPORT_C const EVP_CIPHER *EVP_rc5_32_12_16_cbc(void);
+IMPORT_C const EVP_CIPHER *EVP_rc5_32_12_16_ecb(void);
+IMPORT_C const EVP_CIPHER *EVP_rc5_32_12_16_cfb64(void);
 #  define EVP_rc5_32_12_16_cfb EVP_rc5_32_12_16_cfb64
-const EVP_CIPHER *EVP_rc5_32_12_16_ofb(void);
+IMPORT_C const EVP_CIPHER *EVP_rc5_32_12_16_ofb(void);
 # endif
 # ifndef OPENSSL_NO_AES
-const EVP_CIPHER *EVP_aes_128_ecb(void);
-const EVP_CIPHER *EVP_aes_128_cbc(void);
-const EVP_CIPHER *EVP_aes_128_cfb1(void);
-const EVP_CIPHER *EVP_aes_128_cfb8(void);
-const EVP_CIPHER *EVP_aes_128_cfb128(void);
+IMPORT_C const EVP_CIPHER *EVP_aes_128_ecb(void);
+IMPORT_C const EVP_CIPHER *EVP_aes_128_cbc(void);
+IMPORT_C const EVP_CIPHER *EVP_aes_128_cfb1(void);
+IMPORT_C const EVP_CIPHER *EVP_aes_128_cfb8(void);
+IMPORT_C const EVP_CIPHER *EVP_aes_128_cfb128(void);
 #  define EVP_aes_128_cfb EVP_aes_128_cfb128
-const EVP_CIPHER *EVP_aes_128_ofb(void);
-const EVP_CIPHER *EVP_aes_128_ctr(void);
-const EVP_CIPHER *EVP_aes_128_ccm(void);
-const EVP_CIPHER *EVP_aes_128_gcm(void);
-const EVP_CIPHER *EVP_aes_128_xts(void);
-const EVP_CIPHER *EVP_aes_128_wrap(void);
-const EVP_CIPHER *EVP_aes_192_ecb(void);
-const EVP_CIPHER *EVP_aes_192_cbc(void);
-const EVP_CIPHER *EVP_aes_192_cfb1(void);
-const EVP_CIPHER *EVP_aes_192_cfb8(void);
-const EVP_CIPHER *EVP_aes_192_cfb128(void);
+IMPORT_C const EVP_CIPHER *EVP_aes_128_ofb(void);
+IMPORT_C const EVP_CIPHER *EVP_aes_128_ctr(void);
+IMPORT_C const EVP_CIPHER *EVP_aes_128_ccm(void);
+IMPORT_C const EVP_CIPHER *EVP_aes_128_gcm(void);
+IMPORT_C const EVP_CIPHER *EVP_aes_128_xts(void);
+IMPORT_C const EVP_CIPHER *EVP_aes_128_wrap(void);
+IMPORT_C const EVP_CIPHER *EVP_aes_192_ecb(void);
+IMPORT_C const EVP_CIPHER *EVP_aes_192_cbc(void);
+IMPORT_C const EVP_CIPHER *EVP_aes_192_cfb1(void);
+IMPORT_C const EVP_CIPHER *EVP_aes_192_cfb8(void);
+IMPORT_C const EVP_CIPHER *EVP_aes_192_cfb128(void);
 #  define EVP_aes_192_cfb EVP_aes_192_cfb128
-const EVP_CIPHER *EVP_aes_192_ofb(void);
-const EVP_CIPHER *EVP_aes_192_ctr(void);
-const EVP_CIPHER *EVP_aes_192_ccm(void);
-const EVP_CIPHER *EVP_aes_192_gcm(void);
-const EVP_CIPHER *EVP_aes_192_wrap(void);
-const EVP_CIPHER *EVP_aes_256_ecb(void);
-const EVP_CIPHER *EVP_aes_256_cbc(void);
-const EVP_CIPHER *EVP_aes_256_cfb1(void);
-const EVP_CIPHER *EVP_aes_256_cfb8(void);
-const EVP_CIPHER *EVP_aes_256_cfb128(void);
+IMPORT_C const EVP_CIPHER *EVP_aes_192_ofb(void);
+IMPORT_C const EVP_CIPHER *EVP_aes_192_ctr(void);
+IMPORT_C const EVP_CIPHER *EVP_aes_192_ccm(void);
+IMPORT_C const EVP_CIPHER *EVP_aes_192_gcm(void);
+IMPORT_C const EVP_CIPHER *EVP_aes_192_wrap(void);
+IMPORT_C const EVP_CIPHER *EVP_aes_256_ecb(void);
+IMPORT_C const EVP_CIPHER *EVP_aes_256_cbc(void);
+IMPORT_C const EVP_CIPHER *EVP_aes_256_cfb1(void);
+IMPORT_C const EVP_CIPHER *EVP_aes_256_cfb8(void);
+IMPORT_C const EVP_CIPHER *EVP_aes_256_cfb128(void);
 #  define EVP_aes_256_cfb EVP_aes_256_cfb128
-const EVP_CIPHER *EVP_aes_256_ofb(void);
-const EVP_CIPHER *EVP_aes_256_ctr(void);
-const EVP_CIPHER *EVP_aes_256_ccm(void);
-const EVP_CIPHER *EVP_aes_256_gcm(void);
-const EVP_CIPHER *EVP_aes_256_xts(void);
-const EVP_CIPHER *EVP_aes_256_wrap(void);
+IMPORT_C const EVP_CIPHER *EVP_aes_256_ofb(void);
+IMPORT_C const EVP_CIPHER *EVP_aes_256_ctr(void);
+IMPORT_C const EVP_CIPHER *EVP_aes_256_ccm(void);
+IMPORT_C const EVP_CIPHER *EVP_aes_256_gcm(void);
+IMPORT_C const EVP_CIPHER *EVP_aes_256_xts(void);
+IMPORT_C const EVP_CIPHER *EVP_aes_256_wrap(void);
 #  if !defined(OPENSSL_NO_SHA) && !defined(OPENSSL_NO_SHA1)
-const EVP_CIPHER *EVP_aes_128_cbc_hmac_sha1(void);
-const EVP_CIPHER *EVP_aes_256_cbc_hmac_sha1(void);
+IMPORT_C const EVP_CIPHER *EVP_aes_128_cbc_hmac_sha1(void);
+IMPORT_C const EVP_CIPHER *EVP_aes_256_cbc_hmac_sha1(void);
 #  endif
 #  ifndef OPENSSL_NO_SHA256
 const EVP_CIPHER *EVP_aes_128_cbc_hmac_sha256(void);
@@ -895,15 +895,15 @@ const EVP_CIPHER *EVP_camellia_256_ofb(void);
 # endif
 
 # ifndef OPENSSL_NO_SEED
-const EVP_CIPHER *EVP_seed_ecb(void);
-const EVP_CIPHER *EVP_seed_cbc(void);
-const EVP_CIPHER *EVP_seed_cfb128(void);
+IMPORT_C const EVP_CIPHER *EVP_seed_ecb(void);
+IMPORT_C const EVP_CIPHER *EVP_seed_cbc(void);
+IMPORT_C const EVP_CIPHER *EVP_seed_cfb128(void);
 #  define EVP_seed_cfb EVP_seed_cfb128
-const EVP_CIPHER *EVP_seed_ofb(void);
+IMPORT_C const EVP_CIPHER *EVP_seed_ofb(void);
 # endif
 
-void OPENSSL_add_all_algorithms_noconf(void);
-void OPENSSL_add_all_algorithms_conf(void);
+IMPORT_C void OPENSSL_add_all_algorithms_noconf(void);
+IMPORT_C void OPENSSL_add_all_algorithms_conf(void);
 
 # ifdef OPENSSL_LOAD_CONF
 #  define OpenSSL_add_all_algorithms() \
@@ -913,126 +913,126 @@ void OPENSSL_add_all_algorithms_conf(void);
                 OPENSSL_add_all_algorithms_noconf()
 # endif
 
-void OpenSSL_add_all_ciphers(void);
-void OpenSSL_add_all_digests(void);
+IMPORT_C void OpenSSL_add_all_ciphers(void);
+IMPORT_C void OpenSSL_add_all_digests(void);
 # define SSLeay_add_all_algorithms() OpenSSL_add_all_algorithms()
 # define SSLeay_add_all_ciphers() OpenSSL_add_all_ciphers()
 # define SSLeay_add_all_digests() OpenSSL_add_all_digests()
 
-int EVP_add_cipher(const EVP_CIPHER *cipher);
-int EVP_add_digest(const EVP_MD *digest);
+IMPORT_C int EVP_add_cipher(const EVP_CIPHER *cipher);
+IMPORT_C int EVP_add_digest(const EVP_MD *digest);
 
-const EVP_CIPHER *EVP_get_cipherbyname(const char *name);
-const EVP_MD *EVP_get_digestbyname(const char *name);
-void EVP_cleanup(void);
+IMPORT_C const EVP_CIPHER *EVP_get_cipherbyname(const char *name);
+IMPORT_C const EVP_MD *EVP_get_digestbyname(const char *name);
+IMPORT_C void EVP_cleanup(void);
 
-void EVP_CIPHER_do_all(void (*fn) (const EVP_CIPHER *ciph,
+IMPORT_C void EVP_CIPHER_do_all(void (*fn) (const EVP_CIPHER *ciph,
                                    const char *from, const char *to, void *x),
                        void *arg);
-void EVP_CIPHER_do_all_sorted(void (*fn)
+IMPORT_C void EVP_CIPHER_do_all_sorted(void (*fn)
                                (const EVP_CIPHER *ciph, const char *from,
                                 const char *to, void *x), void *arg);
 
-void EVP_MD_do_all(void (*fn) (const EVP_MD *ciph,
+IMPORT_C void EVP_MD_do_all(void (*fn) (const EVP_MD *ciph,
                                const char *from, const char *to, void *x),
                    void *arg);
-void EVP_MD_do_all_sorted(void (*fn)
+IMPORT_C void EVP_MD_do_all_sorted(void (*fn)
                            (const EVP_MD *ciph, const char *from,
                             const char *to, void *x), void *arg);
 
-int EVP_PKEY_decrypt_old(unsigned char *dec_key,
+IMPORT_C int EVP_PKEY_decrypt_old(unsigned char *dec_key,
                          const unsigned char *enc_key, int enc_key_len,
                          EVP_PKEY *private_key);
-int EVP_PKEY_encrypt_old(unsigned char *enc_key,
+IMPORT_C int EVP_PKEY_encrypt_old(unsigned char *enc_key,
                          const unsigned char *key, int key_len,
                          EVP_PKEY *pub_key);
-int EVP_PKEY_type(int type);
-int EVP_PKEY_id(const EVP_PKEY *pkey);
-int EVP_PKEY_base_id(const EVP_PKEY *pkey);
-int EVP_PKEY_bits(EVP_PKEY *pkey);
-int EVP_PKEY_size(EVP_PKEY *pkey);
-int EVP_PKEY_set_type(EVP_PKEY *pkey, int type);
-int EVP_PKEY_set_type_str(EVP_PKEY *pkey, const char *str, int len);
-int EVP_PKEY_assign(EVP_PKEY *pkey, int type, void *key);
-void *EVP_PKEY_get0(EVP_PKEY *pkey);
+IMPORT_C int EVP_PKEY_type(int type);
+IMPORT_C int EVP_PKEY_id(const EVP_PKEY *pkey);
+IMPORT_C int EVP_PKEY_base_id(const EVP_PKEY *pkey);
+IMPORT_C int EVP_PKEY_bits(EVP_PKEY *pkey);
+IMPORT_C int EVP_PKEY_size(EVP_PKEY *pkey);
+IMPORT_C int EVP_PKEY_set_type(EVP_PKEY *pkey, int type);
+IMPORT_C int EVP_PKEY_set_type_str(EVP_PKEY *pkey, const char *str, int len);
+IMPORT_C int EVP_PKEY_assign(EVP_PKEY *pkey, int type, void *key);
+IMPORT_C void *EVP_PKEY_get0(EVP_PKEY *pkey);
 
 # ifndef OPENSSL_NO_RSA
 struct rsa_st;
-int EVP_PKEY_set1_RSA(EVP_PKEY *pkey, struct rsa_st *key);
-struct rsa_st *EVP_PKEY_get1_RSA(EVP_PKEY *pkey);
+IMPORT_C int EVP_PKEY_set1_RSA(EVP_PKEY *pkey, struct rsa_st *key);
+IMPORT_C struct rsa_st *EVP_PKEY_get1_RSA(EVP_PKEY *pkey);
 # endif
 # ifndef OPENSSL_NO_DSA
 struct dsa_st;
-int EVP_PKEY_set1_DSA(EVP_PKEY *pkey, struct dsa_st *key);
-struct dsa_st *EVP_PKEY_get1_DSA(EVP_PKEY *pkey);
+IMPORT_C int EVP_PKEY_set1_DSA(EVP_PKEY *pkey, struct dsa_st *key);
+IMPORT_C struct dsa_st *EVP_PKEY_get1_DSA(EVP_PKEY *pkey);
 # endif
 # ifndef OPENSSL_NO_DH
 struct dh_st;
-int EVP_PKEY_set1_DH(EVP_PKEY *pkey, struct dh_st *key);
-struct dh_st *EVP_PKEY_get1_DH(EVP_PKEY *pkey);
+IMPORT_C int EVP_PKEY_set1_DH(EVP_PKEY *pkey, struct dh_st *key);
+IMPORT_C struct dh_st *EVP_PKEY_get1_DH(EVP_PKEY *pkey);
 # endif
 # ifndef OPENSSL_NO_EC
 struct ec_key_st;
-int EVP_PKEY_set1_EC_KEY(EVP_PKEY *pkey, struct ec_key_st *key);
-struct ec_key_st *EVP_PKEY_get1_EC_KEY(EVP_PKEY *pkey);
+IMPORT_C int EVP_PKEY_set1_EC_KEY(EVP_PKEY *pkey, struct ec_key_st *key);
+IMPORT_C struct ec_key_st *EVP_PKEY_get1_EC_KEY(EVP_PKEY *pkey);
 # endif
 
-EVP_PKEY *EVP_PKEY_new(void);
-void EVP_PKEY_free(EVP_PKEY *pkey);
+IMPORT_C EVP_PKEY *EVP_PKEY_new(void);
+IMPORT_C void EVP_PKEY_free(EVP_PKEY *pkey);
 
-EVP_PKEY *d2i_PublicKey(int type, EVP_PKEY **a, const unsigned char **pp,
+IMPORT_C EVP_PKEY *d2i_PublicKey(int type, EVP_PKEY **a, const unsigned char **pp,
                         long length);
-int i2d_PublicKey(EVP_PKEY *a, unsigned char **pp);
+IMPORT_C int i2d_PublicKey(EVP_PKEY *a, unsigned char **pp);
 
-EVP_PKEY *d2i_PrivateKey(int type, EVP_PKEY **a, const unsigned char **pp,
+IMPORT_C EVP_PKEY *d2i_PrivateKey(int type, EVP_PKEY **a, const unsigned char **pp,
                          long length);
-EVP_PKEY *d2i_AutoPrivateKey(EVP_PKEY **a, const unsigned char **pp,
+IMPORT_C EVP_PKEY *d2i_AutoPrivateKey(EVP_PKEY **a, const unsigned char **pp,
                              long length);
-int i2d_PrivateKey(EVP_PKEY *a, unsigned char **pp);
+IMPORT_C int i2d_PrivateKey(EVP_PKEY *a, unsigned char **pp);
 
-int EVP_PKEY_copy_parameters(EVP_PKEY *to, const EVP_PKEY *from);
-int EVP_PKEY_missing_parameters(const EVP_PKEY *pkey);
-int EVP_PKEY_save_parameters(EVP_PKEY *pkey, int mode);
-int EVP_PKEY_cmp_parameters(const EVP_PKEY *a, const EVP_PKEY *b);
+IMPORT_C int EVP_PKEY_copy_parameters(EVP_PKEY *to, const EVP_PKEY *from);
+IMPORT_C int EVP_PKEY_missing_parameters(const EVP_PKEY *pkey);
+IMPORT_C int EVP_PKEY_save_parameters(EVP_PKEY *pkey, int mode);
+IMPORT_C int EVP_PKEY_cmp_parameters(const EVP_PKEY *a, const EVP_PKEY *b);
 
-int EVP_PKEY_cmp(const EVP_PKEY *a, const EVP_PKEY *b);
+IMPORT_C int EVP_PKEY_cmp(const EVP_PKEY *a, const EVP_PKEY *b);
 
-int EVP_PKEY_print_public(BIO *out, const EVP_PKEY *pkey,
+IMPORT_C int EVP_PKEY_print_public(BIO *out, const EVP_PKEY *pkey,
                           int indent, ASN1_PCTX *pctx);
-int EVP_PKEY_print_private(BIO *out, const EVP_PKEY *pkey,
+IMPORT_C int EVP_PKEY_print_private(BIO *out, const EVP_PKEY *pkey,
                            int indent, ASN1_PCTX *pctx);
-int EVP_PKEY_print_params(BIO *out, const EVP_PKEY *pkey,
+IMPORT_C int EVP_PKEY_print_params(BIO *out, const EVP_PKEY *pkey,
                           int indent, ASN1_PCTX *pctx);
 
-int EVP_PKEY_get_default_digest_nid(EVP_PKEY *pkey, int *pnid);
+IMPORT_C int EVP_PKEY_get_default_digest_nid(EVP_PKEY *pkey, int *pnid);
 
-int EVP_CIPHER_type(const EVP_CIPHER *ctx);
+IMPORT_C int EVP_CIPHER_type(const EVP_CIPHER *ctx);
 
 /* calls methods */
-int EVP_CIPHER_param_to_asn1(EVP_CIPHER_CTX *c, ASN1_TYPE *type);
-int EVP_CIPHER_asn1_to_param(EVP_CIPHER_CTX *c, ASN1_TYPE *type);
+IMPORT_C int EVP_CIPHER_param_to_asn1(EVP_CIPHER_CTX *c, ASN1_TYPE *type);
+IMPORT_C int EVP_CIPHER_asn1_to_param(EVP_CIPHER_CTX *c, ASN1_TYPE *type);
 
 /* These are used by EVP_CIPHER methods */
-int EVP_CIPHER_set_asn1_iv(EVP_CIPHER_CTX *c, ASN1_TYPE *type);
-int EVP_CIPHER_get_asn1_iv(EVP_CIPHER_CTX *c, ASN1_TYPE *type);
+IMPORT_C int EVP_CIPHER_set_asn1_iv(EVP_CIPHER_CTX *c, ASN1_TYPE *type);
+IMPORT_C int EVP_CIPHER_get_asn1_iv(EVP_CIPHER_CTX *c, ASN1_TYPE *type);
 
 /* PKCS5 password based encryption */
-int PKCS5_PBE_keyivgen(EVP_CIPHER_CTX *ctx, const char *pass, int passlen,
+IMPORT_C int PKCS5_PBE_keyivgen(EVP_CIPHER_CTX *ctx, const char *pass, int passlen,
                        ASN1_TYPE *param, const EVP_CIPHER *cipher,
                        const EVP_MD *md, int en_de);
-int PKCS5_PBKDF2_HMAC_SHA1(const char *pass, int passlen,
+IMPORT_C int PKCS5_PBKDF2_HMAC_SHA1(const char *pass, int passlen,
                            const unsigned char *salt, int saltlen, int iter,
                            int keylen, unsigned char *out);
-int PKCS5_PBKDF2_HMAC(const char *pass, int passlen,
+IMPORT_C int PKCS5_PBKDF2_HMAC(const char *pass, int passlen,
                       const unsigned char *salt, int saltlen, int iter,
                       const EVP_MD *digest, int keylen, unsigned char *out);
-int PKCS5_v2_PBE_keyivgen(EVP_CIPHER_CTX *ctx, const char *pass, int passlen,
+IMPORT_C int PKCS5_v2_PBE_keyivgen(EVP_CIPHER_CTX *ctx, const char *pass, int passlen,
                           ASN1_TYPE *param, const EVP_CIPHER *cipher,
                           const EVP_MD *md, int en_de);
 
-void PKCS5_PBE_add(void);
+IMPORT_C void PKCS5_PBE_add(void);
 
-int EVP_PBE_CipherInit(ASN1_OBJECT *pbe_obj, const char *pass, int passlen,
+IMPORT_C int EVP_PBE_CipherInit(ASN1_OBJECT *pbe_obj, const char *pass, int passlen,
                        ASN1_TYPE *param, EVP_CIPHER_CTX *ctx, int en_de);
 
 /* PBE type */

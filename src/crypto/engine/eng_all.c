@@ -64,7 +64,7 @@ void ENGINE_load_builtin_engines(void)
 {
     /* Some ENGINEs need this */
     OPENSSL_cpuid_setup();
-#if 0
+//#if 0
     /*
      * There's no longer any need for an "openssl" ENGINE unless, one day, it
      * is the *only* way for standard builtin implementations to be be
@@ -72,7 +72,7 @@ void ENGINE_load_builtin_engines(void)
      * *no* builtin implementations).
      */
     ENGINE_load_openssl();
-#endif
+//#endif
 #if !defined(OPENSSL_NO_HW) && (defined(__OpenBSD__) || defined(__FreeBSD__) || defined(HAVE_CRYPTODEV))
     ENGINE_load_cryptodev();
 #endif

@@ -104,7 +104,7 @@ void AES_decrypt(const unsigned char *in, unsigned char *out,
 
 void AES_ecb_encrypt(const unsigned char *in, unsigned char *out,
                      const AES_KEY *key, const int enc);
-void AES_cbc_encrypt(const unsigned char *in, unsigned char *out,
+IMPORT_C void AES_cbc_encrypt(const unsigned char *in, unsigned char *out,
                      size_t length, const AES_KEY *key,
                      unsigned char *ivec, const int enc);
 void AES_cfb128_encrypt(const unsigned char *in, unsigned char *out,

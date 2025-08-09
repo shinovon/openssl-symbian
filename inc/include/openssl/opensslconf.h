@@ -7,6 +7,8 @@ extern "C" {
 /* OpenSSL was configured with the following options: */
 #ifndef OPENSSL_DOING_MAKEDEPEND
 
+#define OPENSSL_LOAD_CONF
+
 #ifndef OPENSSL_NO_ERR
 # define OPENSSL_NO_ERR
 #endif
@@ -52,9 +54,9 @@ extern "C" {
 #ifndef OPENSSL_NO_UNIT_TEST
 # define OPENSSL_NO_UNIT_TEST
 #endif
-//#ifndef OPENSSL_NO_WEAK_SSL_CIPHERS
-//# define OPENSSL_NO_WEAK_SSL_CIPHERS
-//#endif
+#ifndef OPENSSL_NO_WEAK_SSL_CIPHERS
+# define OPENSSL_NO_WEAK_SSL_CIPHERS
+#endif
 
 #endif /* OPENSSL_DOING_MAKEDEPEND */
 

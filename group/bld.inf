@@ -1,19 +1,7 @@
-/*
-============================================================================
- Name		: bld.inf
- Author	  : 
- Copyright   : Your copyright notice
- Description : This file provides the information required for building the
-				whole of a libcrypto.
-============================================================================
-*/
-
 PRJ_PLATFORMS
 DEFAULT
 
 PRJ_EXPORTS
 
 PRJ_MMPFILES
-//libcrypto.mmp
-//libssl.mmp
-libcryptossl.mmp
+libssl2_static.mmp

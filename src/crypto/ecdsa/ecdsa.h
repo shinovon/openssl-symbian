@@ -83,12 +83,12 @@ typedef struct ECDSA_SIG_st {
 /** Allocates and initialize a ECDSA_SIG structure
  *  \return pointer to a ECDSA_SIG structure or NULL if an error occurred
  */
-ECDSA_SIG *ECDSA_SIG_new(void);
+IMPORT_C ECDSA_SIG *ECDSA_SIG_new(void);
 
 /** frees a ECDSA_SIG structure
  *  \param  sig  pointer to the ECDSA_SIG structure
  */
-void ECDSA_SIG_free(ECDSA_SIG *sig);
+IMPORT_C void ECDSA_SIG_free(ECDSA_SIG *sig);
 
 /** DER encode content of ECDSA_SIG object (note: this function modifies *pp
  *  (*pp += length of the DER encoded signature)).
