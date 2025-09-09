@@ -831,11 +831,11 @@ struct ssl_session_st {
 # define SSL_clear_cert_flags(s,op) \
         SSL_ctrl((s),SSL_CTRL_CLEAR_CERT_FLAGS,(op),NULL)
 
-IMPORT_C void SSL_CTX_set_msg_callback(SSL_CTX *ctx,
+SSL2_IMPORT void SSL_CTX_set_msg_callback(SSL_CTX *ctx,
                               void (*cb) (int write_p, int version,
                                           int content_type, const void *buf,
                                           size_t len, SSL *ssl, void *arg));
-IMPORT_C void SSL_set_msg_callback(SSL *ssl,
+SSL2_IMPORT void SSL_set_msg_callback(SSL *ssl,
                           void (*cb) (int write_p, int version,
                                       int content_type, const void *buf,
                                       size_t len, SSL *ssl, void *arg));
@@ -866,14 +866,14 @@ typedef struct srp_ctx_st {
 #  endif
 
 /* see tls_srp.c */
-IMPORT_C int SSL_SRP_CTX_init(SSL *s);
-IMPORT_C int SSL_CTX_SRP_CTX_init(SSL_CTX *ctx);
-IMPORT_C int SSL_SRP_CTX_free(SSL *ctx);
-IMPORT_C int SSL_CTX_SRP_CTX_free(SSL_CTX *ctx);
-IMPORT_C int SSL_srp_server_param_with_username(SSL *s, int *ad);
-IMPORT_C int SRP_generate_server_master_secret(SSL *s, unsigned char *master_key);
-IMPORT_C int SRP_Calc_A_param(SSL *s);
-IMPORT_C int SRP_generate_client_master_secret(SSL *s, unsigned char *master_key);
+SSL2_IMPORT int SSL_SRP_CTX_init(SSL *s);
+SSL2_IMPORT int SSL_CTX_SRP_CTX_init(SSL_CTX *ctx);
+SSL2_IMPORT int SSL_SRP_CTX_free(SSL *ctx);
+SSL2_IMPORT int SSL_CTX_SRP_CTX_free(SSL_CTX *ctx);
+SSL2_IMPORT int SSL_srp_server_param_with_username(SSL *s, int *ad);
+SSL2_IMPORT int SRP_generate_server_master_secret(SSL *s, unsigned char *master_key);
+SSL2_IMPORT int SRP_Calc_A_param(SSL *s);
+SSL2_IMPORT int SRP_generate_client_master_secret(SSL *s, unsigned char *master_key);
 
 # endif
 
@@ -1222,72 +1222,72 @@ LHASH_OF(SSL_SESSION) *SSL_CTX_sessions(SSL_CTX *ctx);
 # define SSL_CTX_sess_cache_full(ctx) \
         SSL_CTX_ctrl(ctx,SSL_CTRL_SESS_CACHE_FULL,0,NULL)
 
-IMPORT_C void SSL_CTX_sess_set_new_cb(SSL_CTX *ctx,
+SSL2_IMPORT void SSL_CTX_sess_set_new_cb(SSL_CTX *ctx,
                              int (*new_session_cb) (struct ssl_st *ssl,
                                                     SSL_SESSION *sess));
-IMPORT_C int (*SSL_CTX_sess_get_new_cb(SSL_CTX *ctx)) (struct ssl_st *ssl,
+SSL2_IMPORT int (*SSL_CTX_sess_get_new_cb(SSL_CTX *ctx)) (struct ssl_st *ssl,
                                               SSL_SESSION *sess);
-IMPORT_C void SSL_CTX_sess_set_remove_cb(SSL_CTX *ctx,
+SSL2_IMPORT void SSL_CTX_sess_set_remove_cb(SSL_CTX *ctx,
                                 void (*remove_session_cb) (struct ssl_ctx_st
                                                            *ctx,
                                                            SSL_SESSION
                                                            *sess));
-IMPORT_C void (*SSL_CTX_sess_get_remove_cb(SSL_CTX *ctx)) (struct ssl_ctx_st *ctx,
+SSL2_IMPORT void (*SSL_CTX_sess_get_remove_cb(SSL_CTX *ctx)) (struct ssl_ctx_st *ctx,
                                                   SSL_SESSION *sess);
-IMPORT_C void SSL_CTX_sess_set_get_cb(SSL_CTX *ctx,
+SSL2_IMPORT void SSL_CTX_sess_set_get_cb(SSL_CTX *ctx,
                              SSL_SESSION *(*get_session_cb) (struct ssl_st
                                                              *ssl,
                                                              unsigned char
                                                              *data, int len,
                                                              int *copy));
-IMPORT_C SSL_SESSION *(*SSL_CTX_sess_get_get_cb(SSL_CTX *ctx)) (struct ssl_st *ssl,
+SSL2_IMPORT SSL_SESSION *(*SSL_CTX_sess_get_get_cb(SSL_CTX *ctx)) (struct ssl_st *ssl,
                                                        unsigned char *Data,
                                                        int len, int *copy);
-IMPORT_C void SSL_CTX_set_info_callback(SSL_CTX *ctx,
+SSL2_IMPORT void SSL_CTX_set_info_callback(SSL_CTX *ctx,
                                void (*cb) (const SSL *ssl, int type,
                                            int val));
-IMPORT_C void (*SSL_CTX_get_info_callback(SSL_CTX *ctx)) (const SSL *ssl, int type,
+SSL2_IMPORT void (*SSL_CTX_get_info_callback(SSL_CTX *ctx)) (const SSL *ssl, int type,
                                                  int val);
-IMPORT_C void SSL_CTX_set_client_cert_cb(SSL_CTX *ctx,
+SSL2_IMPORT void SSL_CTX_set_client_cert_cb(SSL_CTX *ctx,
                                 int (*client_cert_cb) (SSL *ssl, X509 **x509,
                                                        EVP_PKEY **pkey));
-IMPORT_C int (*SSL_CTX_get_client_cert_cb(SSL_CTX *ctx)) (SSL *ssl, X509 **x509,
+SSL2_IMPORT int (*SSL_CTX_get_client_cert_cb(SSL_CTX *ctx)) (SSL *ssl, X509 **x509,
                                                  EVP_PKEY **pkey);
 # ifndef OPENSSL_NO_ENGINE
-IMPORT_C int SSL_CTX_set_client_cert_engine(SSL_CTX *ctx, ENGINE *e);
+SSL2_IMPORT int SSL_CTX_set_client_cert_engine(SSL_CTX *ctx, ENGINE *e);
 # endif
-IMPORT_C void SSL_CTX_set_cookie_generate_cb(SSL_CTX *ctx,
+SSL2_IMPORT void SSL_CTX_set_cookie_generate_cb(SSL_CTX *ctx,
                                     int (*app_gen_cookie_cb) (SSL *ssl,
                                                               unsigned char
                                                               *cookie,
                                                               unsigned int
                                                               *cookie_len));
-IMPORT_C void SSL_CTX_set_cookie_verify_cb(SSL_CTX *ctx,
+SSL2_IMPORT void SSL_CTX_set_cookie_verify_cb(SSL_CTX *ctx,
                                   int (*app_verify_cookie_cb) (SSL *ssl,
                                                                unsigned char
                                                                *cookie,
                                                                unsigned int
                                                                cookie_len));
 # ifndef OPENSSL_NO_NEXTPROTONEG
-IMPORT_C void SSL_CTX_set_next_protos_advertised_cb(SSL_CTX *s,
+SSL2_IMPORT void SSL_CTX_set_next_protos_advertised_cb(SSL_CTX *s,
                                            int (*cb) (SSL *ssl,
                                                       const unsigned char
                                                       **out,
                                                       unsigned int *outlen,
                                                       void *arg), void *arg);
-IMPORT_C void SSL_CTX_set_next_proto_select_cb(SSL_CTX *s,
+SSL2_IMPORT void SSL_CTX_set_next_proto_select_cb(SSL_CTX *s,
                                       int (*cb) (SSL *ssl,
                                                  unsigned char **out,
                                                  unsigned char *outlen,
                                                  const unsigned char *in,
                                                  unsigned int inlen,
                                                  void *arg), void *arg);
-IMPORT_C void SSL_get0_next_proto_negotiated(const SSL *s, const unsigned char **data,
+SSL2_IMPORT void SSL_get0_next_proto_negotiated(const SSL *s, const unsigned char **data,
                                     unsigned *len);
 # endif
 
 # ifndef OPENSSL_NO_TLSEXT
-IMPORT_C int SSL_select_next_proto(unsigned char **out, unsigned char *outlen,
+SSL2_IMPORT int SSL_select_next_proto(unsigned char **out, unsigned char *outlen,
                           const unsigned char *in, unsigned int inlen,
                           const unsigned char *client,
                           unsigned int client_len);
@@ -1297,18 +1297,18 @@ IMPORT_C int SSL_select_next_proto(unsigned char **out, unsigned char *outlen,
 # define OPENSSL_NPN_NEGOTIATED  1
 # define OPENSSL_NPN_NO_OVERLAP  2
 
-IMPORT_C int SSL_CTX_set_alpn_protos(SSL_CTX *ctx, const unsigned char *protos,
+SSL2_IMPORT int SSL_CTX_set_alpn_protos(SSL_CTX *ctx, const unsigned char *protos,
                             unsigned protos_len);
-IMPORT_C int SSL_set_alpn_protos(SSL *ssl, const unsigned char *protos,
+SSL2_IMPORT int SSL_set_alpn_protos(SSL *ssl, const unsigned char *protos,
                         unsigned protos_len);
-IMPORT_C void SSL_CTX_set_alpn_select_cb(SSL_CTX *ctx,
+SSL2_IMPORT void SSL_CTX_set_alpn_select_cb(SSL_CTX *ctx,
                                 int (*cb) (SSL *ssl,
                                            const unsigned char **out,
                                            unsigned char *outlen,
                                            const unsigned char *in,
                                            unsigned int inlen,
                                            void *arg), void *arg);
-IMPORT_C void SSL_get0_alpn_selected(const SSL *ssl, const unsigned char **data,
+SSL2_IMPORT void SSL_get0_alpn_selected(const SSL *ssl, const unsigned char **data,
                             unsigned *len);
 
 # ifndef OPENSSL_NO_PSK
@@ -1318,7 +1318,7 @@ IMPORT_C void SSL_get0_alpn_selected(const SSL *ssl, const unsigned char **data,
  */
 #  define PSK_MAX_IDENTITY_LEN 128
 #  define PSK_MAX_PSK_LEN 256
-IMPORT_C void SSL_CTX_set_psk_client_callback(SSL_CTX *ctx,
+SSL2_IMPORT void SSL_CTX_set_psk_client_callback(SSL_CTX *ctx,
                                      unsigned int (*psk_client_callback) (SSL
                                                                           *ssl,
                                                                           const
@@ -1335,7 +1335,7 @@ IMPORT_C void SSL_CTX_set_psk_client_callback(SSL_CTX *ctx,
                                                                           unsigned
                                                                           int
                                                                           max_psk_len));
-IMPORT_C void SSL_set_psk_client_callback(SSL *ssl,
+SSL2_IMPORT void SSL_set_psk_client_callback(SSL *ssl,
                                  unsigned int (*psk_client_callback) (SSL
                                                                       *ssl,
                                                                       const
@@ -1352,7 +1352,7 @@ IMPORT_C void SSL_set_psk_client_callback(SSL *ssl,
                                                                       unsigned
                                                                       int
                                                                       max_psk_len));
-IMPORT_C void SSL_CTX_set_psk_server_callback(SSL_CTX *ctx,
+SSL2_IMPORT void SSL_CTX_set_psk_server_callback(SSL_CTX *ctx,
                                      unsigned int (*psk_server_callback) (SSL
                                                                           *ssl,
                                                                           const
@@ -1364,7 +1364,7 @@ IMPORT_C void SSL_CTX_set_psk_server_callback(SSL_CTX *ctx,
                                                                           unsigned
                                                                           int
                                                                           max_psk_len));
-IMPORT_C void SSL_set_psk_server_callback(SSL *ssl,
+SSL2_IMPORT void SSL_set_psk_server_callback(SSL *ssl,
                                  unsigned int (*psk_server_callback) (SSL
                                                                       *ssl,
                                                                       const
@@ -1376,30 +1376,30 @@ IMPORT_C void SSL_set_psk_server_callback(SSL *ssl,
                                                                       unsigned
                                                                       int
                                                                       max_psk_len));
-IMPORT_C int SSL_CTX_use_psk_identity_hint(SSL_CTX *ctx, const char *identity_hint);
-IMPORT_C int SSL_use_psk_identity_hint(SSL *s, const char *identity_hint);
-IMPORT_C const char *SSL_get_psk_identity_hint(const SSL *s);
-IMPORT_C const char *SSL_get_psk_identity(const SSL *s);
+SSL2_IMPORT int SSL_CTX_use_psk_identity_hint(SSL_CTX *ctx, const char *identity_hint);
+SSL2_IMPORT int SSL_use_psk_identity_hint(SSL *s, const char *identity_hint);
+SSL2_IMPORT const char *SSL_get_psk_identity_hint(const SSL *s);
+SSL2_IMPORT const char *SSL_get_psk_identity(const SSL *s);
 # endif
 
 # ifndef OPENSSL_NO_TLSEXT
 /* Register callbacks to handle custom TLS Extensions for client or server. */
 
-IMPORT_C int SSL_CTX_add_client_custom_ext(SSL_CTX *ctx, unsigned int ext_type,
+SSL2_IMPORT int SSL_CTX_add_client_custom_ext(SSL_CTX *ctx, unsigned int ext_type,
                                   custom_ext_add_cb add_cb,
                                   custom_ext_free_cb free_cb,
                                   void *add_arg,
                                   custom_ext_parse_cb parse_cb,
                                   void *parse_arg);
 
-IMPORT_C int SSL_CTX_add_server_custom_ext(SSL_CTX *ctx, unsigned int ext_type,
+SSL2_IMPORT int SSL_CTX_add_server_custom_ext(SSL_CTX *ctx, unsigned int ext_type,
                                   custom_ext_add_cb add_cb,
                                   custom_ext_free_cb free_cb,
                                   void *add_arg,
                                   custom_ext_parse_cb parse_cb,
                                   void *parse_arg);
 
-IMPORT_C int SSL_extension_supported(unsigned int ext_type);
+SSL2_IMPORT int SSL_extension_supported(unsigned int ext_type);
 
 # endif
 
@@ -2118,363 +2118,363 @@ DECLARE_PEM_rw(SSL_SESSION, SSL_SESSION)
 # define SSL_get0_ec_point_formats(s, plst) \
         SSL_ctrl(s,SSL_CTRL_GET_EC_POINT_FORMATS,0,(char *)plst)
 # ifndef OPENSSL_NO_BIO
-IMPORT_C BIO_METHOD *BIO_f_ssl(void);
-IMPORT_C BIO *BIO_new_ssl(SSL_CTX *ctx, int client);
-IMPORT_C BIO *BIO_new_ssl_connect(SSL_CTX *ctx);
-IMPORT_C BIO *BIO_new_buffer_ssl_connect(SSL_CTX *ctx);
-IMPORT_C int BIO_ssl_copy_session_id(BIO *to, BIO *from);
-IMPORT_C void BIO_ssl_shutdown(BIO *ssl_bio);
+SSL2_IMPORT BIO_METHOD *BIO_f_ssl(void);
+SSL2_IMPORT BIO *BIO_new_ssl(SSL_CTX *ctx, int client);
+SSL2_IMPORT BIO *BIO_new_ssl_connect(SSL_CTX *ctx);
+SSL2_IMPORT BIO *BIO_new_buffer_ssl_connect(SSL_CTX *ctx);
+SSL2_IMPORT int BIO_ssl_copy_session_id(BIO *to, BIO *from);
+SSL2_IMPORT void BIO_ssl_shutdown(BIO *ssl_bio);
 
 # endif
 
-IMPORT_C int SSL_CTX_set_cipher_list(SSL_CTX *, const char *str);
-IMPORT_C SSL_CTX *SSL_CTX_new(const SSL_METHOD *meth);
-IMPORT_C void SSL_CTX_free(SSL_CTX *);
-IMPORT_C long SSL_CTX_set_timeout(SSL_CTX *ctx, long t);
-IMPORT_C long SSL_CTX_get_timeout(const SSL_CTX *ctx);
-IMPORT_C X509_STORE *SSL_CTX_get_cert_store(const SSL_CTX *);
-IMPORT_C void SSL_CTX_set_cert_store(SSL_CTX *, X509_STORE *);
-IMPORT_C int SSL_want(const SSL *s);
-IMPORT_C int SSL_clear(SSL *s);
+SSL2_IMPORT int SSL_CTX_set_cipher_list(SSL_CTX *, const char *str);
+SSL2_IMPORT SSL_CTX *SSL_CTX_new(const SSL_METHOD *meth);
+SSL2_IMPORT void SSL_CTX_free(SSL_CTX *);
+SSL2_IMPORT long SSL_CTX_set_timeout(SSL_CTX *ctx, long t);
+SSL2_IMPORT long SSL_CTX_get_timeout(const SSL_CTX *ctx);
+SSL2_IMPORT X509_STORE *SSL_CTX_get_cert_store(const SSL_CTX *);
+SSL2_IMPORT void SSL_CTX_set_cert_store(SSL_CTX *, X509_STORE *);
+SSL2_IMPORT int SSL_want(const SSL *s);
+SSL2_IMPORT int SSL_clear(SSL *s);
 
-IMPORT_C void SSL_CTX_flush_sessions(SSL_CTX *ctx, long tm);
+SSL2_IMPORT void SSL_CTX_flush_sessions(SSL_CTX *ctx, long tm);
 
-IMPORT_C const SSL_CIPHER *SSL_get_current_cipher(const SSL *s);
-IMPORT_C int SSL_CIPHER_get_bits(const SSL_CIPHER *c, int *alg_bits);
-IMPORT_C char *SSL_CIPHER_get_version(const SSL_CIPHER *c);
-IMPORT_C const char *SSL_CIPHER_get_name(const SSL_CIPHER *c);
-IMPORT_C unsigned long SSL_CIPHER_get_id(const SSL_CIPHER *c);
+SSL2_IMPORT const SSL_CIPHER *SSL_get_current_cipher(const SSL *s);
+SSL2_IMPORT int SSL_CIPHER_get_bits(const SSL_CIPHER *c, int *alg_bits);
+SSL2_IMPORT char *SSL_CIPHER_get_version(const SSL_CIPHER *c);
+SSL2_IMPORT const char *SSL_CIPHER_get_name(const SSL_CIPHER *c);
+SSL2_IMPORT unsigned long SSL_CIPHER_get_id(const SSL_CIPHER *c);
 
-IMPORT_C int SSL_get_fd(const SSL *s);
-IMPORT_C int SSL_get_rfd(const SSL *s);
-IMPORT_C int SSL_get_wfd(const SSL *s);
-IMPORT_C const char *SSL_get_cipher_list(const SSL *s, int n);
-IMPORT_C char *SSL_get_shared_ciphers(const SSL *s, char *buf, int size);
-IMPORT_C int SSL_get_read_ahead(const SSL *s);
-IMPORT_C int SSL_pending(const SSL *s);
+SSL2_IMPORT int SSL_get_fd(const SSL *s);
+SSL2_IMPORT int SSL_get_rfd(const SSL *s);
+SSL2_IMPORT int SSL_get_wfd(const SSL *s);
+SSL2_IMPORT const char *SSL_get_cipher_list(const SSL *s, int n);
+SSL2_IMPORT char *SSL_get_shared_ciphers(const SSL *s, char *buf, int size);
+SSL2_IMPORT int SSL_get_read_ahead(const SSL *s);
+SSL2_IMPORT int SSL_pending(const SSL *s);
 # ifndef OPENSSL_NO_SOCK
-IMPORT_C int SSL_set_fd(SSL *s, int fd);
-IMPORT_C int SSL_set_rfd(SSL *s, int fd);
-IMPORT_C int SSL_set_wfd(SSL *s, int fd);
+SSL2_IMPORT int SSL_set_fd(SSL *s, int fd);
+SSL2_IMPORT int SSL_set_rfd(SSL *s, int fd);
+SSL2_IMPORT int SSL_set_wfd(SSL *s, int fd);
 # endif
 # ifndef OPENSSL_NO_BIO
-IMPORT_C void SSL_set_bio(SSL *s, BIO *rbio, BIO *wbio);
-IMPORT_C BIO *SSL_get_rbio(const SSL *s);
-IMPORT_C BIO *SSL_get_wbio(const SSL *s);
+SSL2_IMPORT void SSL_set_bio(SSL *s, BIO *rbio, BIO *wbio);
+SSL2_IMPORT BIO *SSL_get_rbio(const SSL *s);
+SSL2_IMPORT BIO *SSL_get_wbio(const SSL *s);
 # endif
-IMPORT_C int SSL_set_cipher_list(SSL *s, const char *str);
-IMPORT_C void SSL_set_read_ahead(SSL *s, int yes);
-IMPORT_C int SSL_get_verify_mode(const SSL *s);
-IMPORT_C int SSL_get_verify_depth(const SSL *s);
-IMPORT_C int (*SSL_get_verify_callback(const SSL *s)) (int, X509_STORE_CTX *);
-IMPORT_C void SSL_set_verify(SSL *s, int mode,
+SSL2_IMPORT int SSL_set_cipher_list(SSL *s, const char *str);
+SSL2_IMPORT void SSL_set_read_ahead(SSL *s, int yes);
+SSL2_IMPORT int SSL_get_verify_mode(const SSL *s);
+SSL2_IMPORT int SSL_get_verify_depth(const SSL *s);
+SSL2_IMPORT int (*SSL_get_verify_callback(const SSL *s)) (int, X509_STORE_CTX *);
+SSL2_IMPORT void SSL_set_verify(SSL *s, int mode,
                     int (*callback) (int ok, X509_STORE_CTX *ctx));
-IMPORT_C void SSL_set_verify_depth(SSL *s, int depth);
-IMPORT_C void SSL_set_cert_cb(SSL *s, int (*cb) (SSL *ssl, void *arg), void *arg);
+SSL2_IMPORT void SSL_set_verify_depth(SSL *s, int depth);
+SSL2_IMPORT void SSL_set_cert_cb(SSL *s, int (*cb) (SSL *ssl, void *arg), void *arg);
 # ifndef OPENSSL_NO_RSA
-IMPORT_C int SSL_use_RSAPrivateKey(SSL *ssl, RSA *rsa);
+SSL2_IMPORT int SSL_use_RSAPrivateKey(SSL *ssl, RSA *rsa);
 # endif
-IMPORT_C int SSL_use_RSAPrivateKey_ASN1(SSL *ssl, unsigned char *d, long len);
-IMPORT_C int SSL_use_PrivateKey(SSL *ssl, EVP_PKEY *pkey);
-IMPORT_C int SSL_use_PrivateKey_ASN1(int pk, SSL *ssl, const unsigned char *d,
+SSL2_IMPORT int SSL_use_RSAPrivateKey_ASN1(SSL *ssl, unsigned char *d, long len);
+SSL2_IMPORT int SSL_use_PrivateKey(SSL *ssl, EVP_PKEY *pkey);
+SSL2_IMPORT int SSL_use_PrivateKey_ASN1(int pk, SSL *ssl, const unsigned char *d,
                             long len);
-IMPORT_C int SSL_use_certificate(SSL *ssl, X509 *x);
-IMPORT_C int SSL_use_certificate_ASN1(SSL *ssl, const unsigned char *d, int len);
+SSL2_IMPORT int SSL_use_certificate(SSL *ssl, X509 *x);
+SSL2_IMPORT int SSL_use_certificate_ASN1(SSL *ssl, const unsigned char *d, int len);
 
 # ifndef OPENSSL_NO_TLSEXT
 /* Set serverinfo data for the current active cert. */
-IMPORT_C int SSL_CTX_use_serverinfo(SSL_CTX *ctx, const unsigned char *serverinfo,
+SSL2_IMPORT int SSL_CTX_use_serverinfo(SSL_CTX *ctx, const unsigned char *serverinfo,
                            size_t serverinfo_length);
 #  ifndef OPENSSL_NO_STDIO
-IMPORT_C int SSL_CTX_use_serverinfo_file(SSL_CTX *ctx, const char *file);
+SSL2_IMPORT int SSL_CTX_use_serverinfo_file(SSL_CTX *ctx, const char *file);
 #  endif                        /* NO_STDIO */
 
 # endif
 
 # ifndef OPENSSL_NO_STDIO
-IMPORT_C int SSL_use_RSAPrivateKey_file(SSL *ssl, const char *file, int type);
-IMPORT_C int SSL_use_PrivateKey_file(SSL *ssl, const char *file, int type);
-IMPORT_C int SSL_use_certificate_file(SSL *ssl, const char *file, int type);
-IMPORT_C int SSL_CTX_use_RSAPrivateKey_file(SSL_CTX *ctx, const char *file, int type);
-IMPORT_C int SSL_CTX_use_PrivateKey_file(SSL_CTX *ctx, const char *file, int type);
-IMPORT_C int SSL_CTX_use_certificate_file(SSL_CTX *ctx, const char *file, int type);
+SSL2_IMPORT int SSL_use_RSAPrivateKey_file(SSL *ssl, const char *file, int type);
+SSL2_IMPORT int SSL_use_PrivateKey_file(SSL *ssl, const char *file, int type);
+SSL2_IMPORT int SSL_use_certificate_file(SSL *ssl, const char *file, int type);
+SSL2_IMPORT int SSL_CTX_use_RSAPrivateKey_file(SSL_CTX *ctx, const char *file, int type);
+SSL2_IMPORT int SSL_CTX_use_PrivateKey_file(SSL_CTX *ctx, const char *file, int type);
+SSL2_IMPORT int SSL_CTX_use_certificate_file(SSL_CTX *ctx, const char *file, int type);
 /* PEM type */
-IMPORT_C int SSL_CTX_use_certificate_chain_file(SSL_CTX *ctx, const char *file);
-IMPORT_C STACK_OF(X509_NAME) *SSL_load_client_CA_file(const char *file);
-IMPORT_C int SSL_add_file_cert_subjects_to_stack(STACK_OF(X509_NAME) *stackCAs,
+SSL2_IMPORT int SSL_CTX_use_certificate_chain_file(SSL_CTX *ctx, const char *file);
+SSL2_IMPORT STACK_OF(X509_NAME) *SSL_load_client_CA_file(const char *file);
+SSL2_IMPORT int SSL_add_file_cert_subjects_to_stack(STACK_OF(X509_NAME) *stackCAs,
                                         const char *file);
 #  ifndef OPENSSL_SYS_VMS
 /* XXXXX: Better scheme needed! [was: #ifndef MAC_OS_pre_X] */
 #   ifndef OPENSSL_SYS_MACINTOSH_CLASSIC
-IMPORT_C int SSL_add_dir_cert_subjects_to_stack(STACK_OF(X509_NAME) *stackCAs,
+SSL2_IMPORT int SSL_add_dir_cert_subjects_to_stack(STACK_OF(X509_NAME) *stackCAs,
                                        const char *dir);
 #   endif
 #  endif
 
 # endif
 
-IMPORT_C void SSL_load_error_strings(void);
-IMPORT_C const char *SSL_state_string(const SSL *s);
-IMPORT_C const char *SSL_rstate_string(const SSL *s);
-IMPORT_C const char *SSL_state_string_long(const SSL *s);
-IMPORT_C const char *SSL_rstate_string_long(const SSL *s);
-IMPORT_C long SSL_SESSION_get_time(const SSL_SESSION *s);
-IMPORT_C long SSL_SESSION_set_time(SSL_SESSION *s, long t);
-IMPORT_C long SSL_SESSION_get_timeout(const SSL_SESSION *s);
-IMPORT_C long SSL_SESSION_set_timeout(SSL_SESSION *s, long t);
-IMPORT_C void SSL_copy_session_id(SSL *to, const SSL *from);
-IMPORT_C X509 *SSL_SESSION_get0_peer(SSL_SESSION *s);
-IMPORT_C int SSL_SESSION_set1_id_context(SSL_SESSION *s, const unsigned char *sid_ctx,
+SSL2_IMPORT void SSL_load_error_strings(void);
+SSL2_IMPORT const char *SSL_state_string(const SSL *s);
+SSL2_IMPORT const char *SSL_rstate_string(const SSL *s);
+SSL2_IMPORT const char *SSL_state_string_long(const SSL *s);
+SSL2_IMPORT const char *SSL_rstate_string_long(const SSL *s);
+SSL2_IMPORT long SSL_SESSION_get_time(const SSL_SESSION *s);
+SSL2_IMPORT long SSL_SESSION_set_time(SSL_SESSION *s, long t);
+SSL2_IMPORT long SSL_SESSION_get_timeout(const SSL_SESSION *s);
+SSL2_IMPORT long SSL_SESSION_set_timeout(SSL_SESSION *s, long t);
+SSL2_IMPORT void SSL_copy_session_id(SSL *to, const SSL *from);
+SSL2_IMPORT X509 *SSL_SESSION_get0_peer(SSL_SESSION *s);
+SSL2_IMPORT int SSL_SESSION_set1_id_context(SSL_SESSION *s, const unsigned char *sid_ctx,
                                 unsigned int sid_ctx_len);
 
-IMPORT_C SSL_SESSION *SSL_SESSION_new(void);
-IMPORT_C const unsigned char *SSL_SESSION_get_id(const SSL_SESSION *s,
+SSL2_IMPORT SSL_SESSION *SSL_SESSION_new(void);
+SSL2_IMPORT const unsigned char *SSL_SESSION_get_id(const SSL_SESSION *s,
                                         unsigned int *len);
-IMPORT_C unsigned int SSL_SESSION_get_compress_id(const SSL_SESSION *s);
+SSL2_IMPORT unsigned int SSL_SESSION_get_compress_id(const SSL_SESSION *s);
 # ifndef OPENSSL_NO_FP_API
-IMPORT_C int SSL_SESSION_print_fp(FILE *fp, const SSL_SESSION *ses);
+SSL2_IMPORT int SSL_SESSION_print_fp(FILE *fp, const SSL_SESSION *ses);
 # endif
 # ifndef OPENSSL_NO_BIO
-IMPORT_C int SSL_SESSION_print(BIO *fp, const SSL_SESSION *ses);
+SSL2_IMPORT int SSL_SESSION_print(BIO *fp, const SSL_SESSION *ses);
 # endif
-IMPORT_C void SSL_SESSION_free(SSL_SESSION *ses);
-IMPORT_C int i2d_SSL_SESSION(SSL_SESSION *in, unsigned char **pp);
-IMPORT_C int SSL_set_session(SSL *to, SSL_SESSION *session);
-IMPORT_C int SSL_CTX_add_session(SSL_CTX *s, SSL_SESSION *c);
-IMPORT_C int SSL_CTX_remove_session(SSL_CTX *, SSL_SESSION *c);
-IMPORT_C int SSL_CTX_set_generate_session_id(SSL_CTX *, GEN_SESSION_CB);
-IMPORT_C int SSL_set_generate_session_id(SSL *, GEN_SESSION_CB);
-IMPORT_C int SSL_has_matching_session_id(const SSL *ssl, const unsigned char *id,
+SSL2_IMPORT void SSL_SESSION_free(SSL_SESSION *ses);
+SSL2_IMPORT int i2d_SSL_SESSION(SSL_SESSION *in, unsigned char **pp);
+SSL2_IMPORT int SSL_set_session(SSL *to, SSL_SESSION *session);
+SSL2_IMPORT int SSL_CTX_add_session(SSL_CTX *s, SSL_SESSION *c);
+SSL2_IMPORT int SSL_CTX_remove_session(SSL_CTX *, SSL_SESSION *c);
+SSL2_IMPORT int SSL_CTX_set_generate_session_id(SSL_CTX *, GEN_SESSION_CB);
+SSL2_IMPORT int SSL_set_generate_session_id(SSL *, GEN_SESSION_CB);
+SSL2_IMPORT int SSL_has_matching_session_id(const SSL *ssl, const unsigned char *id,
                                 unsigned int id_len);
-IMPORT_C SSL_SESSION *d2i_SSL_SESSION(SSL_SESSION **a, const unsigned char **pp,
+SSL2_IMPORT SSL_SESSION *d2i_SSL_SESSION(SSL_SESSION **a, const unsigned char **pp,
                              long length);
 
 # ifdef HEADER_X509_H
-IMPORT_C X509 *SSL_get_peer_certificate(const SSL *s);
+SSL2_IMPORT X509 *SSL_get_peer_certificate(const SSL *s);
 # endif
 
-IMPORT_C STACK_OF(X509) *SSL_get_peer_cert_chain(const SSL *s);
+SSL2_IMPORT STACK_OF(X509) *SSL_get_peer_cert_chain(const SSL *s);
 
-IMPORT_C int SSL_CTX_get_verify_mode(const SSL_CTX *ctx);
-IMPORT_C int SSL_CTX_get_verify_depth(const SSL_CTX *ctx);
-IMPORT_C int (*SSL_CTX_get_verify_callback(const SSL_CTX *ctx)) (int,
+SSL2_IMPORT int SSL_CTX_get_verify_mode(const SSL_CTX *ctx);
+SSL2_IMPORT int SSL_CTX_get_verify_depth(const SSL_CTX *ctx);
+SSL2_IMPORT int (*SSL_CTX_get_verify_callback(const SSL_CTX *ctx)) (int,
                                                         X509_STORE_CTX *);
-IMPORT_C void SSL_CTX_set_verify(SSL_CTX *ctx, int mode,
+SSL2_IMPORT void SSL_CTX_set_verify(SSL_CTX *ctx, int mode,
                         int (*callback) (int, X509_STORE_CTX *));
-IMPORT_C void SSL_CTX_set_verify_depth(SSL_CTX *ctx, int depth);
-IMPORT_C void SSL_CTX_set_cert_verify_callback(SSL_CTX *ctx,
+SSL2_IMPORT void SSL_CTX_set_verify_depth(SSL_CTX *ctx, int depth);
+SSL2_IMPORT void SSL_CTX_set_cert_verify_callback(SSL_CTX *ctx,
                                       int (*cb) (X509_STORE_CTX *, void *),
                                       void *arg);
-IMPORT_C void SSL_CTX_set_cert_cb(SSL_CTX *c, int (*cb) (SSL *ssl, void *arg),
+SSL2_IMPORT void SSL_CTX_set_cert_cb(SSL_CTX *c, int (*cb) (SSL *ssl, void *arg),
                          void *arg);
 # ifndef OPENSSL_NO_RSA
-IMPORT_C int SSL_CTX_use_RSAPrivateKey(SSL_CTX *ctx, RSA *rsa);
+SSL2_IMPORT int SSL_CTX_use_RSAPrivateKey(SSL_CTX *ctx, RSA *rsa);
 # endif
-IMPORT_C int SSL_CTX_use_RSAPrivateKey_ASN1(SSL_CTX *ctx, const unsigned char *d,
+SSL2_IMPORT int SSL_CTX_use_RSAPrivateKey_ASN1(SSL_CTX *ctx, const unsigned char *d,
                                    long len);
-IMPORT_C int SSL_CTX_use_PrivateKey(SSL_CTX *ctx, EVP_PKEY *pkey);
-IMPORT_C int SSL_CTX_use_PrivateKey_ASN1(int pk, SSL_CTX *ctx,
+SSL2_IMPORT int SSL_CTX_use_PrivateKey(SSL_CTX *ctx, EVP_PKEY *pkey);
+SSL2_IMPORT int SSL_CTX_use_PrivateKey_ASN1(int pk, SSL_CTX *ctx,
                                 const unsigned char *d, long len);
-IMPORT_C int SSL_CTX_use_certificate(SSL_CTX *ctx, X509 *x);
-IMPORT_C int SSL_CTX_use_certificate_ASN1(SSL_CTX *ctx, int len,
+SSL2_IMPORT int SSL_CTX_use_certificate(SSL_CTX *ctx, X509 *x);
+SSL2_IMPORT int SSL_CTX_use_certificate_ASN1(SSL_CTX *ctx, int len,
                                  const unsigned char *d);
 
-IMPORT_C void SSL_CTX_set_default_passwd_cb(SSL_CTX *ctx, pem_password_cb *cb);
-IMPORT_C void SSL_CTX_set_default_passwd_cb_userdata(SSL_CTX *ctx, void *u);
+SSL2_IMPORT void SSL_CTX_set_default_passwd_cb(SSL_CTX *ctx, pem_password_cb *cb);
+SSL2_IMPORT void SSL_CTX_set_default_passwd_cb_userdata(SSL_CTX *ctx, void *u);
 
-IMPORT_C int SSL_CTX_check_private_key(const SSL_CTX *ctx);
-IMPORT_C int SSL_check_private_key(const SSL *ctx);
+SSL2_IMPORT int SSL_CTX_check_private_key(const SSL_CTX *ctx);
+SSL2_IMPORT int SSL_check_private_key(const SSL *ctx);
 
-IMPORT_C int SSL_CTX_set_session_id_context(SSL_CTX *ctx, const unsigned char *sid_ctx,
+SSL2_IMPORT int SSL_CTX_set_session_id_context(SSL_CTX *ctx, const unsigned char *sid_ctx,
                                    unsigned int sid_ctx_len);
 
-IMPORT_C SSL *SSL_new(SSL_CTX *ctx);
-IMPORT_C int SSL_set_session_id_context(SSL *ssl, const unsigned char *sid_ctx,
+SSL2_IMPORT SSL *SSL_new(SSL_CTX *ctx);
+SSL2_IMPORT int SSL_set_session_id_context(SSL *ssl, const unsigned char *sid_ctx,
                                unsigned int sid_ctx_len);
 
-IMPORT_C int SSL_CTX_set_purpose(SSL_CTX *s, int purpose);
-IMPORT_C int SSL_set_purpose(SSL *s, int purpose);
-IMPORT_C int SSL_CTX_set_trust(SSL_CTX *s, int trust);
-IMPORT_C int SSL_set_trust(SSL *s, int trust);
+SSL2_IMPORT int SSL_CTX_set_purpose(SSL_CTX *s, int purpose);
+SSL2_IMPORT int SSL_set_purpose(SSL *s, int purpose);
+SSL2_IMPORT int SSL_CTX_set_trust(SSL_CTX *s, int trust);
+SSL2_IMPORT int SSL_set_trust(SSL *s, int trust);
 
-IMPORT_C int SSL_CTX_set1_param(SSL_CTX *ctx, X509_VERIFY_PARAM *vpm);
-IMPORT_C int SSL_set1_param(SSL *ssl, X509_VERIFY_PARAM *vpm);
+SSL2_IMPORT int SSL_CTX_set1_param(SSL_CTX *ctx, X509_VERIFY_PARAM *vpm);
+SSL2_IMPORT int SSL_set1_param(SSL *ssl, X509_VERIFY_PARAM *vpm);
 
-IMPORT_C X509_VERIFY_PARAM *SSL_CTX_get0_param(SSL_CTX *ctx);
-IMPORT_C X509_VERIFY_PARAM *SSL_get0_param(SSL *ssl);
+SSL2_IMPORT X509_VERIFY_PARAM *SSL_CTX_get0_param(SSL_CTX *ctx);
+SSL2_IMPORT X509_VERIFY_PARAM *SSL_get0_param(SSL *ssl);
 
 # ifndef OPENSSL_NO_SRP
-IMPORT_C int SSL_CTX_set_srp_username(SSL_CTX *ctx, char *name);
-IMPORT_C int SSL_CTX_set_srp_password(SSL_CTX *ctx, char *password);
-IMPORT_C int SSL_CTX_set_srp_strength(SSL_CTX *ctx, int strength);
-IMPORT_C int SSL_CTX_set_srp_client_pwd_callback(SSL_CTX *ctx,
+SSL2_IMPORT int SSL_CTX_set_srp_username(SSL_CTX *ctx, char *name);
+SSL2_IMPORT int SSL_CTX_set_srp_password(SSL_CTX *ctx, char *password);
+SSL2_IMPORT int SSL_CTX_set_srp_strength(SSL_CTX *ctx, int strength);
+SSL2_IMPORT int SSL_CTX_set_srp_client_pwd_callback(SSL_CTX *ctx,
                                         char *(*cb) (SSL *, void *));
-IMPORT_C int SSL_CTX_set_srp_verify_param_callback(SSL_CTX *ctx,
+SSL2_IMPORT int SSL_CTX_set_srp_verify_param_callback(SSL_CTX *ctx,
                                           int (*cb) (SSL *, void *));
-IMPORT_C int SSL_CTX_set_srp_username_callback(SSL_CTX *ctx,
+SSL2_IMPORT int SSL_CTX_set_srp_username_callback(SSL_CTX *ctx,
                                       int (*cb) (SSL *, int *, void *));
-IMPORT_C int SSL_CTX_set_srp_cb_arg(SSL_CTX *ctx, void *arg);
+SSL2_IMPORT int SSL_CTX_set_srp_cb_arg(SSL_CTX *ctx, void *arg);
 
-IMPORT_C int SSL_set_srp_server_param(SSL *s, const BIGNUM *N, const BIGNUM *g,
+SSL2_IMPORT int SSL_set_srp_server_param(SSL *s, const BIGNUM *N, const BIGNUM *g,
                              BIGNUM *sa, BIGNUM *v, char *info);
-IMPORT_C int SSL_set_srp_server_param_pw(SSL *s, const char *user, const char *pass,
+SSL2_IMPORT int SSL_set_srp_server_param_pw(SSL *s, const char *user, const char *pass,
                                 const char *grp);
 
-IMPORT_C BIGNUM *SSL_get_srp_g(SSL *s);
-IMPORT_C BIGNUM *SSL_get_srp_N(SSL *s);
+SSL2_IMPORT BIGNUM *SSL_get_srp_g(SSL *s);
+SSL2_IMPORT BIGNUM *SSL_get_srp_N(SSL *s);
 
-IMPORT_C char *SSL_get_srp_username(SSL *s);
-IMPORT_C char *SSL_get_srp_userinfo(SSL *s);
+SSL2_IMPORT char *SSL_get_srp_username(SSL *s);
+SSL2_IMPORT char *SSL_get_srp_userinfo(SSL *s);
 # endif
 
-IMPORT_C void SSL_certs_clear(SSL *s);
-IMPORT_C void SSL_free(SSL *ssl);
-IMPORT_C int SSL_accept(SSL *ssl);
-IMPORT_C int SSL_connect(SSL *ssl);
-IMPORT_C int SSL_read(SSL *ssl, void *buf, int num);
-IMPORT_C int SSL_peek(SSL *ssl, void *buf, int num);
-IMPORT_C int SSL_write(SSL *ssl, const void *buf, int num);
-IMPORT_C long SSL_ctrl(SSL *ssl, int cmd, long larg, void *parg);
-IMPORT_C long SSL_callback_ctrl(SSL *, int, void (*)(void));
-IMPORT_C long SSL_CTX_ctrl(SSL_CTX *ctx, int cmd, long larg, void *parg);
-IMPORT_C long SSL_CTX_callback_ctrl(SSL_CTX *, int, void (*)(void));
+SSL2_IMPORT void SSL_certs_clear(SSL *s);
+SSL2_IMPORT void SSL_free(SSL *ssl);
+SSL2_IMPORT int SSL_accept(SSL *ssl);
+SSL2_IMPORT int SSL_connect(SSL *ssl);
+SSL2_IMPORT int SSL_read(SSL *ssl, void *buf, int num);
+SSL2_IMPORT int SSL_peek(SSL *ssl, void *buf, int num);
+SSL2_IMPORT int SSL_write(SSL *ssl, const void *buf, int num);
+SSL2_IMPORT long SSL_ctrl(SSL *ssl, int cmd, long larg, void *parg);
+SSL2_IMPORT long SSL_callback_ctrl(SSL *, int, void (*)(void));
+SSL2_IMPORT long SSL_CTX_ctrl(SSL_CTX *ctx, int cmd, long larg, void *parg);
+SSL2_IMPORT long SSL_CTX_callback_ctrl(SSL_CTX *, int, void (*)(void));
 
-IMPORT_C int SSL_get_error(const SSL *s, int ret_code);
-IMPORT_C const char *SSL_get_version(const SSL *s);
+SSL2_IMPORT int SSL_get_error(const SSL *s, int ret_code);
+SSL2_IMPORT const char *SSL_get_version(const SSL *s);
 
 /* This sets the 'default' SSL version that SSL_new() will create */
-IMPORT_C int SSL_CTX_set_ssl_version(SSL_CTX *ctx, const SSL_METHOD *meth);
+SSL2_IMPORT int SSL_CTX_set_ssl_version(SSL_CTX *ctx, const SSL_METHOD *meth);
 
 # ifndef OPENSSL_NO_SSL2_METHOD
-IMPORT_C const SSL_METHOD *SSLv2_method(void); /* SSLv2 */
-IMPORT_C const SSL_METHOD *SSLv2_server_method(void); /* SSLv2 */
-IMPORT_C const SSL_METHOD *SSLv2_client_method(void); /* SSLv2 */
+SSL2_IMPORT const SSL_METHOD *SSLv2_method(void); /* SSLv2 */
+SSL2_IMPORT const SSL_METHOD *SSLv2_server_method(void); /* SSLv2 */
+SSL2_IMPORT const SSL_METHOD *SSLv2_client_method(void); /* SSLv2 */
 # endif
 
 # ifndef OPENSSL_NO_SSL3_METHOD
-IMPORT_C const SSL_METHOD *SSLv3_method(void); /* SSLv3 */
-IMPORT_C const SSL_METHOD *SSLv3_server_method(void); /* SSLv3 */
-IMPORT_C const SSL_METHOD *SSLv3_client_method(void); /* SSLv3 */
+SSL2_IMPORT const SSL_METHOD *SSLv3_method(void); /* SSLv3 */
+SSL2_IMPORT const SSL_METHOD *SSLv3_server_method(void); /* SSLv3 */
+SSL2_IMPORT const SSL_METHOD *SSLv3_client_method(void); /* SSLv3 */
 # endif
 
-IMPORT_C const SSL_METHOD *SSLv23_method(void); /* Negotiate highest available SSL/TLS
+SSL2_IMPORT const SSL_METHOD *SSLv23_method(void); /* Negotiate highest available SSL/TLS
                                         * version */
-IMPORT_C const SSL_METHOD *SSLv23_server_method(void); /* Negotiate highest available
+SSL2_IMPORT const SSL_METHOD *SSLv23_server_method(void); /* Negotiate highest available
                                                * SSL/TLS version */
-IMPORT_C const SSL_METHOD *SSLv23_client_method(void); /* Negotiate highest available
+SSL2_IMPORT const SSL_METHOD *SSLv23_client_method(void); /* Negotiate highest available
                                                * SSL/TLS version */
 
-IMPORT_C const SSL_METHOD *TLSv1_method(void); /* TLSv1.0 */
-IMPORT_C const SSL_METHOD *TLSv1_server_method(void); /* TLSv1.0 */
-IMPORT_C const SSL_METHOD *TLSv1_client_method(void); /* TLSv1.0 */
+SSL2_IMPORT const SSL_METHOD *TLSv1_method(void); /* TLSv1.0 */
+SSL2_IMPORT const SSL_METHOD *TLSv1_server_method(void); /* TLSv1.0 */
+SSL2_IMPORT const SSL_METHOD *TLSv1_client_method(void); /* TLSv1.0 */
 
-IMPORT_C const SSL_METHOD *TLSv1_1_method(void); /* TLSv1.1 */
-IMPORT_C const SSL_METHOD *TLSv1_1_server_method(void); /* TLSv1.1 */
-IMPORT_C const SSL_METHOD *TLSv1_1_client_method(void); /* TLSv1.1 */
+SSL2_IMPORT const SSL_METHOD *TLSv1_1_method(void); /* TLSv1.1 */
+SSL2_IMPORT const SSL_METHOD *TLSv1_1_server_method(void); /* TLSv1.1 */
+SSL2_IMPORT const SSL_METHOD *TLSv1_1_client_method(void); /* TLSv1.1 */
 
-IMPORT_C const SSL_METHOD *TLSv1_2_method(void); /* TLSv1.2 */
-IMPORT_C const SSL_METHOD *TLSv1_2_server_method(void); /* TLSv1.2 */
-IMPORT_C const SSL_METHOD *TLSv1_2_client_method(void); /* TLSv1.2 */
+SSL2_IMPORT const SSL_METHOD *TLSv1_2_method(void); /* TLSv1.2 */
+SSL2_IMPORT const SSL_METHOD *TLSv1_2_server_method(void); /* TLSv1.2 */
+SSL2_IMPORT const SSL_METHOD *TLSv1_2_client_method(void); /* TLSv1.2 */
 
-IMPORT_C const SSL_METHOD *DTLSv1_method(void); /* DTLSv1.0 */
-IMPORT_C const SSL_METHOD *DTLSv1_server_method(void); /* DTLSv1.0 */
-IMPORT_C const SSL_METHOD *DTLSv1_client_method(void); /* DTLSv1.0 */
+SSL2_IMPORT const SSL_METHOD *DTLSv1_method(void); /* DTLSv1.0 */
+SSL2_IMPORT const SSL_METHOD *DTLSv1_server_method(void); /* DTLSv1.0 */
+SSL2_IMPORT const SSL_METHOD *DTLSv1_client_method(void); /* DTLSv1.0 */
 
-IMPORT_C const SSL_METHOD *DTLSv1_2_method(void); /* DTLSv1.2 */
-IMPORT_C const SSL_METHOD *DTLSv1_2_server_method(void); /* DTLSv1.2 */
-IMPORT_C const SSL_METHOD *DTLSv1_2_client_method(void); /* DTLSv1.2 */
+SSL2_IMPORT const SSL_METHOD *DTLSv1_2_method(void); /* DTLSv1.2 */
+SSL2_IMPORT const SSL_METHOD *DTLSv1_2_server_method(void); /* DTLSv1.2 */
+SSL2_IMPORT const SSL_METHOD *DTLSv1_2_client_method(void); /* DTLSv1.2 */
 
-IMPORT_C const SSL_METHOD *DTLS_method(void); /* DTLS 1.0 and 1.2 */
-IMPORT_C const SSL_METHOD *DTLS_server_method(void); /* DTLS 1.0 and 1.2 */
-IMPORT_C const SSL_METHOD *DTLS_client_method(void); /* DTLS 1.0 and 1.2 */
+SSL2_IMPORT const SSL_METHOD *DTLS_method(void); /* DTLS 1.0 and 1.2 */
+SSL2_IMPORT const SSL_METHOD *DTLS_server_method(void); /* DTLS 1.0 and 1.2 */
+SSL2_IMPORT const SSL_METHOD *DTLS_client_method(void); /* DTLS 1.0 and 1.2 */
 
-IMPORT_C STACK_OF(SSL_CIPHER) *SSL_get_ciphers(const SSL *s);
+SSL2_IMPORT STACK_OF(SSL_CIPHER) *SSL_get_ciphers(const SSL *s);
 
-IMPORT_C int SSL_do_handshake(SSL *s);
-IMPORT_C int SSL_renegotiate(SSL *s);
-IMPORT_C int SSL_renegotiate_abbreviated(SSL *s);
-IMPORT_C int SSL_renegotiate_pending(SSL *s);
-IMPORT_C int SSL_shutdown(SSL *s);
+SSL2_IMPORT int SSL_do_handshake(SSL *s);
+SSL2_IMPORT int SSL_renegotiate(SSL *s);
+SSL2_IMPORT int SSL_renegotiate_abbreviated(SSL *s);
+SSL2_IMPORT int SSL_renegotiate_pending(SSL *s);
+SSL2_IMPORT int SSL_shutdown(SSL *s);
 
-IMPORT_C const SSL_METHOD *SSL_CTX_get_ssl_method(SSL_CTX *ctx);
-IMPORT_C const SSL_METHOD *SSL_get_ssl_method(SSL *s);
-IMPORT_C int SSL_set_ssl_method(SSL *s, const SSL_METHOD *method);
-IMPORT_C const char *SSL_alert_type_string_long(int value);
-IMPORT_C const char *SSL_alert_type_string(int value);
-IMPORT_C const char *SSL_alert_desc_string_long(int value);
-IMPORT_C const char *SSL_alert_desc_string(int value);
+SSL2_IMPORT const SSL_METHOD *SSL_CTX_get_ssl_method(SSL_CTX *ctx);
+SSL2_IMPORT const SSL_METHOD *SSL_get_ssl_method(SSL *s);
+SSL2_IMPORT int SSL_set_ssl_method(SSL *s, const SSL_METHOD *method);
+SSL2_IMPORT const char *SSL_alert_type_string_long(int value);
+SSL2_IMPORT const char *SSL_alert_type_string(int value);
+SSL2_IMPORT const char *SSL_alert_desc_string_long(int value);
+SSL2_IMPORT const char *SSL_alert_desc_string(int value);
 
-IMPORT_C void SSL_set_client_CA_list(SSL *s, STACK_OF(X509_NAME) *name_list);
-IMPORT_C void SSL_CTX_set_client_CA_list(SSL_CTX *ctx, STACK_OF(X509_NAME) *name_list);
-IMPORT_C STACK_OF(X509_NAME) *SSL_get_client_CA_list(const SSL *s);
-IMPORT_C STACK_OF(X509_NAME) *SSL_CTX_get_client_CA_list(const SSL_CTX *s);
-IMPORT_C int SSL_add_client_CA(SSL *ssl, X509 *x);
-IMPORT_C int SSL_CTX_add_client_CA(SSL_CTX *ctx, X509 *x);
+SSL2_IMPORT void SSL_set_client_CA_list(SSL *s, STACK_OF(X509_NAME) *name_list);
+SSL2_IMPORT void SSL_CTX_set_client_CA_list(SSL_CTX *ctx, STACK_OF(X509_NAME) *name_list);
+SSL2_IMPORT STACK_OF(X509_NAME) *SSL_get_client_CA_list(const SSL *s);
+SSL2_IMPORT STACK_OF(X509_NAME) *SSL_CTX_get_client_CA_list(const SSL_CTX *s);
+SSL2_IMPORT int SSL_add_client_CA(SSL *ssl, X509 *x);
+SSL2_IMPORT int SSL_CTX_add_client_CA(SSL_CTX *ctx, X509 *x);
 
-IMPORT_C void SSL_set_connect_state(SSL *s);
-IMPORT_C void SSL_set_accept_state(SSL *s);
+SSL2_IMPORT void SSL_set_connect_state(SSL *s);
+SSL2_IMPORT void SSL_set_accept_state(SSL *s);
 
-IMPORT_C long SSL_get_default_timeout(const SSL *s);
+SSL2_IMPORT long SSL_get_default_timeout(const SSL *s);
 
-IMPORT_C int SSL_library_init(void);
+SSL2_IMPORT int SSL_library_init(void);
 
-IMPORT_C char *SSL_CIPHER_description(const SSL_CIPHER *, char *buf, int size);
-IMPORT_C STACK_OF(X509_NAME) *SSL_dup_CA_list(STACK_OF(X509_NAME) *sk);
+SSL2_IMPORT char *SSL_CIPHER_description(const SSL_CIPHER *, char *buf, int size);
+SSL2_IMPORT STACK_OF(X509_NAME) *SSL_dup_CA_list(STACK_OF(X509_NAME) *sk);
 
-IMPORT_C SSL *SSL_dup(SSL *ssl);
+SSL2_IMPORT SSL *SSL_dup(SSL *ssl);
 
-IMPORT_C X509 *SSL_get_certificate(const SSL *ssl);
+SSL2_IMPORT X509 *SSL_get_certificate(const SSL *ssl);
 /*
  * EVP_PKEY
  */ struct evp_pkey_st *SSL_get_privatekey(const SSL *ssl);
 
-IMPORT_C X509 *SSL_CTX_get0_certificate(const SSL_CTX *ctx);
-IMPORT_C EVP_PKEY *SSL_CTX_get0_privatekey(const SSL_CTX *ctx);
+SSL2_IMPORT X509 *SSL_CTX_get0_certificate(const SSL_CTX *ctx);
+SSL2_IMPORT EVP_PKEY *SSL_CTX_get0_privatekey(const SSL_CTX *ctx);
 
-IMPORT_C void SSL_CTX_set_quiet_shutdown(SSL_CTX *ctx, int mode);
-IMPORT_C int SSL_CTX_get_quiet_shutdown(const SSL_CTX *ctx);
-IMPORT_C void SSL_set_quiet_shutdown(SSL *ssl, int mode);
-IMPORT_C int SSL_get_quiet_shutdown(const SSL *ssl);
-IMPORT_C void SSL_set_shutdown(SSL *ssl, int mode);
-IMPORT_C int SSL_get_shutdown(const SSL *ssl);
-IMPORT_C int SSL_version(const SSL *ssl);
-IMPORT_C int SSL_CTX_set_default_verify_paths(SSL_CTX *ctx);
-IMPORT_C int SSL_CTX_load_verify_locations(SSL_CTX *ctx, const char *CAfile,
+SSL2_IMPORT void SSL_CTX_set_quiet_shutdown(SSL_CTX *ctx, int mode);
+SSL2_IMPORT int SSL_CTX_get_quiet_shutdown(const SSL_CTX *ctx);
+SSL2_IMPORT void SSL_set_quiet_shutdown(SSL *ssl, int mode);
+SSL2_IMPORT int SSL_get_quiet_shutdown(const SSL *ssl);
+SSL2_IMPORT void SSL_set_shutdown(SSL *ssl, int mode);
+SSL2_IMPORT int SSL_get_shutdown(const SSL *ssl);
+SSL2_IMPORT int SSL_version(const SSL *ssl);
+SSL2_IMPORT int SSL_CTX_set_default_verify_paths(SSL_CTX *ctx);
+SSL2_IMPORT int SSL_CTX_load_verify_locations(SSL_CTX *ctx, const char *CAfile,
                                   const char *CApath);
 # define SSL_get0_session SSL_get_session/* just peek at pointer */
-IMPORT_C SSL_SESSION *SSL_get_session(const SSL *ssl);
-IMPORT_C SSL_SESSION *SSL_get1_session(SSL *ssl); /* obtain a reference count */
-IMPORT_C SSL_CTX *SSL_get_SSL_CTX(const SSL *ssl);
-IMPORT_C SSL_CTX *SSL_set_SSL_CTX(SSL *ssl, SSL_CTX *ctx);
-IMPORT_C void SSL_set_info_callback(SSL *ssl,
+SSL2_IMPORT SSL_SESSION *SSL_get_session(const SSL *ssl);
+SSL2_IMPORT SSL_SESSION *SSL_get1_session(SSL *ssl); /* obtain a reference count */
+SSL2_IMPORT SSL_CTX *SSL_get_SSL_CTX(const SSL *ssl);
+SSL2_IMPORT SSL_CTX *SSL_set_SSL_CTX(SSL *ssl, SSL_CTX *ctx);
+SSL2_IMPORT void SSL_set_info_callback(SSL *ssl,
                            void (*cb) (const SSL *ssl, int type, int val));
-void (*SSL_get_info_callback(const SSL *ssl)) (const SSL *ssl, int type,
+SSL2_IMPORT void (*SSL_get_info_callback(const SSL *ssl)) (const SSL *ssl, int type,
                                                int val);
-IMPORT_C int SSL_state(const SSL *ssl);
-IMPORT_C void SSL_set_state(SSL *ssl, int state);
+SSL2_IMPORT int SSL_state(const SSL *ssl);
+SSL2_IMPORT void SSL_set_state(SSL *ssl, int state);
 
-IMPORT_C void SSL_set_verify_result(SSL *ssl, long v);
-IMPORT_C long SSL_get_verify_result(const SSL *ssl);
+SSL2_IMPORT void SSL_set_verify_result(SSL *ssl, long v);
+SSL2_IMPORT long SSL_get_verify_result(const SSL *ssl);
 
-IMPORT_C int SSL_set_ex_data(SSL *ssl, int idx, void *data);
-IMPORT_C void *SSL_get_ex_data(const SSL *ssl, int idx);
-IMPORT_C int SSL_get_ex_new_index(long argl, void *argp, CRYPTO_EX_new *new_func,
+SSL2_IMPORT int SSL_set_ex_data(SSL *ssl, int idx, void *data);
+SSL2_IMPORT void *SSL_get_ex_data(const SSL *ssl, int idx);
+SSL2_IMPORT int SSL_get_ex_new_index(long argl, void *argp, CRYPTO_EX_new *new_func,
                          CRYPTO_EX_dup *dup_func, CRYPTO_EX_free *free_func);
 
-IMPORT_C int SSL_SESSION_set_ex_data(SSL_SESSION *ss, int idx, void *data);
-IMPORT_C void *SSL_SESSION_get_ex_data(const SSL_SESSION *ss, int idx);
-IMPORT_C int SSL_SESSION_get_ex_new_index(long argl, void *argp,
+SSL2_IMPORT int SSL_SESSION_set_ex_data(SSL_SESSION *ss, int idx, void *data);
+SSL2_IMPORT void *SSL_SESSION_get_ex_data(const SSL_SESSION *ss, int idx);
+SSL2_IMPORT int SSL_SESSION_get_ex_new_index(long argl, void *argp,
                                  CRYPTO_EX_new *new_func,
                                  CRYPTO_EX_dup *dup_func,
                                  CRYPTO_EX_free *free_func);
 
-IMPORT_C int SSL_CTX_set_ex_data(SSL_CTX *ssl, int idx, void *data);
-IMPORT_C void *SSL_CTX_get_ex_data(const SSL_CTX *ssl, int idx);
-IMPORT_C int SSL_CTX_get_ex_new_index(long argl, void *argp, CRYPTO_EX_new *new_func,
+SSL2_IMPORT int SSL_CTX_set_ex_data(SSL_CTX *ssl, int idx, void *data);
+SSL2_IMPORT void *SSL_CTX_get_ex_data(const SSL_CTX *ssl, int idx);
+SSL2_IMPORT int SSL_CTX_get_ex_new_index(long argl, void *argp, CRYPTO_EX_new *new_func,
                              CRYPTO_EX_dup *dup_func,
                              CRYPTO_EX_free *free_func);
 
-IMPORT_C int SSL_get_ex_data_X509_STORE_CTX_idx(void);
+SSL2_IMPORT int SSL_get_ex_data_X509_STORE_CTX_idx(void);
 
 # define SSL_CTX_sess_set_cache_size(ctx,t) \
         SSL_CTX_ctrl(ctx,SSL_CTRL_SET_SESS_CACHE_SIZE,t,NULL)
@@ -2507,73 +2507,73 @@ IMPORT_C int SSL_get_ex_data_X509_STORE_CTX_idx(void);
 
      /* NB: the keylength is only applicable when is_export is true */
 # ifndef OPENSSL_NO_RSA
-IMPORT_C void SSL_CTX_set_tmp_rsa_callback(SSL_CTX *ctx,
+SSL2_IMPORT void SSL_CTX_set_tmp_rsa_callback(SSL_CTX *ctx,
                                   RSA *(*cb) (SSL *ssl, int is_export,
                                               int keylength));
 
-IMPORT_C void SSL_set_tmp_rsa_callback(SSL *ssl,
+SSL2_IMPORT void SSL_set_tmp_rsa_callback(SSL *ssl,
                               RSA *(*cb) (SSL *ssl, int is_export,
                                           int keylength));
 # endif
 # ifndef OPENSSL_NO_DH
-IMPORT_C void SSL_CTX_set_tmp_dh_callback(SSL_CTX *ctx,
+SSL2_IMPORT void SSL_CTX_set_tmp_dh_callback(SSL_CTX *ctx,
                                  DH *(*dh) (SSL *ssl, int is_export,
                                             int keylength));
-IMPORT_C void SSL_set_tmp_dh_callback(SSL *ssl,
+SSL2_IMPORT void SSL_set_tmp_dh_callback(SSL *ssl,
                              DH *(*dh) (SSL *ssl, int is_export,
                                         int keylength));
 # endif
 # ifndef OPENSSL_NO_ECDH
-IMPORT_C void SSL_CTX_set_tmp_ecdh_callback(SSL_CTX *ctx,
+SSL2_IMPORT void SSL_CTX_set_tmp_ecdh_callback(SSL_CTX *ctx,
                                    EC_KEY *(*ecdh) (SSL *ssl, int is_export,
                                                     int keylength));
-IMPORT_C void SSL_set_tmp_ecdh_callback(SSL *ssl,
+SSL2_IMPORT void SSL_set_tmp_ecdh_callback(SSL *ssl,
                                EC_KEY *(*ecdh) (SSL *ssl, int is_export,
                                                 int keylength));
 # endif
 
-IMPORT_C const COMP_METHOD *SSL_get_current_compression(SSL *s);
-IMPORT_C const COMP_METHOD *SSL_get_current_expansion(SSL *s);
-IMPORT_C const char *SSL_COMP_get_name(const COMP_METHOD *comp);
-IMPORT_C STACK_OF(SSL_COMP) *SSL_COMP_get_compression_methods(void);
-IMPORT_C STACK_OF(SSL_COMP) *SSL_COMP_set0_compression_methods(STACK_OF(SSL_COMP)
+SSL2_IMPORT const COMP_METHOD *SSL_get_current_compression(SSL *s);
+SSL2_IMPORT const COMP_METHOD *SSL_get_current_expansion(SSL *s);
+SSL2_IMPORT const char *SSL_COMP_get_name(const COMP_METHOD *comp);
+SSL2_IMPORT STACK_OF(SSL_COMP) *SSL_COMP_get_compression_methods(void);
+SSL2_IMPORT STACK_OF(SSL_COMP) *SSL_COMP_set0_compression_methods(STACK_OF(SSL_COMP)
                                                       *meths);
-IMPORT_C void SSL_COMP_free_compression_methods(void);
-IMPORT_C int SSL_COMP_add_compression_method(int id, COMP_METHOD *cm);
+SSL2_IMPORT void SSL_COMP_free_compression_methods(void);
+SSL2_IMPORT int SSL_COMP_add_compression_method(int id, COMP_METHOD *cm);
 
-IMPORT_C const SSL_CIPHER *SSL_CIPHER_find(SSL *ssl, const unsigned char *ptr);
+SSL2_IMPORT const SSL_CIPHER *SSL_CIPHER_find(SSL *ssl, const unsigned char *ptr);
 
 /* TLS extensions functions */
-IMPORT_C int SSL_set_session_ticket_ext(SSL *s, void *ext_data, int ext_len);
+SSL2_IMPORT int SSL_set_session_ticket_ext(SSL *s, void *ext_data, int ext_len);
 
-IMPORT_C int SSL_set_session_ticket_ext_cb(SSL *s, tls_session_ticket_ext_cb_fn cb,
+SSL2_IMPORT int SSL_set_session_ticket_ext_cb(SSL *s, tls_session_ticket_ext_cb_fn cb,
                                   void *arg);
 
 /* Pre-shared secret session resumption functions */
-IMPORT_C int SSL_set_session_secret_cb(SSL *s,
+SSL2_IMPORT int SSL_set_session_secret_cb(SSL *s,
                               tls_session_secret_cb_fn tls_session_secret_cb,
                               void *arg);
 
-IMPORT_C void SSL_set_debug(SSL *s, int debug);
-IMPORT_C int SSL_cache_hit(SSL *s);
-IMPORT_C int SSL_is_server(SSL *s);
+SSL2_IMPORT void SSL_set_debug(SSL *s, int debug);
+SSL2_IMPORT int SSL_cache_hit(SSL *s);
+SSL2_IMPORT int SSL_is_server(SSL *s);
 
-IMPORT_C SSL_CONF_CTX *SSL_CONF_CTX_new(void);
-IMPORT_C int SSL_CONF_CTX_finish(SSL_CONF_CTX *cctx);
-IMPORT_C void SSL_CONF_CTX_free(SSL_CONF_CTX *cctx);
-IMPORT_C unsigned int SSL_CONF_CTX_set_flags(SSL_CONF_CTX *cctx, unsigned int flags);
-IMPORT_C unsigned int SSL_CONF_CTX_clear_flags(SSL_CONF_CTX *cctx, unsigned int flags);
-IMPORT_C int SSL_CONF_CTX_set1_prefix(SSL_CONF_CTX *cctx, const char *pre);
+SSL2_IMPORT SSL_CONF_CTX *SSL_CONF_CTX_new(void);
+SSL2_IMPORT int SSL_CONF_CTX_finish(SSL_CONF_CTX *cctx);
+SSL2_IMPORT void SSL_CONF_CTX_free(SSL_CONF_CTX *cctx);
+SSL2_IMPORT unsigned int SSL_CONF_CTX_set_flags(SSL_CONF_CTX *cctx, unsigned int flags);
+SSL2_IMPORT unsigned int SSL_CONF_CTX_clear_flags(SSL_CONF_CTX *cctx, unsigned int flags);
+SSL2_IMPORT int SSL_CONF_CTX_set1_prefix(SSL_CONF_CTX *cctx, const char *pre);
 
-IMPORT_C void SSL_CONF_CTX_set_ssl(SSL_CONF_CTX *cctx, SSL *ssl);
-IMPORT_C void SSL_CONF_CTX_set_ssl_ctx(SSL_CONF_CTX *cctx, SSL_CTX *ctx);
+SSL2_IMPORT void SSL_CONF_CTX_set_ssl(SSL_CONF_CTX *cctx, SSL *ssl);
+SSL2_IMPORT void SSL_CONF_CTX_set_ssl_ctx(SSL_CONF_CTX *cctx, SSL_CTX *ctx);
 
-IMPORT_C int SSL_CONF_cmd(SSL_CONF_CTX *cctx, const char *cmd, const char *value);
-IMPORT_C int SSL_CONF_cmd_argv(SSL_CONF_CTX *cctx, int *pargc, char ***pargv);
-IMPORT_C int SSL_CONF_cmd_value_type(SSL_CONF_CTX *cctx, const char *cmd);
+SSL2_IMPORT int SSL_CONF_cmd(SSL_CONF_CTX *cctx, const char *cmd, const char *value);
+SSL2_IMPORT int SSL_CONF_cmd_argv(SSL_CONF_CTX *cctx, int *pargc, char ***pargv);
+SSL2_IMPORT int SSL_CONF_cmd_value_type(SSL_CONF_CTX *cctx, const char *cmd);
 
 # ifndef OPENSSL_NO_SSL_TRACE
-IMPORT_C void SSL_trace(int write_p, int version, int content_type,
+SSL2_IMPORT void SSL_trace(int write_p, int version, int content_type,
                const void *buf, size_t len, SSL *ssl, void *arg);
 const char *SSL_CIPHER_standard_name(const SSL_CIPHER *c);
 # endif
@@ -2587,7 +2587,7 @@ const struct openssl_ssl_test_functions *SSL_test_functions(void);
  * The following lines are auto generated by the script mkerr.pl. Any changes
  * made after this point may be overwritten when the script is next run.
  */
-IMPORT_C void ERR_load_SSL_strings(void);
+SSL2_IMPORT void ERR_load_SSL_strings(void);
 
 /* Error codes for the SSL functions. */
 

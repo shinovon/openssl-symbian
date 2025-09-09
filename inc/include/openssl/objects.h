@@ -990,34 +990,34 @@ typedef struct obj_name_st {
 
 # define         OBJ_create_and_add_object(a,b,c) OBJ_create(a,b,c)
 
-IMPORT_C int OBJ_NAME_init(void);
-IMPORT_C int OBJ_NAME_new_index(unsigned long (*hash_func) (const char *),
+SSL2_IMPORT int OBJ_NAME_init(void);
+SSL2_IMPORT int OBJ_NAME_new_index(unsigned long (*hash_func) (const char *),
                        int (*cmp_func) (const char *, const char *),
                        void (*free_func) (const char *, int, const char *));
-IMPORT_C const char *OBJ_NAME_get(const char *name, int type);
-IMPORT_C int OBJ_NAME_add(const char *name, int type, const char *data);
-IMPORT_C int OBJ_NAME_remove(const char *name, int type);
-IMPORT_C void OBJ_NAME_cleanup(int type); /* -1 for everything */
-IMPORT_C void OBJ_NAME_do_all(int type, void (*fn) (const OBJ_NAME *, void *arg),
+SSL2_IMPORT const char *OBJ_NAME_get(const char *name, int type);
+SSL2_IMPORT int OBJ_NAME_add(const char *name, int type, const char *data);
+SSL2_IMPORT int OBJ_NAME_remove(const char *name, int type);
+SSL2_IMPORT void OBJ_NAME_cleanup(int type); /* -1 for everything */
+SSL2_IMPORT void OBJ_NAME_do_all(int type, void (*fn) (const OBJ_NAME *, void *arg),
                      void *arg);
-IMPORT_C void OBJ_NAME_do_all_sorted(int type,
+SSL2_IMPORT void OBJ_NAME_do_all_sorted(int type,
                             void (*fn) (const OBJ_NAME *, void *arg),
                             void *arg);
 
-IMPORT_C ASN1_OBJECT *OBJ_dup(const ASN1_OBJECT *o);
-IMPORT_C ASN1_OBJECT *OBJ_nid2obj(int n);
-IMPORT_C const char *OBJ_nid2ln(int n);
-IMPORT_C const char *OBJ_nid2sn(int n);
-IMPORT_C int OBJ_obj2nid(const ASN1_OBJECT *o);
-IMPORT_C ASN1_OBJECT *OBJ_txt2obj(const char *s, int no_name);
-IMPORT_C int OBJ_obj2txt(char *buf, int buf_len, const ASN1_OBJECT *a, int no_name);
-IMPORT_C int OBJ_txt2nid(const char *s);
-IMPORT_C int OBJ_ln2nid(const char *s);
-IMPORT_C int OBJ_sn2nid(const char *s);
-IMPORT_C int OBJ_cmp(const ASN1_OBJECT *a, const ASN1_OBJECT *b);
-IMPORT_C const void *OBJ_bsearch_(const void *key, const void *base, int num, int size,
+SSL2_IMPORT ASN1_OBJECT *OBJ_dup(const ASN1_OBJECT *o);
+SSL2_IMPORT ASN1_OBJECT *OBJ_nid2obj(int n);
+SSL2_IMPORT const char *OBJ_nid2ln(int n);
+SSL2_IMPORT const char *OBJ_nid2sn(int n);
+SSL2_IMPORT int OBJ_obj2nid(const ASN1_OBJECT *o);
+SSL2_IMPORT ASN1_OBJECT *OBJ_txt2obj(const char *s, int no_name);
+SSL2_IMPORT int OBJ_obj2txt(char *buf, int buf_len, const ASN1_OBJECT *a, int no_name);
+SSL2_IMPORT int OBJ_txt2nid(const char *s);
+SSL2_IMPORT int OBJ_ln2nid(const char *s);
+SSL2_IMPORT int OBJ_sn2nid(const char *s);
+SSL2_IMPORT int OBJ_cmp(const ASN1_OBJECT *a, const ASN1_OBJECT *b);
+SSL2_IMPORT const void *OBJ_bsearch_(const void *key, const void *base, int num, int size,
                          int (*cmp) (const void *, const void *));
-IMPORT_C const void *OBJ_bsearch_ex_(const void *key, const void *base, int num,
+SSL2_IMPORT const void *OBJ_bsearch_ex_(const void *key, const void *base, int num,
                             int size,
                             int (*cmp) (const void *, const void *),
                             int flags);
@@ -1103,7 +1103,7 @@ IMPORT_C const void *OBJ_bsearch_ex_(const void *key, const void *base, int num,
 
 int OBJ_new_nid(int num);
 int OBJ_add_object(const ASN1_OBJECT *obj);
-IMPORT_C int OBJ_create(const char *oid, const char *sn, const char *ln);
+SSL2_IMPORT int OBJ_create(const char *oid, const char *sn, const char *ln);
 void OBJ_cleanup(void);
 int OBJ_create_objects(BIO *in);
 

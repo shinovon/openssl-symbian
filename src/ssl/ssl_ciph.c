@@ -1673,7 +1673,7 @@ STACK_OF(SSL_CIPHER) *ssl_create_cipher_list(const SSL_METHOD *ssl_method, STACK
     return (cipherstack);
 }
 
-EXPORT_C char *SSL_CIPHER_description(const SSL_CIPHER *cipher, char *buf, int len)
+SSL2_EXPORT char *SSL_CIPHER_description(const SSL_CIPHER *cipher, char *buf, int len)
 {
     int is_export, pkl, kl;
     const char *ver, *exp_str;
@@ -1880,7 +1880,7 @@ EXPORT_C char *SSL_CIPHER_description(const SSL_CIPHER *cipher, char *buf, int l
     return (buf);
 }
 
-EXPORT_C char *SSL_CIPHER_get_version(const SSL_CIPHER *c)
+SSL2_EXPORT char *SSL_CIPHER_get_version(const SSL_CIPHER *c)
 {
     int i;
 
@@ -1896,7 +1896,7 @@ EXPORT_C char *SSL_CIPHER_get_version(const SSL_CIPHER *c)
 }
 
 /* return the actual cipher being used */
-EXPORT_C const char *SSL_CIPHER_get_name(const SSL_CIPHER *c)
+SSL2_EXPORT const char *SSL_CIPHER_get_name(const SSL_CIPHER *c)
 {
     if (c != NULL)
         return (c->name);
@@ -1904,7 +1904,7 @@ EXPORT_C const char *SSL_CIPHER_get_name(const SSL_CIPHER *c)
 }
 
 /* number of bits for symmetric cipher */
-EXPORT_C int SSL_CIPHER_get_bits(const SSL_CIPHER *c, int *alg_bits)
+SSL2_EXPORT int SSL_CIPHER_get_bits(const SSL_CIPHER *c, int *alg_bits)
 {
     int ret = 0;
 
@@ -1938,7 +1938,7 @@ SSL_COMP *ssl3_comp_find(STACK_OF(SSL_COMP) *sk, int n)
 }
 
 #ifdef OPENSSL_NO_COMP
-EXPORT_C STACK_OF(SSL_COMP) *SSL_COMP_get_compression_methods(void)
+SSL2_EXPORT STACK_OF(SSL_COMP) *SSL_COMP_get_compression_methods(void)
 {
     return NULL;
 }
@@ -1953,17 +1953,17 @@ void SSL_COMP_free_compression_methods(void)
 {
 }
 
-EXPORT_C int SSL_COMP_add_compression_method(int id, COMP_METHOD *cm)
+SSL2_EXPORT int SSL_COMP_add_compression_method(int id, COMP_METHOD *cm)
 {
     return 1;
 }
 
-EXPORT_C const char *SSL_COMP_get_name(const COMP_METHOD *comp)
+SSL2_EXPORT const char *SSL_COMP_get_name(const COMP_METHOD *comp)
 {
     return NULL;
 }
 #else
-EXPORT_C STACK_OF(SSL_COMP) *SSL_COMP_get_compression_methods(void)
+SSL2_EXPORT STACK_OF(SSL_COMP) *SSL_COMP_get_compression_methods(void)
 {
     load_builtin_compressions();
     return (ssl_comp_methods);
@@ -1989,7 +1989,7 @@ void SSL_COMP_free_compression_methods(void)
     sk_SSL_COMP_pop_free(old_meths, cmeth_free);
 }
 
-EXPORT_C int SSL_COMP_add_compression_method(int id, COMP_METHOD *cm)
+SSL2_EXPORT int SSL_COMP_add_compression_method(int id, COMP_METHOD *cm)
 {
     SSL_COMP *comp;
 
@@ -2039,7 +2039,7 @@ EXPORT_C int SSL_COMP_add_compression_method(int id, COMP_METHOD *cm)
     }
 }
 
-EXPORT_C const char *SSL_COMP_get_name(const COMP_METHOD *comp)
+SSL2_EXPORT const char *SSL_COMP_get_name(const COMP_METHOD *comp)
 {
     if (comp)
         return comp->name;

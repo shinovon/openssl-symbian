@@ -85,7 +85,7 @@
 #include <stdio.h>
 #include "ssl_locl.h"
 
-EXPORT_C const char *SSL_state_string_long(const SSL *s)
+SSL2_EXPORT const char *SSL_state_string_long(const SSL *s)
 {
     const char *str;
 
@@ -461,7 +461,7 @@ EXPORT_C const char *SSL_state_string_long(const SSL *s)
     return (str);
 }
 
-EXPORT_C const char *SSL_rstate_string_long(const SSL *s)
+SSL2_EXPORT const char *SSL_rstate_string_long(const SSL *s)
 {
     const char *str;
 
@@ -482,7 +482,7 @@ EXPORT_C const char *SSL_rstate_string_long(const SSL *s)
     return (str);
 }
 
-EXPORT_C const char *SSL_state_string(const SSL *s)
+SSL2_EXPORT const char *SSL_state_string(const SSL *s)
 {
     const char *str;
 
@@ -830,7 +830,7 @@ EXPORT_C const char *SSL_state_string(const SSL *s)
     return (str);
 }
 
-EXPORT_C const char *SSL_alert_type_string_long(int value)
+SSL2_EXPORT const char *SSL_alert_type_string_long(int value)
 {
     value >>= 8;
     if (value == SSL3_AL_WARNING)
@@ -841,7 +841,7 @@ EXPORT_C const char *SSL_alert_type_string_long(int value)
         return ("unknown");
 }
 
-EXPORT_C const char *SSL_alert_type_string(int value)
+SSL2_EXPORT const char *SSL_alert_type_string(int value)
 {
     value >>= 8;
     if (value == SSL3_AL_WARNING)
@@ -852,7 +852,7 @@ EXPORT_C const char *SSL_alert_type_string(int value)
         return ("U");
 }
 
-EXPORT_C const char *SSL_alert_desc_string(int value)
+SSL2_EXPORT const char *SSL_alert_desc_string(int value)
 {
     const char *str;
 
@@ -954,7 +954,7 @@ EXPORT_C const char *SSL_alert_desc_string(int value)
     return (str);
 }
 
-EXPORT_C const char *SSL_alert_desc_string_long(int value)
+SSL2_EXPORT const char *SSL_alert_desc_string_long(int value)
 {
     const char *str;
 
@@ -1056,7 +1056,7 @@ EXPORT_C const char *SSL_alert_desc_string_long(int value)
     return (str);
 }
 
-EXPORT_C const char *SSL_rstate_string(const SSL *s)
+SSL2_EXPORT const char *SSL_rstate_string(const SSL *s)
 {
     const char *str;
 

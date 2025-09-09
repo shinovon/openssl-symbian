@@ -60,7 +60,7 @@
 #include <openssl/err.h>
 #include <openssl/ssl.h>
 
-EXPORT_C void SSL_load_error_strings(void)
+SSL2_EXPORT void SSL_load_error_strings(void)
 {
 #ifndef OPENSSL_NO_ERR
     ERR_load_crypto_strings();

@@ -106,22 +106,22 @@ typedef struct bf_key_st {
 # ifdef OPENSSL_FIPS
 void private_BF_set_key(BF_KEY *key, int len, const unsigned char *data);
 # endif
-void BF_set_key(BF_KEY *key, int len, const unsigned char *data);
+SSL2_IMPORT void BF_set_key(BF_KEY *key, int len, const unsigned char *data);
 
-void BF_encrypt(BF_LONG *data, const BF_KEY *key);
-void BF_decrypt(BF_LONG *data, const BF_KEY *key);
+SSL2_IMPORT void BF_encrypt(BF_LONG *data, const BF_KEY *key);
+SSL2_IMPORT void BF_decrypt(BF_LONG *data, const BF_KEY *key);
 
-void BF_ecb_encrypt(const unsigned char *in, unsigned char *out,
+SSL2_IMPORT void BF_ecb_encrypt(const unsigned char *in, unsigned char *out,
                     const BF_KEY *key, int enc);
-void BF_cbc_encrypt(const unsigned char *in, unsigned char *out, long length,
+SSL2_IMPORT void BF_cbc_encrypt(const unsigned char *in, unsigned char *out, long length,
                     const BF_KEY *schedule, unsigned char *ivec, int enc);
-void BF_cfb64_encrypt(const unsigned char *in, unsigned char *out,
+SSL2_IMPORT void BF_cfb64_encrypt(const unsigned char *in, unsigned char *out,
                       long length, const BF_KEY *schedule,
                       unsigned char *ivec, int *num, int enc);
-void BF_ofb64_encrypt(const unsigned char *in, unsigned char *out,
+SSL2_IMPORT void BF_ofb64_encrypt(const unsigned char *in, unsigned char *out,
                       long length, const BF_KEY *schedule,
                       unsigned char *ivec, int *num);
-const char *BF_options(void);
+SSL2_IMPORT const char *BF_options(void);
 
 #ifdef  __cplusplus
 }

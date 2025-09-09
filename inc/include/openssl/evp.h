@@ -513,37 +513,37 @@ typedef int (EVP_PBE_KEYGEN) (EVP_CIPHER_CTX *ctx, const char *pass,
 # define EVP_get_cipherbynid(a) EVP_get_cipherbyname(OBJ_nid2sn(a))
 # define EVP_get_cipherbyobj(a) EVP_get_cipherbynid(OBJ_obj2nid(a))
 
-int EVP_MD_type(const EVP_MD *md);
+SSL2_IMPORT int EVP_MD_type(const EVP_MD *md);
 # define EVP_MD_nid(e)                   EVP_MD_type(e)
 # define EVP_MD_name(e)                  OBJ_nid2sn(EVP_MD_nid(e))
-int EVP_MD_pkey_type(const EVP_MD *md);
-int EVP_MD_size(const EVP_MD *md);
-int EVP_MD_block_size(const EVP_MD *md);
-unsigned long EVP_MD_flags(const EVP_MD *md);
+SSL2_IMPORT int EVP_MD_pkey_type(const EVP_MD *md);
+SSL2_IMPORT int EVP_MD_size(const EVP_MD *md);
+SSL2_IMPORT int EVP_MD_block_size(const EVP_MD *md);
+SSL2_IMPORT unsigned long EVP_MD_flags(const EVP_MD *md);
 
-const EVP_MD *EVP_MD_CTX_md(const EVP_MD_CTX *ctx);
+SSL2_IMPORT const EVP_MD *EVP_MD_CTX_md(const EVP_MD_CTX *ctx);
 # define EVP_MD_CTX_size(e)              EVP_MD_size(EVP_MD_CTX_md(e))
 # define EVP_MD_CTX_block_size(e)        EVP_MD_block_size(EVP_MD_CTX_md(e))
 # define EVP_MD_CTX_type(e)              EVP_MD_type(EVP_MD_CTX_md(e))
 
-int EVP_CIPHER_nid(const EVP_CIPHER *cipher);
+SSL2_IMPORT int EVP_CIPHER_nid(const EVP_CIPHER *cipher);
 # define EVP_CIPHER_name(e)              OBJ_nid2sn(EVP_CIPHER_nid(e))
-int EVP_CIPHER_block_size(const EVP_CIPHER *cipher);
-int EVP_CIPHER_key_length(const EVP_CIPHER *cipher);
-int EVP_CIPHER_iv_length(const EVP_CIPHER *cipher);
-unsigned long EVP_CIPHER_flags(const EVP_CIPHER *cipher);
+SSL2_IMPORT int EVP_CIPHER_block_size(const EVP_CIPHER *cipher);
+SSL2_IMPORT int EVP_CIPHER_key_length(const EVP_CIPHER *cipher);
+SSL2_IMPORT int EVP_CIPHER_iv_length(const EVP_CIPHER *cipher);
+SSL2_IMPORT unsigned long EVP_CIPHER_flags(const EVP_CIPHER *cipher);
 # define EVP_CIPHER_mode(e)              (EVP_CIPHER_flags(e) & EVP_CIPH_MODE)
 
-const EVP_CIPHER *EVP_CIPHER_CTX_cipher(const EVP_CIPHER_CTX *ctx);
-int EVP_CIPHER_CTX_nid(const EVP_CIPHER_CTX *ctx);
-int EVP_CIPHER_CTX_block_size(const EVP_CIPHER_CTX *ctx);
-int EVP_CIPHER_CTX_key_length(const EVP_CIPHER_CTX *ctx);
-int EVP_CIPHER_CTX_iv_length(const EVP_CIPHER_CTX *ctx);
-int EVP_CIPHER_CTX_copy(EVP_CIPHER_CTX *out, const EVP_CIPHER_CTX *in);
-void *EVP_CIPHER_CTX_get_app_data(const EVP_CIPHER_CTX *ctx);
-void EVP_CIPHER_CTX_set_app_data(EVP_CIPHER_CTX *ctx, void *data);
+SSL2_IMPORT const EVP_CIPHER *EVP_CIPHER_CTX_cipher(const EVP_CIPHER_CTX *ctx);
+SSL2_IMPORT int EVP_CIPHER_CTX_nid(const EVP_CIPHER_CTX *ctx);
+SSL2_IMPORT int EVP_CIPHER_CTX_block_size(const EVP_CIPHER_CTX *ctx);
+SSL2_IMPORT int EVP_CIPHER_CTX_key_length(const EVP_CIPHER_CTX *ctx);
+SSL2_IMPORT int EVP_CIPHER_CTX_iv_length(const EVP_CIPHER_CTX *ctx);
+SSL2_IMPORT int EVP_CIPHER_CTX_copy(EVP_CIPHER_CTX *out, const EVP_CIPHER_CTX *in);
+SSL2_IMPORT void *EVP_CIPHER_CTX_get_app_data(const EVP_CIPHER_CTX *ctx);
+SSL2_IMPORT void EVP_CIPHER_CTX_set_app_data(EVP_CIPHER_CTX *ctx, void *data);
 # define EVP_CIPHER_CTX_type(c)         EVP_CIPHER_type(EVP_CIPHER_CTX_cipher(c))
-unsigned long EVP_CIPHER_CTX_flags(const EVP_CIPHER_CTX *ctx);
+SSL2_IMPORT unsigned long EVP_CIPHER_CTX_flags(const EVP_CIPHER_CTX *ctx);
 # define EVP_CIPHER_CTX_mode(e)          (EVP_CIPHER_CTX_flags(e) & EVP_CIPH_MODE)
 
 # define EVP_ENCODE_LENGTH(l)    (((l+2)/3*4)+(l/48+1)*2+80)
@@ -571,7 +571,7 @@ void BIO_set_md(BIO *, const EVP_MD *md);
 # define BIO_get_cipher_status(b)        BIO_ctrl(b,BIO_C_GET_CIPHER_STATUS,0,NULL)
 # define BIO_get_cipher_ctx(b,c_pp)      BIO_ctrl(b,BIO_C_GET_CIPHER_CTX,0,(char *)c_pp)
 
-int EVP_Cipher(EVP_CIPHER_CTX *c,
+SSL2_IMPORT int EVP_Cipher(EVP_CIPHER_CTX *c,
                unsigned char *out, const unsigned char *in, unsigned int inl);
 
 # define EVP_add_cipher_alias(n,alias) \
@@ -583,191 +583,191 @@ int EVP_Cipher(EVP_CIPHER_CTX *c,
 # define EVP_delete_digest_alias(alias) \
         OBJ_NAME_remove(alias,OBJ_NAME_TYPE_MD_METH|OBJ_NAME_ALIAS);
 
-void EVP_MD_CTX_init(EVP_MD_CTX *ctx);
-int EVP_MD_CTX_cleanup(EVP_MD_CTX *ctx);
-EVP_MD_CTX *EVP_MD_CTX_create(void);
-void EVP_MD_CTX_destroy(EVP_MD_CTX *ctx);
-int EVP_MD_CTX_copy_ex(EVP_MD_CTX *out, const EVP_MD_CTX *in);
-void EVP_MD_CTX_set_flags(EVP_MD_CTX *ctx, int flags);
-void EVP_MD_CTX_clear_flags(EVP_MD_CTX *ctx, int flags);
-int EVP_MD_CTX_test_flags(const EVP_MD_CTX *ctx, int flags);
-int EVP_DigestInit_ex(EVP_MD_CTX *ctx, const EVP_MD *type, ENGINE *impl);
-int EVP_DigestUpdate(EVP_MD_CTX *ctx, const void *d, size_t cnt);
-int EVP_DigestFinal_ex(EVP_MD_CTX *ctx, unsigned char *md, unsigned int *s);
-int EVP_Digest(const void *data, size_t count,
+SSL2_IMPORT void EVP_MD_CTX_init(EVP_MD_CTX *ctx);
+SSL2_IMPORT int EVP_MD_CTX_cleanup(EVP_MD_CTX *ctx);
+SSL2_IMPORT EVP_MD_CTX *EVP_MD_CTX_create(void);
+SSL2_IMPORT void EVP_MD_CTX_destroy(EVP_MD_CTX *ctx);
+SSL2_IMPORT int EVP_MD_CTX_copy_ex(EVP_MD_CTX *out, const EVP_MD_CTX *in);
+SSL2_IMPORT void EVP_MD_CTX_set_flags(EVP_MD_CTX *ctx, int flags);
+SSL2_IMPORT void EVP_MD_CTX_clear_flags(EVP_MD_CTX *ctx, int flags);
+SSL2_IMPORT int EVP_MD_CTX_test_flags(const EVP_MD_CTX *ctx, int flags);
+SSL2_IMPORT int EVP_DigestInit_ex(EVP_MD_CTX *ctx, const EVP_MD *type, ENGINE *impl);
+SSL2_IMPORT int EVP_DigestUpdate(EVP_MD_CTX *ctx, const void *d, size_t cnt);
+SSL2_IMPORT int EVP_DigestFinal_ex(EVP_MD_CTX *ctx, unsigned char *md, unsigned int *s);
+SSL2_IMPORT int EVP_Digest(const void *data, size_t count,
                unsigned char *md, unsigned int *size, const EVP_MD *type,
                ENGINE *impl);
 
-int EVP_MD_CTX_copy(EVP_MD_CTX *out, const EVP_MD_CTX *in);
-int EVP_DigestInit(EVP_MD_CTX *ctx, const EVP_MD *type);
-int EVP_DigestFinal(EVP_MD_CTX *ctx, unsigned char *md, unsigned int *s);
+SSL2_IMPORT int EVP_MD_CTX_copy(EVP_MD_CTX *out, const EVP_MD_CTX *in);
+SSL2_IMPORT int EVP_DigestInit(EVP_MD_CTX *ctx, const EVP_MD *type);
+SSL2_IMPORT int EVP_DigestFinal(EVP_MD_CTX *ctx, unsigned char *md, unsigned int *s);
 
-int EVP_read_pw_string(char *buf, int length, const char *prompt, int verify);
-int EVP_read_pw_string_min(char *buf, int minlen, int maxlen,
+SSL2_IMPORT int EVP_read_pw_string(char *buf, int length, const char *prompt, int verify);
+SSL2_IMPORT int EVP_read_pw_string_min(char *buf, int minlen, int maxlen,
                            const char *prompt, int verify);
-void EVP_set_pw_prompt(const char *prompt);
-char *EVP_get_pw_prompt(void);
+SSL2_IMPORT void EVP_set_pw_prompt(const char *prompt);
+SSL2_IMPORT char *EVP_get_pw_prompt(void);
 
-int EVP_BytesToKey(const EVP_CIPHER *type, const EVP_MD *md,
+SSL2_IMPORT int EVP_BytesToKey(const EVP_CIPHER *type, const EVP_MD *md,
                    const unsigned char *salt, const unsigned char *data,
                    int datal, int count, unsigned char *key,
                    unsigned char *iv);
 
-void EVP_CIPHER_CTX_set_flags(EVP_CIPHER_CTX *ctx, int flags);
-void EVP_CIPHER_CTX_clear_flags(EVP_CIPHER_CTX *ctx, int flags);
-int EVP_CIPHER_CTX_test_flags(const EVP_CIPHER_CTX *ctx, int flags);
+SSL2_IMPORT void EVP_CIPHER_CTX_set_flags(EVP_CIPHER_CTX *ctx, int flags);
+SSL2_IMPORT void EVP_CIPHER_CTX_clear_flags(EVP_CIPHER_CTX *ctx, int flags);
+SSL2_IMPORT int EVP_CIPHER_CTX_test_flags(const EVP_CIPHER_CTX *ctx, int flags);
 
-int EVP_EncryptInit(EVP_CIPHER_CTX *ctx, const EVP_CIPHER *cipher,
+SSL2_IMPORT int EVP_EncryptInit(EVP_CIPHER_CTX *ctx, const EVP_CIPHER *cipher,
                     const unsigned char *key, const unsigned char *iv);
-int EVP_EncryptInit_ex(EVP_CIPHER_CTX *ctx, const EVP_CIPHER *cipher,
+SSL2_IMPORT int EVP_EncryptInit_ex(EVP_CIPHER_CTX *ctx, const EVP_CIPHER *cipher,
                        ENGINE *impl, const unsigned char *key,
                        const unsigned char *iv);
-int EVP_EncryptUpdate(EVP_CIPHER_CTX *ctx, unsigned char *out, int *outl,
+SSL2_IMPORT int EVP_EncryptUpdate(EVP_CIPHER_CTX *ctx, unsigned char *out, int *outl,
                       const unsigned char *in, int inl);
-int EVP_EncryptFinal_ex(EVP_CIPHER_CTX *ctx, unsigned char *out, int *outl);
-int EVP_EncryptFinal(EVP_CIPHER_CTX *ctx, unsigned char *out, int *outl);
+SSL2_IMPORT int EVP_EncryptFinal_ex(EVP_CIPHER_CTX *ctx, unsigned char *out, int *outl);
+SSL2_IMPORT int EVP_EncryptFinal(EVP_CIPHER_CTX *ctx, unsigned char *out, int *outl);
 
-int EVP_DecryptInit(EVP_CIPHER_CTX *ctx, const EVP_CIPHER *cipher,
+SSL2_IMPORT int EVP_DecryptInit(EVP_CIPHER_CTX *ctx, const EVP_CIPHER *cipher,
                     const unsigned char *key, const unsigned char *iv);
-int EVP_DecryptInit_ex(EVP_CIPHER_CTX *ctx, const EVP_CIPHER *cipher,
+SSL2_IMPORT int EVP_DecryptInit_ex(EVP_CIPHER_CTX *ctx, const EVP_CIPHER *cipher,
                        ENGINE *impl, const unsigned char *key,
                        const unsigned char *iv);
-int EVP_DecryptUpdate(EVP_CIPHER_CTX *ctx, unsigned char *out, int *outl,
+SSL2_IMPORT int EVP_DecryptUpdate(EVP_CIPHER_CTX *ctx, unsigned char *out, int *outl,
                       const unsigned char *in, int inl);
-int EVP_DecryptFinal(EVP_CIPHER_CTX *ctx, unsigned char *outm, int *outl);
-int EVP_DecryptFinal_ex(EVP_CIPHER_CTX *ctx, unsigned char *outm, int *outl);
+SSL2_IMPORT int EVP_DecryptFinal(EVP_CIPHER_CTX *ctx, unsigned char *outm, int *outl);
+SSL2_IMPORT int EVP_DecryptFinal_ex(EVP_CIPHER_CTX *ctx, unsigned char *outm, int *outl);
 
-int EVP_CipherInit(EVP_CIPHER_CTX *ctx, const EVP_CIPHER *cipher,
+SSL2_IMPORT int EVP_CipherInit(EVP_CIPHER_CTX *ctx, const EVP_CIPHER *cipher,
                    const unsigned char *key, const unsigned char *iv,
                    int enc);
-int EVP_CipherInit_ex(EVP_CIPHER_CTX *ctx, const EVP_CIPHER *cipher,
+SSL2_IMPORT int EVP_CipherInit_ex(EVP_CIPHER_CTX *ctx, const EVP_CIPHER *cipher,
                       ENGINE *impl, const unsigned char *key,
                       const unsigned char *iv, int enc);
-int EVP_CipherUpdate(EVP_CIPHER_CTX *ctx, unsigned char *out, int *outl,
+SSL2_IMPORT int EVP_CipherUpdate(EVP_CIPHER_CTX *ctx, unsigned char *out, int *outl,
                      const unsigned char *in, int inl);
-int EVP_CipherFinal(EVP_CIPHER_CTX *ctx, unsigned char *outm, int *outl);
-int EVP_CipherFinal_ex(EVP_CIPHER_CTX *ctx, unsigned char *outm, int *outl);
+SSL2_IMPORT int EVP_CipherFinal(EVP_CIPHER_CTX *ctx, unsigned char *outm, int *outl);
+SSL2_IMPORT int EVP_CipherFinal_ex(EVP_CIPHER_CTX *ctx, unsigned char *outm, int *outl);
 
-int EVP_SignFinal(EVP_MD_CTX *ctx, unsigned char *md, unsigned int *s,
+SSL2_IMPORT int EVP_SignFinal(EVP_MD_CTX *ctx, unsigned char *md, unsigned int *s,
                   EVP_PKEY *pkey);
 
-int EVP_VerifyFinal(EVP_MD_CTX *ctx, const unsigned char *sigbuf,
+SSL2_IMPORT int EVP_VerifyFinal(EVP_MD_CTX *ctx, const unsigned char *sigbuf,
                     unsigned int siglen, EVP_PKEY *pkey);
 
-int EVP_DigestSignInit(EVP_MD_CTX *ctx, EVP_PKEY_CTX **pctx,
+SSL2_IMPORT int EVP_DigestSignInit(EVP_MD_CTX *ctx, EVP_PKEY_CTX **pctx,
                        const EVP_MD *type, ENGINE *e, EVP_PKEY *pkey);
-int EVP_DigestSignFinal(EVP_MD_CTX *ctx,
+SSL2_IMPORT int EVP_DigestSignFinal(EVP_MD_CTX *ctx,
                         unsigned char *sigret, size_t *siglen);
 
-int EVP_DigestVerifyInit(EVP_MD_CTX *ctx, EVP_PKEY_CTX **pctx,
+SSL2_IMPORT int EVP_DigestVerifyInit(EVP_MD_CTX *ctx, EVP_PKEY_CTX **pctx,
                          const EVP_MD *type, ENGINE *e, EVP_PKEY *pkey);
-int EVP_DigestVerifyFinal(EVP_MD_CTX *ctx,
+SSL2_IMPORT int EVP_DigestVerifyFinal(EVP_MD_CTX *ctx,
                           const unsigned char *sig, size_t siglen);
 
-int EVP_OpenInit(EVP_CIPHER_CTX *ctx, const EVP_CIPHER *type,
+SSL2_IMPORT int EVP_OpenInit(EVP_CIPHER_CTX *ctx, const EVP_CIPHER *type,
                  const unsigned char *ek, int ekl, const unsigned char *iv,
                  EVP_PKEY *priv);
-int EVP_OpenFinal(EVP_CIPHER_CTX *ctx, unsigned char *out, int *outl);
+SSL2_IMPORT int EVP_OpenFinal(EVP_CIPHER_CTX *ctx, unsigned char *out, int *outl);
 
-int EVP_SealInit(EVP_CIPHER_CTX *ctx, const EVP_CIPHER *type,
+SSL2_IMPORT int EVP_SealInit(EVP_CIPHER_CTX *ctx, const EVP_CIPHER *type,
                  unsigned char **ek, int *ekl, unsigned char *iv,
                  EVP_PKEY **pubk, int npubk);
-int EVP_SealFinal(EVP_CIPHER_CTX *ctx, unsigned char *out, int *outl);
+SSL2_IMPORT int EVP_SealFinal(EVP_CIPHER_CTX *ctx, unsigned char *out, int *outl);
 
-void EVP_EncodeInit(EVP_ENCODE_CTX *ctx);
-void EVP_EncodeUpdate(EVP_ENCODE_CTX *ctx, unsigned char *out, int *outl,
+SSL2_IMPORT void EVP_EncodeInit(EVP_ENCODE_CTX *ctx);
+SSL2_IMPORT void EVP_EncodeUpdate(EVP_ENCODE_CTX *ctx, unsigned char *out, int *outl,
                       const unsigned char *in, int inl);
-void EVP_EncodeFinal(EVP_ENCODE_CTX *ctx, unsigned char *out, int *outl);
-int EVP_EncodeBlock(unsigned char *t, const unsigned char *f, int n);
+SSL2_IMPORT void EVP_EncodeFinal(EVP_ENCODE_CTX *ctx, unsigned char *out, int *outl);
+SSL2_IMPORT int EVP_EncodeBlock(unsigned char *t, const unsigned char *f, int n);
 
-void EVP_DecodeInit(EVP_ENCODE_CTX *ctx);
-int EVP_DecodeUpdate(EVP_ENCODE_CTX *ctx, unsigned char *out, int *outl,
+SSL2_IMPORT void EVP_DecodeInit(EVP_ENCODE_CTX *ctx);
+SSL2_IMPORT int EVP_DecodeUpdate(EVP_ENCODE_CTX *ctx, unsigned char *out, int *outl,
                      const unsigned char *in, int inl);
-int EVP_DecodeFinal(EVP_ENCODE_CTX *ctx, unsigned
+SSL2_IMPORT int EVP_DecodeFinal(EVP_ENCODE_CTX *ctx, unsigned
                     char *out, int *outl);
-int EVP_DecodeBlock(unsigned char *t, const unsigned char *f, int n);
+SSL2_IMPORT int EVP_DecodeBlock(unsigned char *t, const unsigned char *f, int n);
 
-void EVP_CIPHER_CTX_init(EVP_CIPHER_CTX *a);
-int EVP_CIPHER_CTX_cleanup(EVP_CIPHER_CTX *a);
-EVP_CIPHER_CTX *EVP_CIPHER_CTX_new(void);
-void EVP_CIPHER_CTX_free(EVP_CIPHER_CTX *a);
-int EVP_CIPHER_CTX_set_key_length(EVP_CIPHER_CTX *x, int keylen);
-int EVP_CIPHER_CTX_set_padding(EVP_CIPHER_CTX *c, int pad);
-int EVP_CIPHER_CTX_ctrl(EVP_CIPHER_CTX *ctx, int type, int arg, void *ptr);
-int EVP_CIPHER_CTX_rand_key(EVP_CIPHER_CTX *ctx, unsigned char *key);
+SSL2_IMPORT void EVP_CIPHER_CTX_init(EVP_CIPHER_CTX *a);
+SSL2_IMPORT int EVP_CIPHER_CTX_cleanup(EVP_CIPHER_CTX *a);
+SSL2_IMPORT EVP_CIPHER_CTX *EVP_CIPHER_CTX_new(void);
+SSL2_IMPORT void EVP_CIPHER_CTX_free(EVP_CIPHER_CTX *a);
+SSL2_IMPORT int EVP_CIPHER_CTX_set_key_length(EVP_CIPHER_CTX *x, int keylen);
+SSL2_IMPORT int EVP_CIPHER_CTX_set_padding(EVP_CIPHER_CTX *c, int pad);
+SSL2_IMPORT int EVP_CIPHER_CTX_ctrl(EVP_CIPHER_CTX *ctx, int type, int arg, void *ptr);
+SSL2_IMPORT int EVP_CIPHER_CTX_rand_key(EVP_CIPHER_CTX *ctx, unsigned char *key);
 
 # ifndef OPENSSL_NO_BIO
-BIO_METHOD *BIO_f_md(void);
-BIO_METHOD *BIO_f_base64(void);
-BIO_METHOD *BIO_f_cipher(void);
-BIO_METHOD *BIO_f_reliable(void);
-void BIO_set_cipher(BIO *b, const EVP_CIPHER *c, const unsigned char *k,
+SSL2_IMPORT BIO_METHOD *BIO_f_md(void);
+SSL2_IMPORT BIO_METHOD *BIO_f_base64(void);
+SSL2_IMPORT BIO_METHOD *BIO_f_cipher(void);
+SSL2_IMPORT BIO_METHOD *BIO_f_reliable(void);
+SSL2_IMPORT void BIO_set_cipher(BIO *b, const EVP_CIPHER *c, const unsigned char *k,
                     const unsigned char *i, int enc);
 # endif
 
-const EVP_MD *EVP_md_null(void);
+SSL2_IMPORT const EVP_MD *EVP_md_null(void);
 # ifndef OPENSSL_NO_MD2
-const EVP_MD *EVP_md2(void);
+SSL2_IMPORT const EVP_MD *EVP_md2(void);
 # endif
 # ifndef OPENSSL_NO_MD4
-const EVP_MD *EVP_md4(void);
+SSL2_IMPORT const EVP_MD *EVP_md4(void);
 # endif
 # ifndef OPENSSL_NO_MD5
-const EVP_MD *EVP_md5(void);
+SSL2_IMPORT const EVP_MD *EVP_md5(void);
 # endif
 # ifndef OPENSSL_NO_SHA
-IMPORT_C const EVP_MD *EVP_sha(void);
-IMPORT_C const EVP_MD *EVP_sha1(void);
-IMPORT_C const EVP_MD *EVP_dss(void);
-IMPORT_C const EVP_MD *EVP_dss1(void);
-IMPORT_C const EVP_MD *EVP_ecdsa(void);
+SSL2_IMPORT const EVP_MD *EVP_sha(void);
+SSL2_IMPORT const EVP_MD *EVP_sha1(void);
+SSL2_IMPORT const EVP_MD *EVP_dss(void);
+SSL2_IMPORT const EVP_MD *EVP_dss1(void);
+SSL2_IMPORT const EVP_MD *EVP_ecdsa(void);
 # endif
 # ifndef OPENSSL_NO_SHA256
-IMPORT_C const EVP_MD *EVP_sha224(void);
-IMPORT_C const EVP_MD *EVP_sha256(void);
+SSL2_IMPORT const EVP_MD *EVP_sha224(void);
+SSL2_IMPORT const EVP_MD *EVP_sha256(void);
 # endif
 # ifndef OPENSSL_NO_SHA512
-IMPORT_C const EVP_MD *EVP_sha384(void);
-IMPORT_C const EVP_MD *EVP_sha512(void);
+SSL2_IMPORT const EVP_MD *EVP_sha384(void);
+SSL2_IMPORT const EVP_MD *EVP_sha512(void);
 # endif
 # ifndef OPENSSL_NO_MDC2
-IMPORT_C const EVP_MD *EVP_mdc2(void);
+SSL2_IMPORT const EVP_MD *EVP_mdc2(void);
 # endif
 # ifndef OPENSSL_NO_RIPEMD
-IMPORT_C const EVP_MD *EVP_ripemd160(void);
+SSL2_IMPORT const EVP_MD *EVP_ripemd160(void);
 # endif
 # ifndef OPENSSL_NO_WHIRLPOOL
-IMPORT_C const EVP_MD *EVP_whirlpool(void);
+SSL2_IMPORT const EVP_MD *EVP_whirlpool(void);
 # endif
-IMPORT_C const EVP_CIPHER *EVP_enc_null(void); /* does nothing :-) */
+SSL2_IMPORT const EVP_CIPHER *EVP_enc_null(void); /* does nothing :-) */
 # ifndef OPENSSL_NO_DES
-IMPORT_C const EVP_CIPHER *EVP_des_ecb(void);
-IMPORT_C const EVP_CIPHER *EVP_des_ede(void);
-IMPORT_C const EVP_CIPHER *EVP_des_ede3(void);
-IMPORT_C const EVP_CIPHER *EVP_des_ede_ecb(void);
-IMPORT_C const EVP_CIPHER *EVP_des_ede3_ecb(void);
-IMPORT_C const EVP_CIPHER *EVP_des_cfb64(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_des_ecb(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_des_ede(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_des_ede3(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_des_ede_ecb(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_des_ede3_ecb(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_des_cfb64(void);
 #  define EVP_des_cfb EVP_des_cfb64
-IMPORT_C const EVP_CIPHER *EVP_des_cfb1(void);
-IMPORT_C const EVP_CIPHER *EVP_des_cfb8(void);
-IMPORT_C const EVP_CIPHER *EVP_des_ede_cfb64(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_des_cfb1(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_des_cfb8(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_des_ede_cfb64(void);
 #  define EVP_des_ede_cfb EVP_des_ede_cfb64
 #  if 0
 const EVP_CIPHER *EVP_des_ede_cfb1(void);
 const EVP_CIPHER *EVP_des_ede_cfb8(void);
 #  endif
-IMPORT_C const EVP_CIPHER *EVP_des_ede3_cfb64(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_des_ede3_cfb64(void);
 #  define EVP_des_ede3_cfb EVP_des_ede3_cfb64
-IMPORT_C const EVP_CIPHER *EVP_des_ede3_cfb1(void);
-IMPORT_C const EVP_CIPHER *EVP_des_ede3_cfb8(void);
-IMPORT_C const EVP_CIPHER *EVP_des_ofb(void);
-IMPORT_C const EVP_CIPHER *EVP_des_ede_ofb(void);
-IMPORT_C const EVP_CIPHER *EVP_des_ede3_ofb(void);
-IMPORT_C const EVP_CIPHER *EVP_des_cbc(void);
-IMPORT_C const EVP_CIPHER *EVP_des_ede_cbc(void);
-IMPORT_C const EVP_CIPHER *EVP_des_ede3_cbc(void);
-IMPORT_C const EVP_CIPHER *EVP_desx_cbc(void);
-IMPORT_C const EVP_CIPHER *EVP_des_ede3_wrap(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_des_ede3_cfb1(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_des_ede3_cfb8(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_des_ofb(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_des_ede_ofb(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_des_ede3_ofb(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_des_cbc(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_des_ede_cbc(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_des_ede3_cbc(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_desx_cbc(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_des_ede3_wrap(void);
 /*
  * This should now be supported through the dev_crypto ENGINE. But also, why
  * are rc4 and md5 declarations made here inside a "NO_DES" precompiler
@@ -782,88 +782,88 @@ const EVP_MD *EVP_dev_crypto_md5(void);
 #  endif
 # endif
 # ifndef OPENSSL_NO_RC4
-IMPORT_C const EVP_CIPHER *EVP_rc4(void);
-IMPORT_C const EVP_CIPHER *EVP_rc4_40(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_rc4(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_rc4_40(void);
 #  ifndef OPENSSL_NO_MD5
-IMPORT_C const EVP_CIPHER *EVP_rc4_hmac_md5(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_rc4_hmac_md5(void);
 #  endif
 # endif
 # ifndef OPENSSL_NO_IDEA
-IMPORT_C const EVP_CIPHER *EVP_idea_ecb(void);
-IMPORT_C const EVP_CIPHER *EVP_idea_cfb64(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_idea_ecb(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_idea_cfb64(void);
 #  define EVP_idea_cfb EVP_idea_cfb64
-IMPORT_C const EVP_CIPHER *EVP_idea_ofb(void);
-IMPORT_C const EVP_CIPHER *EVP_idea_cbc(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_idea_ofb(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_idea_cbc(void);
 # endif
 # ifndef OPENSSL_NO_RC2
-IMPORT_C const EVP_CIPHER *EVP_rc2_ecb(void);
-IMPORT_C IMPORT_C const EVP_CIPHER *EVP_rc2_cbc(void);
-IMPORT_C IMPORT_C const EVP_CIPHER *EVP_rc2_40_cbc(void);
-IMPORT_C const EVP_CIPHER *EVP_rc2_64_cbc(void);
-IMPORT_C const EVP_CIPHER *EVP_rc2_cfb64(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_rc2_ecb(void);
+SSL2_IMPORT SSL2_IMPORT const EVP_CIPHER *EVP_rc2_cbc(void);
+SSL2_IMPORT SSL2_IMPORT const EVP_CIPHER *EVP_rc2_40_cbc(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_rc2_64_cbc(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_rc2_cfb64(void);
 #  define EVP_rc2_cfb EVP_rc2_cfb64
-IMPORT_C const EVP_CIPHER *EVP_rc2_ofb(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_rc2_ofb(void);
 # endif
 # ifndef OPENSSL_NO_BF
-IMPORT_C const EVP_CIPHER *EVP_bf_ecb(void);
-IMPORT_C const EVP_CIPHER *EVP_bf_cbc(void);
-IMPORT_C const EVP_CIPHER *EVP_bf_cfb64(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_bf_ecb(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_bf_cbc(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_bf_cfb64(void);
 #  define EVP_bf_cfb EVP_bf_cfb64
-IMPORT_C const EVP_CIPHER *EVP_bf_ofb(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_bf_ofb(void);
 # endif
 # ifndef OPENSSL_NO_CAST
-IMPORT_C const EVP_CIPHER *EVP_cast5_ecb(void);
-IMPORT_C const EVP_CIPHER *EVP_cast5_cbc(void);
-IMPORT_C const EVP_CIPHER *EVP_cast5_cfb64(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_cast5_ecb(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_cast5_cbc(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_cast5_cfb64(void);
 #  define EVP_cast5_cfb EVP_cast5_cfb64
-IMPORT_C const EVP_CIPHER *EVP_cast5_ofb(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_cast5_ofb(void);
 # endif
 # ifndef OPENSSL_NO_RC5
-IMPORT_C const EVP_CIPHER *EVP_rc5_32_12_16_cbc(void);
-IMPORT_C const EVP_CIPHER *EVP_rc5_32_12_16_ecb(void);
-IMPORT_C const EVP_CIPHER *EVP_rc5_32_12_16_cfb64(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_rc5_32_12_16_cbc(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_rc5_32_12_16_ecb(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_rc5_32_12_16_cfb64(void);
 #  define EVP_rc5_32_12_16_cfb EVP_rc5_32_12_16_cfb64
-IMPORT_C const EVP_CIPHER *EVP_rc5_32_12_16_ofb(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_rc5_32_12_16_ofb(void);
 # endif
 # ifndef OPENSSL_NO_AES
-IMPORT_C const EVP_CIPHER *EVP_aes_128_ecb(void);
-IMPORT_C const EVP_CIPHER *EVP_aes_128_cbc(void);
-IMPORT_C const EVP_CIPHER *EVP_aes_128_cfb1(void);
-IMPORT_C const EVP_CIPHER *EVP_aes_128_cfb8(void);
-IMPORT_C const EVP_CIPHER *EVP_aes_128_cfb128(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_aes_128_ecb(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_aes_128_cbc(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_aes_128_cfb1(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_aes_128_cfb8(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_aes_128_cfb128(void);
 #  define EVP_aes_128_cfb EVP_aes_128_cfb128
-IMPORT_C const EVP_CIPHER *EVP_aes_128_ofb(void);
-IMPORT_C const EVP_CIPHER *EVP_aes_128_ctr(void);
-IMPORT_C const EVP_CIPHER *EVP_aes_128_ccm(void);
-IMPORT_C const EVP_CIPHER *EVP_aes_128_gcm(void);
-IMPORT_C const EVP_CIPHER *EVP_aes_128_xts(void);
-IMPORT_C const EVP_CIPHER *EVP_aes_128_wrap(void);
-IMPORT_C const EVP_CIPHER *EVP_aes_192_ecb(void);
-IMPORT_C const EVP_CIPHER *EVP_aes_192_cbc(void);
-IMPORT_C const EVP_CIPHER *EVP_aes_192_cfb1(void);
-IMPORT_C const EVP_CIPHER *EVP_aes_192_cfb8(void);
-IMPORT_C const EVP_CIPHER *EVP_aes_192_cfb128(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_aes_128_ofb(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_aes_128_ctr(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_aes_128_ccm(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_aes_128_gcm(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_aes_128_xts(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_aes_128_wrap(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_aes_192_ecb(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_aes_192_cbc(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_aes_192_cfb1(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_aes_192_cfb8(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_aes_192_cfb128(void);
 #  define EVP_aes_192_cfb EVP_aes_192_cfb128
-IMPORT_C const EVP_CIPHER *EVP_aes_192_ofb(void);
-IMPORT_C const EVP_CIPHER *EVP_aes_192_ctr(void);
-IMPORT_C const EVP_CIPHER *EVP_aes_192_ccm(void);
-IMPORT_C const EVP_CIPHER *EVP_aes_192_gcm(void);
-IMPORT_C const EVP_CIPHER *EVP_aes_192_wrap(void);
-IMPORT_C const EVP_CIPHER *EVP_aes_256_ecb(void);
-IMPORT_C const EVP_CIPHER *EVP_aes_256_cbc(void);
-IMPORT_C const EVP_CIPHER *EVP_aes_256_cfb1(void);
-IMPORT_C const EVP_CIPHER *EVP_aes_256_cfb8(void);
-IMPORT_C const EVP_CIPHER *EVP_aes_256_cfb128(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_aes_192_ofb(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_aes_192_ctr(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_aes_192_ccm(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_aes_192_gcm(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_aes_192_wrap(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_aes_256_ecb(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_aes_256_cbc(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_aes_256_cfb1(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_aes_256_cfb8(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_aes_256_cfb128(void);
 #  define EVP_aes_256_cfb EVP_aes_256_cfb128
-IMPORT_C const EVP_CIPHER *EVP_aes_256_ofb(void);
-IMPORT_C const EVP_CIPHER *EVP_aes_256_ctr(void);
-IMPORT_C const EVP_CIPHER *EVP_aes_256_ccm(void);
-IMPORT_C const EVP_CIPHER *EVP_aes_256_gcm(void);
-IMPORT_C const EVP_CIPHER *EVP_aes_256_xts(void);
-IMPORT_C const EVP_CIPHER *EVP_aes_256_wrap(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_aes_256_ofb(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_aes_256_ctr(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_aes_256_ccm(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_aes_256_gcm(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_aes_256_xts(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_aes_256_wrap(void);
 #  if !defined(OPENSSL_NO_SHA) && !defined(OPENSSL_NO_SHA1)
-IMPORT_C const EVP_CIPHER *EVP_aes_128_cbc_hmac_sha1(void);
-IMPORT_C const EVP_CIPHER *EVP_aes_256_cbc_hmac_sha1(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_aes_128_cbc_hmac_sha1(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_aes_256_cbc_hmac_sha1(void);
 #  endif
 #  ifndef OPENSSL_NO_SHA256
 const EVP_CIPHER *EVP_aes_128_cbc_hmac_sha256(void);
@@ -895,15 +895,15 @@ const EVP_CIPHER *EVP_camellia_256_ofb(void);
 # endif
 
 # ifndef OPENSSL_NO_SEED
-IMPORT_C const EVP_CIPHER *EVP_seed_ecb(void);
-IMPORT_C const EVP_CIPHER *EVP_seed_cbc(void);
-IMPORT_C const EVP_CIPHER *EVP_seed_cfb128(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_seed_ecb(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_seed_cbc(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_seed_cfb128(void);
 #  define EVP_seed_cfb EVP_seed_cfb128
-IMPORT_C const EVP_CIPHER *EVP_seed_ofb(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_seed_ofb(void);
 # endif
 
-IMPORT_C void OPENSSL_add_all_algorithms_noconf(void);
-IMPORT_C void OPENSSL_add_all_algorithms_conf(void);
+SSL2_IMPORT void OPENSSL_add_all_algorithms_noconf(void);
+SSL2_IMPORT void OPENSSL_add_all_algorithms_conf(void);
 
 # ifdef OPENSSL_LOAD_CONF
 #  define OpenSSL_add_all_algorithms() \
@@ -913,126 +913,126 @@ IMPORT_C void OPENSSL_add_all_algorithms_conf(void);
                 OPENSSL_add_all_algorithms_noconf()
 # endif
 
-IMPORT_C void OpenSSL_add_all_ciphers(void);
-IMPORT_C void OpenSSL_add_all_digests(void);
+SSL2_IMPORT void OpenSSL_add_all_ciphers(void);
+SSL2_IMPORT void OpenSSL_add_all_digests(void);
 # define SSLeay_add_all_algorithms() OpenSSL_add_all_algorithms()
 # define SSLeay_add_all_ciphers() OpenSSL_add_all_ciphers()
 # define SSLeay_add_all_digests() OpenSSL_add_all_digests()
 
-IMPORT_C int EVP_add_cipher(const EVP_CIPHER *cipher);
-IMPORT_C int EVP_add_digest(const EVP_MD *digest);
+SSL2_IMPORT int EVP_add_cipher(const EVP_CIPHER *cipher);
+SSL2_IMPORT int EVP_add_digest(const EVP_MD *digest);
 
-IMPORT_C const EVP_CIPHER *EVP_get_cipherbyname(const char *name);
-IMPORT_C const EVP_MD *EVP_get_digestbyname(const char *name);
-IMPORT_C void EVP_cleanup(void);
+SSL2_IMPORT const EVP_CIPHER *EVP_get_cipherbyname(const char *name);
+SSL2_IMPORT const EVP_MD *EVP_get_digestbyname(const char *name);
+SSL2_IMPORT void EVP_cleanup(void);
 
-IMPORT_C void EVP_CIPHER_do_all(void (*fn) (const EVP_CIPHER *ciph,
+SSL2_IMPORT void EVP_CIPHER_do_all(void (*fn) (const EVP_CIPHER *ciph,
                                    const char *from, const char *to, void *x),
                        void *arg);
-IMPORT_C void EVP_CIPHER_do_all_sorted(void (*fn)
+SSL2_IMPORT void EVP_CIPHER_do_all_sorted(void (*fn)
                                (const EVP_CIPHER *ciph, const char *from,
                                 const char *to, void *x), void *arg);
 
-IMPORT_C void EVP_MD_do_all(void (*fn) (const EVP_MD *ciph,
+SSL2_IMPORT void EVP_MD_do_all(void (*fn) (const EVP_MD *ciph,
                                const char *from, const char *to, void *x),
                    void *arg);
-IMPORT_C void EVP_MD_do_all_sorted(void (*fn)
+SSL2_IMPORT void EVP_MD_do_all_sorted(void (*fn)
                            (const EVP_MD *ciph, const char *from,
                             const char *to, void *x), void *arg);
 
-IMPORT_C int EVP_PKEY_decrypt_old(unsigned char *dec_key,
+SSL2_IMPORT int EVP_PKEY_decrypt_old(unsigned char *dec_key,
                          const unsigned char *enc_key, int enc_key_len,
                          EVP_PKEY *private_key);
-IMPORT_C int EVP_PKEY_encrypt_old(unsigned char *enc_key,
+SSL2_IMPORT int EVP_PKEY_encrypt_old(unsigned char *enc_key,
                          const unsigned char *key, int key_len,
                          EVP_PKEY *pub_key);
-IMPORT_C int EVP_PKEY_type(int type);
-IMPORT_C int EVP_PKEY_id(const EVP_PKEY *pkey);
-IMPORT_C int EVP_PKEY_base_id(const EVP_PKEY *pkey);
-IMPORT_C int EVP_PKEY_bits(EVP_PKEY *pkey);
-IMPORT_C int EVP_PKEY_size(EVP_PKEY *pkey);
-IMPORT_C int EVP_PKEY_set_type(EVP_PKEY *pkey, int type);
-IMPORT_C int EVP_PKEY_set_type_str(EVP_PKEY *pkey, const char *str, int len);
-IMPORT_C int EVP_PKEY_assign(EVP_PKEY *pkey, int type, void *key);
-IMPORT_C void *EVP_PKEY_get0(EVP_PKEY *pkey);
+SSL2_IMPORT int EVP_PKEY_type(int type);
+SSL2_IMPORT int EVP_PKEY_id(const EVP_PKEY *pkey);
+SSL2_IMPORT int EVP_PKEY_base_id(const EVP_PKEY *pkey);
+SSL2_IMPORT int EVP_PKEY_bits(EVP_PKEY *pkey);
+SSL2_IMPORT int EVP_PKEY_size(EVP_PKEY *pkey);
+SSL2_IMPORT int EVP_PKEY_set_type(EVP_PKEY *pkey, int type);
+SSL2_IMPORT int EVP_PKEY_set_type_str(EVP_PKEY *pkey, const char *str, int len);
+SSL2_IMPORT int EVP_PKEY_assign(EVP_PKEY *pkey, int type, void *key);
+SSL2_IMPORT void *EVP_PKEY_get0(EVP_PKEY *pkey);
 
 # ifndef OPENSSL_NO_RSA
 struct rsa_st;
-IMPORT_C int EVP_PKEY_set1_RSA(EVP_PKEY *pkey, struct rsa_st *key);
-IMPORT_C struct rsa_st *EVP_PKEY_get1_RSA(EVP_PKEY *pkey);
+SSL2_IMPORT int EVP_PKEY_set1_RSA(EVP_PKEY *pkey, struct rsa_st *key);
+SSL2_IMPORT struct rsa_st *EVP_PKEY_get1_RSA(EVP_PKEY *pkey);
 # endif
 # ifndef OPENSSL_NO_DSA
 struct dsa_st;
-IMPORT_C int EVP_PKEY_set1_DSA(EVP_PKEY *pkey, struct dsa_st *key);
-IMPORT_C struct dsa_st *EVP_PKEY_get1_DSA(EVP_PKEY *pkey);
+SSL2_IMPORT int EVP_PKEY_set1_DSA(EVP_PKEY *pkey, struct dsa_st *key);
+SSL2_IMPORT struct dsa_st *EVP_PKEY_get1_DSA(EVP_PKEY *pkey);
 # endif
 # ifndef OPENSSL_NO_DH
 struct dh_st;
-IMPORT_C int EVP_PKEY_set1_DH(EVP_PKEY *pkey, struct dh_st *key);
-IMPORT_C struct dh_st *EVP_PKEY_get1_DH(EVP_PKEY *pkey);
+SSL2_IMPORT int EVP_PKEY_set1_DH(EVP_PKEY *pkey, struct dh_st *key);
+SSL2_IMPORT struct dh_st *EVP_PKEY_get1_DH(EVP_PKEY *pkey);
 # endif
 # ifndef OPENSSL_NO_EC
 struct ec_key_st;
-IMPORT_C int EVP_PKEY_set1_EC_KEY(EVP_PKEY *pkey, struct ec_key_st *key);
-IMPORT_C struct ec_key_st *EVP_PKEY_get1_EC_KEY(EVP_PKEY *pkey);
+SSL2_IMPORT int EVP_PKEY_set1_EC_KEY(EVP_PKEY *pkey, struct ec_key_st *key);
+SSL2_IMPORT struct ec_key_st *EVP_PKEY_get1_EC_KEY(EVP_PKEY *pkey);
 # endif
 
-IMPORT_C EVP_PKEY *EVP_PKEY_new(void);
-IMPORT_C void EVP_PKEY_free(EVP_PKEY *pkey);
+SSL2_IMPORT EVP_PKEY *EVP_PKEY_new(void);
+SSL2_IMPORT void EVP_PKEY_free(EVP_PKEY *pkey);
 
-IMPORT_C EVP_PKEY *d2i_PublicKey(int type, EVP_PKEY **a, const unsigned char **pp,
+SSL2_IMPORT EVP_PKEY *d2i_PublicKey(int type, EVP_PKEY **a, const unsigned char **pp,
                         long length);
-IMPORT_C int i2d_PublicKey(EVP_PKEY *a, unsigned char **pp);
+SSL2_IMPORT int i2d_PublicKey(EVP_PKEY *a, unsigned char **pp);
 
-IMPORT_C EVP_PKEY *d2i_PrivateKey(int type, EVP_PKEY **a, const unsigned char **pp,
+SSL2_IMPORT EVP_PKEY *d2i_PrivateKey(int type, EVP_PKEY **a, const unsigned char **pp,
                          long length);
-IMPORT_C EVP_PKEY *d2i_AutoPrivateKey(EVP_PKEY **a, const unsigned char **pp,
+SSL2_IMPORT EVP_PKEY *d2i_AutoPrivateKey(EVP_PKEY **a, const unsigned char **pp,
                              long length);
-IMPORT_C int i2d_PrivateKey(EVP_PKEY *a, unsigned char **pp);
+SSL2_IMPORT int i2d_PrivateKey(EVP_PKEY *a, unsigned char **pp);
 
-IMPORT_C int EVP_PKEY_copy_parameters(EVP_PKEY *to, const EVP_PKEY *from);
-IMPORT_C int EVP_PKEY_missing_parameters(const EVP_PKEY *pkey);
-IMPORT_C int EVP_PKEY_save_parameters(EVP_PKEY *pkey, int mode);
-IMPORT_C int EVP_PKEY_cmp_parameters(const EVP_PKEY *a, const EVP_PKEY *b);
+SSL2_IMPORT int EVP_PKEY_copy_parameters(EVP_PKEY *to, const EVP_PKEY *from);
+SSL2_IMPORT int EVP_PKEY_missing_parameters(const EVP_PKEY *pkey);
+SSL2_IMPORT int EVP_PKEY_save_parameters(EVP_PKEY *pkey, int mode);
+SSL2_IMPORT int EVP_PKEY_cmp_parameters(const EVP_PKEY *a, const EVP_PKEY *b);
 
-IMPORT_C int EVP_PKEY_cmp(const EVP_PKEY *a, const EVP_PKEY *b);
+SSL2_IMPORT int EVP_PKEY_cmp(const EVP_PKEY *a, const EVP_PKEY *b);
 
-IMPORT_C int EVP_PKEY_print_public(BIO *out, const EVP_PKEY *pkey,
+SSL2_IMPORT int EVP_PKEY_print_public(BIO *out, const EVP_PKEY *pkey,
                           int indent, ASN1_PCTX *pctx);
-IMPORT_C int EVP_PKEY_print_private(BIO *out, const EVP_PKEY *pkey,
+SSL2_IMPORT int EVP_PKEY_print_private(BIO *out, const EVP_PKEY *pkey,
                            int indent, ASN1_PCTX *pctx);
-IMPORT_C int EVP_PKEY_print_params(BIO *out, const EVP_PKEY *pkey,
+SSL2_IMPORT int EVP_PKEY_print_params(BIO *out, const EVP_PKEY *pkey,
                           int indent, ASN1_PCTX *pctx);
 
-IMPORT_C int EVP_PKEY_get_default_digest_nid(EVP_PKEY *pkey, int *pnid);
+SSL2_IMPORT int EVP_PKEY_get_default_digest_nid(EVP_PKEY *pkey, int *pnid);
 
-IMPORT_C int EVP_CIPHER_type(const EVP_CIPHER *ctx);
+SSL2_IMPORT int EVP_CIPHER_type(const EVP_CIPHER *ctx);
 
 /* calls methods */
-IMPORT_C int EVP_CIPHER_param_to_asn1(EVP_CIPHER_CTX *c, ASN1_TYPE *type);
-IMPORT_C int EVP_CIPHER_asn1_to_param(EVP_CIPHER_CTX *c, ASN1_TYPE *type);
+SSL2_IMPORT int EVP_CIPHER_param_to_asn1(EVP_CIPHER_CTX *c, ASN1_TYPE *type);
+SSL2_IMPORT int EVP_CIPHER_asn1_to_param(EVP_CIPHER_CTX *c, ASN1_TYPE *type);
 
 /* These are used by EVP_CIPHER methods */
-IMPORT_C int EVP_CIPHER_set_asn1_iv(EVP_CIPHER_CTX *c, ASN1_TYPE *type);
-IMPORT_C int EVP_CIPHER_get_asn1_iv(EVP_CIPHER_CTX *c, ASN1_TYPE *type);
+SSL2_IMPORT int EVP_CIPHER_set_asn1_iv(EVP_CIPHER_CTX *c, ASN1_TYPE *type);
+SSL2_IMPORT int EVP_CIPHER_get_asn1_iv(EVP_CIPHER_CTX *c, ASN1_TYPE *type);
 
 /* PKCS5 password based encryption */
-IMPORT_C int PKCS5_PBE_keyivgen(EVP_CIPHER_CTX *ctx, const char *pass, int passlen,
+SSL2_IMPORT int PKCS5_PBE_keyivgen(EVP_CIPHER_CTX *ctx, const char *pass, int passlen,
                        ASN1_TYPE *param, const EVP_CIPHER *cipher,
                        const EVP_MD *md, int en_de);
-IMPORT_C int PKCS5_PBKDF2_HMAC_SHA1(const char *pass, int passlen,
+SSL2_IMPORT int PKCS5_PBKDF2_HMAC_SHA1(const char *pass, int passlen,
                            const unsigned char *salt, int saltlen, int iter,
                            int keylen, unsigned char *out);
-IMPORT_C int PKCS5_PBKDF2_HMAC(const char *pass, int passlen,
+SSL2_IMPORT int PKCS5_PBKDF2_HMAC(const char *pass, int passlen,
                       const unsigned char *salt, int saltlen, int iter,
                       const EVP_MD *digest, int keylen, unsigned char *out);
-IMPORT_C int PKCS5_v2_PBE_keyivgen(EVP_CIPHER_CTX *ctx, const char *pass, int passlen,
+SSL2_IMPORT int PKCS5_v2_PBE_keyivgen(EVP_CIPHER_CTX *ctx, const char *pass, int passlen,
                           ASN1_TYPE *param, const EVP_CIPHER *cipher,
                           const EVP_MD *md, int en_de);
 
-IMPORT_C void PKCS5_PBE_add(void);
+SSL2_IMPORT void PKCS5_PBE_add(void);
 
-IMPORT_C int EVP_PBE_CipherInit(ASN1_OBJECT *pbe_obj, const char *pass, int passlen,
+SSL2_IMPORT int EVP_PBE_CipherInit(ASN1_OBJECT *pbe_obj, const char *pass, int passlen,
                        ASN1_TYPE *param, EVP_CIPHER_CTX *ctx, int en_de);
 
 /* PBE type */
@@ -1042,13 +1042,13 @@ IMPORT_C int EVP_PBE_CipherInit(ASN1_OBJECT *pbe_obj, const char *pass, int pass
 /* Is an PRF type OID */
 # define EVP_PBE_TYPE_PRF        0x1
 
-int EVP_PBE_alg_add_type(int pbe_type, int pbe_nid, int cipher_nid,
+SSL2_IMPORT int EVP_PBE_alg_add_type(int pbe_type, int pbe_nid, int cipher_nid,
                          int md_nid, EVP_PBE_KEYGEN *keygen);
-int EVP_PBE_alg_add(int nid, const EVP_CIPHER *cipher, const EVP_MD *md,
+SSL2_IMPORT int EVP_PBE_alg_add(int nid, const EVP_CIPHER *cipher, const EVP_MD *md,
                     EVP_PBE_KEYGEN *keygen);
-int EVP_PBE_find(int type, int pbe_nid, int *pcnid, int *pmnid,
+SSL2_IMPORT int EVP_PBE_find(int type, int pbe_nid, int *pcnid, int *pmnid,
                  EVP_PBE_KEYGEN **pkeygen);
-void EVP_PBE_cleanup(void);
+SSL2_IMPORT void EVP_PBE_cleanup(void);
 
 # define ASN1_PKEY_ALIAS         0x1
 # define ASN1_PKEY_DYNAMIC       0x2
@@ -1061,26 +1061,26 @@ void EVP_PBE_cleanup(void);
 # define ASN1_PKEY_CTRL_CMS_ENVELOPE     0x7
 # define ASN1_PKEY_CTRL_CMS_RI_TYPE      0x8
 
-int EVP_PKEY_asn1_get_count(void);
-const EVP_PKEY_ASN1_METHOD *EVP_PKEY_asn1_get0(int idx);
-const EVP_PKEY_ASN1_METHOD *EVP_PKEY_asn1_find(ENGINE **pe, int type);
-const EVP_PKEY_ASN1_METHOD *EVP_PKEY_asn1_find_str(ENGINE **pe,
+SSL2_IMPORT int EVP_PKEY_asn1_get_count(void);
+SSL2_IMPORT const EVP_PKEY_ASN1_METHOD *EVP_PKEY_asn1_get0(int idx);
+SSL2_IMPORT const EVP_PKEY_ASN1_METHOD *EVP_PKEY_asn1_find(ENGINE **pe, int type);
+SSL2_IMPORT const EVP_PKEY_ASN1_METHOD *EVP_PKEY_asn1_find_str(ENGINE **pe,
                                                    const char *str, int len);
-int EVP_PKEY_asn1_add0(const EVP_PKEY_ASN1_METHOD *ameth);
-int EVP_PKEY_asn1_add_alias(int to, int from);
-int EVP_PKEY_asn1_get0_info(int *ppkey_id, int *pkey_base_id,
+SSL2_IMPORT int EVP_PKEY_asn1_add0(const EVP_PKEY_ASN1_METHOD *ameth);
+SSL2_IMPORT int EVP_PKEY_asn1_add_alias(int to, int from);
+SSL2_IMPORT int EVP_PKEY_asn1_get0_info(int *ppkey_id, int *pkey_base_id,
                             int *ppkey_flags, const char **pinfo,
                             const char **ppem_str,
                             const EVP_PKEY_ASN1_METHOD *ameth);
 
-const EVP_PKEY_ASN1_METHOD *EVP_PKEY_get0_asn1(EVP_PKEY *pkey);
-EVP_PKEY_ASN1_METHOD *EVP_PKEY_asn1_new(int id, int flags,
+SSL2_IMPORT const EVP_PKEY_ASN1_METHOD *EVP_PKEY_get0_asn1(EVP_PKEY *pkey);
+SSL2_IMPORT EVP_PKEY_ASN1_METHOD *EVP_PKEY_asn1_new(int id, int flags,
                                         const char *pem_str,
                                         const char *info);
-void EVP_PKEY_asn1_copy(EVP_PKEY_ASN1_METHOD *dst,
+SSL2_IMPORT void EVP_PKEY_asn1_copy(EVP_PKEY_ASN1_METHOD *dst,
                         const EVP_PKEY_ASN1_METHOD *src);
-void EVP_PKEY_asn1_free(EVP_PKEY_ASN1_METHOD *ameth);
-void EVP_PKEY_asn1_set_public(EVP_PKEY_ASN1_METHOD *ameth,
+SSL2_IMPORT void EVP_PKEY_asn1_free(EVP_PKEY_ASN1_METHOD *ameth);
+SSL2_IMPORT void EVP_PKEY_asn1_set_public(EVP_PKEY_ASN1_METHOD *ameth,
                               int (*pub_decode) (EVP_PKEY *pk,
                                                  X509_PUBKEY *pub),
                               int (*pub_encode) (X509_PUBKEY *pub,
@@ -1092,7 +1092,7 @@ void EVP_PKEY_asn1_set_public(EVP_PKEY_ASN1_METHOD *ameth,
                                                 int indent, ASN1_PCTX *pctx),
                               int (*pkey_size) (const EVP_PKEY *pk),
                               int (*pkey_bits) (const EVP_PKEY *pk));
-void EVP_PKEY_asn1_set_private(EVP_PKEY_ASN1_METHOD *ameth,
+SSL2_IMPORT void EVP_PKEY_asn1_set_private(EVP_PKEY_ASN1_METHOD *ameth,
                                int (*priv_decode) (EVP_PKEY *pk,
                                                    PKCS8_PRIV_KEY_INFO
                                                    *p8inf),
@@ -1102,7 +1102,7 @@ void EVP_PKEY_asn1_set_private(EVP_PKEY_ASN1_METHOD *ameth,
                                                   const EVP_PKEY *pkey,
                                                   int indent,
                                                   ASN1_PCTX *pctx));
-void EVP_PKEY_asn1_set_param(EVP_PKEY_ASN1_METHOD *ameth,
+SSL2_IMPORT void EVP_PKEY_asn1_set_param(EVP_PKEY_ASN1_METHOD *ameth,
                              int (*param_decode) (EVP_PKEY *pkey,
                                                   const unsigned char **pder,
                                                   int derlen),
@@ -1118,12 +1118,12 @@ void EVP_PKEY_asn1_set_param(EVP_PKEY_ASN1_METHOD *ameth,
                                                  int indent,
                                                  ASN1_PCTX *pctx));
 
-void EVP_PKEY_asn1_set_free(EVP_PKEY_ASN1_METHOD *ameth,
+SSL2_IMPORT void EVP_PKEY_asn1_set_free(EVP_PKEY_ASN1_METHOD *ameth,
                             void (*pkey_free) (EVP_PKEY *pkey));
-void EVP_PKEY_asn1_set_ctrl(EVP_PKEY_ASN1_METHOD *ameth,
+SSL2_IMPORT void EVP_PKEY_asn1_set_ctrl(EVP_PKEY_ASN1_METHOD *ameth,
                             int (*pkey_ctrl) (EVP_PKEY *pkey, int op,
                                               long arg1, void *arg2));
-void EVP_PKEY_asn1_set_item(EVP_PKEY_ASN1_METHOD *ameth,
+SSL2_IMPORT void EVP_PKEY_asn1_set_item(EVP_PKEY_ASN1_METHOD *ameth,
                             int (*item_verify) (EVP_MD_CTX *ctx,
                                                 const ASN1_ITEM *it,
                                                 void *asn,
@@ -1201,104 +1201,104 @@ void EVP_PKEY_asn1_set_item(EVP_PKEY_ASN1_METHOD *ameth,
  */
 # define EVP_PKEY_FLAG_SIGCTX_CUSTOM     4
 
-const EVP_PKEY_METHOD *EVP_PKEY_meth_find(int type);
-EVP_PKEY_METHOD *EVP_PKEY_meth_new(int id, int flags);
-void EVP_PKEY_meth_get0_info(int *ppkey_id, int *pflags,
+SSL2_IMPORT const EVP_PKEY_METHOD *EVP_PKEY_meth_find(int type);
+SSL2_IMPORT EVP_PKEY_METHOD *EVP_PKEY_meth_new(int id, int flags);
+SSL2_IMPORT void EVP_PKEY_meth_get0_info(int *ppkey_id, int *pflags,
                              const EVP_PKEY_METHOD *meth);
-void EVP_PKEY_meth_copy(EVP_PKEY_METHOD *dst, const EVP_PKEY_METHOD *src);
-void EVP_PKEY_meth_free(EVP_PKEY_METHOD *pmeth);
-int EVP_PKEY_meth_add0(const EVP_PKEY_METHOD *pmeth);
+SSL2_IMPORT void EVP_PKEY_meth_copy(EVP_PKEY_METHOD *dst, const EVP_PKEY_METHOD *src);
+SSL2_IMPORT void EVP_PKEY_meth_free(EVP_PKEY_METHOD *pmeth);
+SSL2_IMPORT int EVP_PKEY_meth_add0(const EVP_PKEY_METHOD *pmeth);
 
-EVP_PKEY_CTX *EVP_PKEY_CTX_new(EVP_PKEY *pkey, ENGINE *e);
-EVP_PKEY_CTX *EVP_PKEY_CTX_new_id(int id, ENGINE *e);
-EVP_PKEY_CTX *EVP_PKEY_CTX_dup(EVP_PKEY_CTX *ctx);
-void EVP_PKEY_CTX_free(EVP_PKEY_CTX *ctx);
+SSL2_IMPORT EVP_PKEY_CTX *EVP_PKEY_CTX_new(EVP_PKEY *pkey, ENGINE *e);
+SSL2_IMPORT EVP_PKEY_CTX *EVP_PKEY_CTX_new_id(int id, ENGINE *e);
+SSL2_IMPORT EVP_PKEY_CTX *EVP_PKEY_CTX_dup(EVP_PKEY_CTX *ctx);
+SSL2_IMPORT void EVP_PKEY_CTX_free(EVP_PKEY_CTX *ctx);
 
-int EVP_PKEY_CTX_ctrl(EVP_PKEY_CTX *ctx, int keytype, int optype,
+SSL2_IMPORT int EVP_PKEY_CTX_ctrl(EVP_PKEY_CTX *ctx, int keytype, int optype,
                       int cmd, int p1, void *p2);
-int EVP_PKEY_CTX_ctrl_str(EVP_PKEY_CTX *ctx, const char *type,
+SSL2_IMPORT int EVP_PKEY_CTX_ctrl_str(EVP_PKEY_CTX *ctx, const char *type,
                           const char *value);
 
-int EVP_PKEY_CTX_get_operation(EVP_PKEY_CTX *ctx);
-void EVP_PKEY_CTX_set0_keygen_info(EVP_PKEY_CTX *ctx, int *dat, int datlen);
+SSL2_IMPORT int EVP_PKEY_CTX_get_operation(EVP_PKEY_CTX *ctx);
+SSL2_IMPORT void EVP_PKEY_CTX_set0_keygen_info(EVP_PKEY_CTX *ctx, int *dat, int datlen);
 
-EVP_PKEY *EVP_PKEY_new_mac_key(int type, ENGINE *e,
+SSL2_IMPORT EVP_PKEY *EVP_PKEY_new_mac_key(int type, ENGINE *e,
                                const unsigned char *key, int keylen);
 
-void EVP_PKEY_CTX_set_data(EVP_PKEY_CTX *ctx, void *data);
-void *EVP_PKEY_CTX_get_data(EVP_PKEY_CTX *ctx);
-EVP_PKEY *EVP_PKEY_CTX_get0_pkey(EVP_PKEY_CTX *ctx);
+SSL2_IMPORT void EVP_PKEY_CTX_set_data(EVP_PKEY_CTX *ctx, void *data);
+SSL2_IMPORT void *EVP_PKEY_CTX_get_data(EVP_PKEY_CTX *ctx);
+SSL2_IMPORT EVP_PKEY *EVP_PKEY_CTX_get0_pkey(EVP_PKEY_CTX *ctx);
 
-EVP_PKEY *EVP_PKEY_CTX_get0_peerkey(EVP_PKEY_CTX *ctx);
+SSL2_IMPORT EVP_PKEY *EVP_PKEY_CTX_get0_peerkey(EVP_PKEY_CTX *ctx);
 
-void EVP_PKEY_CTX_set_app_data(EVP_PKEY_CTX *ctx, void *data);
-void *EVP_PKEY_CTX_get_app_data(EVP_PKEY_CTX *ctx);
+SSL2_IMPORT void EVP_PKEY_CTX_set_app_data(EVP_PKEY_CTX *ctx, void *data);
+SSL2_IMPORT void *EVP_PKEY_CTX_get_app_data(EVP_PKEY_CTX *ctx);
 
-int EVP_PKEY_sign_init(EVP_PKEY_CTX *ctx);
-int EVP_PKEY_sign(EVP_PKEY_CTX *ctx,
+SSL2_IMPORT int EVP_PKEY_sign_init(EVP_PKEY_CTX *ctx);
+SSL2_IMPORT int EVP_PKEY_sign(EVP_PKEY_CTX *ctx,
                   unsigned char *sig, size_t *siglen,
                   const unsigned char *tbs, size_t tbslen);
-int EVP_PKEY_verify_init(EVP_PKEY_CTX *ctx);
-int EVP_PKEY_verify(EVP_PKEY_CTX *ctx,
+SSL2_IMPORT int EVP_PKEY_verify_init(EVP_PKEY_CTX *ctx);
+SSL2_IMPORT int EVP_PKEY_verify(EVP_PKEY_CTX *ctx,
                     const unsigned char *sig, size_t siglen,
                     const unsigned char *tbs, size_t tbslen);
-int EVP_PKEY_verify_recover_init(EVP_PKEY_CTX *ctx);
-int EVP_PKEY_verify_recover(EVP_PKEY_CTX *ctx,
+SSL2_IMPORT int EVP_PKEY_verify_recover_init(EVP_PKEY_CTX *ctx);
+SSL2_IMPORT int EVP_PKEY_verify_recover(EVP_PKEY_CTX *ctx,
                             unsigned char *rout, size_t *routlen,
                             const unsigned char *sig, size_t siglen);
-int EVP_PKEY_encrypt_init(EVP_PKEY_CTX *ctx);
-int EVP_PKEY_encrypt(EVP_PKEY_CTX *ctx,
+SSL2_IMPORT int EVP_PKEY_encrypt_init(EVP_PKEY_CTX *ctx);
+SSL2_IMPORT int EVP_PKEY_encrypt(EVP_PKEY_CTX *ctx,
                      unsigned char *out, size_t *outlen,
                      const unsigned char *in, size_t inlen);
-int EVP_PKEY_decrypt_init(EVP_PKEY_CTX *ctx);
-int EVP_PKEY_decrypt(EVP_PKEY_CTX *ctx,
+SSL2_IMPORT int EVP_PKEY_decrypt_init(EVP_PKEY_CTX *ctx);
+SSL2_IMPORT int EVP_PKEY_decrypt(EVP_PKEY_CTX *ctx,
                      unsigned char *out, size_t *outlen,
                      const unsigned char *in, size_t inlen);
 
-int EVP_PKEY_derive_init(EVP_PKEY_CTX *ctx);
-int EVP_PKEY_derive_set_peer(EVP_PKEY_CTX *ctx, EVP_PKEY *peer);
-int EVP_PKEY_derive(EVP_PKEY_CTX *ctx, unsigned char *key, size_t *keylen);
+SSL2_IMPORT int EVP_PKEY_derive_init(EVP_PKEY_CTX *ctx);
+SSL2_IMPORT int EVP_PKEY_derive_set_peer(EVP_PKEY_CTX *ctx, EVP_PKEY *peer);
+SSL2_IMPORT int EVP_PKEY_derive(EVP_PKEY_CTX *ctx, unsigned char *key, size_t *keylen);
 
 typedef int EVP_PKEY_gen_cb (EVP_PKEY_CTX *ctx);
 
-int EVP_PKEY_paramgen_init(EVP_PKEY_CTX *ctx);
-int EVP_PKEY_paramgen(EVP_PKEY_CTX *ctx, EVP_PKEY **ppkey);
-int EVP_PKEY_keygen_init(EVP_PKEY_CTX *ctx);
-int EVP_PKEY_keygen(EVP_PKEY_CTX *ctx, EVP_PKEY **ppkey);
+SSL2_IMPORT int EVP_PKEY_paramgen_init(EVP_PKEY_CTX *ctx);
+SSL2_IMPORT int EVP_PKEY_paramgen(EVP_PKEY_CTX *ctx, EVP_PKEY **ppkey);
+SSL2_IMPORT int EVP_PKEY_keygen_init(EVP_PKEY_CTX *ctx);
+SSL2_IMPORT int EVP_PKEY_keygen(EVP_PKEY_CTX *ctx, EVP_PKEY **ppkey);
 
-void EVP_PKEY_CTX_set_cb(EVP_PKEY_CTX *ctx, EVP_PKEY_gen_cb *cb);
-EVP_PKEY_gen_cb *EVP_PKEY_CTX_get_cb(EVP_PKEY_CTX *ctx);
+SSL2_IMPORT void EVP_PKEY_CTX_set_cb(EVP_PKEY_CTX *ctx, EVP_PKEY_gen_cb *cb);
+SSL2_IMPORT EVP_PKEY_gen_cb *EVP_PKEY_CTX_get_cb(EVP_PKEY_CTX *ctx);
 
-int EVP_PKEY_CTX_get_keygen_info(EVP_PKEY_CTX *ctx, int idx);
+SSL2_IMPORT int EVP_PKEY_CTX_get_keygen_info(EVP_PKEY_CTX *ctx, int idx);
 
-void EVP_PKEY_meth_set_init(EVP_PKEY_METHOD *pmeth,
+SSL2_IMPORT void EVP_PKEY_meth_set_init(EVP_PKEY_METHOD *pmeth,
                             int (*init) (EVP_PKEY_CTX *ctx));
 
-void EVP_PKEY_meth_set_copy(EVP_PKEY_METHOD *pmeth,
+SSL2_IMPORT void EVP_PKEY_meth_set_copy(EVP_PKEY_METHOD *pmeth,
                             int (*copy) (EVP_PKEY_CTX *dst,
                                          EVP_PKEY_CTX *src));
 
-void EVP_PKEY_meth_set_cleanup(EVP_PKEY_METHOD *pmeth,
+SSL2_IMPORT void EVP_PKEY_meth_set_cleanup(EVP_PKEY_METHOD *pmeth,
                                void (*cleanup) (EVP_PKEY_CTX *ctx));
 
-void EVP_PKEY_meth_set_paramgen(EVP_PKEY_METHOD *pmeth,
+SSL2_IMPORT void EVP_PKEY_meth_set_paramgen(EVP_PKEY_METHOD *pmeth,
                                 int (*paramgen_init) (EVP_PKEY_CTX *ctx),
                                 int (*paramgen) (EVP_PKEY_CTX *ctx,
                                                  EVP_PKEY *pkey));
 
-void EVP_PKEY_meth_set_keygen(EVP_PKEY_METHOD *pmeth,
+SSL2_IMPORT void EVP_PKEY_meth_set_keygen(EVP_PKEY_METHOD *pmeth,
                               int (*keygen_init) (EVP_PKEY_CTX *ctx),
                               int (*keygen) (EVP_PKEY_CTX *ctx,
                                              EVP_PKEY *pkey));
 
-void EVP_PKEY_meth_set_sign(EVP_PKEY_METHOD *pmeth,
+SSL2_IMPORT void EVP_PKEY_meth_set_sign(EVP_PKEY_METHOD *pmeth,
                             int (*sign_init) (EVP_PKEY_CTX *ctx),
                             int (*sign) (EVP_PKEY_CTX *ctx,
                                          unsigned char *sig, size_t *siglen,
                                          const unsigned char *tbs,
                                          size_t tbslen));
 
-void EVP_PKEY_meth_set_verify(EVP_PKEY_METHOD *pmeth,
+SSL2_IMPORT void EVP_PKEY_meth_set_verify(EVP_PKEY_METHOD *pmeth,
                               int (*verify_init) (EVP_PKEY_CTX *ctx),
                               int (*verify) (EVP_PKEY_CTX *ctx,
                                              const unsigned char *sig,
@@ -1306,7 +1306,7 @@ void EVP_PKEY_meth_set_verify(EVP_PKEY_METHOD *pmeth,
                                              const unsigned char *tbs,
                                              size_t tbslen));
 
-void EVP_PKEY_meth_set_verify_recover(EVP_PKEY_METHOD *pmeth,
+SSL2_IMPORT void EVP_PKEY_meth_set_verify_recover(EVP_PKEY_METHOD *pmeth,
                                       int (*verify_recover_init) (EVP_PKEY_CTX
                                                                   *ctx),
                                       int (*verify_recover) (EVP_PKEY_CTX
@@ -1318,7 +1318,7 @@ void EVP_PKEY_meth_set_verify_recover(EVP_PKEY_METHOD *pmeth,
                                                              char *tbs,
                                                              size_t tbslen));
 
-void EVP_PKEY_meth_set_signctx(EVP_PKEY_METHOD *pmeth,
+SSL2_IMPORT void EVP_PKEY_meth_set_signctx(EVP_PKEY_METHOD *pmeth,
                                int (*signctx_init) (EVP_PKEY_CTX *ctx,
                                                     EVP_MD_CTX *mctx),
                                int (*signctx) (EVP_PKEY_CTX *ctx,
@@ -1326,7 +1326,7 @@ void EVP_PKEY_meth_set_signctx(EVP_PKEY_METHOD *pmeth,
                                                size_t *siglen,
                                                EVP_MD_CTX *mctx));
 
-void EVP_PKEY_meth_set_verifyctx(EVP_PKEY_METHOD *pmeth,
+SSL2_IMPORT void EVP_PKEY_meth_set_verifyctx(EVP_PKEY_METHOD *pmeth,
                                  int (*verifyctx_init) (EVP_PKEY_CTX *ctx,
                                                         EVP_MD_CTX *mctx),
                                  int (*verifyctx) (EVP_PKEY_CTX *ctx,
@@ -1334,7 +1334,7 @@ void EVP_PKEY_meth_set_verifyctx(EVP_PKEY_METHOD *pmeth,
                                                    int siglen,
                                                    EVP_MD_CTX *mctx));
 
-void EVP_PKEY_meth_set_encrypt(EVP_PKEY_METHOD *pmeth,
+SSL2_IMPORT void EVP_PKEY_meth_set_encrypt(EVP_PKEY_METHOD *pmeth,
                                int (*encrypt_init) (EVP_PKEY_CTX *ctx),
                                int (*encryptfn) (EVP_PKEY_CTX *ctx,
                                                  unsigned char *out,
@@ -1342,7 +1342,7 @@ void EVP_PKEY_meth_set_encrypt(EVP_PKEY_METHOD *pmeth,
                                                  const unsigned char *in,
                                                  size_t inlen));
 
-void EVP_PKEY_meth_set_decrypt(EVP_PKEY_METHOD *pmeth,
+SSL2_IMPORT void EVP_PKEY_meth_set_decrypt(EVP_PKEY_METHOD *pmeth,
                                int (*decrypt_init) (EVP_PKEY_CTX *ctx),
                                int (*decrypt) (EVP_PKEY_CTX *ctx,
                                                unsigned char *out,
@@ -1350,47 +1350,47 @@ void EVP_PKEY_meth_set_decrypt(EVP_PKEY_METHOD *pmeth,
                                                const unsigned char *in,
                                                size_t inlen));
 
-void EVP_PKEY_meth_set_derive(EVP_PKEY_METHOD *pmeth,
+SSL2_IMPORT void EVP_PKEY_meth_set_derive(EVP_PKEY_METHOD *pmeth,
                               int (*derive_init) (EVP_PKEY_CTX *ctx),
                               int (*derive) (EVP_PKEY_CTX *ctx,
                                              unsigned char *key,
                                              size_t *keylen));
 
-void EVP_PKEY_meth_set_ctrl(EVP_PKEY_METHOD *pmeth,
+SSL2_IMPORT void EVP_PKEY_meth_set_ctrl(EVP_PKEY_METHOD *pmeth,
                             int (*ctrl) (EVP_PKEY_CTX *ctx, int type, int p1,
                                          void *p2),
                             int (*ctrl_str) (EVP_PKEY_CTX *ctx,
                                              const char *type,
                                              const char *value));
 
-void EVP_PKEY_meth_get_init(EVP_PKEY_METHOD *pmeth,
+SSL2_IMPORT void EVP_PKEY_meth_get_init(EVP_PKEY_METHOD *pmeth,
                             int (**pinit) (EVP_PKEY_CTX *ctx));
 
-void EVP_PKEY_meth_get_copy(EVP_PKEY_METHOD *pmeth,
+SSL2_IMPORT void EVP_PKEY_meth_get_copy(EVP_PKEY_METHOD *pmeth,
                             int (**pcopy) (EVP_PKEY_CTX *dst,
                                            EVP_PKEY_CTX *src));
 
-void EVP_PKEY_meth_get_cleanup(EVP_PKEY_METHOD *pmeth,
+SSL2_IMPORT void EVP_PKEY_meth_get_cleanup(EVP_PKEY_METHOD *pmeth,
                                void (**pcleanup) (EVP_PKEY_CTX *ctx));
 
-void EVP_PKEY_meth_get_paramgen(EVP_PKEY_METHOD *pmeth,
+SSL2_IMPORT void EVP_PKEY_meth_get_paramgen(EVP_PKEY_METHOD *pmeth,
                                 int (**pparamgen_init) (EVP_PKEY_CTX *ctx),
                                 int (**pparamgen) (EVP_PKEY_CTX *ctx,
                                                    EVP_PKEY *pkey));
 
-void EVP_PKEY_meth_get_keygen(EVP_PKEY_METHOD *pmeth,
+SSL2_IMPORT void EVP_PKEY_meth_get_keygen(EVP_PKEY_METHOD *pmeth,
                               int (**pkeygen_init) (EVP_PKEY_CTX *ctx),
                               int (**pkeygen) (EVP_PKEY_CTX *ctx,
                                                EVP_PKEY *pkey));
 
-void EVP_PKEY_meth_get_sign(EVP_PKEY_METHOD *pmeth,
+SSL2_IMPORT void EVP_PKEY_meth_get_sign(EVP_PKEY_METHOD *pmeth,
                             int (**psign_init) (EVP_PKEY_CTX *ctx),
                             int (**psign) (EVP_PKEY_CTX *ctx,
                                            unsigned char *sig, size_t *siglen,
                                            const unsigned char *tbs,
                                            size_t tbslen));
 
-void EVP_PKEY_meth_get_verify(EVP_PKEY_METHOD *pmeth,
+SSL2_IMPORT void EVP_PKEY_meth_get_verify(EVP_PKEY_METHOD *pmeth,
                               int (**pverify_init) (EVP_PKEY_CTX *ctx),
                               int (**pverify) (EVP_PKEY_CTX *ctx,
                                                const unsigned char *sig,
@@ -1398,7 +1398,7 @@ void EVP_PKEY_meth_get_verify(EVP_PKEY_METHOD *pmeth,
                                                const unsigned char *tbs,
                                                size_t tbslen));
 
-void EVP_PKEY_meth_get_verify_recover(EVP_PKEY_METHOD *pmeth,
+SSL2_IMPORT void EVP_PKEY_meth_get_verify_recover(EVP_PKEY_METHOD *pmeth,
                                       int (**pverify_recover_init) (EVP_PKEY_CTX
                                                                     *ctx),
                                       int (**pverify_recover) (EVP_PKEY_CTX
@@ -1410,7 +1410,7 @@ void EVP_PKEY_meth_get_verify_recover(EVP_PKEY_METHOD *pmeth,
                                                                char *tbs,
                                                                size_t tbslen));
 
-void EVP_PKEY_meth_get_signctx(EVP_PKEY_METHOD *pmeth,
+SSL2_IMPORT void EVP_PKEY_meth_get_signctx(EVP_PKEY_METHOD *pmeth,
                                int (**psignctx_init) (EVP_PKEY_CTX *ctx,
                                                       EVP_MD_CTX *mctx),
                                int (**psignctx) (EVP_PKEY_CTX *ctx,
@@ -1418,7 +1418,7 @@ void EVP_PKEY_meth_get_signctx(EVP_PKEY_METHOD *pmeth,
                                                  size_t *siglen,
                                                  EVP_MD_CTX *mctx));
 
-void EVP_PKEY_meth_get_verifyctx(EVP_PKEY_METHOD *pmeth,
+SSL2_IMPORT void EVP_PKEY_meth_get_verifyctx(EVP_PKEY_METHOD *pmeth,
                                  int (**pverifyctx_init) (EVP_PKEY_CTX *ctx,
                                                           EVP_MD_CTX *mctx),
                                  int (**pverifyctx) (EVP_PKEY_CTX *ctx,
@@ -1426,7 +1426,7 @@ void EVP_PKEY_meth_get_verifyctx(EVP_PKEY_METHOD *pmeth,
                                                      int siglen,
                                                      EVP_MD_CTX *mctx));
 
-void EVP_PKEY_meth_get_encrypt(EVP_PKEY_METHOD *pmeth,
+SSL2_IMPORT void EVP_PKEY_meth_get_encrypt(EVP_PKEY_METHOD *pmeth,
                                int (**pencrypt_init) (EVP_PKEY_CTX *ctx),
                                int (**pencryptfn) (EVP_PKEY_CTX *ctx,
                                                    unsigned char *out,
@@ -1434,7 +1434,7 @@ void EVP_PKEY_meth_get_encrypt(EVP_PKEY_METHOD *pmeth,
                                                    const unsigned char *in,
                                                    size_t inlen));
 
-void EVP_PKEY_meth_get_decrypt(EVP_PKEY_METHOD *pmeth,
+SSL2_IMPORT void EVP_PKEY_meth_get_decrypt(EVP_PKEY_METHOD *pmeth,
                                int (**pdecrypt_init) (EVP_PKEY_CTX *ctx),
                                int (**pdecrypt) (EVP_PKEY_CTX *ctx,
                                                  unsigned char *out,
@@ -1442,20 +1442,20 @@ void EVP_PKEY_meth_get_decrypt(EVP_PKEY_METHOD *pmeth,
                                                  const unsigned char *in,
                                                  size_t inlen));
 
-void EVP_PKEY_meth_get_derive(EVP_PKEY_METHOD *pmeth,
+SSL2_IMPORT void EVP_PKEY_meth_get_derive(EVP_PKEY_METHOD *pmeth,
                               int (**pderive_init) (EVP_PKEY_CTX *ctx),
                               int (**pderive) (EVP_PKEY_CTX *ctx,
                                                unsigned char *key,
                                                size_t *keylen));
 
-void EVP_PKEY_meth_get_ctrl(EVP_PKEY_METHOD *pmeth,
+SSL2_IMPORT void EVP_PKEY_meth_get_ctrl(EVP_PKEY_METHOD *pmeth,
                             int (**pctrl) (EVP_PKEY_CTX *ctx, int type, int p1,
                                            void *p2),
                             int (**pctrl_str) (EVP_PKEY_CTX *ctx,
                                                const char *type,
                                                const char *value));
 
-void EVP_add_alg_module(void);
+SSL2_IMPORT void EVP_add_alg_module(void);
 
 /* BEGIN ERROR CODES */
 /*
@@ -1463,7 +1463,7 @@ void EVP_add_alg_module(void);
  * made after this point may be overwritten when the script is next run.
  */
 
-void ERR_load_EVP_strings(void);
+SSL2_IMPORT void ERR_load_EVP_strings(void);
 
 /* Error codes for the EVP functions. */
 

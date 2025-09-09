@@ -181,7 +181,7 @@ static const SSL_METHOD *ssl3_get_client_method(int ver)
         return (NULL);
 }
 
-EXPORT_C IMPLEMENT_ssl3_meth_func(SSLv3_client_method,
+SSL2_EXPORT IMPLEMENT_ssl3_meth_func(SSLv3_client_method,
                          ssl_undefined_function,
                          ssl3_connect, ssl3_get_client_method)
 #endif

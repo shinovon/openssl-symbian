@@ -1061,137 +1061,137 @@ struct openssl_ssl_test_functions {
 
 # ifndef OPENSSL_UNIT_TEST
 
-IMPORT_C void ssl_clear_cipher_ctx(SSL *s);
-IMPORT_C int ssl_clear_bad_session(SSL *s);
-IMPORT_C CERT *ssl_cert_new(void);
-IMPORT_C CERT *ssl_cert_dup(CERT *cert);
-IMPORT_C void ssl_cert_set_default_md(CERT *cert);
-IMPORT_C int ssl_cert_inst(CERT **o);
-IMPORT_C void ssl_cert_clear_certs(CERT *c);
-IMPORT_C void ssl_cert_free(CERT *c);
-IMPORT_C SESS_CERT *ssl_sess_cert_new(void);
-IMPORT_C void ssl_sess_cert_free(SESS_CERT *sc);
-IMPORT_C int ssl_set_peer_cert_type(SESS_CERT *c, int type);
-IMPORT_C int ssl_get_new_session(SSL *s, int session);
-IMPORT_C int ssl_get_prev_session(SSL *s, unsigned char *session, int len,
+SSL2_IMPORT void ssl_clear_cipher_ctx(SSL *s);
+SSL2_IMPORT int ssl_clear_bad_session(SSL *s);
+SSL2_IMPORT CERT *ssl_cert_new(void);
+SSL2_IMPORT CERT *ssl_cert_dup(CERT *cert);
+SSL2_IMPORT void ssl_cert_set_default_md(CERT *cert);
+SSL2_IMPORT int ssl_cert_inst(CERT **o);
+SSL2_IMPORT void ssl_cert_clear_certs(CERT *c);
+SSL2_IMPORT void ssl_cert_free(CERT *c);
+SSL2_IMPORT SESS_CERT *ssl_sess_cert_new(void);
+SSL2_IMPORT void ssl_sess_cert_free(SESS_CERT *sc);
+SSL2_IMPORT int ssl_set_peer_cert_type(SESS_CERT *c, int type);
+SSL2_IMPORT int ssl_get_new_session(SSL *s, int session);
+SSL2_IMPORT int ssl_get_prev_session(SSL *s, unsigned char *session, int len,
                          const unsigned char *limit);
-IMPORT_C SSL_SESSION *ssl_session_dup(SSL_SESSION *src, int ticket);
-IMPORT_C int ssl_cipher_id_cmp(const SSL_CIPHER *a, const SSL_CIPHER *b);
-IMPORT_C DECLARE_OBJ_BSEARCH_GLOBAL_CMP_FN(SSL_CIPHER, SSL_CIPHER, ssl_cipher_id);
-IMPORT_C int ssl_cipher_ptr_id_cmp(const SSL_CIPHER *const *ap,
+SSL2_IMPORT SSL_SESSION *ssl_session_dup(SSL_SESSION *src, int ticket);
+SSL2_IMPORT int ssl_cipher_id_cmp(const SSL_CIPHER *a, const SSL_CIPHER *b);
+SSL2_IMPORT DECLARE_OBJ_BSEARCH_GLOBAL_CMP_FN(SSL_CIPHER, SSL_CIPHER, ssl_cipher_id);
+SSL2_IMPORT int ssl_cipher_ptr_id_cmp(const SSL_CIPHER *const *ap,
                           const SSL_CIPHER *const *bp);
-IMPORT_C STACK_OF(SSL_CIPHER) *ssl_bytes_to_cipher_list(SSL *s, unsigned char *p,
+SSL2_IMPORT STACK_OF(SSL_CIPHER) *ssl_bytes_to_cipher_list(SSL *s, unsigned char *p,
                                                int num,
                                                STACK_OF(SSL_CIPHER) **skp);
-IMPORT_C int ssl_cipher_list_to_bytes(SSL *s, STACK_OF(SSL_CIPHER) *sk,
+SSL2_IMPORT int ssl_cipher_list_to_bytes(SSL *s, STACK_OF(SSL_CIPHER) *sk,
                              unsigned char *p,
                              int (*put_cb) (const SSL_CIPHER *,
                                             unsigned char *));
-IMPORT_C STACK_OF(SSL_CIPHER) *ssl_create_cipher_list(const SSL_METHOD *meth,
+SSL2_IMPORT STACK_OF(SSL_CIPHER) *ssl_create_cipher_list(const SSL_METHOD *meth,
                                              STACK_OF(SSL_CIPHER) **pref,
                                              STACK_OF(SSL_CIPHER) **sorted,
                                              const char *rule_str, CERT *c);
-IMPORT_C void ssl_update_cache(SSL *s, int mode);
-IMPORT_C int ssl_cipher_get_evp(const SSL_SESSION *s, const EVP_CIPHER **enc,
+SSL2_IMPORT void ssl_update_cache(SSL *s, int mode);
+SSL2_IMPORT int ssl_cipher_get_evp(const SSL_SESSION *s, const EVP_CIPHER **enc,
                        const EVP_MD **md, int *mac_pkey_type,
                        int *mac_secret_size, SSL_COMP **comp);
-IMPORT_C int ssl_get_handshake_digest(int i, long *mask, const EVP_MD **md);
-IMPORT_C int ssl_cipher_get_cert_index(const SSL_CIPHER *c);
-IMPORT_C const SSL_CIPHER *ssl_get_cipher_by_char(SSL *ssl, const unsigned char *ptr);
-IMPORT_C int ssl_cert_set0_chain(CERT *c, STACK_OF(X509) *chain);
-IMPORT_C int ssl_cert_set1_chain(CERT *c, STACK_OF(X509) *chain);
-IMPORT_C int ssl_cert_add0_chain_cert(CERT *c, X509 *x);
-IMPORT_C int ssl_cert_add1_chain_cert(CERT *c, X509 *x);
-IMPORT_C int ssl_cert_select_current(CERT *c, X509 *x);
-IMPORT_C int ssl_cert_set_current(CERT *c, long arg);
-IMPORT_C X509 *ssl_cert_get0_next_certificate(CERT *c, int first);
-IMPORT_C void ssl_cert_set_cert_cb(CERT *c, int (*cb) (SSL *ssl, void *arg),
+SSL2_IMPORT int ssl_get_handshake_digest(int i, long *mask, const EVP_MD **md);
+SSL2_IMPORT int ssl_cipher_get_cert_index(const SSL_CIPHER *c);
+SSL2_IMPORT const SSL_CIPHER *ssl_get_cipher_by_char(SSL *ssl, const unsigned char *ptr);
+SSL2_IMPORT int ssl_cert_set0_chain(CERT *c, STACK_OF(X509) *chain);
+SSL2_IMPORT int ssl_cert_set1_chain(CERT *c, STACK_OF(X509) *chain);
+SSL2_IMPORT int ssl_cert_add0_chain_cert(CERT *c, X509 *x);
+SSL2_IMPORT int ssl_cert_add1_chain_cert(CERT *c, X509 *x);
+SSL2_IMPORT int ssl_cert_select_current(CERT *c, X509 *x);
+SSL2_IMPORT int ssl_cert_set_current(CERT *c, long arg);
+SSL2_IMPORT X509 *ssl_cert_get0_next_certificate(CERT *c, int first);
+SSL2_IMPORT void ssl_cert_set_cert_cb(CERT *c, int (*cb) (SSL *ssl, void *arg),
                           void *arg);
 
-IMPORT_C int ssl_verify_cert_chain(SSL *s, STACK_OF(X509) *sk);
-IMPORT_C int ssl_add_cert_chain(SSL *s, CERT_PKEY *cpk, unsigned long *l);
-IMPORT_C int ssl_build_cert_chain(CERT *c, X509_STORE *chain_store, int flags);
-IMPORT_C int ssl_cert_set_cert_store(CERT *c, X509_STORE *store, int chain, int ref);
-IMPORT_C int ssl_undefined_function(SSL *s);
-IMPORT_C int ssl_undefined_void_function(void);
-IMPORT_C int ssl_undefined_const_function(const SSL *s);
-IMPORT_C CERT_PKEY *ssl_get_server_send_pkey(const SSL *s);
+SSL2_IMPORT int ssl_verify_cert_chain(SSL *s, STACK_OF(X509) *sk);
+SSL2_IMPORT int ssl_add_cert_chain(SSL *s, CERT_PKEY *cpk, unsigned long *l);
+SSL2_IMPORT int ssl_build_cert_chain(CERT *c, X509_STORE *chain_store, int flags);
+SSL2_IMPORT int ssl_cert_set_cert_store(CERT *c, X509_STORE *store, int chain, int ref);
+SSL2_IMPORT int ssl_undefined_function(SSL *s);
+SSL2_IMPORT int ssl_undefined_void_function(void);
+SSL2_IMPORT int ssl_undefined_const_function(const SSL *s);
+SSL2_IMPORT CERT_PKEY *ssl_get_server_send_pkey(const SSL *s);
 #  ifndef OPENSSL_NO_TLSEXT
-IMPORT_C int ssl_get_server_cert_serverinfo(SSL *s, const unsigned char **serverinfo,
+SSL2_IMPORT int ssl_get_server_cert_serverinfo(SSL *s, const unsigned char **serverinfo,
                                    size_t *serverinfo_length);
 #  endif
-IMPORT_C EVP_PKEY *ssl_get_sign_pkey(SSL *s, const SSL_CIPHER *c, const EVP_MD **pmd);
-IMPORT_C int ssl_cert_type(X509 *x, EVP_PKEY *pkey);
-IMPORT_C void ssl_set_cert_masks(CERT *c, const SSL_CIPHER *cipher);
-IMPORT_C STACK_OF(SSL_CIPHER) *ssl_get_ciphers_by_id(SSL *s);
-IMPORT_C int ssl_verify_alarm_type(long type);
-IMPORT_C void ssl_load_ciphers(void);
-IMPORT_C int ssl_fill_hello_random(SSL *s, int server, unsigned char *field, int len);
+SSL2_IMPORT EVP_PKEY *ssl_get_sign_pkey(SSL *s, const SSL_CIPHER *c, const EVP_MD **pmd);
+SSL2_IMPORT int ssl_cert_type(X509 *x, EVP_PKEY *pkey);
+SSL2_IMPORT void ssl_set_cert_masks(CERT *c, const SSL_CIPHER *cipher);
+SSL2_IMPORT STACK_OF(SSL_CIPHER) *ssl_get_ciphers_by_id(SSL *s);
+SSL2_IMPORT int ssl_verify_alarm_type(long type);
+SSL2_IMPORT void ssl_load_ciphers(void);
+SSL2_IMPORT int ssl_fill_hello_random(SSL *s, int server, unsigned char *field, int len);
 
-IMPORT_C int ssl2_enc_init(SSL *s, int client);
-IMPORT_C int ssl2_generate_key_material(SSL *s);
-IMPORT_C int ssl2_enc(SSL *s, int send_data);
-IMPORT_C void ssl2_mac(SSL *s, unsigned char *mac, int send_data);
-IMPORT_C const SSL_CIPHER *ssl2_get_cipher_by_char(const unsigned char *p);
-IMPORT_C int ssl2_put_cipher_by_char(const SSL_CIPHER *c, unsigned char *p);
-IMPORT_C int ssl2_part_read(SSL *s, unsigned long f, int i);
-IMPORT_C int ssl2_do_write(SSL *s);
-IMPORT_C int ssl2_set_certificate(SSL *s, int type, int len,
+SSL2_IMPORT int ssl2_enc_init(SSL *s, int client);
+SSL2_IMPORT int ssl2_generate_key_material(SSL *s);
+SSL2_IMPORT int ssl2_enc(SSL *s, int send_data);
+SSL2_IMPORT void ssl2_mac(SSL *s, unsigned char *mac, int send_data);
+SSL2_IMPORT const SSL_CIPHER *ssl2_get_cipher_by_char(const unsigned char *p);
+SSL2_IMPORT int ssl2_put_cipher_by_char(const SSL_CIPHER *c, unsigned char *p);
+SSL2_IMPORT int ssl2_part_read(SSL *s, unsigned long f, int i);
+SSL2_IMPORT int ssl2_do_write(SSL *s);
+SSL2_IMPORT int ssl2_set_certificate(SSL *s, int type, int len,
                          const unsigned char *data);
-IMPORT_C void ssl2_return_error(SSL *s, int reason);
-IMPORT_C void ssl2_write_error(SSL *s);
-IMPORT_C int ssl2_num_ciphers(void);
-IMPORT_C const SSL_CIPHER *ssl2_get_cipher(unsigned int u);
-IMPORT_C int ssl2_new(SSL *s);
-IMPORT_C void ssl2_free(SSL *s);
-IMPORT_C int ssl2_accept(SSL *s);
-IMPORT_C int ssl2_connect(SSL *s);
-IMPORT_C int ssl2_read(SSL *s, void *buf, int len);
-IMPORT_C int ssl2_peek(SSL *s, void *buf, int len);
-IMPORT_C int ssl2_write(SSL *s, const void *buf, int len);
-IMPORT_C int ssl2_shutdown(SSL *s);
-IMPORT_C void ssl2_clear(SSL *s);
-IMPORT_C long ssl2_ctrl(SSL *s, int cmd, long larg, void *parg);
-IMPORT_C long ssl2_ctx_ctrl(SSL_CTX *s, int cmd, long larg, void *parg);
-IMPORT_C long ssl2_callback_ctrl(SSL *s, int cmd, void (*fp) (void));
-IMPORT_C long ssl2_ctx_callback_ctrl(SSL_CTX *s, int cmd, void (*fp) (void));
-IMPORT_C int ssl2_pending(const SSL *s);
-IMPORT_C long ssl2_default_timeout(void);
+SSL2_IMPORT void ssl2_return_error(SSL *s, int reason);
+SSL2_IMPORT void ssl2_write_error(SSL *s);
+SSL2_IMPORT int ssl2_num_ciphers(void);
+SSL2_IMPORT const SSL_CIPHER *ssl2_get_cipher(unsigned int u);
+SSL2_IMPORT int ssl2_new(SSL *s);
+SSL2_IMPORT void ssl2_free(SSL *s);
+SSL2_IMPORT int ssl2_accept(SSL *s);
+SSL2_IMPORT int ssl2_connect(SSL *s);
+SSL2_IMPORT int ssl2_read(SSL *s, void *buf, int len);
+SSL2_IMPORT int ssl2_peek(SSL *s, void *buf, int len);
+SSL2_IMPORT int ssl2_write(SSL *s, const void *buf, int len);
+SSL2_IMPORT int ssl2_shutdown(SSL *s);
+SSL2_IMPORT void ssl2_clear(SSL *s);
+SSL2_IMPORT long ssl2_ctrl(SSL *s, int cmd, long larg, void *parg);
+SSL2_IMPORT long ssl2_ctx_ctrl(SSL_CTX *s, int cmd, long larg, void *parg);
+SSL2_IMPORT long ssl2_callback_ctrl(SSL *s, int cmd, void (*fp) (void));
+SSL2_IMPORT long ssl2_ctx_callback_ctrl(SSL_CTX *s, int cmd, void (*fp) (void));
+SSL2_IMPORT int ssl2_pending(const SSL *s);
+SSL2_IMPORT long ssl2_default_timeout(void);
 
-IMPORT_C const SSL_CIPHER *ssl3_get_cipher_by_char(const unsigned char *p);
-IMPORT_C int ssl3_put_cipher_by_char(const SSL_CIPHER *c, unsigned char *p);
-IMPORT_C int ssl3_init_finished_mac(SSL *s);
-IMPORT_C int ssl3_send_server_certificate(SSL *s);
-IMPORT_C int ssl3_send_newsession_ticket(SSL *s);
-IMPORT_C int ssl3_send_cert_status(SSL *s);
-IMPORT_C int ssl3_get_finished(SSL *s, int state_a, int state_b);
-IMPORT_C int ssl3_setup_key_block(SSL *s);
-IMPORT_C int ssl3_send_change_cipher_spec(SSL *s, int state_a, int state_b);
-IMPORT_C int ssl3_change_cipher_state(SSL *s, int which);
-IMPORT_C void ssl3_cleanup_key_block(SSL *s);
-IMPORT_C int ssl3_do_write(SSL *s, int type);
-IMPORT_C int ssl3_send_alert(SSL *s, int level, int desc);
-IMPORT_C int ssl3_generate_master_secret(SSL *s, unsigned char *out,
+SSL2_IMPORT const SSL_CIPHER *ssl3_get_cipher_by_char(const unsigned char *p);
+SSL2_IMPORT int ssl3_put_cipher_by_char(const SSL_CIPHER *c, unsigned char *p);
+SSL2_IMPORT int ssl3_init_finished_mac(SSL *s);
+SSL2_IMPORT int ssl3_send_server_certificate(SSL *s);
+SSL2_IMPORT int ssl3_send_newsession_ticket(SSL *s);
+SSL2_IMPORT int ssl3_send_cert_status(SSL *s);
+SSL2_IMPORT int ssl3_get_finished(SSL *s, int state_a, int state_b);
+SSL2_IMPORT int ssl3_setup_key_block(SSL *s);
+SSL2_IMPORT int ssl3_send_change_cipher_spec(SSL *s, int state_a, int state_b);
+SSL2_IMPORT int ssl3_change_cipher_state(SSL *s, int which);
+SSL2_IMPORT void ssl3_cleanup_key_block(SSL *s);
+SSL2_IMPORT int ssl3_do_write(SSL *s, int type);
+SSL2_IMPORT int ssl3_send_alert(SSL *s, int level, int desc);
+SSL2_IMPORT int ssl3_generate_master_secret(SSL *s, unsigned char *out,
                                 unsigned char *p, int len);
-IMPORT_C int ssl3_get_req_cert_type(SSL *s, unsigned char *p);
-IMPORT_C long ssl3_get_message(SSL *s, int st1, int stn, int mt, long max, int *ok);
-IMPORT_C int ssl3_send_finished(SSL *s, int a, int b, const char *sender, int slen);
-IMPORT_C int ssl3_num_ciphers(void);
-IMPORT_C const SSL_CIPHER *ssl3_get_cipher(unsigned int u);
-IMPORT_C int ssl3_renegotiate(SSL *ssl);
-IMPORT_C int ssl3_renegotiate_check(SSL *ssl);
-IMPORT_C int ssl3_dispatch_alert(SSL *s);
-IMPORT_C int ssl3_read_bytes(SSL *s, int type, unsigned char *buf, int len, int peek);
-IMPORT_C int ssl3_write_bytes(SSL *s, int type, const void *buf, int len);
-IMPORT_C int ssl3_final_finish_mac(SSL *s, const char *sender, int slen,
+SSL2_IMPORT int ssl3_get_req_cert_type(SSL *s, unsigned char *p);
+SSL2_IMPORT long ssl3_get_message(SSL *s, int st1, int stn, int mt, long max, int *ok);
+SSL2_IMPORT int ssl3_send_finished(SSL *s, int a, int b, const char *sender, int slen);
+SSL2_IMPORT int ssl3_num_ciphers(void);
+SSL2_IMPORT const SSL_CIPHER *ssl3_get_cipher(unsigned int u);
+SSL2_IMPORT int ssl3_renegotiate(SSL *ssl);
+SSL2_IMPORT int ssl3_renegotiate_check(SSL *ssl);
+SSL2_IMPORT int ssl3_dispatch_alert(SSL *s);
+SSL2_IMPORT int ssl3_read_bytes(SSL *s, int type, unsigned char *buf, int len, int peek);
+SSL2_IMPORT int ssl3_write_bytes(SSL *s, int type, const void *buf, int len);
+SSL2_IMPORT int ssl3_final_finish_mac(SSL *s, const char *sender, int slen,
                           unsigned char *p);
-IMPORT_C int ssl3_cert_verify_mac(SSL *s, int md_nid, unsigned char *p);
-IMPORT_C void ssl3_finish_mac(SSL *s, const unsigned char *buf, int len);
-IMPORT_C int ssl3_enc(SSL *s, int send_data);
-IMPORT_C int n_ssl3_mac(SSL *ssl, unsigned char *md, int send_data);
-IMPORT_C void ssl3_free_digest_list(SSL *s);
-IMPORT_C unsigned long ssl3_output_cert_chain(SSL *s, CERT_PKEY *cpk);
-IMPORT_C SSL_CIPHER *ssl3_choose_cipher(SSL *ssl, STACK_OF(SSL_CIPHER) *clnt,
+SSL2_IMPORT int ssl3_cert_verify_mac(SSL *s, int md_nid, unsigned char *p);
+SSL2_IMPORT void ssl3_finish_mac(SSL *s, const unsigned char *buf, int len);
+SSL2_IMPORT int ssl3_enc(SSL *s, int send_data);
+SSL2_IMPORT int n_ssl3_mac(SSL *ssl, unsigned char *md, int send_data);
+SSL2_IMPORT void ssl3_free_digest_list(SSL *s);
+SSL2_IMPORT unsigned long ssl3_output_cert_chain(SSL *s, CERT_PKEY *cpk);
+SSL2_IMPORT SSL_CIPHER *ssl3_choose_cipher(SSL *ssl, STACK_OF(SSL_CIPHER) *clnt,
                                STACK_OF(SSL_CIPHER) *srvr);
 int ssl3_setup_buffers(SSL *s);
 int ssl3_setup_read_buffer(SSL *s);

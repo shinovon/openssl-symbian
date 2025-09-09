@@ -143,7 +143,7 @@ static const SSL_METHOD *dtls1_get_client_method(int ver)
         return NULL;
 }
 
-EXPORT_C IMPLEMENT_dtls1_meth_func(DTLS1_VERSION,
+SSL2_EXPORT IMPLEMENT_dtls1_meth_func(DTLS1_VERSION,
                           DTLSv1_client_method,
                           ssl_undefined_function,
                           dtls1_connect,

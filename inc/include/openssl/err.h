@@ -317,59 +317,59 @@ typedef struct ERR_string_data_st {
     const char *string;
 } ERR_STRING_DATA;
 
-IMPORT_C void ERR_put_error(int lib, int func, int reason, const char *file, int line);
-IMPORT_C void ERR_set_error_data(char *data, int flags);
+SSL2_IMPORT void ERR_put_error(int lib, int func, int reason, const char *file, int line);
+SSL2_IMPORT void ERR_set_error_data(char *data, int flags);
 
-IMPORT_C unsigned long ERR_get_error(void);
-IMPORT_C unsigned long ERR_get_error_line(const char **file, int *line);
-IMPORT_C unsigned long ERR_get_error_line_data(const char **file, int *line,
+SSL2_IMPORT unsigned long ERR_get_error(void);
+SSL2_IMPORT unsigned long ERR_get_error_line(const char **file, int *line);
+SSL2_IMPORT unsigned long ERR_get_error_line_data(const char **file, int *line,
                                       const char **data, int *flags);
-IMPORT_C unsigned long ERR_peek_error(void);
-IMPORT_C unsigned long ERR_peek_error_line(const char **file, int *line);
-IMPORT_C unsigned long ERR_peek_error_line_data(const char **file, int *line,
+SSL2_IMPORT unsigned long ERR_peek_error(void);
+SSL2_IMPORT unsigned long ERR_peek_error_line(const char **file, int *line);
+SSL2_IMPORT unsigned long ERR_peek_error_line_data(const char **file, int *line,
                                        const char **data, int *flags);
-IMPORT_C unsigned long ERR_peek_last_error(void);
-IMPORT_C unsigned long ERR_peek_last_error_line(const char **file, int *line);
-IMPORT_C unsigned long ERR_peek_last_error_line_data(const char **file, int *line,
+SSL2_IMPORT unsigned long ERR_peek_last_error(void);
+SSL2_IMPORT unsigned long ERR_peek_last_error_line(const char **file, int *line);
+SSL2_IMPORT unsigned long ERR_peek_last_error_line_data(const char **file, int *line,
                                             const char **data, int *flags);
-IMPORT_C void ERR_clear_error(void);
-IMPORT_C char *ERR_error_string(unsigned long e, char *buf);
-IMPORT_C void ERR_error_string_n(unsigned long e, char *buf, size_t len);
-IMPORT_C const char *ERR_lib_error_string(unsigned long e);
-IMPORT_C const char *ERR_func_error_string(unsigned long e);
-IMPORT_C const char *ERR_reason_error_string(unsigned long e);
-IMPORT_C void ERR_print_errors_cb(int (*cb) (const char *str, size_t len, void *u),
+SSL2_IMPORT void ERR_clear_error(void);
+SSL2_IMPORT char *ERR_error_string(unsigned long e, char *buf);
+SSL2_IMPORT void ERR_error_string_n(unsigned long e, char *buf, size_t len);
+SSL2_IMPORT const char *ERR_lib_error_string(unsigned long e);
+SSL2_IMPORT const char *ERR_func_error_string(unsigned long e);
+SSL2_IMPORT const char *ERR_reason_error_string(unsigned long e);
+SSL2_IMPORT void ERR_print_errors_cb(int (*cb) (const char *str, size_t len, void *u),
                          void *u);
 # ifndef OPENSSL_NO_FP_API
-IMPORT_C void ERR_print_errors_fp(FILE *fp);
+SSL2_IMPORT void ERR_print_errors_fp(FILE *fp);
 # endif
 # ifndef OPENSSL_NO_BIO
-IMPORT_C void ERR_print_errors(BIO *bp);
+SSL2_IMPORT void ERR_print_errors(BIO *bp);
 # endif
-IMPORT_C void ERR_add_error_data(int num, ...);
-IMPORT_C void ERR_add_error_vdata(int num, va_list args);
-IMPORT_C void ERR_load_strings(int lib, ERR_STRING_DATA str[]);
-IMPORT_C void ERR_unload_strings(int lib, ERR_STRING_DATA str[]);
-IMPORT_C void ERR_load_ERR_strings(void);
-IMPORT_C void ERR_load_crypto_strings(void);
-IMPORT_C void ERR_free_strings(void);
+SSL2_IMPORT void ERR_add_error_data(int num, ...);
+SSL2_IMPORT void ERR_add_error_vdata(int num, va_list args);
+SSL2_IMPORT void ERR_load_strings(int lib, ERR_STRING_DATA str[]);
+SSL2_IMPORT void ERR_unload_strings(int lib, ERR_STRING_DATA str[]);
+SSL2_IMPORT void ERR_load_ERR_strings(void);
+SSL2_IMPORT void ERR_load_crypto_strings(void);
+SSL2_IMPORT void ERR_free_strings(void);
 
-IMPORT_C void ERR_remove_thread_state(const CRYPTO_THREADID *tid);
+SSL2_IMPORT void ERR_remove_thread_state(const CRYPTO_THREADID *tid);
 # ifndef OPENSSL_NO_DEPRECATED
-IMPORT_C void ERR_remove_state(unsigned long pid); /* if zero we look it up */
+SSL2_IMPORT void ERR_remove_state(unsigned long pid); /* if zero we look it up */
 # endif
-IMPORT_C ERR_STATE *ERR_get_state(void);
+SSL2_IMPORT ERR_STATE *ERR_get_state(void);
 
 # ifndef OPENSSL_NO_LHASH
-LHASH_OF(ERR_STRING_DATA) *ERR_get_string_table(void);
-LHASH_OF(ERR_STATE) *ERR_get_err_state_table(void);
-void ERR_release_err_state_table(LHASH_OF(ERR_STATE) **hash);
+SSL2_IMPORT LHASH_OF(ERR_STRING_DATA) *ERR_get_string_table(void);
+SSL2_IMPORT LHASH_OF(ERR_STATE) *ERR_get_err_state_table(void);
+SSL2_IMPORT void ERR_release_err_state_table(LHASH_OF(ERR_STATE) **hash);
 # endif
 
-int ERR_get_next_error_library(void);
+SSL2_IMPORT int ERR_get_next_error_library(void);
 
-int ERR_set_mark(void);
-int ERR_pop_to_mark(void);
+SSL2_IMPORT int ERR_set_mark(void);
+SSL2_IMPORT int ERR_pop_to_mark(void);
 
 /* Already defined in ossl_typ.h */
 /* typedef struct st_ERR_FNS ERR_FNS; */
@@ -377,12 +377,12 @@ int ERR_pop_to_mark(void);
  * An application can use this function and provide the return value to
  * loaded modules that should use the application's ERR state/functionality
  */
-const ERR_FNS *ERR_get_implementation(void);
+SSL2_IMPORT const ERR_FNS *ERR_get_implementation(void);
 /*
  * A loaded module should call this function prior to any ERR operations
  * using the application's "ERR_FNS".
  */
-int ERR_set_implementation(const ERR_FNS *fns);
+SSL2_IMPORT int ERR_set_implementation(const ERR_FNS *fns);
 
 #ifdef  __cplusplus
 }

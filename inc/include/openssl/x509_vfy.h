@@ -456,157 +456,157 @@ void X509_STORE_CTX_set_depth(X509_STORE_CTX *ctx, int depth);
                                 | X509_V_FLAG_INHIBIT_ANY \
                                 | X509_V_FLAG_INHIBIT_MAP)
 
-IMPORT_C int X509_OBJECT_idx_by_subject(STACK_OF(X509_OBJECT) *h, int type,
+SSL2_IMPORT int X509_OBJECT_idx_by_subject(STACK_OF(X509_OBJECT) *h, int type,
                                X509_NAME *name);
-IMPORT_C X509_OBJECT *X509_OBJECT_retrieve_by_subject(STACK_OF(X509_OBJECT) *h,
+SSL2_IMPORT X509_OBJECT *X509_OBJECT_retrieve_by_subject(STACK_OF(X509_OBJECT) *h,
                                              int type, X509_NAME *name);
-IMPORT_C X509_OBJECT *X509_OBJECT_retrieve_match(STACK_OF(X509_OBJECT) *h,
+SSL2_IMPORT X509_OBJECT *X509_OBJECT_retrieve_match(STACK_OF(X509_OBJECT) *h,
                                         X509_OBJECT *x);
-IMPORT_C void X509_OBJECT_up_ref_count(X509_OBJECT *a);
-IMPORT_C void X509_OBJECT_free_contents(X509_OBJECT *a);
-IMPORT_C X509_STORE *X509_STORE_new(void);
-IMPORT_C void X509_STORE_free(X509_STORE *v);
+SSL2_IMPORT void X509_OBJECT_up_ref_count(X509_OBJECT *a);
+SSL2_IMPORT void X509_OBJECT_free_contents(X509_OBJECT *a);
+SSL2_IMPORT X509_STORE *X509_STORE_new(void);
+SSL2_IMPORT void X509_STORE_free(X509_STORE *v);
 
-IMPORT_C STACK_OF(X509) *X509_STORE_get1_certs(X509_STORE_CTX *st, X509_NAME *nm);
-IMPORT_C STACK_OF(X509_CRL) *X509_STORE_get1_crls(X509_STORE_CTX *st, X509_NAME *nm);
-IMPORT_C int X509_STORE_set_flags(X509_STORE *ctx, unsigned long flags);
-IMPORT_C int X509_STORE_set_purpose(X509_STORE *ctx, int purpose);
-IMPORT_C int X509_STORE_set_trust(X509_STORE *ctx, int trust);
-IMPORT_C int X509_STORE_set1_param(X509_STORE *ctx, X509_VERIFY_PARAM *pm);
+SSL2_IMPORT STACK_OF(X509) *X509_STORE_get1_certs(X509_STORE_CTX *st, X509_NAME *nm);
+SSL2_IMPORT STACK_OF(X509_CRL) *X509_STORE_get1_crls(X509_STORE_CTX *st, X509_NAME *nm);
+SSL2_IMPORT int X509_STORE_set_flags(X509_STORE *ctx, unsigned long flags);
+SSL2_IMPORT int X509_STORE_set_purpose(X509_STORE *ctx, int purpose);
+SSL2_IMPORT int X509_STORE_set_trust(X509_STORE *ctx, int trust);
+SSL2_IMPORT int X509_STORE_set1_param(X509_STORE *ctx, X509_VERIFY_PARAM *pm);
 
-IMPORT_C void X509_STORE_set_verify_cb(X509_STORE *ctx,
+SSL2_IMPORT void X509_STORE_set_verify_cb(X509_STORE *ctx,
                               int (*verify_cb) (int, X509_STORE_CTX *));
 
-IMPORT_C void X509_STORE_set_lookup_crls_cb(X509_STORE *ctx,
+SSL2_IMPORT void X509_STORE_set_lookup_crls_cb(X509_STORE *ctx,
                                    STACK_OF(X509_CRL) *(*cb) (X509_STORE_CTX
                                                               *ctx,
                                                               X509_NAME *nm));
 
-IMPORT_C X509_STORE_CTX *X509_STORE_CTX_new(void);
+SSL2_IMPORT X509_STORE_CTX *X509_STORE_CTX_new(void);
 
-IMPORT_C int X509_STORE_CTX_get1_issuer(X509 **issuer, X509_STORE_CTX *ctx, X509 *x);
+SSL2_IMPORT int X509_STORE_CTX_get1_issuer(X509 **issuer, X509_STORE_CTX *ctx, X509 *x);
 
-IMPORT_C void X509_STORE_CTX_free(X509_STORE_CTX *ctx);
-IMPORT_C int X509_STORE_CTX_init(X509_STORE_CTX *ctx, X509_STORE *store,
+SSL2_IMPORT void X509_STORE_CTX_free(X509_STORE_CTX *ctx);
+SSL2_IMPORT int X509_STORE_CTX_init(X509_STORE_CTX *ctx, X509_STORE *store,
                         X509 *x509, STACK_OF(X509) *chain);
-IMPORT_C void X509_STORE_CTX_trusted_stack(X509_STORE_CTX *ctx, STACK_OF(X509) *sk);
-IMPORT_C void X509_STORE_CTX_cleanup(X509_STORE_CTX *ctx);
+SSL2_IMPORT void X509_STORE_CTX_trusted_stack(X509_STORE_CTX *ctx, STACK_OF(X509) *sk);
+SSL2_IMPORT void X509_STORE_CTX_cleanup(X509_STORE_CTX *ctx);
 
-IMPORT_C X509_STORE *X509_STORE_CTX_get0_store(X509_STORE_CTX *ctx);
+SSL2_IMPORT X509_STORE *X509_STORE_CTX_get0_store(X509_STORE_CTX *ctx);
 
-IMPORT_C X509_LOOKUP *X509_STORE_add_lookup(X509_STORE *v, X509_LOOKUP_METHOD *m);
+SSL2_IMPORT X509_LOOKUP *X509_STORE_add_lookup(X509_STORE *v, X509_LOOKUP_METHOD *m);
 
-IMPORT_C X509_LOOKUP_METHOD *X509_LOOKUP_hash_dir(void);
-IMPORT_C X509_LOOKUP_METHOD *X509_LOOKUP_file(void);
+SSL2_IMPORT X509_LOOKUP_METHOD *X509_LOOKUP_hash_dir(void);
+SSL2_IMPORT X509_LOOKUP_METHOD *X509_LOOKUP_file(void);
 
-IMPORT_C int X509_STORE_add_cert(X509_STORE *ctx, X509 *x);
-IMPORT_C int X509_STORE_add_crl(X509_STORE *ctx, X509_CRL *x);
+SSL2_IMPORT int X509_STORE_add_cert(X509_STORE *ctx, X509 *x);
+SSL2_IMPORT int X509_STORE_add_crl(X509_STORE *ctx, X509_CRL *x);
 
-IMPORT_C int X509_STORE_get_by_subject(X509_STORE_CTX *vs, int type, X509_NAME *name,
+SSL2_IMPORT int X509_STORE_get_by_subject(X509_STORE_CTX *vs, int type, X509_NAME *name,
                               X509_OBJECT *ret);
 
-IMPORT_C int X509_LOOKUP_ctrl(X509_LOOKUP *ctx, int cmd, const char *argc,
+SSL2_IMPORT int X509_LOOKUP_ctrl(X509_LOOKUP *ctx, int cmd, const char *argc,
                      long argl, char **ret);
 
 # ifndef OPENSSL_NO_STDIO
-IMPORT_C int X509_load_cert_file(X509_LOOKUP *ctx, const char *file, int type);
-IMPORT_C int X509_load_crl_file(X509_LOOKUP *ctx, const char *file, int type);
-IMPORT_C int X509_load_cert_crl_file(X509_LOOKUP *ctx, const char *file, int type);
+SSL2_IMPORT int X509_load_cert_file(X509_LOOKUP *ctx, const char *file, int type);
+SSL2_IMPORT int X509_load_crl_file(X509_LOOKUP *ctx, const char *file, int type);
+SSL2_IMPORT int X509_load_cert_crl_file(X509_LOOKUP *ctx, const char *file, int type);
 # endif
 
-IMPORT_C X509_LOOKUP *X509_LOOKUP_new(X509_LOOKUP_METHOD *method);
-IMPORT_C void X509_LOOKUP_free(X509_LOOKUP *ctx);
-IMPORT_C int X509_LOOKUP_init(X509_LOOKUP *ctx);
-IMPORT_C int X509_LOOKUP_by_subject(X509_LOOKUP *ctx, int type, X509_NAME *name,
+SSL2_IMPORT X509_LOOKUP *X509_LOOKUP_new(X509_LOOKUP_METHOD *method);
+SSL2_IMPORT void X509_LOOKUP_free(X509_LOOKUP *ctx);
+SSL2_IMPORT int X509_LOOKUP_init(X509_LOOKUP *ctx);
+SSL2_IMPORT int X509_LOOKUP_by_subject(X509_LOOKUP *ctx, int type, X509_NAME *name,
                            X509_OBJECT *ret);
-IMPORT_C int X509_LOOKUP_by_issuer_serial(X509_LOOKUP *ctx, int type, X509_NAME *name,
+SSL2_IMPORT int X509_LOOKUP_by_issuer_serial(X509_LOOKUP *ctx, int type, X509_NAME *name,
                                  ASN1_INTEGER *serial, X509_OBJECT *ret);
-IMPORT_C int X509_LOOKUP_by_fingerprint(X509_LOOKUP *ctx, int type,
+SSL2_IMPORT int X509_LOOKUP_by_fingerprint(X509_LOOKUP *ctx, int type,
                                unsigned char *bytes, int len,
                                X509_OBJECT *ret);
-IMPORT_C int X509_LOOKUP_by_alias(X509_LOOKUP *ctx, int type, char *str, int len,
+SSL2_IMPORT int X509_LOOKUP_by_alias(X509_LOOKUP *ctx, int type, char *str, int len,
                          X509_OBJECT *ret);
-IMPORT_C int X509_LOOKUP_shutdown(X509_LOOKUP *ctx);
+SSL2_IMPORT int X509_LOOKUP_shutdown(X509_LOOKUP *ctx);
 
 # ifndef OPENSSL_NO_STDIO
-IMPORT_C int X509_STORE_load_locations(X509_STORE *ctx,
+SSL2_IMPORT int X509_STORE_load_locations(X509_STORE *ctx,
                               const char *file, const char *dir);
-IMPORT_C int X509_STORE_set_default_paths(X509_STORE *ctx);
+SSL2_IMPORT int X509_STORE_set_default_paths(X509_STORE *ctx);
 # endif
 
-IMPORT_C int X509_STORE_CTX_get_ex_new_index(long argl, void *argp,
+SSL2_IMPORT int X509_STORE_CTX_get_ex_new_index(long argl, void *argp,
                                     CRYPTO_EX_new *new_func,
                                     CRYPTO_EX_dup *dup_func,
                                     CRYPTO_EX_free *free_func);
-IMPORT_C int X509_STORE_CTX_set_ex_data(X509_STORE_CTX *ctx, int idx, void *data);
-IMPORT_C void *X509_STORE_CTX_get_ex_data(X509_STORE_CTX *ctx, int idx);
-IMPORT_C int X509_STORE_CTX_get_error(X509_STORE_CTX *ctx);
-IMPORT_C void X509_STORE_CTX_set_error(X509_STORE_CTX *ctx, int s);
-IMPORT_C int X509_STORE_CTX_get_error_depth(X509_STORE_CTX *ctx);
-IMPORT_C X509 *X509_STORE_CTX_get_current_cert(X509_STORE_CTX *ctx);
-IMPORT_C X509 *X509_STORE_CTX_get0_current_issuer(X509_STORE_CTX *ctx);
-IMPORT_C X509_CRL *X509_STORE_CTX_get0_current_crl(X509_STORE_CTX *ctx);
-IMPORT_C X509_STORE_CTX *X509_STORE_CTX_get0_parent_ctx(X509_STORE_CTX *ctx);
-IMPORT_C STACK_OF(X509) *X509_STORE_CTX_get_chain(X509_STORE_CTX *ctx);
-IMPORT_C STACK_OF(X509) *X509_STORE_CTX_get1_chain(X509_STORE_CTX *ctx);
-IMPORT_C void X509_STORE_CTX_set_cert(X509_STORE_CTX *c, X509 *x);
-IMPORT_C void X509_STORE_CTX_set_chain(X509_STORE_CTX *c, STACK_OF(X509) *sk);
-IMPORT_C void X509_STORE_CTX_set0_crls(X509_STORE_CTX *c, STACK_OF(X509_CRL) *sk);
-IMPORT_C int X509_STORE_CTX_set_purpose(X509_STORE_CTX *ctx, int purpose);
-IMPORT_C int X509_STORE_CTX_set_trust(X509_STORE_CTX *ctx, int trust);
-IMPORT_C int X509_STORE_CTX_purpose_inherit(X509_STORE_CTX *ctx, int def_purpose,
+SSL2_IMPORT int X509_STORE_CTX_set_ex_data(X509_STORE_CTX *ctx, int idx, void *data);
+SSL2_IMPORT void *X509_STORE_CTX_get_ex_data(X509_STORE_CTX *ctx, int idx);
+SSL2_IMPORT int X509_STORE_CTX_get_error(X509_STORE_CTX *ctx);
+SSL2_IMPORT void X509_STORE_CTX_set_error(X509_STORE_CTX *ctx, int s);
+SSL2_IMPORT int X509_STORE_CTX_get_error_depth(X509_STORE_CTX *ctx);
+SSL2_IMPORT X509 *X509_STORE_CTX_get_current_cert(X509_STORE_CTX *ctx);
+SSL2_IMPORT X509 *X509_STORE_CTX_get0_current_issuer(X509_STORE_CTX *ctx);
+SSL2_IMPORT X509_CRL *X509_STORE_CTX_get0_current_crl(X509_STORE_CTX *ctx);
+SSL2_IMPORT X509_STORE_CTX *X509_STORE_CTX_get0_parent_ctx(X509_STORE_CTX *ctx);
+SSL2_IMPORT STACK_OF(X509) *X509_STORE_CTX_get_chain(X509_STORE_CTX *ctx);
+SSL2_IMPORT STACK_OF(X509) *X509_STORE_CTX_get1_chain(X509_STORE_CTX *ctx);
+SSL2_IMPORT void X509_STORE_CTX_set_cert(X509_STORE_CTX *c, X509 *x);
+SSL2_IMPORT void X509_STORE_CTX_set_chain(X509_STORE_CTX *c, STACK_OF(X509) *sk);
+SSL2_IMPORT void X509_STORE_CTX_set0_crls(X509_STORE_CTX *c, STACK_OF(X509_CRL) *sk);
+SSL2_IMPORT int X509_STORE_CTX_set_purpose(X509_STORE_CTX *ctx, int purpose);
+SSL2_IMPORT int X509_STORE_CTX_set_trust(X509_STORE_CTX *ctx, int trust);
+SSL2_IMPORT int X509_STORE_CTX_purpose_inherit(X509_STORE_CTX *ctx, int def_purpose,
                                    int purpose, int trust);
-IMPORT_C void X509_STORE_CTX_set_flags(X509_STORE_CTX *ctx, unsigned long flags);
-IMPORT_C void X509_STORE_CTX_set_time(X509_STORE_CTX *ctx, unsigned long flags,
+SSL2_IMPORT void X509_STORE_CTX_set_flags(X509_STORE_CTX *ctx, unsigned long flags);
+SSL2_IMPORT void X509_STORE_CTX_set_time(X509_STORE_CTX *ctx, unsigned long flags,
                              time_t t);
-IMPORT_C void X509_STORE_CTX_set_verify_cb(X509_STORE_CTX *ctx,
+SSL2_IMPORT void X509_STORE_CTX_set_verify_cb(X509_STORE_CTX *ctx,
                                   int (*verify_cb) (int, X509_STORE_CTX *));
 
-IMPORT_C X509_POLICY_TREE *X509_STORE_CTX_get0_policy_tree(X509_STORE_CTX *ctx);
-IMPORT_C int X509_STORE_CTX_get_explicit_policy(X509_STORE_CTX *ctx);
+SSL2_IMPORT X509_POLICY_TREE *X509_STORE_CTX_get0_policy_tree(X509_STORE_CTX *ctx);
+SSL2_IMPORT int X509_STORE_CTX_get_explicit_policy(X509_STORE_CTX *ctx);
 
-IMPORT_C X509_VERIFY_PARAM *X509_STORE_CTX_get0_param(X509_STORE_CTX *ctx);
-IMPORT_C void X509_STORE_CTX_set0_param(X509_STORE_CTX *ctx, X509_VERIFY_PARAM *param);
-IMPORT_C int X509_STORE_CTX_set_default(X509_STORE_CTX *ctx, const char *name);
+SSL2_IMPORT X509_VERIFY_PARAM *X509_STORE_CTX_get0_param(X509_STORE_CTX *ctx);
+SSL2_IMPORT void X509_STORE_CTX_set0_param(X509_STORE_CTX *ctx, X509_VERIFY_PARAM *param);
+SSL2_IMPORT int X509_STORE_CTX_set_default(X509_STORE_CTX *ctx, const char *name);
 
 /* X509_VERIFY_PARAM functions */
 
-IMPORT_C X509_VERIFY_PARAM *X509_VERIFY_PARAM_new(void);
-IMPORT_C void X509_VERIFY_PARAM_free(X509_VERIFY_PARAM *param);
-IMPORT_C int X509_VERIFY_PARAM_inherit(X509_VERIFY_PARAM *to,
+SSL2_IMPORT X509_VERIFY_PARAM *X509_VERIFY_PARAM_new(void);
+SSL2_IMPORT void X509_VERIFY_PARAM_free(X509_VERIFY_PARAM *param);
+SSL2_IMPORT int X509_VERIFY_PARAM_inherit(X509_VERIFY_PARAM *to,
                               const X509_VERIFY_PARAM *from);
-IMPORT_C int X509_VERIFY_PARAM_set1(X509_VERIFY_PARAM *to,
+SSL2_IMPORT int X509_VERIFY_PARAM_set1(X509_VERIFY_PARAM *to,
                            const X509_VERIFY_PARAM *from);
-IMPORT_C int X509_VERIFY_PARAM_set1_name(X509_VERIFY_PARAM *param, const char *name);
-IMPORT_C int X509_VERIFY_PARAM_set_flags(X509_VERIFY_PARAM *param,
+SSL2_IMPORT int X509_VERIFY_PARAM_set1_name(X509_VERIFY_PARAM *param, const char *name);
+SSL2_IMPORT int X509_VERIFY_PARAM_set_flags(X509_VERIFY_PARAM *param,
                                 unsigned long flags);
-IMPORT_C int X509_VERIFY_PARAM_clear_flags(X509_VERIFY_PARAM *param,
+SSL2_IMPORT int X509_VERIFY_PARAM_clear_flags(X509_VERIFY_PARAM *param,
                                   unsigned long flags);
-IMPORT_C unsigned long X509_VERIFY_PARAM_get_flags(X509_VERIFY_PARAM *param);
-IMPORT_C int X509_VERIFY_PARAM_set_purpose(X509_VERIFY_PARAM *param, int purpose);
-IMPORT_C int X509_VERIFY_PARAM_set_trust(X509_VERIFY_PARAM *param, int trust);
-IMPORT_C void X509_VERIFY_PARAM_set_depth(X509_VERIFY_PARAM *param, int depth);
-IMPORT_C void X509_VERIFY_PARAM_set_time(X509_VERIFY_PARAM *param, time_t t);
-IMPORT_C int X509_VERIFY_PARAM_add0_policy(X509_VERIFY_PARAM *param,
+SSL2_IMPORT unsigned long X509_VERIFY_PARAM_get_flags(X509_VERIFY_PARAM *param);
+SSL2_IMPORT int X509_VERIFY_PARAM_set_purpose(X509_VERIFY_PARAM *param, int purpose);
+SSL2_IMPORT int X509_VERIFY_PARAM_set_trust(X509_VERIFY_PARAM *param, int trust);
+SSL2_IMPORT void X509_VERIFY_PARAM_set_depth(X509_VERIFY_PARAM *param, int depth);
+SSL2_IMPORT void X509_VERIFY_PARAM_set_time(X509_VERIFY_PARAM *param, time_t t);
+SSL2_IMPORT int X509_VERIFY_PARAM_add0_policy(X509_VERIFY_PARAM *param,
                                   ASN1_OBJECT *policy);
-IMPORT_C int X509_VERIFY_PARAM_set1_policies(X509_VERIFY_PARAM *param,
+SSL2_IMPORT int X509_VERIFY_PARAM_set1_policies(X509_VERIFY_PARAM *param,
                                     STACK_OF(ASN1_OBJECT) *policies);
 
-IMPORT_C int X509_VERIFY_PARAM_set1_host(X509_VERIFY_PARAM *param,
+SSL2_IMPORT int X509_VERIFY_PARAM_set1_host(X509_VERIFY_PARAM *param,
                                 const char *name, size_t namelen);
-IMPORT_C int X509_VERIFY_PARAM_add1_host(X509_VERIFY_PARAM *param,
+SSL2_IMPORT int X509_VERIFY_PARAM_add1_host(X509_VERIFY_PARAM *param,
                                 const char *name, size_t namelen);
-IMPORT_C void X509_VERIFY_PARAM_set_hostflags(X509_VERIFY_PARAM *param,
+SSL2_IMPORT void X509_VERIFY_PARAM_set_hostflags(X509_VERIFY_PARAM *param,
                                      unsigned int flags);
-IMPORT_C char *X509_VERIFY_PARAM_get0_peername(X509_VERIFY_PARAM *);
-IMPORT_C int X509_VERIFY_PARAM_set1_email(X509_VERIFY_PARAM *param,
+SSL2_IMPORT char *X509_VERIFY_PARAM_get0_peername(X509_VERIFY_PARAM *);
+SSL2_IMPORT int X509_VERIFY_PARAM_set1_email(X509_VERIFY_PARAM *param,
                                  const char *email, size_t emaillen);
-IMPORT_C int X509_VERIFY_PARAM_set1_ip(X509_VERIFY_PARAM *param,
+SSL2_IMPORT int X509_VERIFY_PARAM_set1_ip(X509_VERIFY_PARAM *param,
                               const unsigned char *ip, size_t iplen);
-IMPORT_C int X509_VERIFY_PARAM_set1_ip_asc(X509_VERIFY_PARAM *param,
+SSL2_IMPORT int X509_VERIFY_PARAM_set1_ip_asc(X509_VERIFY_PARAM *param,
                                   const char *ipasc);
 
-IMPORT_C int X509_VERIFY_PARAM_get_depth(const X509_VERIFY_PARAM *param);
+SSL2_IMPORT int X509_VERIFY_PARAM_get_depth(const X509_VERIFY_PARAM *param);
 const char *X509_VERIFY_PARAM_get0_name(const X509_VERIFY_PARAM *param);
 
 int X509_VERIFY_PARAM_add0_table(X509_VERIFY_PARAM *param);

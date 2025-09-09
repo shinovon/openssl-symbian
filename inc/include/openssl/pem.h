@@ -328,32 +328,32 @@ int PEM_write_bio_##name(BIO *bp, type *x, const EVP_CIPHER *enc, \
 # else
 
 #  define DECLARE_PEM_read_fp(name, type) \
-	IMPORT_C type *PEM_read_##name(FILE *fp, type **x, pem_password_cb *cb, void *u);
+	SSL2_IMPORT type *PEM_read_##name(FILE *fp, type **x, pem_password_cb *cb, void *u);
 
 #  define DECLARE_PEM_write_fp(name, type) \
-	IMPORT_C int PEM_write_##name(FILE *fp, type *x);
+	SSL2_IMPORT int PEM_write_##name(FILE *fp, type *x);
 
 #  define DECLARE_PEM_write_fp_const(name, type) \
-	IMPORT_C int PEM_write_##name(FILE *fp, const type *x);
+	SSL2_IMPORT int PEM_write_##name(FILE *fp, const type *x);
 
 #  define DECLARE_PEM_write_cb_fp(name, type) \
-	IMPORT_C int PEM_write_##name(FILE *fp, type *x, const EVP_CIPHER *enc, \
+	SSL2_IMPORT int PEM_write_##name(FILE *fp, type *x, const EVP_CIPHER *enc, \
              unsigned char *kstr, int klen, pem_password_cb *cb, void *u);
 
 # endif
 
 # ifndef OPENSSL_NO_BIO
 #  define DECLARE_PEM_read_bio(name, type) \
-        IMPORT_C type *PEM_read_bio_##name(BIO *bp, type **x, pem_password_cb *cb, void *u);
+        SSL2_IMPORT type *PEM_read_bio_##name(BIO *bp, type **x, pem_password_cb *cb, void *u);
 
 #  define DECLARE_PEM_write_bio(name, type) \
-        IMPORT_C int PEM_write_bio_##name(BIO *bp, type *x);
+        SSL2_IMPORT int PEM_write_bio_##name(BIO *bp, type *x);
 
 #  define DECLARE_PEM_write_bio_const(name, type) \
-        IMPORT_C int PEM_write_bio_##name(BIO *bp, const type *x);
+        SSL2_IMPORT int PEM_write_bio_##name(BIO *bp, const type *x);
 
 #  define DECLARE_PEM_write_cb_bio(name, type) \
-        IMPORT_C int PEM_write_bio_##name(BIO *bp, type *x, const EVP_CIPHER *enc, \
+        SSL2_IMPORT int PEM_write_bio_##name(BIO *bp, type *x, const EVP_CIPHER *enc, \
              unsigned char *kstr, int klen, pem_password_cb *cb, void *u);
 
 # else
@@ -392,60 +392,60 @@ typedef int pem_password_cb (char *buf, int size, int rwflag, void *userdata);
 typedef int pem_password_cb (char *buf, int size, int rwflag);
 # endif
 
-IMPORT_C int PEM_get_EVP_CIPHER_INFO(char *header, EVP_CIPHER_INFO *cipher);
-IMPORT_C int PEM_do_header(EVP_CIPHER_INFO *cipher, unsigned char *data, long *len,
+SSL2_IMPORT int PEM_get_EVP_CIPHER_INFO(char *header, EVP_CIPHER_INFO *cipher);
+SSL2_IMPORT int PEM_do_header(EVP_CIPHER_INFO *cipher, unsigned char *data, long *len,
                   pem_password_cb *callback, void *u);
 
 # ifndef OPENSSL_NO_BIO
-IMPORT_C int PEM_read_bio(BIO *bp, char **name, char **header,
+SSL2_IMPORT int PEM_read_bio(BIO *bp, char **name, char **header,
                  unsigned char **data, long *len);
-IMPORT_C int PEM_write_bio(BIO *bp, const char *name, const char *hdr,
+SSL2_IMPORT int PEM_write_bio(BIO *bp, const char *name, const char *hdr,
                   const unsigned char *data, long len);
-IMPORT_C int PEM_bytes_read_bio(unsigned char **pdata, long *plen, char **pnm,
+SSL2_IMPORT int PEM_bytes_read_bio(unsigned char **pdata, long *plen, char **pnm,
                        const char *name, BIO *bp, pem_password_cb *cb,
                        void *u);
-IMPORT_C void *PEM_ASN1_read_bio(d2i_of_void *d2i, const char *name, BIO *bp, void **x,
+SSL2_IMPORT void *PEM_ASN1_read_bio(d2i_of_void *d2i, const char *name, BIO *bp, void **x,
                         pem_password_cb *cb, void *u);
-IMPORT_C int PEM_ASN1_write_bio(i2d_of_void *i2d, const char *name, BIO *bp, void *x,
+SSL2_IMPORT int PEM_ASN1_write_bio(i2d_of_void *i2d, const char *name, BIO *bp, void *x,
                        const EVP_CIPHER *enc, unsigned char *kstr, int klen,
                        pem_password_cb *cb, void *u);
 
-IMPORT_C STACK_OF(X509_INFO) *PEM_X509_INFO_read_bio(BIO *bp, STACK_OF(X509_INFO) *sk,
+SSL2_IMPORT STACK_OF(X509_INFO) *PEM_X509_INFO_read_bio(BIO *bp, STACK_OF(X509_INFO) *sk,
                                             pem_password_cb *cb, void *u);
-IMPORT_C int PEM_X509_INFO_write_bio(BIO *bp, X509_INFO *xi, EVP_CIPHER *enc,
+SSL2_IMPORT int PEM_X509_INFO_write_bio(BIO *bp, X509_INFO *xi, EVP_CIPHER *enc,
                             unsigned char *kstr, int klen,
                             pem_password_cb *cd, void *u);
 # endif
 
-IMPORT_C int PEM_read(FILE *fp, char **name, char **header,
+SSL2_IMPORT int PEM_read(FILE *fp, char **name, char **header,
              unsigned char **data, long *len);
-IMPORT_C int PEM_write(FILE *fp, const char *name, const char *hdr,
+SSL2_IMPORT int PEM_write(FILE *fp, const char *name, const char *hdr,
               const unsigned char *data, long len);
-IMPORT_C void *PEM_ASN1_read(d2i_of_void *d2i, const char *name, FILE *fp, void **x,
+SSL2_IMPORT void *PEM_ASN1_read(d2i_of_void *d2i, const char *name, FILE *fp, void **x,
                     pem_password_cb *cb, void *u);
-IMPORT_C int PEM_ASN1_write(i2d_of_void *i2d, const char *name, FILE *fp,
+SSL2_IMPORT int PEM_ASN1_write(i2d_of_void *i2d, const char *name, FILE *fp,
                    void *x, const EVP_CIPHER *enc, unsigned char *kstr,
                    int klen, pem_password_cb *callback, void *u);
-IMPORT_C STACK_OF(X509_INFO) *PEM_X509_INFO_read(FILE *fp, STACK_OF(X509_INFO) *sk,
+SSL2_IMPORT STACK_OF(X509_INFO) *PEM_X509_INFO_read(FILE *fp, STACK_OF(X509_INFO) *sk,
                                         pem_password_cb *cb, void *u);
 
-IMPORT_C int PEM_SealInit(PEM_ENCODE_SEAL_CTX *ctx, EVP_CIPHER *type,
+SSL2_IMPORT int PEM_SealInit(PEM_ENCODE_SEAL_CTX *ctx, EVP_CIPHER *type,
                  EVP_MD *md_type, unsigned char **ek, int *ekl,
                  unsigned char *iv, EVP_PKEY **pubk, int npubk);
-IMPORT_C void PEM_SealUpdate(PEM_ENCODE_SEAL_CTX *ctx, unsigned char *out, int *outl,
+SSL2_IMPORT void PEM_SealUpdate(PEM_ENCODE_SEAL_CTX *ctx, unsigned char *out, int *outl,
                     unsigned char *in, int inl);
-IMPORT_C int PEM_SealFinal(PEM_ENCODE_SEAL_CTX *ctx, unsigned char *sig, int *sigl,
+SSL2_IMPORT int PEM_SealFinal(PEM_ENCODE_SEAL_CTX *ctx, unsigned char *sig, int *sigl,
                   unsigned char *out, int *outl, EVP_PKEY *priv);
 
-IMPORT_C void PEM_SignInit(EVP_MD_CTX *ctx, EVP_MD *type);
-IMPORT_C void PEM_SignUpdate(EVP_MD_CTX *ctx, unsigned char *d, unsigned int cnt);
-IMPORT_C int PEM_SignFinal(EVP_MD_CTX *ctx, unsigned char *sigret,
+SSL2_IMPORT void PEM_SignInit(EVP_MD_CTX *ctx, EVP_MD *type);
+SSL2_IMPORT void PEM_SignUpdate(EVP_MD_CTX *ctx, unsigned char *d, unsigned int cnt);
+SSL2_IMPORT int PEM_SignFinal(EVP_MD_CTX *ctx, unsigned char *sigret,
                   unsigned int *siglen, EVP_PKEY *pkey);
 
 /* The default pem_password_cb that's used internally */
-IMPORT_C int PEM_def_callback(char *buf, int num, int rwflag, void *userdata);
-IMPORT_C void PEM_proc_type(char *buf, int type);
-IMPORT_C void PEM_dek_info(char *buf, const char *type, int len, char *str);
+SSL2_IMPORT int PEM_def_callback(char *buf, int num, int rwflag, void *userdata);
+SSL2_IMPORT void PEM_proc_type(char *buf, int type);
+SSL2_IMPORT void PEM_dek_info(char *buf, const char *type, int len, char *str);
 
 # include <openssl/symhacks.h>
 
@@ -481,49 +481,49 @@ DECLARE_PEM_write_const(DHxparams, DH)
 DECLARE_PEM_rw_cb(PrivateKey, EVP_PKEY)
 DECLARE_PEM_rw(PUBKEY, EVP_PKEY)
 
-int PEM_write_bio_PKCS8PrivateKey_nid(BIO *bp, EVP_PKEY *x, int nid,
+SSL2_IMPORT int PEM_write_bio_PKCS8PrivateKey_nid(BIO *bp, EVP_PKEY *x, int nid,
                                       char *kstr, int klen,
                                       pem_password_cb *cb, void *u);
-int PEM_write_bio_PKCS8PrivateKey(BIO *, EVP_PKEY *, const EVP_CIPHER *,
+SSL2_IMPORT int PEM_write_bio_PKCS8PrivateKey(BIO *, EVP_PKEY *, const EVP_CIPHER *,
                                   char *, int, pem_password_cb *, void *);
-int i2d_PKCS8PrivateKey_bio(BIO *bp, EVP_PKEY *x, const EVP_CIPHER *enc,
+SSL2_IMPORT int i2d_PKCS8PrivateKey_bio(BIO *bp, EVP_PKEY *x, const EVP_CIPHER *enc,
                             char *kstr, int klen,
                             pem_password_cb *cb, void *u);
-int i2d_PKCS8PrivateKey_nid_bio(BIO *bp, EVP_PKEY *x, int nid,
+SSL2_IMPORT int i2d_PKCS8PrivateKey_nid_bio(BIO *bp, EVP_PKEY *x, int nid,
                                 char *kstr, int klen,
                                 pem_password_cb *cb, void *u);
-EVP_PKEY *d2i_PKCS8PrivateKey_bio(BIO *bp, EVP_PKEY **x, pem_password_cb *cb,
+SSL2_IMPORT EVP_PKEY *d2i_PKCS8PrivateKey_bio(BIO *bp, EVP_PKEY **x, pem_password_cb *cb,
                                   void *u);
 
-int i2d_PKCS8PrivateKey_fp(FILE *fp, EVP_PKEY *x, const EVP_CIPHER *enc,
+SSL2_IMPORT int i2d_PKCS8PrivateKey_fp(FILE *fp, EVP_PKEY *x, const EVP_CIPHER *enc,
                            char *kstr, int klen,
                            pem_password_cb *cb, void *u);
-int i2d_PKCS8PrivateKey_nid_fp(FILE *fp, EVP_PKEY *x, int nid,
+SSL2_IMPORT int i2d_PKCS8PrivateKey_nid_fp(FILE *fp, EVP_PKEY *x, int nid,
                                char *kstr, int klen,
                                pem_password_cb *cb, void *u);
-int PEM_write_PKCS8PrivateKey_nid(FILE *fp, EVP_PKEY *x, int nid,
+SSL2_IMPORT int PEM_write_PKCS8PrivateKey_nid(FILE *fp, EVP_PKEY *x, int nid,
                                   char *kstr, int klen,
                                   pem_password_cb *cb, void *u);
 
-EVP_PKEY *d2i_PKCS8PrivateKey_fp(FILE *fp, EVP_PKEY **x, pem_password_cb *cb,
+SSL2_IMPORT EVP_PKEY *d2i_PKCS8PrivateKey_fp(FILE *fp, EVP_PKEY **x, pem_password_cb *cb,
                                  void *u);
 
-int PEM_write_PKCS8PrivateKey(FILE *fp, EVP_PKEY *x, const EVP_CIPHER *enc,
+SSL2_IMPORT int PEM_write_PKCS8PrivateKey(FILE *fp, EVP_PKEY *x, const EVP_CIPHER *enc,
                               char *kstr, int klen, pem_password_cb *cd,
                               void *u);
 
-EVP_PKEY *PEM_read_bio_Parameters(BIO *bp, EVP_PKEY **x);
-int PEM_write_bio_Parameters(BIO *bp, EVP_PKEY *x);
+SSL2_IMPORT EVP_PKEY *PEM_read_bio_Parameters(BIO *bp, EVP_PKEY **x);
+SSL2_IMPORT int PEM_write_bio_Parameters(BIO *bp, EVP_PKEY *x);
 
-EVP_PKEY *b2i_PrivateKey(const unsigned char **in, long length);
-EVP_PKEY *b2i_PublicKey(const unsigned char **in, long length);
-EVP_PKEY *b2i_PrivateKey_bio(BIO *in);
-EVP_PKEY *b2i_PublicKey_bio(BIO *in);
-int i2b_PrivateKey_bio(BIO *out, EVP_PKEY *pk);
-int i2b_PublicKey_bio(BIO *out, EVP_PKEY *pk);
+SSL2_IMPORT EVP_PKEY *b2i_PrivateKey(const unsigned char **in, long length);
+SSL2_IMPORT EVP_PKEY *b2i_PublicKey(const unsigned char **in, long length);
+SSL2_IMPORT EVP_PKEY *b2i_PrivateKey_bio(BIO *in);
+SSL2_IMPORT EVP_PKEY *b2i_PublicKey_bio(BIO *in);
+SSL2_IMPORT int i2b_PrivateKey_bio(BIO *out, EVP_PKEY *pk);
+SSL2_IMPORT int i2b_PublicKey_bio(BIO *out, EVP_PKEY *pk);
 # ifndef OPENSSL_NO_RC4
-EVP_PKEY *b2i_PVK_bio(BIO *in, pem_password_cb *cb, void *u);
-int i2b_PVK_bio(BIO *out, EVP_PKEY *pk, int enclevel,
+SSL2_IMPORT EVP_PKEY *b2i_PVK_bio(BIO *in, pem_password_cb *cb, void *u);
+SSL2_IMPORT int i2b_PVK_bio(BIO *out, EVP_PKEY *pk, int enclevel,
                 pem_password_cb *cb, void *u);
 # endif
 
@@ -533,7 +533,7 @@ int i2b_PVK_bio(BIO *out, EVP_PKEY *pk, int enclevel,
  * made after this point may be overwritten when the script is next run.
  */
 
-void ERR_load_PEM_strings(void);
+SSL2_IMPORT void ERR_load_PEM_strings(void);
 
 /* Error codes for the PEM functions. */
 

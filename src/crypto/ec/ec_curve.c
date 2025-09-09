@@ -3159,7 +3159,7 @@ static EC_GROUP *ec_group_new_from_data(const ec_list_element curve)
     return group;
 }
 
-EXPORT_C EC_GROUP *EC_GROUP_new_by_curve_name(int nid)
+SSL2_EXPORT EC_GROUP *EC_GROUP_new_by_curve_name(int nid)
 {
     size_t i;
     EC_GROUP *ret = NULL;

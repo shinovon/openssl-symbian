@@ -66,7 +66,7 @@
 
 static int ssl_set_cert(CERT *c, X509 *x509);
 static int ssl_set_pkey(CERT *c, EVP_PKEY *pkey);
-EXPORT_C int SSL_use_certificate(SSL *ssl, X509 *x)
+SSL2_EXPORT int SSL_use_certificate(SSL *ssl, X509 *x)
 {
     if (x == NULL) {
         SSLerr(SSL_F_SSL_USE_CERTIFICATE, ERR_R_PASSED_NULL_PARAMETER);
@@ -80,7 +80,7 @@ EXPORT_C int SSL_use_certificate(SSL *ssl, X509 *x)
 }
 
 #ifndef OPENSSL_NO_STDIO
-EXPORT_C int SSL_use_certificate_file(SSL *ssl, const char *file, int type)
+SSL2_EXPORT int SSL_use_certificate_file(SSL *ssl, const char *file, int type)
 {
     int j;
     BIO *in;
@@ -124,7 +124,7 @@ EXPORT_C int SSL_use_certificate_file(SSL *ssl, const char *file, int type)
 }
 #endif
 
-EXPORT_C int SSL_use_certificate_ASN1(SSL *ssl, const unsigned char *d, int len)
+SSL2_EXPORT int SSL_use_certificate_ASN1(SSL *ssl, const unsigned char *d, int len)
 {
     X509 *x;
     int ret;
@@ -141,7 +141,7 @@ EXPORT_C int SSL_use_certificate_ASN1(SSL *ssl, const unsigned char *d, int len)
 }
 
 #ifndef OPENSSL_NO_RSA
-EXPORT_C int SSL_use_RSAPrivateKey(SSL *ssl, RSA *rsa)
+SSL2_EXPORT int SSL_use_RSAPrivateKey(SSL *ssl, RSA *rsa)
 {
     EVP_PKEY *pkey;
     int ret;
@@ -239,7 +239,7 @@ static int ssl_set_pkey(CERT *c, EVP_PKEY *pkey)
 
 #ifndef OPENSSL_NO_RSA
 # ifndef OPENSSL_NO_STDIO
-EXPORT_C int SSL_use_RSAPrivateKey_file(SSL *ssl, const char *file, int type)
+SSL2_EXPORT int SSL_use_RSAPrivateKey_file(SSL *ssl, const char *file, int type)
 {
     int j, ret = 0;
     BIO *in;
@@ -281,7 +281,7 @@ EXPORT_C int SSL_use_RSAPrivateKey_file(SSL *ssl, const char *file, int type)
 }
 # endif
 
-EXPORT_C int SSL_use_RSAPrivateKey_ASN1(SSL *ssl, unsigned char *d, long len)
+SSL2_EXPORT int SSL_use_RSAPrivateKey_ASN1(SSL *ssl, unsigned char *d, long len)
 {
     int ret;
     const unsigned char *p;
@@ -299,7 +299,7 @@ EXPORT_C int SSL_use_RSAPrivateKey_ASN1(SSL *ssl, unsigned char *d, long len)
 }
 #endif                          /* !OPENSSL_NO_RSA */
 
-EXPORT_C int SSL_use_PrivateKey(SSL *ssl, EVP_PKEY *pkey)
+SSL2_EXPORT int SSL_use_PrivateKey(SSL *ssl, EVP_PKEY *pkey)
 {
     int ret;
 
@@ -316,7 +316,7 @@ EXPORT_C int SSL_use_PrivateKey(SSL *ssl, EVP_PKEY *pkey)
 }
 
 #ifndef OPENSSL_NO_STDIO
-EXPORT_C int SSL_use_PrivateKey_file(SSL *ssl, const char *file, int type)
+SSL2_EXPORT int SSL_use_PrivateKey_file(SSL *ssl, const char *file, int type)
 {
     int j, ret = 0;
     BIO *in;
@@ -358,7 +358,7 @@ EXPORT_C int SSL_use_PrivateKey_file(SSL *ssl, const char *file, int type)
 }
 #endif
 
-EXPORT_C int SSL_use_PrivateKey_ASN1(int type, SSL *ssl, const unsigned char *d,
+SSL2_EXPORT int SSL_use_PrivateKey_ASN1(int type, SSL *ssl, const unsigned char *d,
                             long len)
 {
     int ret;
@@ -376,7 +376,7 @@ EXPORT_C int SSL_use_PrivateKey_ASN1(int type, SSL *ssl, const unsigned char *d,
     return (ret);
 }
 
-EXPORT_C int SSL_CTX_use_certificate(SSL_CTX *ctx, X509 *x)
+SSL2_EXPORT int SSL_CTX_use_certificate(SSL_CTX *ctx, X509 *x)
 {
     if (x == NULL) {
         SSLerr(SSL_F_SSL_CTX_USE_CERTIFICATE, ERR_R_PASSED_NULL_PARAMETER);
@@ -451,7 +451,7 @@ static int ssl_set_cert(CERT *c, X509 *x)
 }
 
 #ifndef OPENSSL_NO_STDIO
-EXPORT_C int SSL_CTX_use_certificate_file(SSL_CTX *ctx, const char *file, int type)
+SSL2_EXPORT int SSL_CTX_use_certificate_file(SSL_CTX *ctx, const char *file, int type)
 {
     int j;
     BIO *in;
@@ -495,7 +495,7 @@ EXPORT_C int SSL_CTX_use_certificate_file(SSL_CTX *ctx, const char *file, int ty
 }
 #endif
 
-EXPORT_C int SSL_CTX_use_certificate_ASN1(SSL_CTX *ctx, int len,
+SSL2_EXPORT int SSL_CTX_use_certificate_ASN1(SSL_CTX *ctx, int len,
                                  const unsigned char *d)
 {
     X509 *x;
@@ -513,7 +513,7 @@ EXPORT_C int SSL_CTX_use_certificate_ASN1(SSL_CTX *ctx, int len,
 }
 
 #ifndef OPENSSL_NO_RSA
-EXPORT_C int SSL_CTX_use_RSAPrivateKey(SSL_CTX *ctx, RSA *rsa)
+SSL2_EXPORT int SSL_CTX_use_RSAPrivateKey(SSL_CTX *ctx, RSA *rsa)
 {
     int ret;
     EVP_PKEY *pkey;
@@ -543,7 +543,7 @@ EXPORT_C int SSL_CTX_use_RSAPrivateKey(SSL_CTX *ctx, RSA *rsa)
 }
 
 # ifndef OPENSSL_NO_STDIO
-EXPORT_C int SSL_CTX_use_RSAPrivateKey_file(SSL_CTX *ctx, const char *file, int type)
+SSL2_EXPORT int SSL_CTX_use_RSAPrivateKey_file(SSL_CTX *ctx, const char *file, int type)
 {
     int j, ret = 0;
     BIO *in;
@@ -584,7 +584,7 @@ EXPORT_C int SSL_CTX_use_RSAPrivateKey_file(SSL_CTX *ctx, const char *file, int 
 }
 # endif
 
-EXPORT_C int SSL_CTX_use_RSAPrivateKey_ASN1(SSL_CTX *ctx, const unsigned char *d,
+SSL2_EXPORT int SSL_CTX_use_RSAPrivateKey_ASN1(SSL_CTX *ctx, const unsigned char *d,
                                    long len)
 {
     int ret;
@@ -603,7 +603,7 @@ EXPORT_C int SSL_CTX_use_RSAPrivateKey_ASN1(SSL_CTX *ctx, const unsigned char *d
 }
 #endif                          /* !OPENSSL_NO_RSA */
 
-EXPORT_C int SSL_CTX_use_PrivateKey(SSL_CTX *ctx, EVP_PKEY *pkey)
+SSL2_EXPORT int SSL_CTX_use_PrivateKey(SSL_CTX *ctx, EVP_PKEY *pkey)
 {
     if (pkey == NULL) {
         SSLerr(SSL_F_SSL_CTX_USE_PRIVATEKEY, ERR_R_PASSED_NULL_PARAMETER);
@@ -617,7 +617,7 @@ EXPORT_C int SSL_CTX_use_PrivateKey(SSL_CTX *ctx, EVP_PKEY *pkey)
 }
 
 #ifndef OPENSSL_NO_STDIO
-EXPORT_C int SSL_CTX_use_PrivateKey_file(SSL_CTX *ctx, const char *file, int type)
+SSL2_EXPORT int SSL_CTX_use_PrivateKey_file(SSL_CTX *ctx, const char *file, int type)
 {
     int j, ret = 0;
     BIO *in;
@@ -658,7 +658,7 @@ EXPORT_C int SSL_CTX_use_PrivateKey_file(SSL_CTX *ctx, const char *file, int typ
 }
 #endif
 
-EXPORT_C int SSL_CTX_use_PrivateKey_ASN1(int type, SSL_CTX *ctx,
+SSL2_EXPORT int SSL_CTX_use_PrivateKey_ASN1(int type, SSL_CTX *ctx,
                                 const unsigned char *d, long len)
 {
     int ret;
@@ -682,7 +682,7 @@ EXPORT_C int SSL_CTX_use_PrivateKey_ASN1(int type, SSL_CTX *ctx,
  * followed by a sequence of CA certificates that should be sent to the peer
  * in the Certificate message.
  */
-EXPORT_C int SSL_CTX_use_certificate_chain_file(SSL_CTX *ctx, const char *file)
+SSL2_EXPORT int SSL_CTX_use_certificate_chain_file(SSL_CTX *ctx, const char *file)
 {
     BIO *in;
     int ret = 0;

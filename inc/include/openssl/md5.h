@@ -107,11 +107,11 @@ typedef struct MD5state_st {
 # ifdef OPENSSL_FIPS
 int private_MD5_Init(MD5_CTX *c);
 # endif
-int MD5_Init(MD5_CTX *c);
-int MD5_Update(MD5_CTX *c, const void *data, size_t len);
-int MD5_Final(unsigned char *md, MD5_CTX *c);
-unsigned char *MD5(const unsigned char *d, size_t n, unsigned char *md);
-void MD5_Transform(MD5_CTX *c, const unsigned char *b);
+SSL2_IMPORT int MD5_Init(MD5_CTX *c);
+SSL2_IMPORT int MD5_Update(MD5_CTX *c, const void *data, size_t len);
+SSL2_IMPORT int MD5_Final(unsigned char *md, MD5_CTX *c);
+SSL2_IMPORT unsigned char *MD5(const unsigned char *d, size_t n, unsigned char *md);
+SSL2_IMPORT void MD5_Transform(MD5_CTX *c, const unsigned char *b);
 #ifdef  __cplusplus
 }
 #endif

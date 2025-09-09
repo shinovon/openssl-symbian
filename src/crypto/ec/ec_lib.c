@@ -119,7 +119,7 @@ EC_GROUP *EC_GROUP_new(const EC_METHOD *meth)
     return ret;
 }
 
-EXPORT_C void EC_GROUP_free(EC_GROUP *group)
+SSL2_EXPORT void EC_GROUP_free(EC_GROUP *group)
 {
     if (!group)
         return;

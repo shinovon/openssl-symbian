@@ -625,7 +625,7 @@ static const u32 rcon[] = {
 /**
  * Expand the cipher key into the encryption key schedule.
  */
-EXPORT_C int private_AES_set_encrypt_key(const unsigned char *userKey, const int bits,
+SSL2_EXPORT int private_AES_set_encrypt_key(const unsigned char *userKey, const int bits,
                                 AES_KEY *key)
 {
 
@@ -727,7 +727,7 @@ EXPORT_C int private_AES_set_encrypt_key(const unsigned char *userKey, const int
 /**
  * Expand the cipher key into the decryption key schedule.
  */
-EXPORT_C int private_AES_set_decrypt_key(const unsigned char *userKey, const int bits,
+SSL2_EXPORT int private_AES_set_decrypt_key(const unsigned char *userKey, const int bits,
                                 AES_KEY *key)
 {
 
@@ -780,7 +780,7 @@ EXPORT_C int private_AES_set_decrypt_key(const unsigned char *userKey, const int
  * Encrypt a single block
  * in and out can overlap
  */
-EXPORT_C void AES_encrypt(const unsigned char *in, unsigned char *out,
+SSL2_EXPORT void AES_encrypt(const unsigned char *in, unsigned char *out,
                  const AES_KEY *key) {
 
     const u32 *rk;
@@ -971,7 +971,7 @@ EXPORT_C void AES_encrypt(const unsigned char *in, unsigned char *out,
  * Decrypt a single block
  * in and out can overlap
  */
-EXPORT_C void AES_decrypt(const unsigned char *in, unsigned char *out,
+SSL2_EXPORT void AES_decrypt(const unsigned char *in, unsigned char *out,
                  const AES_KEY *key)
 {
 

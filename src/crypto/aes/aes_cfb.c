@@ -58,7 +58,7 @@
  * used is contained in *num;
  */
 
-EXPORT_C void AES_cfb128_encrypt(const unsigned char *in, unsigned char *out,
+SSL2_EXPORT void AES_cfb128_encrypt(const unsigned char *in, unsigned char *out,
                         size_t length, const AES_KEY *key,
                         unsigned char *ivec, int *num, const int enc)
 {
@@ -68,7 +68,7 @@ EXPORT_C void AES_cfb128_encrypt(const unsigned char *in, unsigned char *out,
 }
 
 /* N.B. This expects the input to be packed, MS bit first */
-EXPORT_C void AES_cfb1_encrypt(const unsigned char *in, unsigned char *out,
+SSL2_EXPORT void AES_cfb1_encrypt(const unsigned char *in, unsigned char *out,
                       size_t length, const AES_KEY *key,
                       unsigned char *ivec, int *num, const int enc)
 {
@@ -76,7 +76,7 @@ EXPORT_C void AES_cfb1_encrypt(const unsigned char *in, unsigned char *out,
                             (block128_f) AES_encrypt);
 }
 
-EXPORT_C void AES_cfb8_encrypt(const unsigned char *in, unsigned char *out,
+SSL2_EXPORT void AES_cfb8_encrypt(const unsigned char *in, unsigned char *out,
                       size_t length, const AES_KEY *key,
                       unsigned char *ivec, int *num, const int enc)
 {

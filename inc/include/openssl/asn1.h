@@ -314,31 +314,31 @@ typedef struct ASN1_VALUE_st ASN1_VALUE;
         DECLARE_ASN1_ENCODE_FUNCTIONS(type, itname, name)
 
 # define DECLARE_ASN1_ENCODE_FUNCTIONS(type, itname, name) \
-	IMPORT_C type *d2i_##name(type **a, const unsigned char **in, long len); \
-        IMPORT_C int i2d_##name(type *a, unsigned char **out); \
+	SSL2_IMPORT type *d2i_##name(type **a, const unsigned char **in, long len); \
+        SSL2_IMPORT int i2d_##name(type *a, unsigned char **out); \
         DECLARE_ASN1_ITEM(itname)
 
 # define DECLARE_ASN1_ENCODE_FUNCTIONS_const(type, name) \
-	IMPORT_C type *d2i_##name(type **a, const unsigned char **in, long len); \
-        IMPORT_C int i2d_##name(const type *a, unsigned char **out); \
+	SSL2_IMPORT type *d2i_##name(type **a, const unsigned char **in, long len); \
+        SSL2_IMPORT int i2d_##name(const type *a, unsigned char **out); \
         DECLARE_ASN1_ITEM(name)
 
 # define DECLARE_ASN1_NDEF_FUNCTION(name) \
-	IMPORT_C int i2d_##name##_NDEF(name *a, unsigned char **out);
+	SSL2_IMPORT int i2d_##name##_NDEF(name *a, unsigned char **out);
 
 # define DECLARE_ASN1_FUNCTIONS_const(name) \
         DECLARE_ASN1_ALLOC_FUNCTIONS(name) \
         DECLARE_ASN1_ENCODE_FUNCTIONS_const(name, name)
 
 # define DECLARE_ASN1_ALLOC_FUNCTIONS_name(type, name) \
-        IMPORT_C type *name##_new(void); \
-        IMPORT_C void name##_free(type *a);
+        SSL2_IMPORT type *name##_new(void); \
+        SSL2_IMPORT void name##_free(type *a);
 
 # define DECLARE_ASN1_PRINT_FUNCTION(stname) \
         DECLARE_ASN1_PRINT_FUNCTION_fname(stname, stname)
 
 # define DECLARE_ASN1_PRINT_FUNCTION_fname(stname, fname) \
-	IMPORT_C int fname##_print_ctx(BIO *out, stname *x, int indent, \
+	SSL2_IMPORT int fname##_print_ctx(BIO *out, stname *x, int indent, \
                                          const ASN1_PCTX *pctx);
 
 # define D2I_OF(type) type *(*)(type **,const unsigned char **,long)
@@ -775,17 +775,17 @@ typedef struct BIT_STRING_BITNAME_st {
 
 DECLARE_ASN1_FUNCTIONS_fname(ASN1_TYPE, ASN1_ANY, ASN1_TYPE)
 
-IMPORT_C int ASN1_TYPE_get(ASN1_TYPE *a);
-IMPORT_C void ASN1_TYPE_set(ASN1_TYPE *a, int type, void *value);
-IMPORT_C int ASN1_TYPE_set1(ASN1_TYPE *a, int type, const void *value);
-IMPORT_C int ASN1_TYPE_cmp(const ASN1_TYPE *a, const ASN1_TYPE *b);
+SSL2_IMPORT int ASN1_TYPE_get(ASN1_TYPE *a);
+SSL2_IMPORT void ASN1_TYPE_set(ASN1_TYPE *a, int type, void *value);
+SSL2_IMPORT int ASN1_TYPE_set1(ASN1_TYPE *a, int type, const void *value);
+SSL2_IMPORT int ASN1_TYPE_cmp(const ASN1_TYPE *a, const ASN1_TYPE *b);
 
-IMPORT_C ASN1_OBJECT *ASN1_OBJECT_new(void);
-IMPORT_C void ASN1_OBJECT_free(ASN1_OBJECT *a);
-IMPORT_C int i2d_ASN1_OBJECT(ASN1_OBJECT *a, unsigned char **pp);
-IMPORT_C ASN1_OBJECT *c2i_ASN1_OBJECT(ASN1_OBJECT **a, const unsigned char **pp,
+SSL2_IMPORT ASN1_OBJECT *ASN1_OBJECT_new(void);
+SSL2_IMPORT void ASN1_OBJECT_free(ASN1_OBJECT *a);
+SSL2_IMPORT int i2d_ASN1_OBJECT(ASN1_OBJECT *a, unsigned char **pp);
+SSL2_IMPORT ASN1_OBJECT *c2i_ASN1_OBJECT(ASN1_OBJECT **a, const unsigned char **pp,
                              long length);
-IMPORT_C ASN1_OBJECT *d2i_ASN1_OBJECT(ASN1_OBJECT **a, const unsigned char **pp,
+SSL2_IMPORT ASN1_OBJECT *d2i_ASN1_OBJECT(ASN1_OBJECT **a, const unsigned char **pp,
                              long length);
 
 DECLARE_ASN1_ITEM(ASN1_OBJECT)
@@ -793,81 +793,81 @@ DECLARE_ASN1_ITEM(ASN1_OBJECT)
 DECLARE_STACK_OF(ASN1_OBJECT)
 DECLARE_ASN1_SET_OF(ASN1_OBJECT)
 
-IMPORT_C ASN1_STRING *ASN1_STRING_new(void);
-IMPORT_C void ASN1_STRING_free(ASN1_STRING *a);
-IMPORT_C void ASN1_STRING_clear_free(ASN1_STRING *a);
-IMPORT_C int ASN1_STRING_copy(ASN1_STRING *dst, const ASN1_STRING *str);
-IMPORT_C ASN1_STRING *ASN1_STRING_dup(const ASN1_STRING *a);
-IMPORT_C ASN1_STRING *ASN1_STRING_type_new(int type);
-IMPORT_C int ASN1_STRING_cmp(const ASN1_STRING *a, const ASN1_STRING *b);
+SSL2_IMPORT ASN1_STRING *ASN1_STRING_new(void);
+SSL2_IMPORT void ASN1_STRING_free(ASN1_STRING *a);
+SSL2_IMPORT void ASN1_STRING_clear_free(ASN1_STRING *a);
+SSL2_IMPORT int ASN1_STRING_copy(ASN1_STRING *dst, const ASN1_STRING *str);
+SSL2_IMPORT ASN1_STRING *ASN1_STRING_dup(const ASN1_STRING *a);
+SSL2_IMPORT ASN1_STRING *ASN1_STRING_type_new(int type);
+SSL2_IMPORT int ASN1_STRING_cmp(const ASN1_STRING *a, const ASN1_STRING *b);
   /*
    * Since this is used to store all sorts of things, via macros, for now,
    * make its data void *
    */
-IMPORT_C int ASN1_STRING_set(ASN1_STRING *str, const void *data, int len);
-IMPORT_C void ASN1_STRING_set0(ASN1_STRING *str, void *data, int len);
-IMPORT_C int ASN1_STRING_length(const ASN1_STRING *x);
-IMPORT_C void ASN1_STRING_length_set(ASN1_STRING *x, int n);
-IMPORT_C int ASN1_STRING_type(ASN1_STRING *x);
-IMPORT_C unsigned char *ASN1_STRING_data(ASN1_STRING *x);
+SSL2_IMPORT int ASN1_STRING_set(ASN1_STRING *str, const void *data, int len);
+SSL2_IMPORT void ASN1_STRING_set0(ASN1_STRING *str, void *data, int len);
+SSL2_IMPORT int ASN1_STRING_length(const ASN1_STRING *x);
+SSL2_IMPORT void ASN1_STRING_length_set(ASN1_STRING *x, int n);
+SSL2_IMPORT int ASN1_STRING_type(ASN1_STRING *x);
+SSL2_IMPORT unsigned char *ASN1_STRING_data(ASN1_STRING *x);
 
 DECLARE_ASN1_FUNCTIONS(ASN1_BIT_STRING)
-IMPORT_C int i2c_ASN1_BIT_STRING(ASN1_BIT_STRING *a, unsigned char **pp);
-IMPORT_C ASN1_BIT_STRING *c2i_ASN1_BIT_STRING(ASN1_BIT_STRING **a,
+SSL2_IMPORT int i2c_ASN1_BIT_STRING(ASN1_BIT_STRING *a, unsigned char **pp);
+SSL2_IMPORT ASN1_BIT_STRING *c2i_ASN1_BIT_STRING(ASN1_BIT_STRING **a,
                                      const unsigned char **pp, long length);
-IMPORT_C int ASN1_BIT_STRING_set(ASN1_BIT_STRING *a, unsigned char *d, int length);
-IMPORT_C int ASN1_BIT_STRING_set_bit(ASN1_BIT_STRING *a, int n, int value);
-IMPORT_C int ASN1_BIT_STRING_get_bit(ASN1_BIT_STRING *a, int n);
-IMPORT_C int ASN1_BIT_STRING_check(ASN1_BIT_STRING *a,
+SSL2_IMPORT int ASN1_BIT_STRING_set(ASN1_BIT_STRING *a, unsigned char *d, int length);
+SSL2_IMPORT int ASN1_BIT_STRING_set_bit(ASN1_BIT_STRING *a, int n, int value);
+SSL2_IMPORT int ASN1_BIT_STRING_get_bit(ASN1_BIT_STRING *a, int n);
+SSL2_IMPORT int ASN1_BIT_STRING_check(ASN1_BIT_STRING *a,
                           unsigned char *flags, int flags_len);
 
 # ifndef OPENSSL_NO_BIO
-IMPORT_C int ASN1_BIT_STRING_name_print(BIO *out, ASN1_BIT_STRING *bs,
+SSL2_IMPORT int ASN1_BIT_STRING_name_print(BIO *out, ASN1_BIT_STRING *bs,
                                BIT_STRING_BITNAME *tbl, int indent);
 # endif
-IMPORT_C int ASN1_BIT_STRING_num_asc(char *name, BIT_STRING_BITNAME *tbl);
-IMPORT_C int ASN1_BIT_STRING_set_asc(ASN1_BIT_STRING *bs, char *name, int value,
+SSL2_IMPORT int ASN1_BIT_STRING_num_asc(char *name, BIT_STRING_BITNAME *tbl);
+SSL2_IMPORT int ASN1_BIT_STRING_set_asc(ASN1_BIT_STRING *bs, char *name, int value,
                             BIT_STRING_BITNAME *tbl);
 
-IMPORT_C int i2d_ASN1_BOOLEAN(int a, unsigned char **pp);
-IMPORT_C int d2i_ASN1_BOOLEAN(int *a, const unsigned char **pp, long length);
+SSL2_IMPORT int i2d_ASN1_BOOLEAN(int a, unsigned char **pp);
+SSL2_IMPORT int d2i_ASN1_BOOLEAN(int *a, const unsigned char **pp, long length);
 
 DECLARE_ASN1_FUNCTIONS(ASN1_INTEGER)
-IMPORT_C int i2c_ASN1_INTEGER(ASN1_INTEGER *a, unsigned char **pp);
-IMPORT_C ASN1_INTEGER *c2i_ASN1_INTEGER(ASN1_INTEGER **a, const unsigned char **pp,
+SSL2_IMPORT int i2c_ASN1_INTEGER(ASN1_INTEGER *a, unsigned char **pp);
+SSL2_IMPORT ASN1_INTEGER *c2i_ASN1_INTEGER(ASN1_INTEGER **a, const unsigned char **pp,
                                long length);
-IMPORT_C ASN1_INTEGER *d2i_ASN1_UINTEGER(ASN1_INTEGER **a, const unsigned char **pp,
+SSL2_IMPORT ASN1_INTEGER *d2i_ASN1_UINTEGER(ASN1_INTEGER **a, const unsigned char **pp,
                                 long length);
-IMPORT_C ASN1_INTEGER *ASN1_INTEGER_dup(const ASN1_INTEGER *x);
-IMPORT_C int ASN1_INTEGER_cmp(const ASN1_INTEGER *x, const ASN1_INTEGER *y);
+SSL2_IMPORT ASN1_INTEGER *ASN1_INTEGER_dup(const ASN1_INTEGER *x);
+SSL2_IMPORT int ASN1_INTEGER_cmp(const ASN1_INTEGER *x, const ASN1_INTEGER *y);
 
 DECLARE_ASN1_FUNCTIONS(ASN1_ENUMERATED)
 
-IMPORT_C int ASN1_UTCTIME_check(const ASN1_UTCTIME *a);
-IMPORT_C ASN1_UTCTIME *ASN1_UTCTIME_set(ASN1_UTCTIME *s, time_t t);
-IMPORT_C ASN1_UTCTIME *ASN1_UTCTIME_adj(ASN1_UTCTIME *s, time_t t,
+SSL2_IMPORT int ASN1_UTCTIME_check(const ASN1_UTCTIME *a);
+SSL2_IMPORT ASN1_UTCTIME *ASN1_UTCTIME_set(ASN1_UTCTIME *s, time_t t);
+SSL2_IMPORT ASN1_UTCTIME *ASN1_UTCTIME_adj(ASN1_UTCTIME *s, time_t t,
                                int offset_day, long offset_sec);
-IMPORT_C int ASN1_UTCTIME_set_string(ASN1_UTCTIME *s, const char *str);
-IMPORT_C int ASN1_UTCTIME_cmp_time_t(const ASN1_UTCTIME *s, time_t t);
+SSL2_IMPORT int ASN1_UTCTIME_set_string(ASN1_UTCTIME *s, const char *str);
+SSL2_IMPORT int ASN1_UTCTIME_cmp_time_t(const ASN1_UTCTIME *s, time_t t);
 # if 0
 time_t ASN1_UTCTIME_get(const ASN1_UTCTIME *s);
 # endif
 
-IMPORT_C int ASN1_GENERALIZEDTIME_check(const ASN1_GENERALIZEDTIME *a);
-IMPORT_C ASN1_GENERALIZEDTIME *ASN1_GENERALIZEDTIME_set(ASN1_GENERALIZEDTIME *s,
+SSL2_IMPORT int ASN1_GENERALIZEDTIME_check(const ASN1_GENERALIZEDTIME *a);
+SSL2_IMPORT ASN1_GENERALIZEDTIME *ASN1_GENERALIZEDTIME_set(ASN1_GENERALIZEDTIME *s,
                                                time_t t);
-IMPORT_C ASN1_GENERALIZEDTIME *ASN1_GENERALIZEDTIME_adj(ASN1_GENERALIZEDTIME *s,
+SSL2_IMPORT ASN1_GENERALIZEDTIME *ASN1_GENERALIZEDTIME_adj(ASN1_GENERALIZEDTIME *s,
                                                time_t t, int offset_day,
                                                long offset_sec);
-IMPORT_C int ASN1_GENERALIZEDTIME_set_string(ASN1_GENERALIZEDTIME *s, const char *str);
-IMPORT_C int ASN1_TIME_diff(int *pday, int *psec,
+SSL2_IMPORT int ASN1_GENERALIZEDTIME_set_string(ASN1_GENERALIZEDTIME *s, const char *str);
+SSL2_IMPORT int ASN1_TIME_diff(int *pday, int *psec,
                    const ASN1_TIME *from, const ASN1_TIME *to);
 
 DECLARE_ASN1_FUNCTIONS(ASN1_OCTET_STRING)
-IMPORT_C ASN1_OCTET_STRING *ASN1_OCTET_STRING_dup(const ASN1_OCTET_STRING *a);
-IMPORT_C int ASN1_OCTET_STRING_cmp(const ASN1_OCTET_STRING *a,
+SSL2_IMPORT ASN1_OCTET_STRING *ASN1_OCTET_STRING_dup(const ASN1_OCTET_STRING *a);
+SSL2_IMPORT int ASN1_OCTET_STRING_cmp(const ASN1_OCTET_STRING *a,
                           const ASN1_OCTET_STRING *b);
-IMPORT_C int ASN1_OCTET_STRING_set(ASN1_OCTET_STRING *str, const unsigned char *data,
+SSL2_IMPORT int ASN1_OCTET_STRING_set(ASN1_OCTET_STRING *str, const unsigned char *data,
                           int len);
 
 DECLARE_ASN1_FUNCTIONS(ASN1_VISIBLESTRING)
@@ -876,8 +876,8 @@ DECLARE_ASN1_FUNCTIONS(ASN1_UTF8STRING)
 DECLARE_ASN1_FUNCTIONS(ASN1_NULL)
 DECLARE_ASN1_FUNCTIONS(ASN1_BMPSTRING)
 
-IMPORT_C int UTF8_getc(const unsigned char *str, int len, unsigned long *val);
-IMPORT_C int UTF8_putc(unsigned char *str, int len, unsigned long value);
+SSL2_IMPORT int UTF8_getc(const unsigned char *str, int len, unsigned long *val);
+SSL2_IMPORT int UTF8_putc(unsigned char *str, int len, unsigned long value);
 
 DECLARE_ASN1_FUNCTIONS_name(ASN1_STRING, ASN1_PRINTABLE)
 
@@ -893,75 +893,75 @@ DECLARE_ASN1_FUNCTIONS(ASN1_TIME)
 
 DECLARE_ASN1_ITEM(ASN1_OCTET_STRING_NDEF)
 
-IMPORT_C ASN1_TIME *ASN1_TIME_set(ASN1_TIME *s, time_t t);
-IMPORT_C ASN1_TIME *ASN1_TIME_adj(ASN1_TIME *s, time_t t,
+SSL2_IMPORT ASN1_TIME *ASN1_TIME_set(ASN1_TIME *s, time_t t);
+SSL2_IMPORT ASN1_TIME *ASN1_TIME_adj(ASN1_TIME *s, time_t t,
                          int offset_day, long offset_sec);
-IMPORT_C int ASN1_TIME_check(ASN1_TIME *t);
-IMPORT_C ASN1_GENERALIZEDTIME *ASN1_TIME_to_generalizedtime(ASN1_TIME *t, ASN1_GENERALIZEDTIME
+SSL2_IMPORT int ASN1_TIME_check(ASN1_TIME *t);
+SSL2_IMPORT ASN1_GENERALIZEDTIME *ASN1_TIME_to_generalizedtime(ASN1_TIME *t, ASN1_GENERALIZEDTIME
                                                    **out);
-IMPORT_C int ASN1_TIME_set_string(ASN1_TIME *s, const char *str);
+SSL2_IMPORT int ASN1_TIME_set_string(ASN1_TIME *s, const char *str);
 
-IMPORT_C int i2d_ASN1_SET(STACK_OF(OPENSSL_BLOCK) *a, unsigned char **pp,
+SSL2_IMPORT int i2d_ASN1_SET(STACK_OF(OPENSSL_BLOCK) *a, unsigned char **pp,
                  i2d_of_void *i2d, int ex_tag, int ex_class, int is_set);
-IMPORT_C STACK_OF(OPENSSL_BLOCK) *d2i_ASN1_SET(STACK_OF(OPENSSL_BLOCK) **a,
+SSL2_IMPORT STACK_OF(OPENSSL_BLOCK) *d2i_ASN1_SET(STACK_OF(OPENSSL_BLOCK) **a,
                                       const unsigned char **pp,
                                       long length, d2i_of_void *d2i,
                                       void (*free_func) (OPENSSL_BLOCK),
                                       int ex_tag, int ex_class);
 
 # ifndef OPENSSL_NO_BIO
-IMPORT_C int i2a_ASN1_INTEGER(BIO *bp, ASN1_INTEGER *a);
-IMPORT_C int a2i_ASN1_INTEGER(BIO *bp, ASN1_INTEGER *bs, char *buf, int size);
-IMPORT_C int i2a_ASN1_ENUMERATED(BIO *bp, ASN1_ENUMERATED *a);
-IMPORT_C int a2i_ASN1_ENUMERATED(BIO *bp, ASN1_ENUMERATED *bs, char *buf, int size);
-IMPORT_C int i2a_ASN1_OBJECT(BIO *bp, ASN1_OBJECT *a);
-IMPORT_C int a2i_ASN1_STRING(BIO *bp, ASN1_STRING *bs, char *buf, int size);
-IMPORT_C int i2a_ASN1_STRING(BIO *bp, ASN1_STRING *a, int type);
+SSL2_IMPORT int i2a_ASN1_INTEGER(BIO *bp, ASN1_INTEGER *a);
+SSL2_IMPORT int a2i_ASN1_INTEGER(BIO *bp, ASN1_INTEGER *bs, char *buf, int size);
+SSL2_IMPORT int i2a_ASN1_ENUMERATED(BIO *bp, ASN1_ENUMERATED *a);
+SSL2_IMPORT int a2i_ASN1_ENUMERATED(BIO *bp, ASN1_ENUMERATED *bs, char *buf, int size);
+SSL2_IMPORT int i2a_ASN1_OBJECT(BIO *bp, ASN1_OBJECT *a);
+SSL2_IMPORT int a2i_ASN1_STRING(BIO *bp, ASN1_STRING *bs, char *buf, int size);
+SSL2_IMPORT int i2a_ASN1_STRING(BIO *bp, ASN1_STRING *a, int type);
 # endif
-IMPORT_C int i2t_ASN1_OBJECT(char *buf, int buf_len, ASN1_OBJECT *a);
+SSL2_IMPORT int i2t_ASN1_OBJECT(char *buf, int buf_len, ASN1_OBJECT *a);
 
-IMPORT_C int a2d_ASN1_OBJECT(unsigned char *out, int olen, const char *buf, int num);
-IMPORT_C ASN1_OBJECT *ASN1_OBJECT_create(int nid, unsigned char *data, int len,
+SSL2_IMPORT int a2d_ASN1_OBJECT(unsigned char *out, int olen, const char *buf, int num);
+SSL2_IMPORT ASN1_OBJECT *ASN1_OBJECT_create(int nid, unsigned char *data, int len,
                                 const char *sn, const char *ln);
 
-IMPORT_C int ASN1_INTEGER_set(ASN1_INTEGER *a, long v);
-IMPORT_C long ASN1_INTEGER_get(const ASN1_INTEGER *a);
-IMPORT_C ASN1_INTEGER *BN_to_ASN1_INTEGER(const BIGNUM *bn, ASN1_INTEGER *ai);
-IMPORT_C BIGNUM *ASN1_INTEGER_to_BN(const ASN1_INTEGER *ai, BIGNUM *bn);
+SSL2_IMPORT int ASN1_INTEGER_set(ASN1_INTEGER *a, long v);
+SSL2_IMPORT long ASN1_INTEGER_get(const ASN1_INTEGER *a);
+SSL2_IMPORT ASN1_INTEGER *BN_to_ASN1_INTEGER(const BIGNUM *bn, ASN1_INTEGER *ai);
+SSL2_IMPORT BIGNUM *ASN1_INTEGER_to_BN(const ASN1_INTEGER *ai, BIGNUM *bn);
 
-IMPORT_C int ASN1_ENUMERATED_set(ASN1_ENUMERATED *a, long v);
-IMPORT_C long ASN1_ENUMERATED_get(ASN1_ENUMERATED *a);
-IMPORT_C ASN1_ENUMERATED *BN_to_ASN1_ENUMERATED(BIGNUM *bn, ASN1_ENUMERATED *ai);
-IMPORT_C BIGNUM *ASN1_ENUMERATED_to_BN(ASN1_ENUMERATED *ai, BIGNUM *bn);
+SSL2_IMPORT int ASN1_ENUMERATED_set(ASN1_ENUMERATED *a, long v);
+SSL2_IMPORT long ASN1_ENUMERATED_get(ASN1_ENUMERATED *a);
+SSL2_IMPORT ASN1_ENUMERATED *BN_to_ASN1_ENUMERATED(BIGNUM *bn, ASN1_ENUMERATED *ai);
+SSL2_IMPORT BIGNUM *ASN1_ENUMERATED_to_BN(ASN1_ENUMERATED *ai, BIGNUM *bn);
 
 /* General */
 /* given a string, return the correct type, max is the maximum length */
-IMPORT_C int ASN1_PRINTABLE_type(const unsigned char *s, int max);
+SSL2_IMPORT int ASN1_PRINTABLE_type(const unsigned char *s, int max);
 
-IMPORT_C int i2d_ASN1_bytes(ASN1_STRING *a, unsigned char **pp, int tag, int xclass);
-IMPORT_C ASN1_STRING *d2i_ASN1_bytes(ASN1_STRING **a, const unsigned char **pp,
+SSL2_IMPORT int i2d_ASN1_bytes(ASN1_STRING *a, unsigned char **pp, int tag, int xclass);
+SSL2_IMPORT ASN1_STRING *d2i_ASN1_bytes(ASN1_STRING **a, const unsigned char **pp,
                             long length, int Ptag, int Pclass);
-IMPORT_C unsigned long ASN1_tag2bit(int tag);
+SSL2_IMPORT unsigned long ASN1_tag2bit(int tag);
 /* type is one or more of the B_ASN1_ values. */
-IMPORT_C ASN1_STRING *d2i_ASN1_type_bytes(ASN1_STRING **a, const unsigned char **pp,
+SSL2_IMPORT ASN1_STRING *d2i_ASN1_type_bytes(ASN1_STRING **a, const unsigned char **pp,
                                  long length, int type);
 
 /* PARSING */
-IMPORT_C int asn1_Finish(ASN1_CTX *c);
-IMPORT_C int asn1_const_Finish(ASN1_const_CTX *c);
+SSL2_IMPORT int asn1_Finish(ASN1_CTX *c);
+SSL2_IMPORT int asn1_const_Finish(ASN1_const_CTX *c);
 
 /* SPECIALS */
-IMPORT_C int ASN1_get_object(const unsigned char **pp, long *plength, int *ptag,
+SSL2_IMPORT int ASN1_get_object(const unsigned char **pp, long *plength, int *ptag,
                     int *pclass, long omax);
-IMPORT_C int ASN1_check_infinite_end(unsigned char **p, long len);
-IMPORT_C int ASN1_const_check_infinite_end(const unsigned char **p, long len);
-IMPORT_C void ASN1_put_object(unsigned char **pp, int constructed, int length,
+SSL2_IMPORT int ASN1_check_infinite_end(unsigned char **p, long len);
+SSL2_IMPORT int ASN1_const_check_infinite_end(const unsigned char **p, long len);
+SSL2_IMPORT void ASN1_put_object(unsigned char **pp, int constructed, int length,
                      int tag, int xclass);
-IMPORT_C int ASN1_put_eoc(unsigned char **pp);
-IMPORT_C int ASN1_object_size(int constructed, int length, int tag);
+SSL2_IMPORT int ASN1_put_eoc(unsigned char **pp);
+SSL2_IMPORT int ASN1_object_size(int constructed, int length, int tag);
 
 /* Used to implement other functions */
-IMPORT_C void *ASN1_dup(i2d_of_void *i2d, d2i_of_void *d2i, void *x);
+SSL2_IMPORT void *ASN1_dup(i2d_of_void *i2d, d2i_of_void *d2i, void *x);
 
 # define ASN1_dup_of(type,i2d,d2i,x) \
     ((type*)ASN1_dup(CHECKED_I2D_OF(type, i2d), \
@@ -973,7 +973,7 @@ IMPORT_C void *ASN1_dup(i2d_of_void *i2d, d2i_of_void *d2i, void *x);
                      CHECKED_D2I_OF(type, d2i), \
                      CHECKED_PTR_OF(const type, x)))
 
-IMPORT_C void *ASN1_item_dup(const ASN1_ITEM *it, void *x);
+SSL2_IMPORT void *ASN1_item_dup(const ASN1_ITEM *it, void *x);
 
 /* ASN1 alloc/free macros for when a type is only used internally */
 
@@ -1003,14 +1003,14 @@ int ASN1_i2d_fp(i2d_of_void *i2d, FILE *out, void *x);
                  out, \
                  CHECKED_PTR_OF(const type, x)))
 
-IMPORT_C int ASN1_item_i2d_fp(const ASN1_ITEM *it, FILE *out, void *x);
-IMPORT_C int ASN1_STRING_print_ex_fp(FILE *fp, ASN1_STRING *str, unsigned long flags);
+SSL2_IMPORT int ASN1_item_i2d_fp(const ASN1_ITEM *it, FILE *out, void *x);
+SSL2_IMPORT int ASN1_STRING_print_ex_fp(FILE *fp, ASN1_STRING *str, unsigned long flags);
 # endif
 
-IMPORT_C int ASN1_STRING_to_UTF8(unsigned char **out, ASN1_STRING *in);
+SSL2_IMPORT int ASN1_STRING_to_UTF8(unsigned char **out, ASN1_STRING *in);
 
 # ifndef OPENSSL_NO_BIO
-IMPORT_C void *ASN1_d2i_bio(void *(*xnew) (void), d2i_of_void *d2i, BIO *in, void **x);
+SSL2_IMPORT void *ASN1_d2i_bio(void *(*xnew) (void), d2i_of_void *d2i, BIO *in, void **x);
 
 #  define ASN1_d2i_bio_of(type,xnew,d2i,in,x) \
     ((type*)ASN1_d2i_bio( CHECKED_NEW_OF(type, xnew), \
@@ -1018,8 +1018,8 @@ IMPORT_C void *ASN1_d2i_bio(void *(*xnew) (void), d2i_of_void *d2i, BIO *in, voi
                           in, \
                           CHECKED_PPTR_OF(type, x)))
 
-IMPORT_C void *ASN1_item_d2i_bio(const ASN1_ITEM *it, BIO *in, void *x);
-IMPORT_C int ASN1_i2d_bio(i2d_of_void *i2d, BIO *out, unsigned char *x);
+SSL2_IMPORT void *ASN1_item_d2i_bio(const ASN1_ITEM *it, BIO *in, void *x);
+SSL2_IMPORT int ASN1_i2d_bio(i2d_of_void *i2d, BIO *out, unsigned char *x);
 
 #  define ASN1_i2d_bio_of(type,i2d,out,x) \
     (ASN1_i2d_bio(CHECKED_I2D_OF(type, i2d), \
@@ -1031,41 +1031,41 @@ IMPORT_C int ASN1_i2d_bio(i2d_of_void *i2d, BIO *out, unsigned char *x);
                   out, \
                   CHECKED_PTR_OF(const type, x)))
 
-IMPORT_C int ASN1_item_i2d_bio(const ASN1_ITEM *it, BIO *out, void *x);
-IMPORT_C int ASN1_UTCTIME_print(BIO *fp, const ASN1_UTCTIME *a);
-IMPORT_C int ASN1_GENERALIZEDTIME_print(BIO *fp, const ASN1_GENERALIZEDTIME *a);
-IMPORT_C int ASN1_TIME_print(BIO *fp, const ASN1_TIME *a);
-IMPORT_C int ASN1_STRING_print(BIO *bp, const ASN1_STRING *v);
-IMPORT_C int ASN1_STRING_print_ex(BIO *out, ASN1_STRING *str, unsigned long flags);
-IMPORT_C int ASN1_bn_print(BIO *bp, const char *number, const BIGNUM *num,
+SSL2_IMPORT int ASN1_item_i2d_bio(const ASN1_ITEM *it, BIO *out, void *x);
+SSL2_IMPORT int ASN1_UTCTIME_print(BIO *fp, const ASN1_UTCTIME *a);
+SSL2_IMPORT int ASN1_GENERALIZEDTIME_print(BIO *fp, const ASN1_GENERALIZEDTIME *a);
+SSL2_IMPORT int ASN1_TIME_print(BIO *fp, const ASN1_TIME *a);
+SSL2_IMPORT int ASN1_STRING_print(BIO *bp, const ASN1_STRING *v);
+SSL2_IMPORT int ASN1_STRING_print_ex(BIO *out, ASN1_STRING *str, unsigned long flags);
+SSL2_IMPORT int ASN1_bn_print(BIO *bp, const char *number, const BIGNUM *num,
                   unsigned char *buf, int off);
-IMPORT_C int ASN1_parse(BIO *bp, const unsigned char *pp, long len, int indent);
-IMPORT_C int ASN1_parse_dump(BIO *bp, const unsigned char *pp, long len, int indent,
+SSL2_IMPORT int ASN1_parse(BIO *bp, const unsigned char *pp, long len, int indent);
+SSL2_IMPORT int ASN1_parse_dump(BIO *bp, const unsigned char *pp, long len, int indent,
                     int dump);
 # endif
-IMPORT_C const char *ASN1_tag2str(int tag);
+SSL2_IMPORT const char *ASN1_tag2str(int tag);
 
 /* Used to load and write netscape format cert */
 
 DECLARE_ASN1_FUNCTIONS(NETSCAPE_X509)
 
-IMPORT_C int ASN1_UNIVERSALSTRING_to_string(ASN1_UNIVERSALSTRING *s);
+SSL2_IMPORT int ASN1_UNIVERSALSTRING_to_string(ASN1_UNIVERSALSTRING *s);
 
-IMPORT_C int ASN1_TYPE_set_octetstring(ASN1_TYPE *a, unsigned char *data, int len);
-IMPORT_C int ASN1_TYPE_get_octetstring(ASN1_TYPE *a, unsigned char *data, int max_len);
-IMPORT_C int ASN1_TYPE_set_int_octetstring(ASN1_TYPE *a, long num,
+SSL2_IMPORT int ASN1_TYPE_set_octetstring(ASN1_TYPE *a, unsigned char *data, int len);
+SSL2_IMPORT int ASN1_TYPE_get_octetstring(ASN1_TYPE *a, unsigned char *data, int max_len);
+SSL2_IMPORT int ASN1_TYPE_set_int_octetstring(ASN1_TYPE *a, long num,
                                   unsigned char *data, int len);
-IMPORT_C int ASN1_TYPE_get_int_octetstring(ASN1_TYPE *a, long *num,
+SSL2_IMPORT int ASN1_TYPE_get_int_octetstring(ASN1_TYPE *a, long *num,
                                   unsigned char *data, int max_len);
 
-IMPORT_C STACK_OF(OPENSSL_BLOCK) *ASN1_seq_unpack(const unsigned char *buf, int len,
+SSL2_IMPORT STACK_OF(OPENSSL_BLOCK) *ASN1_seq_unpack(const unsigned char *buf, int len,
                                          d2i_of_void *d2i,
                                          void (*free_func) (OPENSSL_BLOCK));
-IMPORT_C unsigned char *ASN1_seq_pack(STACK_OF(OPENSSL_BLOCK) *safes, i2d_of_void *i2d,
+SSL2_IMPORT unsigned char *ASN1_seq_pack(STACK_OF(OPENSSL_BLOCK) *safes, i2d_of_void *i2d,
                              unsigned char **buf, int *len);
-IMPORT_C void *ASN1_unpack_string(ASN1_STRING *oct, d2i_of_void *d2i);
-IMPORT_C void *ASN1_item_unpack(ASN1_STRING *oct, const ASN1_ITEM *it);
-IMPORT_C ASN1_STRING *ASN1_pack_string(void *obj, i2d_of_void *i2d,
+SSL2_IMPORT void *ASN1_unpack_string(ASN1_STRING *oct, d2i_of_void *d2i);
+SSL2_IMPORT void *ASN1_item_unpack(ASN1_STRING *oct, const ASN1_ITEM *it);
+SSL2_IMPORT ASN1_STRING *ASN1_pack_string(void *obj, i2d_of_void *i2d,
                               ASN1_OCTET_STRING **oct);
 
 # define ASN1_pack_string_of(type,obj,i2d,oct) \
@@ -1073,40 +1073,40 @@ IMPORT_C ASN1_STRING *ASN1_pack_string(void *obj, i2d_of_void *i2d,
                       CHECKED_I2D_OF(type, i2d), \
                       oct))
 
-IMPORT_C ASN1_STRING *ASN1_item_pack(void *obj, const ASN1_ITEM *it,
+SSL2_IMPORT ASN1_STRING *ASN1_item_pack(void *obj, const ASN1_ITEM *it,
                             ASN1_OCTET_STRING **oct);
 
-IMPORT_C void ASN1_STRING_set_default_mask(unsigned long mask);
-IMPORT_C int ASN1_STRING_set_default_mask_asc(const char *p);
-IMPORT_C unsigned long ASN1_STRING_get_default_mask(void);
-IMPORT_C int ASN1_mbstring_copy(ASN1_STRING **out, const unsigned char *in, int len,
+SSL2_IMPORT void ASN1_STRING_set_default_mask(unsigned long mask);
+SSL2_IMPORT int ASN1_STRING_set_default_mask_asc(const char *p);
+SSL2_IMPORT unsigned long ASN1_STRING_get_default_mask(void);
+SSL2_IMPORT int ASN1_mbstring_copy(ASN1_STRING **out, const unsigned char *in, int len,
                        int inform, unsigned long mask);
-IMPORT_C int ASN1_mbstring_ncopy(ASN1_STRING **out, const unsigned char *in, int len,
+SSL2_IMPORT int ASN1_mbstring_ncopy(ASN1_STRING **out, const unsigned char *in, int len,
                         int inform, unsigned long mask,
                         long minsize, long maxsize);
 
-IMPORT_C ASN1_STRING *ASN1_STRING_set_by_NID(ASN1_STRING **out,
+SSL2_IMPORT ASN1_STRING *ASN1_STRING_set_by_NID(ASN1_STRING **out,
                                     const unsigned char *in, int inlen,
                                     int inform, int nid);
-IMPORT_C ASN1_STRING_TABLE *ASN1_STRING_TABLE_get(int nid);
-IMPORT_C int ASN1_STRING_TABLE_add(int, long, long, unsigned long, unsigned long);
-IMPORT_C void ASN1_STRING_TABLE_cleanup(void);
+SSL2_IMPORT ASN1_STRING_TABLE *ASN1_STRING_TABLE_get(int nid);
+SSL2_IMPORT int ASN1_STRING_TABLE_add(int, long, long, unsigned long, unsigned long);
+SSL2_IMPORT void ASN1_STRING_TABLE_cleanup(void);
 
 /* ASN1 template functions */
 
 /* Old API compatible functions */
-IMPORT_C ASN1_VALUE *ASN1_item_new(const ASN1_ITEM *it);
-IMPORT_C void ASN1_item_free(ASN1_VALUE *val, const ASN1_ITEM *it);
-IMPORT_C ASN1_VALUE *ASN1_item_d2i(ASN1_VALUE **val, const unsigned char **in,
+SSL2_IMPORT ASN1_VALUE *ASN1_item_new(const ASN1_ITEM *it);
+SSL2_IMPORT void ASN1_item_free(ASN1_VALUE *val, const ASN1_ITEM *it);
+SSL2_IMPORT ASN1_VALUE *ASN1_item_d2i(ASN1_VALUE **val, const unsigned char **in,
                           long len, const ASN1_ITEM *it);
-IMPORT_C int ASN1_item_i2d(ASN1_VALUE *val, unsigned char **out, const ASN1_ITEM *it);
-IMPORT_C int ASN1_item_ndef_i2d(ASN1_VALUE *val, unsigned char **out,
+SSL2_IMPORT int ASN1_item_i2d(ASN1_VALUE *val, unsigned char **out, const ASN1_ITEM *it);
+SSL2_IMPORT int ASN1_item_ndef_i2d(ASN1_VALUE *val, unsigned char **out,
                        const ASN1_ITEM *it);
 
-IMPORT_C void ASN1_add_oid_module(void);
+SSL2_IMPORT void ASN1_add_oid_module(void);
 
-IMPORT_C ASN1_TYPE *ASN1_generate_nconf(char *str, CONF *nconf);
-IMPORT_C ASN1_TYPE *ASN1_generate_v3(char *str, X509V3_CTX *cnf);
+SSL2_IMPORT ASN1_TYPE *ASN1_generate_nconf(char *str, CONF *nconf);
+SSL2_IMPORT ASN1_TYPE *ASN1_generate_v3(char *str, X509V3_CTX *cnf);
 
 /* ASN1 Print flags */
 

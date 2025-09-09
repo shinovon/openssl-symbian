@@ -118,7 +118,7 @@ typedef struct ssl_session_asn1_st {
 #endif                          /* OPENSSL_NO_SRP */
 } SSL_SESSION_ASN1;
 
-EXPORT_C int i2d_SSL_SESSION(SSL_SESSION *in, unsigned char **pp)
+SSL2_EXPORT int i2d_SSL_SESSION(SSL_SESSION *in, unsigned char **pp)
 {
 #define LSIZE2 (sizeof(long)*2)
     int v1 = 0, v2 = 0, v3 = 0, v4 = 0, v5 = 0;
@@ -378,7 +378,7 @@ EXPORT_C int i2d_SSL_SESSION(SSL_SESSION *in, unsigned char **pp)
     M_ASN1_I2D_finish();
 }
 
-EXPORT_C SSL_SESSION *d2i_SSL_SESSION(SSL_SESSION **a, const unsigned char **pp,
+SSL2_EXPORT SSL_SESSION *d2i_SSL_SESSION(SSL_SESSION **a, const unsigned char **pp,
                              long length)
 {
     int ssl_version = 0, i;

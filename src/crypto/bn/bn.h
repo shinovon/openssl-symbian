@@ -490,7 +490,7 @@ void BN_init(BIGNUM *);
 void BN_clear_free(BIGNUM *a);
 BIGNUM *BN_copy(BIGNUM *a, const BIGNUM *b);
 void BN_swap(BIGNUM *a, BIGNUM *b);
-IMPORT_C BIGNUM *BN_bin2bn(const unsigned char *s, int len, BIGNUM *ret);
+SSL2_IMPORT BIGNUM *BN_bin2bn(const unsigned char *s, int len, BIGNUM *ret);
 int BN_bn2bin(const BIGNUM *a, unsigned char *to);
 BIGNUM *BN_mpi2bn(const unsigned char *s, int len, BIGNUM *ret);
 int BN_bn2mpi(const BIGNUM *a, unsigned char *to);

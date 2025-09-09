@@ -5,20 +5,20 @@
  * returned out of public API. It may only be passed internally into other
  * functions known to support non-minimal or zero-padded BIGNUMs.
  */
-int bn_mul_mont_fixed_top(BIGNUM *r, const BIGNUM *a, const BIGNUM *b,
+SSL2_IMPORT int bn_mul_mont_fixed_top(BIGNUM *r, const BIGNUM *a, const BIGNUM *b,
                           BN_MONT_CTX *mont, BN_CTX *ctx);
-int bn_from_mont_fixed_top(BIGNUM *r, const BIGNUM *a, BN_MONT_CTX *mont,
+SSL2_IMPORT int bn_from_mont_fixed_top(BIGNUM *r, const BIGNUM *a, BN_MONT_CTX *mont,
                            BN_CTX *ctx);
-int bn_to_mont_fixed_top(BIGNUM *r, const BIGNUM *a, BN_MONT_CTX *mont,
+SSL2_IMPORT int bn_to_mont_fixed_top(BIGNUM *r, const BIGNUM *a, BN_MONT_CTX *mont,
                          BN_CTX *ctx);
-int bn_mod_add_fixed_top(BIGNUM *r, const BIGNUM *a, const BIGNUM *b,
+SSL2_IMPORT int bn_mod_add_fixed_top(BIGNUM *r, const BIGNUM *a, const BIGNUM *b,
                          const BIGNUM *m);
-int bn_mod_sub_fixed_top(BIGNUM *r, const BIGNUM *a, const BIGNUM *b,
+SSL2_IMPORT int bn_mod_sub_fixed_top(BIGNUM *r, const BIGNUM *a, const BIGNUM *b,
                          const BIGNUM *m);
-int bn_mul_fixed_top(BIGNUM *r, const BIGNUM *a, const BIGNUM *b, BN_CTX *ctx);
-int bn_sqr_fixed_top(BIGNUM *r, const BIGNUM *a, BN_CTX *ctx);
+SSL2_IMPORT int bn_mul_fixed_top(BIGNUM *r, const BIGNUM *a, const BIGNUM *b, BN_CTX *ctx);
+SSL2_IMPORT int bn_sqr_fixed_top(BIGNUM *r, const BIGNUM *a, BN_CTX *ctx);
 
-int bn_bn2binpad(const BIGNUM *a, unsigned char *to, int tolen);
+SSL2_IMPORT int bn_bn2binpad(const BIGNUM *a, unsigned char *to, int tolen);
 
-BIGNUM *bn_lebin2bn(const unsigned char *s, int len, BIGNUM *ret);
-int bn_bn2lebinpad(const BIGNUM *a, unsigned char *to, int tolen);
+SSL2_IMPORT BIGNUM *bn_lebin2bn(const unsigned char *s, int len, BIGNUM *ret);
+SSL2_IMPORT int bn_bn2lebinpad(const BIGNUM *a, unsigned char *to, int tolen);

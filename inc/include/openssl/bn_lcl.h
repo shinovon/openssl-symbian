@@ -506,29 +506,29 @@ unsigned __int64 _umul128(unsigned __int64 a, unsigned __int64 b,
 #  undef bn_div_words
 # endif
 
-void bn_mul_normal(BN_ULONG *r, BN_ULONG *a, int na, BN_ULONG *b, int nb);
-void bn_mul_comba8(BN_ULONG *r, BN_ULONG *a, BN_ULONG *b);
-void bn_mul_comba4(BN_ULONG *r, BN_ULONG *a, BN_ULONG *b);
-void bn_sqr_normal(BN_ULONG *r, const BN_ULONG *a, int n, BN_ULONG *tmp);
-void bn_sqr_comba8(BN_ULONG *r, const BN_ULONG *a);
-void bn_sqr_comba4(BN_ULONG *r, const BN_ULONG *a);
-int bn_cmp_words(const BN_ULONG *a, const BN_ULONG *b, int n);
-int bn_cmp_part_words(const BN_ULONG *a, const BN_ULONG *b, int cl, int dl);
-void bn_mul_recursive(BN_ULONG *r, BN_ULONG *a, BN_ULONG *b, int n2,
+SSL2_IMPORT void bn_mul_normal(BN_ULONG *r, BN_ULONG *a, int na, BN_ULONG *b, int nb);
+SSL2_IMPORT void bn_mul_comba8(BN_ULONG *r, BN_ULONG *a, BN_ULONG *b);
+SSL2_IMPORT void bn_mul_comba4(BN_ULONG *r, BN_ULONG *a, BN_ULONG *b);
+SSL2_IMPORT void bn_sqr_normal(BN_ULONG *r, const BN_ULONG *a, int n, BN_ULONG *tmp);
+SSL2_IMPORT void bn_sqr_comba8(BN_ULONG *r, const BN_ULONG *a);
+SSL2_IMPORT void bn_sqr_comba4(BN_ULONG *r, const BN_ULONG *a);
+SSL2_IMPORT int bn_cmp_words(const BN_ULONG *a, const BN_ULONG *b, int n);
+SSL2_IMPORT int bn_cmp_part_words(const BN_ULONG *a, const BN_ULONG *b, int cl, int dl);
+SSL2_IMPORT void bn_mul_recursive(BN_ULONG *r, BN_ULONG *a, BN_ULONG *b, int n2,
                       int dna, int dnb, BN_ULONG *t);
-void bn_mul_part_recursive(BN_ULONG *r, BN_ULONG *a, BN_ULONG *b,
+SSL2_IMPORT void bn_mul_part_recursive(BN_ULONG *r, BN_ULONG *a, BN_ULONG *b,
                            int n, int tna, int tnb, BN_ULONG *t);
-void bn_sqr_recursive(BN_ULONG *r, const BN_ULONG *a, int n2, BN_ULONG *t);
-void bn_mul_low_normal(BN_ULONG *r, BN_ULONG *a, BN_ULONG *b, int n);
-void bn_mul_low_recursive(BN_ULONG *r, BN_ULONG *a, BN_ULONG *b, int n2,
+SSL2_IMPORT void bn_sqr_recursive(BN_ULONG *r, const BN_ULONG *a, int n2, BN_ULONG *t);
+SSL2_IMPORT void bn_mul_low_normal(BN_ULONG *r, BN_ULONG *a, BN_ULONG *b, int n);
+SSL2_IMPORT void bn_mul_low_recursive(BN_ULONG *r, BN_ULONG *a, BN_ULONG *b, int n2,
                           BN_ULONG *t);
-void bn_mul_high(BN_ULONG *r, BN_ULONG *a, BN_ULONG *b, BN_ULONG *l, int n2,
+SSL2_IMPORT void bn_mul_high(BN_ULONG *r, BN_ULONG *a, BN_ULONG *b, BN_ULONG *l, int n2,
                  BN_ULONG *t);
-BN_ULONG bn_add_part_words(BN_ULONG *r, const BN_ULONG *a, const BN_ULONG *b,
+SSL2_IMPORT BN_ULONG bn_add_part_words(BN_ULONG *r, const BN_ULONG *a, const BN_ULONG *b,
                            int cl, int dl);
-BN_ULONG bn_sub_part_words(BN_ULONG *r, const BN_ULONG *a, const BN_ULONG *b,
+SSL2_IMPORT BN_ULONG bn_sub_part_words(BN_ULONG *r, const BN_ULONG *a, const BN_ULONG *b,
                            int cl, int dl);
-int bn_mul_mont(BN_ULONG *rp, const BN_ULONG *ap, const BN_ULONG *bp,
+SSL2_IMPORT int bn_mul_mont(BN_ULONG *rp, const BN_ULONG *ap, const BN_ULONG *bp,
                 const BN_ULONG *np, const BN_ULONG *n0, int num);
 
 #ifdef  __cplusplus

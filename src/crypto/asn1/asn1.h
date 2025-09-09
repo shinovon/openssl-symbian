@@ -815,10 +815,10 @@ DECLARE_ASN1_FUNCTIONS(ASN1_BIT_STRING)
 int i2c_ASN1_BIT_STRING(ASN1_BIT_STRING *a, unsigned char **pp);
 ASN1_BIT_STRING *c2i_ASN1_BIT_STRING(ASN1_BIT_STRING **a,
                                      const unsigned char **pp, long length);
-IMPORT_C int ASN1_BIT_STRING_set(ASN1_BIT_STRING *a, unsigned char *d, int length);
-IMPORT_C int ASN1_BIT_STRING_set_bit(ASN1_BIT_STRING *a, int n, int value);
-IMPORT_C int ASN1_BIT_STRING_get_bit(ASN1_BIT_STRING *a, int n);
-IMPORT_C int ASN1_BIT_STRING_check(ASN1_BIT_STRING *a,
+SSL2_IMPORT int ASN1_BIT_STRING_set(ASN1_BIT_STRING *a, unsigned char *d, int length);
+SSL2_IMPORT int ASN1_BIT_STRING_set_bit(ASN1_BIT_STRING *a, int n, int value);
+SSL2_IMPORT int ASN1_BIT_STRING_get_bit(ASN1_BIT_STRING *a, int n);
+SSL2_IMPORT int ASN1_BIT_STRING_check(ASN1_BIT_STRING *a,
                           unsigned char *flags, int flags_len);
 
 # ifndef OPENSSL_NO_BIO

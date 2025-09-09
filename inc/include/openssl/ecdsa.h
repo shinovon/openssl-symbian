@@ -83,12 +83,12 @@ typedef struct ECDSA_SIG_st {
 /** Allocates and initialize a ECDSA_SIG structure
  *  \return pointer to a ECDSA_SIG structure or NULL if an error occurred
  */
-IMPORT_C ECDSA_SIG *ECDSA_SIG_new(void);
+SSL2_IMPORT ECDSA_SIG *ECDSA_SIG_new(void);
 
 /** frees a ECDSA_SIG structure
  *  \param  sig  pointer to the ECDSA_SIG structure
  */
-IMPORT_C void ECDSA_SIG_free(ECDSA_SIG *sig);
+SSL2_IMPORT void ECDSA_SIG_free(ECDSA_SIG *sig);
 
 /** DER encode content of ECDSA_SIG object (note: this function modifies *pp
  *  (*pp += length of the DER encoded signature)).
@@ -96,7 +96,7 @@ IMPORT_C void ECDSA_SIG_free(ECDSA_SIG *sig);
  *  \param  pp   pointer to a unsigned char pointer for the output or NULL
  *  \return the length of the DER encoded ECDSA_SIG object or 0
  */
-int i2d_ECDSA_SIG(const ECDSA_SIG *sig, unsigned char **pp);
+SSL2_IMPORT int i2d_ECDSA_SIG(const ECDSA_SIG *sig, unsigned char **pp);
 
 /** Decodes a DER encoded ECDSA signature (note: this function changes *pp
  *  (*pp += len)).
@@ -105,7 +105,7 @@ int i2d_ECDSA_SIG(const ECDSA_SIG *sig, unsigned char **pp);
  *  \param  len  length of the buffer
  *  \return pointer to the decoded ECDSA_SIG structure (or NULL)
  */
-ECDSA_SIG *d2i_ECDSA_SIG(ECDSA_SIG **sig, const unsigned char **pp, long len);
+SSL2_IMPORT ECDSA_SIG *d2i_ECDSA_SIG(ECDSA_SIG **sig, const unsigned char **pp, long len);
 
 /** Computes the ECDSA signature of the given hash value using
  *  the supplied private key and returns the created signature.
@@ -114,7 +114,7 @@ ECDSA_SIG *d2i_ECDSA_SIG(ECDSA_SIG **sig, const unsigned char **pp, long len);
  *  \param  eckey     EC_KEY object containing a private EC key
  *  \return pointer to a ECDSA_SIG structure or NULL if an error occurred
  */
-ECDSA_SIG *ECDSA_do_sign(const unsigned char *dgst, int dgst_len,
+SSL2_IMPORT ECDSA_SIG *ECDSA_do_sign(const unsigned char *dgst, int dgst_len,
                          EC_KEY *eckey);
 
 /** Computes ECDSA signature of a given hash value using the supplied
@@ -127,7 +127,7 @@ ECDSA_SIG *ECDSA_do_sign(const unsigned char *dgst, int dgst_len,
  *  \param  eckey    EC_KEY object containing a private EC key
  *  \return pointer to a ECDSA_SIG structure or NULL if an error occurred
  */
-ECDSA_SIG *ECDSA_do_sign_ex(const unsigned char *dgst, int dgstlen,
+SSL2_IMPORT ECDSA_SIG *ECDSA_do_sign_ex(const unsigned char *dgst, int dgstlen,
                             const BIGNUM *kinv, const BIGNUM *rp,
                             EC_KEY *eckey);
 
@@ -140,33 +140,33 @@ ECDSA_SIG *ECDSA_do_sign_ex(const unsigned char *dgst, int dgstlen,
  *  \return 1 if the signature is valid, 0 if the signature is invalid
  *          and -1 on error
  */
-int ECDSA_do_verify(const unsigned char *dgst, int dgst_len,
+SSL2_IMPORT int ECDSA_do_verify(const unsigned char *dgst, int dgst_len,
                     const ECDSA_SIG *sig, EC_KEY *eckey);
 
-const ECDSA_METHOD *ECDSA_OpenSSL(void);
+SSL2_IMPORT const ECDSA_METHOD *ECDSA_OpenSSL(void);
 
 /** Sets the default ECDSA method
  *  \param  meth  new default ECDSA_METHOD
  */
-void ECDSA_set_default_method(const ECDSA_METHOD *meth);
+SSL2_IMPORT void ECDSA_set_default_method(const ECDSA_METHOD *meth);
 
 /** Returns the default ECDSA method
  *  \return pointer to ECDSA_METHOD structure containing the default method
  */
-const ECDSA_METHOD *ECDSA_get_default_method(void);
+SSL2_IMPORT const ECDSA_METHOD *ECDSA_get_default_method(void);
 
 /** Sets method to be used for the ECDSA operations
  *  \param  eckey  EC_KEY object
  *  \param  meth   new method
  *  \return 1 on success and 0 otherwise
  */
-int ECDSA_set_method(EC_KEY *eckey, const ECDSA_METHOD *meth);
+SSL2_IMPORT int ECDSA_set_method(EC_KEY *eckey, const ECDSA_METHOD *meth);
 
 /** Returns the maximum length of the DER encoded signature
  *  \param  eckey  EC_KEY object
  *  \return numbers of bytes required for the DER encoded signature
  */
-int ECDSA_size(const EC_KEY *eckey);
+SSL2_IMPORT int ECDSA_size(const EC_KEY *eckey);
 
 /** Precompute parts of the signing operation
  *  \param  eckey  EC_KEY object containing a private EC key
@@ -175,7 +175,7 @@ int ECDSA_size(const EC_KEY *eckey);
  *  \param  rp     BIGNUM pointer for x coordinate of k * generator
  *  \return 1 on success and 0 otherwise
  */
-int ECDSA_sign_setup(EC_KEY *eckey, BN_CTX *ctx, BIGNUM **kinv, BIGNUM **rp);
+SSL2_IMPORT int ECDSA_sign_setup(EC_KEY *eckey, BN_CTX *ctx, BIGNUM **kinv, BIGNUM **rp);
 
 /** Computes ECDSA signature of a given hash value using the supplied
  *  private key (note: sig must point to ECDSA_size(eckey) bytes of memory).
@@ -187,7 +187,7 @@ int ECDSA_sign_setup(EC_KEY *eckey, BN_CTX *ctx, BIGNUM **kinv, BIGNUM **rp);
  *  \param  eckey    EC_KEY object containing a private EC key
  *  \return 1 on success and 0 otherwise
  */
-int ECDSA_sign(int type, const unsigned char *dgst, int dgstlen,
+SSL2_IMPORT int ECDSA_sign(int type, const unsigned char *dgst, int dgstlen,
                unsigned char *sig, unsigned int *siglen, EC_KEY *eckey);
 
 /** Computes ECDSA signature of a given hash value using the supplied
@@ -203,7 +203,7 @@ int ECDSA_sign(int type, const unsigned char *dgst, int dgstlen,
  *  \param  eckey    EC_KEY object containing a private EC key
  *  \return 1 on success and 0 otherwise
  */
-int ECDSA_sign_ex(int type, const unsigned char *dgst, int dgstlen,
+SSL2_IMPORT int ECDSA_sign_ex(int type, const unsigned char *dgst, int dgstlen,
                   unsigned char *sig, unsigned int *siglen,
                   const BIGNUM *kinv, const BIGNUM *rp, EC_KEY *eckey);
 
@@ -218,48 +218,48 @@ int ECDSA_sign_ex(int type, const unsigned char *dgst, int dgstlen,
  *  \return 1 if the signature is valid, 0 if the signature is invalid
  *          and -1 on error
  */
-int ECDSA_verify(int type, const unsigned char *dgst, int dgstlen,
+SSL2_IMPORT int ECDSA_verify(int type, const unsigned char *dgst, int dgstlen,
                  const unsigned char *sig, int siglen, EC_KEY *eckey);
 
 /* the standard ex_data functions */
-int ECDSA_get_ex_new_index(long argl, void *argp, CRYPTO_EX_new
+SSL2_IMPORT int ECDSA_get_ex_new_index(long argl, void *argp, CRYPTO_EX_new
                            *new_func, CRYPTO_EX_dup *dup_func,
                            CRYPTO_EX_free *free_func);
-int ECDSA_set_ex_data(EC_KEY *d, int idx, void *arg);
-void *ECDSA_get_ex_data(EC_KEY *d, int idx);
+SSL2_IMPORT int ECDSA_set_ex_data(EC_KEY *d, int idx, void *arg);
+SSL2_IMPORT void *ECDSA_get_ex_data(EC_KEY *d, int idx);
 
 /** Allocates and initialize a ECDSA_METHOD structure
  *  \param ecdsa_method pointer to ECDSA_METHOD to copy.  (May be NULL)
  *  \return pointer to a ECDSA_METHOD structure or NULL if an error occurred
  */
 
-ECDSA_METHOD *ECDSA_METHOD_new(const ECDSA_METHOD *ecdsa_method);
+SSL2_IMPORT ECDSA_METHOD *ECDSA_METHOD_new(const ECDSA_METHOD *ecdsa_method);
 
 /** frees a ECDSA_METHOD structure
  *  \param  ecdsa_method  pointer to the ECDSA_METHOD structure
  */
-void ECDSA_METHOD_free(ECDSA_METHOD *ecdsa_method);
+SSL2_IMPORT void ECDSA_METHOD_free(ECDSA_METHOD *ecdsa_method);
 
 /**  Sets application specific data in the ECDSA_METHOD
  *   \param  ecdsa_method pointer to existing ECDSA_METHOD
  *   \param  app application specific data to set
  */
 
-void ECDSA_METHOD_set_app_data(ECDSA_METHOD *ecdsa_method, void *app);
+SSL2_IMPORT void ECDSA_METHOD_set_app_data(ECDSA_METHOD *ecdsa_method, void *app);
 
 /** Returns application specific data from a ECDSA_METHOD structure
  *  \param ecdsa_method pointer to ECDSA_METHOD structure
  *  \return pointer to application specific data.
  */
 
-void *ECDSA_METHOD_get_app_data(ECDSA_METHOD *ecdsa_method);
+SSL2_IMPORT void *ECDSA_METHOD_get_app_data(ECDSA_METHOD *ecdsa_method);
 
 /**  Set the ECDSA_do_sign function in the ECDSA_METHOD
  *   \param  ecdsa_method  pointer to existing ECDSA_METHOD
  *   \param  ecdsa_do_sign a funtion of type ECDSA_do_sign
  */
 
-void ECDSA_METHOD_set_sign(ECDSA_METHOD *ecdsa_method,
+SSL2_IMPORT void ECDSA_METHOD_set_sign(ECDSA_METHOD *ecdsa_method,
                            ECDSA_SIG *(*ecdsa_do_sign) (const unsigned char
                                                         *dgst, int dgst_len,
                                                         const BIGNUM *inv,
@@ -271,7 +271,7 @@ void ECDSA_METHOD_set_sign(ECDSA_METHOD *ecdsa_method,
  *   \param  ecdsa_sign_setup a funtion of type ECDSA_sign_setup
  */
 
-void ECDSA_METHOD_set_sign_setup(ECDSA_METHOD *ecdsa_method,
+SSL2_IMPORT void ECDSA_METHOD_set_sign_setup(ECDSA_METHOD *ecdsa_method,
                                  int (*ecdsa_sign_setup) (EC_KEY *eckey,
                                                           BN_CTX *ctx,
                                                           BIGNUM **kinv,
@@ -282,20 +282,20 @@ void ECDSA_METHOD_set_sign_setup(ECDSA_METHOD *ecdsa_method,
  *   \param  ecdsa_do_verify a funtion of type ECDSA_do_verify
  */
 
-void ECDSA_METHOD_set_verify(ECDSA_METHOD *ecdsa_method,
+SSL2_IMPORT void ECDSA_METHOD_set_verify(ECDSA_METHOD *ecdsa_method,
                              int (*ecdsa_do_verify) (const unsigned char
                                                      *dgst, int dgst_len,
                                                      const ECDSA_SIG *sig,
                                                      EC_KEY *eckey));
 
-void ECDSA_METHOD_set_flags(ECDSA_METHOD *ecdsa_method, int flags);
+SSL2_IMPORT void ECDSA_METHOD_set_flags(ECDSA_METHOD *ecdsa_method, int flags);
 
 /**  Set the flags field in the ECDSA_METHOD
  *   \param  ecdsa_method  pointer to existing ECDSA_METHOD
  *   \param  flags flags value to set
  */
 
-void ECDSA_METHOD_set_name(ECDSA_METHOD *ecdsa_method, char *name);
+SSL2_IMPORT void ECDSA_METHOD_set_name(ECDSA_METHOD *ecdsa_method, char *name);
 
 /**  Set the name field in the ECDSA_METHOD
  *   \param  ecdsa_method  pointer to existing ECDSA_METHOD
@@ -307,7 +307,7 @@ void ECDSA_METHOD_set_name(ECDSA_METHOD *ecdsa_method, char *name);
  * The following lines are auto generated by the script mkerr.pl. Any changes
  * made after this point may be overwritten when the script is next run.
  */
-void ERR_load_ECDSA_strings(void);
+SSL2_IMPORT void ERR_load_ECDSA_strings(void);
 
 /* Error codes for the ECDSA functions. */
 

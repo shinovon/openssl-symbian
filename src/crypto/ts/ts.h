@@ -346,7 +346,7 @@ ESS_ISSUER_SERIAL *d2i_ESS_ISSUER_SERIAL(ESS_ISSUER_SERIAL **a,
 ESS_ISSUER_SERIAL *ESS_ISSUER_SERIAL_dup(ESS_ISSUER_SERIAL *a);
 
 ESS_CERT_ID *ESS_CERT_ID_new(void);
-IMPORT_C void ESS_CERT_ID_free(ESS_CERT_ID *a);
+SSL2_IMPORT void ESS_CERT_ID_free(ESS_CERT_ID *a);
 int i2d_ESS_CERT_ID(const ESS_CERT_ID *a, unsigned char **pp);
 ESS_CERT_ID *d2i_ESS_CERT_ID(ESS_CERT_ID **a, const unsigned char **pp,
                              long length);

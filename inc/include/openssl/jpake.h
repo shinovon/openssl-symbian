@@ -60,34 +60,34 @@ void JPAKE_CTX_free(JPAKE_CTX *ctx);
  * Note that JPAKE_STEP1 can be used multiple times before release
  * without another init.
  */
-void JPAKE_STEP1_init(JPAKE_STEP1 *s1);
-int JPAKE_STEP1_generate(JPAKE_STEP1 *send, JPAKE_CTX *ctx);
-int JPAKE_STEP1_process(JPAKE_CTX *ctx, const JPAKE_STEP1 *received);
-void JPAKE_STEP1_release(JPAKE_STEP1 *s1);
+SSL2_IMPORT void JPAKE_STEP1_init(JPAKE_STEP1 *s1);
+SSL2_IMPORT int JPAKE_STEP1_generate(JPAKE_STEP1 *send, JPAKE_CTX *ctx);
+SSL2_IMPORT int JPAKE_STEP1_process(JPAKE_CTX *ctx, const JPAKE_STEP1 *received);
+SSL2_IMPORT void JPAKE_STEP1_release(JPAKE_STEP1 *s1);
 
 /*
  * Note that JPAKE_STEP2 can be used multiple times before release
  * without another init.
  */
-void JPAKE_STEP2_init(JPAKE_STEP2 *s2);
-int JPAKE_STEP2_generate(JPAKE_STEP2 *send, JPAKE_CTX *ctx);
-int JPAKE_STEP2_process(JPAKE_CTX *ctx, const JPAKE_STEP2 *received);
-void JPAKE_STEP2_release(JPAKE_STEP2 *s2);
+SSL2_IMPORT void JPAKE_STEP2_init(JPAKE_STEP2 *s2);
+SSL2_IMPORT int JPAKE_STEP2_generate(JPAKE_STEP2 *send, JPAKE_CTX *ctx);
+SSL2_IMPORT int JPAKE_STEP2_process(JPAKE_CTX *ctx, const JPAKE_STEP2 *received);
+SSL2_IMPORT void JPAKE_STEP2_release(JPAKE_STEP2 *s2);
 
 /*
  * Optionally verify the shared key. If the shared secrets do not
  * match, the two ends will disagree about the shared key, but
  * otherwise the protocol will succeed.
  */
-void JPAKE_STEP3A_init(JPAKE_STEP3A *s3a);
-int JPAKE_STEP3A_generate(JPAKE_STEP3A *send, JPAKE_CTX *ctx);
-int JPAKE_STEP3A_process(JPAKE_CTX *ctx, const JPAKE_STEP3A *received);
-void JPAKE_STEP3A_release(JPAKE_STEP3A *s3a);
+SSL2_IMPORT void JPAKE_STEP3A_init(JPAKE_STEP3A *s3a);
+SSL2_IMPORT int JPAKE_STEP3A_generate(JPAKE_STEP3A *send, JPAKE_CTX *ctx);
+SSL2_IMPORT int JPAKE_STEP3A_process(JPAKE_CTX *ctx, const JPAKE_STEP3A *received);
+SSL2_IMPORT void JPAKE_STEP3A_release(JPAKE_STEP3A *s3a);
 
-void JPAKE_STEP3B_init(JPAKE_STEP3B *s3b);
-int JPAKE_STEP3B_generate(JPAKE_STEP3B *send, JPAKE_CTX *ctx);
-int JPAKE_STEP3B_process(JPAKE_CTX *ctx, const JPAKE_STEP3B *received);
-void JPAKE_STEP3B_release(JPAKE_STEP3B *s3b);
+SSL2_IMPORT void JPAKE_STEP3B_init(JPAKE_STEP3B *s3b);
+SSL2_IMPORT int JPAKE_STEP3B_generate(JPAKE_STEP3B *send, JPAKE_CTX *ctx);
+SSL2_IMPORT int JPAKE_STEP3B_process(JPAKE_CTX *ctx, const JPAKE_STEP3B *received);
+SSL2_IMPORT void JPAKE_STEP3B_release(JPAKE_STEP3B *s3b);
 
 /*
  * the return value belongs to the library and will be released when

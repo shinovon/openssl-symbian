@@ -641,66 +641,66 @@ unsigned long BIO_number_read(BIO *bio);
 unsigned long BIO_number_written(BIO *bio);
 
 /* For BIO_f_asn1() */
-IMPORT_C int BIO_asn1_set_prefix(BIO *b, asn1_ps_func *prefix,
+SSL2_IMPORT int BIO_asn1_set_prefix(BIO *b, asn1_ps_func *prefix,
                         asn1_ps_func *prefix_free);
-IMPORT_C int BIO_asn1_get_prefix(BIO *b, asn1_ps_func **pprefix,
+SSL2_IMPORT int BIO_asn1_get_prefix(BIO *b, asn1_ps_func **pprefix,
                         asn1_ps_func **pprefix_free);
-IMPORT_C int BIO_asn1_set_suffix(BIO *b, asn1_ps_func *suffix,
+SSL2_IMPORT int BIO_asn1_set_suffix(BIO *b, asn1_ps_func *suffix,
                         asn1_ps_func *suffix_free);
-IMPORT_C int BIO_asn1_get_suffix(BIO *b, asn1_ps_func **psuffix,
+SSL2_IMPORT int BIO_asn1_get_suffix(BIO *b, asn1_ps_func **psuffix,
                         asn1_ps_func **psuffix_free);
 
 # ifndef OPENSSL_NO_FP_API
-IMPORT_C BIO_METHOD *BIO_s_file(void);
-IMPORT_C BIO *BIO_new_file(const char *filename, const char *mode);
-IMPORT_C BIO *BIO_new_fp(FILE *stream, int close_flag);
+SSL2_IMPORT BIO_METHOD *BIO_s_file(void);
+SSL2_IMPORT BIO *BIO_new_file(const char *filename, const char *mode);
+SSL2_IMPORT BIO *BIO_new_fp(FILE *stream, int close_flag);
 #  define BIO_s_file_internal    BIO_s_file
 # endif
-IMPORT_C BIO *BIO_new(BIO_METHOD *type);
-IMPORT_C int BIO_set(BIO *a, BIO_METHOD *type);
-IMPORT_C int BIO_free(BIO *a);
-IMPORT_C void BIO_vfree(BIO *a);
-IMPORT_C int BIO_read(BIO *b, void *data, int len);
-IMPORT_C int BIO_gets(BIO *bp, char *buf, int size);
-IMPORT_C int BIO_write(BIO *b, const void *data, int len);
-IMPORT_C int BIO_puts(BIO *bp, const char *buf);
-IMPORT_C int BIO_indent(BIO *b, int indent, int max);
-IMPORT_C long BIO_ctrl(BIO *bp, int cmd, long larg, void *parg);
-IMPORT_C long BIO_callback_ctrl(BIO *b, int cmd,
+SSL2_IMPORT BIO *BIO_new(BIO_METHOD *type);
+SSL2_IMPORT int BIO_set(BIO *a, BIO_METHOD *type);
+SSL2_IMPORT int BIO_free(BIO *a);
+SSL2_IMPORT void BIO_vfree(BIO *a);
+SSL2_IMPORT int BIO_read(BIO *b, void *data, int len);
+SSL2_IMPORT int BIO_gets(BIO *bp, char *buf, int size);
+SSL2_IMPORT int BIO_write(BIO *b, const void *data, int len);
+SSL2_IMPORT int BIO_puts(BIO *bp, const char *buf);
+SSL2_IMPORT int BIO_indent(BIO *b, int indent, int max);
+SSL2_IMPORT long BIO_ctrl(BIO *bp, int cmd, long larg, void *parg);
+SSL2_IMPORT long BIO_callback_ctrl(BIO *b, int cmd,
                        void (*fp) (struct bio_st *, int, const char *, int,
                                    long, long));
-IMPORT_C char *BIO_ptr_ctrl(BIO *bp, int cmd, long larg);
-IMPORT_C long BIO_int_ctrl(BIO *bp, int cmd, long larg, int iarg);
-IMPORT_C BIO *BIO_push(BIO *b, BIO *append);
-IMPORT_C BIO *BIO_pop(BIO *b);
-IMPORT_C void BIO_free_all(BIO *a);
-IMPORT_C BIO *BIO_find_type(BIO *b, int bio_type);
-IMPORT_C BIO *BIO_next(BIO *b);
-IMPORT_C BIO *BIO_get_retry_BIO(BIO *bio, int *reason);
-IMPORT_C int BIO_get_retry_reason(BIO *bio);
-IMPORT_C BIO *BIO_dup_chain(BIO *in);
+SSL2_IMPORT char *BIO_ptr_ctrl(BIO *bp, int cmd, long larg);
+SSL2_IMPORT long BIO_int_ctrl(BIO *bp, int cmd, long larg, int iarg);
+SSL2_IMPORT BIO *BIO_push(BIO *b, BIO *append);
+SSL2_IMPORT BIO *BIO_pop(BIO *b);
+SSL2_IMPORT void BIO_free_all(BIO *a);
+SSL2_IMPORT BIO *BIO_find_type(BIO *b, int bio_type);
+SSL2_IMPORT BIO *BIO_next(BIO *b);
+SSL2_IMPORT BIO *BIO_get_retry_BIO(BIO *bio, int *reason);
+SSL2_IMPORT int BIO_get_retry_reason(BIO *bio);
+SSL2_IMPORT BIO *BIO_dup_chain(BIO *in);
 
-IMPORT_C int BIO_nread0(BIO *bio, char **buf);
-IMPORT_C int BIO_nread(BIO *bio, char **buf, int num);
-IMPORT_C int BIO_nwrite0(BIO *bio, char **buf);
-IMPORT_C int BIO_nwrite(BIO *bio, char **buf, int num);
+SSL2_IMPORT int BIO_nread0(BIO *bio, char **buf);
+SSL2_IMPORT int BIO_nread(BIO *bio, char **buf, int num);
+SSL2_IMPORT int BIO_nwrite0(BIO *bio, char **buf);
+SSL2_IMPORT int BIO_nwrite(BIO *bio, char **buf, int num);
 
 long BIO_debug_callback(BIO *bio, int cmd, const char *argp, int argi,
                         long argl, long ret);
 
-IMPORT_C BIO_METHOD *BIO_s_mem(void);
-IMPORT_C BIO *BIO_new_mem_buf(const void *buf, int len);
-IMPORT_C BIO_METHOD *BIO_s_socket(void);
-IMPORT_C BIO_METHOD *BIO_s_connect(void);
-IMPORT_C BIO_METHOD *BIO_s_accept(void);
-IMPORT_C BIO_METHOD *BIO_s_fd(void);
+SSL2_IMPORT BIO_METHOD *BIO_s_mem(void);
+SSL2_IMPORT BIO *BIO_new_mem_buf(const void *buf, int len);
+SSL2_IMPORT BIO_METHOD *BIO_s_socket(void);
+SSL2_IMPORT BIO_METHOD *BIO_s_connect(void);
+SSL2_IMPORT BIO_METHOD *BIO_s_accept(void);
+SSL2_IMPORT BIO_METHOD *BIO_s_fd(void);
 # ifndef OPENSSL_SYS_OS2
-IMPORT_C BIO_METHOD *BIO_s_log(void);
+SSL2_IMPORT BIO_METHOD *BIO_s_log(void);
 # endif
-IMPORT_C BIO_METHOD *BIO_s_bio(void);
-IMPORT_C BIO_METHOD *BIO_s_null(void);
-IMPORT_C BIO_METHOD *BIO_f_null(void);
-IMPORT_C BIO_METHOD *BIO_f_buffer(void);
+SSL2_IMPORT BIO_METHOD *BIO_s_bio(void);
+SSL2_IMPORT BIO_METHOD *BIO_s_null(void);
+SSL2_IMPORT BIO_METHOD *BIO_f_null(void);
+SSL2_IMPORT BIO_METHOD *BIO_f_buffer(void);
 # ifdef OPENSSL_SYS_VMS
 BIO_METHOD *BIO_f_linebuffer(void);
 # endif
@@ -714,23 +714,23 @@ BIO_METHOD *BIO_s_datagram_sctp(void);
 
 /* BIO_METHOD *BIO_f_ber(void); */
 
-int BIO_sock_should_retry(int i);
-int BIO_sock_non_fatal_error(int error);
-int BIO_dgram_non_fatal_error(int error);
+SSL2_IMPORT int BIO_sock_should_retry(int i);
+SSL2_IMPORT int BIO_sock_non_fatal_error(int error);
+SSL2_IMPORT int BIO_dgram_non_fatal_error(int error);
 
-int BIO_fd_should_retry(int i);
-int BIO_fd_non_fatal_error(int error);
-int BIO_dump_cb(int (*cb) (const void *data, size_t len, void *u),
+SSL2_IMPORT int BIO_fd_should_retry(int i);
+SSL2_IMPORT int BIO_fd_non_fatal_error(int error);
+SSL2_IMPORT int BIO_dump_cb(int (*cb) (const void *data, size_t len, void *u),
                 void *u, const char *s, int len);
-int BIO_dump_indent_cb(int (*cb) (const void *data, size_t len, void *u),
+SSL2_IMPORT int BIO_dump_indent_cb(int (*cb) (const void *data, size_t len, void *u),
                        void *u, const char *s, int len, int indent);
-int BIO_dump(BIO *b, const char *bytes, int len);
-int BIO_dump_indent(BIO *b, const char *bytes, int len, int indent);
+SSL2_IMPORT int BIO_dump(BIO *b, const char *bytes, int len);
+SSL2_IMPORT int BIO_dump_indent(BIO *b, const char *bytes, int len, int indent);
 # ifndef OPENSSL_NO_FP_API
-int BIO_dump_fp(FILE *fp, const char *s, int len);
-int BIO_dump_indent_fp(FILE *fp, const char *s, int len, int indent);
+SSL2_IMPORT int BIO_dump_fp(FILE *fp, const char *s, int len);
+SSL2_IMPORT int BIO_dump_indent_fp(FILE *fp, const char *s, int len, int indent);
 # endif
-int BIO_hex_string(BIO *out, int indent, int width, unsigned char *data,
+SSL2_IMPORT int BIO_hex_string(BIO *out, int indent, int width, unsigned char *data,
                    int datalen);
 
 struct hostent *BIO_gethostbyname(const char *name);
@@ -743,19 +743,19 @@ struct hostent *BIO_gethostbyname(const char *name);
  * substructures; if the buffer does not suffice, NULL is returned
  * and an appropriate error code is set).
  */
-int BIO_sock_error(int sock);
-int BIO_socket_ioctl(int fd, long type, void *arg);
-int BIO_socket_nbio(int fd, int mode);
-int BIO_get_port(const char *str, unsigned short *port_ptr);
-int BIO_get_host_ip(const char *str, unsigned char *ip);
-int BIO_get_accept_socket(char *host_port, int mode);
-int BIO_accept(int sock, char **ip_port);
-int BIO_sock_init(void);
-void BIO_sock_cleanup(void);
-int BIO_set_tcp_ndelay(int sock, int turn_on);
+SSL2_IMPORT int BIO_sock_error(int sock);
+SSL2_IMPORT int BIO_socket_ioctl(int fd, long type, void *arg);
+SSL2_IMPORT int BIO_socket_nbio(int fd, int mode);
+SSL2_IMPORT int BIO_get_port(const char *str, unsigned short *port_ptr);
+SSL2_IMPORT int BIO_get_host_ip(const char *str, unsigned char *ip);
+SSL2_IMPORT int BIO_get_accept_socket(char *host_port, int mode);
+SSL2_IMPORT int BIO_accept(int sock, char **ip_port);
+SSL2_IMPORT int BIO_sock_init(void);
+SSL2_IMPORT void BIO_sock_cleanup(void);
+SSL2_IMPORT int BIO_set_tcp_ndelay(int sock, int turn_on);
 
-BIO *BIO_new_socket(int sock, int close_flag);
-BIO *BIO_new_dgram(int fd, int close_flag);
+SSL2_IMPORT BIO *BIO_new_socket(int sock, int close_flag);
+SSL2_IMPORT BIO *BIO_new_dgram(int fd, int close_flag);
 # ifndef OPENSSL_NO_SCTP
 BIO *BIO_new_dgram_sctp(int fd, int close_flag);
 int BIO_dgram_is_sctp(BIO *bio);
@@ -768,11 +768,11 @@ int BIO_dgram_sctp_notification_cb(BIO *b,
 int BIO_dgram_sctp_wait_for_dry(BIO *b);
 int BIO_dgram_sctp_msg_waiting(BIO *b);
 # endif
-BIO *BIO_new_fd(int fd, int close_flag);
-BIO *BIO_new_connect(const char *host_port);
-BIO *BIO_new_accept(const char *host_port);
+SSL2_IMPORT BIO *BIO_new_fd(int fd, int close_flag);
+SSL2_IMPORT BIO *BIO_new_connect(const char *host_port);
+SSL2_IMPORT BIO *BIO_new_accept(const char *host_port);
 
-int BIO_new_bio_pair(BIO **bio1, size_t writebuf1,
+SSL2_IMPORT int BIO_new_bio_pair(BIO **bio1, size_t writebuf1,
                      BIO **bio2, size_t writebuf2);
 /*
  * If successful, returns 1 and in *bio1, *bio2 two BIO pair endpoints.
@@ -780,7 +780,7 @@ int BIO_new_bio_pair(BIO **bio1, size_t writebuf1,
  * value.
  */
 
-void BIO_copy_next_retry(BIO *b);
+SSL2_IMPORT void BIO_copy_next_retry(BIO *b);
 
 /*
  * long BIO_ghbn_ctrl(int cmd,int iarg,char *parg);

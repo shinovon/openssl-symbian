@@ -317,47 +317,47 @@ struct rsa_st {
 # define RSA_set_app_data(s,arg)         RSA_set_ex_data(s,0,arg)
 # define RSA_get_app_data(s)             RSA_get_ex_data(s,0)
 
-IMPORT_C RSA *RSA_new(void);
-IMPORT_C RSA *RSA_new_method(ENGINE *engine);
-IMPORT_C int RSA_size(const RSA *rsa);
+SSL2_IMPORT RSA *RSA_new(void);
+SSL2_IMPORT RSA *RSA_new_method(ENGINE *engine);
+SSL2_IMPORT int RSA_size(const RSA *rsa);
 
 /* Deprecated version */
 # ifndef OPENSSL_NO_DEPRECATED
-IMPORT_C RSA *RSA_generate_key(int bits, unsigned long e, void
+SSL2_IMPORT RSA *RSA_generate_key(int bits, unsigned long e, void
                        (*callback) (int, int, void *), void *cb_arg);
 # endif                         /* !defined(OPENSSL_NO_DEPRECATED) */
 
 /* New version */
-IMPORT_C int RSA_generate_key_ex(RSA *rsa, int bits, BIGNUM *e, BN_GENCB *cb);
+SSL2_IMPORT int RSA_generate_key_ex(RSA *rsa, int bits, BIGNUM *e, BN_GENCB *cb);
 
-IMPORT_C int RSA_check_key(const RSA *);
+SSL2_IMPORT int RSA_check_key(const RSA *);
         /* next 4 return -1 on error */
-IMPORT_C int RSA_public_encrypt(int flen, const unsigned char *from,
+SSL2_IMPORT int RSA_public_encrypt(int flen, const unsigned char *from,
                        unsigned char *to, RSA *rsa, int padding);
-IMPORT_C int RSA_private_encrypt(int flen, const unsigned char *from,
+SSL2_IMPORT int RSA_private_encrypt(int flen, const unsigned char *from,
                         unsigned char *to, RSA *rsa, int padding);
-IMPORT_C int RSA_public_decrypt(int flen, const unsigned char *from,
+SSL2_IMPORT int RSA_public_decrypt(int flen, const unsigned char *from,
                        unsigned char *to, RSA *rsa, int padding);
-IMPORT_C int RSA_private_decrypt(int flen, const unsigned char *from,
+SSL2_IMPORT int RSA_private_decrypt(int flen, const unsigned char *from,
                         unsigned char *to, RSA *rsa, int padding);
-IMPORT_C void RSA_free(RSA *r);
+SSL2_IMPORT void RSA_free(RSA *r);
 /* "up" the RSA object's reference count */
-IMPORT_C int RSA_up_ref(RSA *r);
+SSL2_IMPORT int RSA_up_ref(RSA *r);
 
-IMPORT_C int RSA_flags(const RSA *r);
+SSL2_IMPORT int RSA_flags(const RSA *r);
 
-IMPORT_C void RSA_set_default_method(const RSA_METHOD *meth);
-IMPORT_C const RSA_METHOD *RSA_get_default_method(void);
-IMPORT_C const RSA_METHOD *RSA_get_method(const RSA *rsa);
-IMPORT_C int RSA_set_method(RSA *rsa, const RSA_METHOD *meth);
+SSL2_IMPORT void RSA_set_default_method(const RSA_METHOD *meth);
+SSL2_IMPORT const RSA_METHOD *RSA_get_default_method(void);
+SSL2_IMPORT const RSA_METHOD *RSA_get_method(const RSA *rsa);
+SSL2_IMPORT int RSA_set_method(RSA *rsa, const RSA_METHOD *meth);
 
 /* This function needs the memory locking malloc callbacks to be installed */
-IMPORT_C int RSA_memory_lock(RSA *r);
+SSL2_IMPORT int RSA_memory_lock(RSA *r);
 
 /* these are the actual SSLeay RSA functions */
-IMPORT_C const RSA_METHOD *RSA_PKCS1_SSLeay(void);
+SSL2_IMPORT const RSA_METHOD *RSA_PKCS1_SSLeay(void);
 
-IMPORT_C const RSA_METHOD *RSA_null_method(void);
+SSL2_IMPORT const RSA_METHOD *RSA_null_method(void);
 
 DECLARE_ASN1_ENCODE_FUNCTIONS_const(RSA, RSAPublicKey)
 DECLARE_ASN1_ENCODE_FUNCTIONS_const(RSA, RSAPrivateKey)
@@ -380,25 +380,25 @@ typedef struct rsa_oaep_params_st {
 DECLARE_ASN1_FUNCTIONS(RSA_OAEP_PARAMS)
 
 # ifndef OPENSSL_NO_FP_API
-int RSA_print_fp(FILE *fp, const RSA *r, int offset);
+SSL2_IMPORT int RSA_print_fp(FILE *fp, const RSA *r, int offset);
 # endif
 
 # ifndef OPENSSL_NO_BIO
-int RSA_print(BIO *bp, const RSA *r, int offset);
+SSL2_IMPORT int RSA_print(BIO *bp, const RSA *r, int offset);
 # endif
 
 # ifndef OPENSSL_NO_RC4
-int i2d_RSA_NET(const RSA *a, unsigned char **pp,
+SSL2_IMPORT int i2d_RSA_NET(const RSA *a, unsigned char **pp,
                 int (*cb) (char *buf, int len, const char *prompt,
                            int verify), int sgckey);
-RSA *d2i_RSA_NET(RSA **a, const unsigned char **pp, long length,
+SSL2_IMPORT RSA *d2i_RSA_NET(RSA **a, const unsigned char **pp, long length,
                  int (*cb) (char *buf, int len, const char *prompt,
                             int verify), int sgckey);
 
-int i2d_Netscape_RSA(const RSA *a, unsigned char **pp,
+SSL2_IMPORT int i2d_Netscape_RSA(const RSA *a, unsigned char **pp,
                      int (*cb) (char *buf, int len, const char *prompt,
                                 int verify));
-RSA *d2i_Netscape_RSA(RSA **a, const unsigned char **pp, long length,
+SSL2_IMPORT RSA *d2i_Netscape_RSA(RSA **a, const unsigned char **pp, long length,
                       int (*cb) (char *buf, int len, const char *prompt,
                                  int verify));
 # endif
@@ -407,91 +407,91 @@ RSA *d2i_Netscape_RSA(RSA **a, const unsigned char **pp, long length,
  * The following 2 functions sign and verify a X509_SIG ASN1 object inside
  * PKCS#1 padded RSA encryption
  */
-int RSA_sign(int type, const unsigned char *m, unsigned int m_length,
+SSL2_IMPORT int RSA_sign(int type, const unsigned char *m, unsigned int m_length,
              unsigned char *sigret, unsigned int *siglen, RSA *rsa);
-int RSA_verify(int type, const unsigned char *m, unsigned int m_length,
+SSL2_IMPORT int RSA_verify(int type, const unsigned char *m, unsigned int m_length,
                const unsigned char *sigbuf, unsigned int siglen, RSA *rsa);
 
 /*
  * The following 2 function sign and verify a ASN1_OCTET_STRING object inside
  * PKCS#1 padded RSA encryption
  */
-int RSA_sign_ASN1_OCTET_STRING(int type,
+SSL2_IMPORT int RSA_sign_ASN1_OCTET_STRING(int type,
                                const unsigned char *m, unsigned int m_length,
                                unsigned char *sigret, unsigned int *siglen,
                                RSA *rsa);
-int RSA_verify_ASN1_OCTET_STRING(int type, const unsigned char *m,
+SSL2_IMPORT int RSA_verify_ASN1_OCTET_STRING(int type, const unsigned char *m,
                                  unsigned int m_length, unsigned char *sigbuf,
                                  unsigned int siglen, RSA *rsa);
 
-int RSA_blinding_on(RSA *rsa, BN_CTX *ctx);
-void RSA_blinding_off(RSA *rsa);
-BN_BLINDING *RSA_setup_blinding(RSA *rsa, BN_CTX *ctx);
+SSL2_IMPORT int RSA_blinding_on(RSA *rsa, BN_CTX *ctx);
+SSL2_IMPORT void RSA_blinding_off(RSA *rsa);
+SSL2_IMPORT BN_BLINDING *RSA_setup_blinding(RSA *rsa, BN_CTX *ctx);
 
-int RSA_padding_add_PKCS1_type_1(unsigned char *to, int tlen,
+SSL2_IMPORT int RSA_padding_add_PKCS1_type_1(unsigned char *to, int tlen,
                                  const unsigned char *f, int fl);
-int RSA_padding_check_PKCS1_type_1(unsigned char *to, int tlen,
+SSL2_IMPORT int RSA_padding_check_PKCS1_type_1(unsigned char *to, int tlen,
                                    const unsigned char *f, int fl,
                                    int rsa_len);
-int RSA_padding_add_PKCS1_type_2(unsigned char *to, int tlen,
+SSL2_IMPORT int RSA_padding_add_PKCS1_type_2(unsigned char *to, int tlen,
                                  const unsigned char *f, int fl);
-int RSA_padding_check_PKCS1_type_2(unsigned char *to, int tlen,
+SSL2_IMPORT int RSA_padding_check_PKCS1_type_2(unsigned char *to, int tlen,
                                    const unsigned char *f, int fl,
                                    int rsa_len);
-int PKCS1_MGF1(unsigned char *mask, long len, const unsigned char *seed,
+SSL2_IMPORT int PKCS1_MGF1(unsigned char *mask, long len, const unsigned char *seed,
                long seedlen, const EVP_MD *dgst);
-int RSA_padding_add_PKCS1_OAEP(unsigned char *to, int tlen,
+SSL2_IMPORT int RSA_padding_add_PKCS1_OAEP(unsigned char *to, int tlen,
                                const unsigned char *f, int fl,
                                const unsigned char *p, int pl);
-int RSA_padding_check_PKCS1_OAEP(unsigned char *to, int tlen,
+SSL2_IMPORT int RSA_padding_check_PKCS1_OAEP(unsigned char *to, int tlen,
                                  const unsigned char *f, int fl, int rsa_len,
                                  const unsigned char *p, int pl);
-int RSA_padding_add_PKCS1_OAEP_mgf1(unsigned char *to, int tlen,
+SSL2_IMPORT int RSA_padding_add_PKCS1_OAEP_mgf1(unsigned char *to, int tlen,
                                     const unsigned char *from, int flen,
                                     const unsigned char *param, int plen,
                                     const EVP_MD *md, const EVP_MD *mgf1md);
-int RSA_padding_check_PKCS1_OAEP_mgf1(unsigned char *to, int tlen,
+SSL2_IMPORT int RSA_padding_check_PKCS1_OAEP_mgf1(unsigned char *to, int tlen,
                                       const unsigned char *from, int flen,
                                       int num, const unsigned char *param,
                                       int plen, const EVP_MD *md,
                                       const EVP_MD *mgf1md);
-int RSA_padding_add_SSLv23(unsigned char *to, int tlen,
+SSL2_IMPORT int RSA_padding_add_SSLv23(unsigned char *to, int tlen,
                            const unsigned char *f, int fl);
-int RSA_padding_check_SSLv23(unsigned char *to, int tlen,
+SSL2_IMPORT int RSA_padding_check_SSLv23(unsigned char *to, int tlen,
                              const unsigned char *f, int fl, int rsa_len);
-int RSA_padding_add_none(unsigned char *to, int tlen, const unsigned char *f,
+SSL2_IMPORT int RSA_padding_add_none(unsigned char *to, int tlen, const unsigned char *f,
                          int fl);
-int RSA_padding_check_none(unsigned char *to, int tlen,
+SSL2_IMPORT int RSA_padding_check_none(unsigned char *to, int tlen,
                            const unsigned char *f, int fl, int rsa_len);
-int RSA_padding_add_X931(unsigned char *to, int tlen, const unsigned char *f,
+SSL2_IMPORT int RSA_padding_add_X931(unsigned char *to, int tlen, const unsigned char *f,
                          int fl);
-int RSA_padding_check_X931(unsigned char *to, int tlen,
+SSL2_IMPORT int RSA_padding_check_X931(unsigned char *to, int tlen,
                            const unsigned char *f, int fl, int rsa_len);
-int RSA_X931_hash_id(int nid);
+SSL2_IMPORT int RSA_X931_hash_id(int nid);
 
-int RSA_verify_PKCS1_PSS(RSA *rsa, const unsigned char *mHash,
+SSL2_IMPORT int RSA_verify_PKCS1_PSS(RSA *rsa, const unsigned char *mHash,
                          const EVP_MD *Hash, const unsigned char *EM,
                          int sLen);
-int RSA_padding_add_PKCS1_PSS(RSA *rsa, unsigned char *EM,
+SSL2_IMPORT int RSA_padding_add_PKCS1_PSS(RSA *rsa, unsigned char *EM,
                               const unsigned char *mHash, const EVP_MD *Hash,
                               int sLen);
 
-int RSA_verify_PKCS1_PSS_mgf1(RSA *rsa, const unsigned char *mHash,
+SSL2_IMPORT int RSA_verify_PKCS1_PSS_mgf1(RSA *rsa, const unsigned char *mHash,
                               const EVP_MD *Hash, const EVP_MD *mgf1Hash,
                               const unsigned char *EM, int sLen);
 
-int RSA_padding_add_PKCS1_PSS_mgf1(RSA *rsa, unsigned char *EM,
+SSL2_IMPORT int RSA_padding_add_PKCS1_PSS_mgf1(RSA *rsa, unsigned char *EM,
                                    const unsigned char *mHash,
                                    const EVP_MD *Hash, const EVP_MD *mgf1Hash,
                                    int sLen);
 
-int RSA_get_ex_new_index(long argl, void *argp, CRYPTO_EX_new *new_func,
+SSL2_IMPORT int RSA_get_ex_new_index(long argl, void *argp, CRYPTO_EX_new *new_func,
                          CRYPTO_EX_dup *dup_func, CRYPTO_EX_free *free_func);
-int RSA_set_ex_data(RSA *r, int idx, void *arg);
-void *RSA_get_ex_data(const RSA *r, int idx);
+SSL2_IMPORT int RSA_set_ex_data(RSA *r, int idx, void *arg);
+SSL2_IMPORT void *RSA_get_ex_data(const RSA *r, int idx);
 
-RSA *RSAPublicKey_dup(RSA *rsa);
-RSA *RSAPrivateKey_dup(RSA *rsa);
+SSL2_IMPORT RSA *RSAPublicKey_dup(RSA *rsa);
+SSL2_IMPORT RSA *RSAPrivateKey_dup(RSA *rsa);
 
 /*
  * If this flag is set the RSA method is FIPS compliant and can be used in
@@ -520,7 +520,7 @@ RSA *RSAPrivateKey_dup(RSA *rsa);
  * The following lines are auto generated by the script mkerr.pl. Any changes
  * made after this point may be overwritten when the script is next run.
  */
-void ERR_load_RSA_strings(void);
+SSL2_IMPORT void ERR_load_RSA_strings(void);
 
 /* Error codes for the RSA functions. */
 
