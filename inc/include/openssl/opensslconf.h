@@ -134,7 +134,7 @@ extern "C" {
 #define OPENSSL_UNISTD <unistd.h>
 
 
-#if defined(OPENSSL_SYS_SYMBIAN) && !defined(OPENSSL_STATIC)
+#if defined(OPENSSL_SYS_SYMBIAN) && !defined(SSL2_STATIC)
 # define SSL2_EXPORT EXPORT_C
 # define SSL2_IMPORT IMPORT_C
 #else
